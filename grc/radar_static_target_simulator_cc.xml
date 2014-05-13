@@ -1,0 +1,84 @@
+<block>
+  <name>Static target simulator</name>
+  <key>radar_static_target_simulator_cc</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.static_target_simulator_cc($range, $velocity, $rcs, $azimuth, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling, $len_key)</make>
+  <param>
+    <name>Range [m]</name>
+    <key>range</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Velocity [m/s]</name>
+    <key>velocity</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>RCS</name>
+    <key>rcs</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Azimuth</name>
+    <key>azimuth</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Sample rate [Hz]</name>
+    <key>samp_rate</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Center frequency [Hz]</name>
+    <key>center_freq</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Self coupling [dB]</name>
+    <key>self_coupling_db</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Random phase shift</name>
+    <key>rndm_phaseshift</key>
+    <value>True</value>
+    <type>bool</type>
+      <option>
+		<name>True</name>
+		<key>True</key>
+	  </option>
+	  <option>
+		<name>False</name>
+		<key>False</key>
+	  </option>
+  </param>
+  <param>
+    <name>Self coupling</name>
+    <key>self_coupling</key>
+    <value>True</value>
+    <type>bool</type>
+      <option>
+		<name>True</name>
+		<key>True</key>
+	  </option>
+	  <option>
+		<name>False</name>
+		<key>False</key>
+	  </option>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value>"packet_len"</value>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>IQ in</name>
+    <type>complex</type>
+  </sink>
+  <source>
+    <name>IQ out</name>
+    <type>complex</type>
+  </source>
+</block>

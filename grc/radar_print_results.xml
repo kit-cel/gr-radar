@@ -1,0 +1,12 @@
+<block>
+  <name>Print results</name>
+  <key>radar_print_results</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.print_results()</make>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+</block>

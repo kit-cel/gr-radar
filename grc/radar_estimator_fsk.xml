@@ -1,0 +1,27 @@
+<block>
+  <name>Estimator FSK</name>
+  <key>radar_estimator_fsk</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.estimator_fsk($center_freq, $delta_freq)</make>
+  <param>
+    <name>Center frequency</name>
+    <key>center_freq</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Delta frequency</name>
+    <key>delta_freq</key>
+    <type>float</type>
+  </param>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+  <source>
+    <name>Msg out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

@@ -1,0 +1,35 @@
+<block>
+  <name>Tagged stream FFT</name>
+  <key>radar_ts_fft_cc</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.ts_fft_cc($apply_filter, $len_key)</make>
+  <param>
+    <name>Hamming window</name>
+    <key>apply_filter</key>
+    <value>0</value>
+    <type>int</type>
+      <option>
+		<name>True</name>
+		<key>1</key>
+	  </option>
+	  <option>
+		<name>False</name>
+		<key>0</key>
+	  </option>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value> "packet_len"</value>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>IQ in</name>
+    <type>complex</type>
+  </sink>
+  <source>
+    <name>IQ out</name>
+    <type>complex</type>
+  </source>
+</block>

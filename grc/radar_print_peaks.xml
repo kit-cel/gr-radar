@@ -1,0 +1,12 @@
+<block>
+  <name>Print peaks</name>
+  <key>radar_print_peaks</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.print_peaks()</make>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+</block>

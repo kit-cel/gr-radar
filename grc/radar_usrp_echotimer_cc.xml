@@ -1,0 +1,30 @@
+<block>
+  <name>Usrp echotimer cc</name>
+  <key>radar_usrp_echotimer_cc</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $len_key)</make>
+  <param>
+    <name>Samp_rate</name>
+    <key>samp_rate</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Center_freq</name>
+    <key>center_freq</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Len_key</name>
+    <key>len_key</key>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+  </source>
+</block>

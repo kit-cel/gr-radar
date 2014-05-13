@@ -1,0 +1,37 @@
+<block>
+  <name>Signal generator CW</name>
+  <key>radar_signal_generator_cw_c</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.signal_generator_cw_c($packet_len, $samp_rate, $frequency, $amplitude, $len_key)</make>
+  <param>
+    <name>Packet length</name>
+    <key>packet_len</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Sample rate</name>
+    <key>samp_rate</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Frequency</name>
+    <key>frequency</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Amplitude</name>
+    <key>amplitude</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value>"packet_len"</value>
+    <type>string</type>
+  </param>
+  <source>
+    <name>IQ out</name>
+    <type>complex</type>
+  </source>
+</block>
