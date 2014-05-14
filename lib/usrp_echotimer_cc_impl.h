@@ -372,7 +372,7 @@ namespace gr {
       std::string d_clock_source_tx, d_clock_source_rx;
 	  std::string d_wire_tx, d_wire_rx;
 	  std::string d_antenna_tx, d_antenna_rx;
-	  std::string d_time_source_rx;
+	  std::string d_time_source_tx, d_time_source_rx;
       uhd::usrp::multi_usrp::sptr d_usrp_tx, d_usrp_rx;
       uhd::tune_request_t d_tune_request_tx, d_tune_request_rx;
       uhd::tx_streamer::sptr d_tx_stream;
@@ -381,6 +381,9 @@ namespace gr {
       uhd::rx_metadata_t d_metadata_rx;
       double d_lo_offset_tx, d_lo_offset_rx;
       float d_timeout_tx, d_timeout_rx;
+      float d_wait_tx, d_wait_rx;
+      
+      uhd::time_spec_t d_time_now_tx, d_time_now_rx;
       
       gr::thread::thread d_thread_recv;
       gr_complex *d_out_recv;

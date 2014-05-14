@@ -374,9 +374,11 @@ namespace gr {
 		d_args_tx = "addr=192.168.10.6";
 		d_wire_tx = "";
 		d_clock_source_tx = "internal";
+		d_time_source_tx = "none";
 		d_antenna_tx = "J1";
 		d_lo_offset_tx = 0;
-		d_timeout_tx = 0.1; // FIXME: timeout? why default on 0.1?
+		d_timeout_tx = 0.1;
+		d_wait_tx = 0.1;
 		
 		// Setup USRP TX: args (addr,...)
 		d_usrp_tx = uhd::usrp::multi_usrp::make(d_args_tx);
@@ -395,7 +397,10 @@ namespace gr {
 		d_usrp_tx->set_tx_antenna(d_antenna_tx);
 		
 		// Setup USRP TX: clock source
-		d_usrp_tx->set_clock_source(d_clock_source_tx); // Set TX clock to internal, TX is master
+		d_usrp_tx->set_clock_source(d_clock_source_tx); // Set TX clock, TX is master
+		
+		// Setup USRP TX: time source
+		d_usrp_tx->set_time_source(d_time_source_tx); // Set TX time, TX is master
 		
 		// Setup USRP TX: timestamp
 		d_usrp_tx->set_time_now(uhd::time_spec_t(0.0)); // Set to 0 on startup
@@ -414,7 +419,8 @@ namespace gr {
 		d_time_source_rx = "mimo";
 		d_antenna_rx = "J1";
 		d_lo_offset_rx = 2*d_samp_rate;
-		d_timeout_rx = 0.1; // FIXME: timeout? why default on 0.1?
+		d_timeout_rx = 0.1;
+		d_wait_rx = d_wait_tx;
 		
 		// Setup USRP RX: args (addr,...)
 		d_usrp_rx = uhd::usrp::multi_usrp::make(d_args_rx);
@@ -454,7 +460,7 @@ namespace gr {
 		//uhd::set_thread_priority_safe(); // necessary? dont work...
 		
 		// Sleep to get sync done
-		boost::this_thread::sleep(boost::posix_time::milliseconds(500));
+		boost::this_thread::sleep(boost::posix_time::milliseconds(500)); // FIXME: necessary?
 	}
 
     /*
@@ -477,13 +483,14 @@ namespace gr {
 		// Setup metadata for first package
         d_metadata_tx.start_of_burst = true;
 		d_metadata_tx.end_of_burst = false;
-		d_metadata_tx.has_time_spec = false;
-		//d_metadata.time_spec = uhd::time_spec_t(1.5+d_timeout); // Timespec needed?
+		d_metadata_tx.has_time_spec = true;
+		d_metadata_tx.time_spec = uhd::time_spec_t(d_time_now_tx.get_real_secs()+d_wait_tx); // Timespec needed?
 		
 		// Send input buffer
 		size_t num_acc_samps = 0; // Number of accumulated samples
 		size_t samps_to_send, num_tx_samps, total_num_samps;
 		total_num_samps = d_noutput_items_send;
+		bool first_loop = true;
 		while(num_acc_samps < total_num_samps){
 			samps_to_send = std::min(total_num_samps - num_acc_samps, d_tx_stream->get_max_num_samps());
 
@@ -491,8 +498,13 @@ namespace gr {
 			num_tx_samps = d_tx_stream->send(d_in_send, samps_to_send, d_metadata_tx, d_timeout_tx);
 			d_in_send = d_in_send + num_tx_samps;
 
-			// Do not use time spec for subsequent packets
-			d_metadata_tx.has_time_spec = false;
+			// Process first loop
+			if(first_loop){
+				// Do not use time spec for subsequent packets
+				d_metadata_tx.has_time_spec = false;
+				
+				first_loop = false;
+			}
 
 			if (num_tx_samps < samps_to_send) std::cerr << "Send timeout..." << std::endl;
 
@@ -512,7 +524,7 @@ namespace gr {
 		uhd::stream_cmd_t stream_cmd(uhd::stream_cmd_t::STREAM_MODE_NUM_SAMPS_AND_DONE);
 		stream_cmd.num_samps = total_num_samps;
 		stream_cmd.stream_now = true;
-		//stream_cmd.time_spec = uhd::time_spec_t(seconds_in_future);
+		stream_cmd.time_spec = uhd::time_spec_t(d_time_now_rx.get_real_secs()+d_wait_rx);
 		d_rx_stream->issue_stream_cmd(stream_cmd);
 		
 		size_t num_acc_samps = 0; // Number of accumulated samples
@@ -524,15 +536,18 @@ namespace gr {
 			num_rx_samps = d_rx_stream->recv(d_out_recv, samps_to_recv, d_metadata_rx, d_timeout_rx, true);
 			d_out_recv = d_out_recv + num_rx_samps;
 			//std::cout << "num_rec: " << num_rx_samps << "/" << samps_to_recv << std::endl;
-
-			// Use a small timeout for subsequent packets
-			//d_timeout_rx = 0.1; // no use atm
 			
-			// Save timestamp of first package
+			// Process first loop
 			if(first_loop){
+				// Save timestamp of first loop
 				d_time_val = pmt::make_tuple
 				(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
 				 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
+				 
+				 // Set streaming to now
+				 stream_cmd.stream_now = true;
+				 d_rx_stream->issue_stream_cmd(stream_cmd);
+				 
 				 first_loop = false;
 			 }
 
@@ -563,9 +578,8 @@ namespace gr {
         noutput_items = ninput_items[0];
         
         // Get time from USRP TX
-        uhd::time_spec_t d_time_now;
-        d_usrp_rx->get_time_now();
-        std::cout << d_time_now.get_full_secs() << "/" << d_time_now.get_frac_secs() << std::endl;
+        d_time_now_tx = d_usrp_tx->get_time_now();
+        d_time_now_rx = d_time_now_tx;
         
         // Send thread
         d_in_send = in;

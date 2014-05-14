@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed May 14 16:47:47 2014
+# Generated: Wed May 14 18:29:14 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -47,12 +47,13 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 250000
-        self.packet_len = packet_len = 2**15
+        self.samp_rate = samp_rate = 1000000
+        self.packet_len = packet_len = 2**12
+        self.decim_fac = decim_fac = 2**0
+        self.packet_len_red = packet_len_red = packet_len/decim_fac
         self.min_output_buffer = min_output_buffer = packet_len*2
         self.freq_res = freq_res = samp_rate/packet_len
-        self.decim_fac = decim_fac = 1
-        self.center_freq = center_freq = 5800000
+        self.center_freq = center_freq = 4800000
 
         ##################################################
         # Blocks
@@ -64,14 +65,14 @@ class top_block(gr.top_block, Qt.QWidget):
                 fractional_bw=None,
         )
         self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, "packet_len")
-        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(65536)
+        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(8192)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(0,  "packet_len")
-        (self.radar_ts_fft_cc_0).set_min_output_buffer(65536)
+        (self.radar_ts_fft_cc_0).set_min_output_buffer(8192)
         self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, ((50000), ), 0.5, "packet_len")
-        (self.radar_signal_generator_cw_c_0).set_min_output_buffer(65536)
+        (self.radar_signal_generator_cw_c_0).set_min_output_buffer(8192)
         self.radar_print_peaks_0 = radar.print_peaks()
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/decim_fac, 15, 0, 0.78, 15, True, "packet_len")
-        (self.radar_os_cfar_c_0).set_min_output_buffer(65536)
+        (self.radar_os_cfar_c_0).set_min_output_buffer(8192)
         self.qtgui_sink_x_0 = qtgui.sink_c(
         	packet_len/decim_fac, #fftsize
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -89,7 +90,7 @@ class top_block(gr.top_block, Qt.QWidget):
         
         
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/decim_fac)
-        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(65536)
+        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(8192)
 
         ##################################################
         # Connections
@@ -125,8 +126,24 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_freq_res(self.samp_rate/self.packet_len)
         self.set_min_output_buffer(self.packet_len*2)
+        self.set_packet_len_red(self.packet_len/self.decim_fac)
+        self.set_freq_res(self.samp_rate/self.packet_len)
+
+    def get_decim_fac(self):
+        return self.decim_fac
+
+    def set_decim_fac(self, decim_fac):
+        self.decim_fac = decim_fac
+        self.set_packet_len_red(self.packet_len/self.decim_fac)
+        self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decim_fac)
+        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
+
+    def get_packet_len_red(self):
+        return self.packet_len_red
+
+    def set_packet_len_red(self, packet_len_red):
+        self.packet_len_red = packet_len_red
 
     def get_min_output_buffer(self):
         return self.min_output_buffer
@@ -139,14 +156,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_freq_res(self, freq_res):
         self.freq_res = freq_res
-
-    def get_decim_fac(self):
-        return self.decim_fac
-
-    def set_decim_fac(self, decim_fac):
-        self.decim_fac = decim_fac
-        self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decim_fac)
-        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
 
     def get_center_freq(self):
         return self.center_freq
