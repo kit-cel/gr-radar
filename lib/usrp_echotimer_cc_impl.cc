@@ -347,7 +347,6 @@
 #include <gnuradio/io_signature.h>
 #include "usrp_echotimer_cc_impl.h"
 #include <iostream>
-#include <boost/thread.hpp>
 
 namespace gr {
   namespace radar {
@@ -414,8 +413,8 @@ namespace gr {
 		d_clock_source_rx = "mimo";
 		d_time_source_rx = "mimo";
 		d_antenna_rx = "J1";
-		d_lo_offset_rx = 0;
-		d_timeout_rx = 0; // FIXME: timeout? why default on 0.1?
+		d_lo_offset_rx = 2*d_samp_rate;
+		d_timeout_rx = 0.1; // FIXME: timeout? why default on 0.1?
 		
 		// Setup USRP RX: args (addr,...)
 		d_usrp_rx = uhd::usrp::multi_usrp::make(d_args_rx);
@@ -447,8 +446,15 @@ namespace gr {
 		
 		//***** Misc *****//
 		
+		// Setup rx_time pmt
+		d_time_key = pmt::string_to_symbol("rx_time");
+		d_srcid = pmt::string_to_symbol("usrp_echotimer");
+		
 		// Setup thread priority
 		//uhd::set_thread_priority_safe(); // necessary? dont work...
+		
+		// Sleep to get sync done
+		boost::this_thread::sleep(boost::posix_time::milliseconds(500));
 	}
 
     /*
@@ -465,8 +471,8 @@ namespace gr {
       return noutput_items ;
     }
     
-    int
-    usrp_echotimer_cc_impl::send(const gr_complex *in, int noutput_items)
+    void
+    usrp_echotimer_cc_impl::send()
     {
 		// Setup metadata for first package
         d_metadata_tx.start_of_burst = true;
@@ -477,13 +483,13 @@ namespace gr {
 		// Send input buffer
 		size_t num_acc_samps = 0; // Number of accumulated samples
 		size_t samps_to_send, num_tx_samps, total_num_samps;
-		total_num_samps = noutput_items;
+		total_num_samps = d_noutput_items_send;
 		while(num_acc_samps < total_num_samps){
 			samps_to_send = std::min(total_num_samps - num_acc_samps, d_tx_stream->get_max_num_samps());
 
 			// Send a single packet
-			num_tx_samps = d_tx_stream->send(in, samps_to_send, d_metadata_tx, d_timeout_tx);
-			in = in + num_tx_samps;
+			num_tx_samps = d_tx_stream->send(d_in_send, samps_to_send, d_metadata_tx, d_timeout_tx);
+			d_in_send = d_in_send + num_tx_samps;
 
 			// Do not use time spec for subsequent packets
 			d_metadata_tx.has_time_spec = false;
@@ -496,31 +502,39 @@ namespace gr {
 		// Send a mini EOB packet
 		d_metadata_tx.end_of_burst = true;
 		d_tx_stream->send("", 0, d_metadata_tx);
-		
-		return 1; // FIXME: useless atm
     }
     
-    int
-    usrp_echotimer_cc_impl::receive(const gr_complex *out, int noutput_items)
+    void
+    usrp_echotimer_cc_impl::receive()
     {
 		// Setup RX streaming
-		size_t total_num_samps = noutput_items;
+		size_t total_num_samps = d_noutput_items_recv;
 		uhd::stream_cmd_t stream_cmd(uhd::stream_cmd_t::STREAM_MODE_NUM_SAMPS_AND_DONE);
 		stream_cmd.num_samps = total_num_samps;
-		stream_cmd.stream_now = false;
-		stream_cmd.time_spec = uhd::time_spec_t(d_timeout_rx); // FIXME: do I need this timespec?
+		stream_cmd.stream_now = true;
+		//stream_cmd.time_spec = uhd::time_spec_t(seconds_in_future);
 		d_rx_stream->issue_stream_cmd(stream_cmd);
 		
 		size_t num_acc_samps = 0; // Number of accumulated samples
 		size_t num_rx_samps, samps_to_recv;
+		bool first_loop = true;
 		while(num_acc_samps < total_num_samps){
 			// Receive a single packet
 			samps_to_recv = std::min(total_num_samps-num_acc_samps, d_rx_stream->get_max_num_samps());
-			num_rx_samps = d_rx_stream->recv(out, samps_to_recv, d_metadata_rx, d_timeout_rx, true);
-			out = out + num_rx_samps;
+			num_rx_samps = d_rx_stream->recv(d_out_recv, samps_to_recv, d_metadata_rx, d_timeout_rx, true);
+			d_out_recv = d_out_recv + num_rx_samps;
+			//std::cout << "num_rec: " << num_rx_samps << "/" << samps_to_recv << std::endl;
 
 			// Use a small timeout for subsequent packets
-			d_timeout_rx = 0.1;
+			//d_timeout_rx = 0.1; // no use atm
+			
+			// Save timestamp of first package
+			if(first_loop){
+				d_time_val = pmt::make_tuple
+				(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
+				 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
+				 first_loop = false;
+			 }
 
 			// Handle the error code
 			if (d_metadata_rx.error_code == uhd::rx_metadata_t::ERROR_CODE_TIMEOUT) break;
@@ -534,8 +548,6 @@ namespace gr {
 		}
 
 		if (num_acc_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
-    
-		return 1; // FIXME: useless atm
     }
 
     int
@@ -544,20 +556,33 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-        const gr_complex *in = (const gr_complex *) input_items[0];
+        gr_complex *in = (gr_complex *) input_items[0]; // remove const
         gr_complex *out = (gr_complex *) output_items[0];
         
         // Set output items on packet length
         noutput_items = ninput_items[0];
         
+        // Get time from USRP TX
+        uhd::time_spec_t d_time_now;
+        d_usrp_rx->get_time_now();
+        std::cout << d_time_now.get_full_secs() << "/" << d_time_now.get_frac_secs() << std::endl;
         
         // Send thread
-        //send(in, noutput_items);
+        d_in_send = in;
+        d_noutput_items_send = noutput_items;
+        d_thread_send = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::send, this));
         
         // Receive thread
-        receive(out, noutput_items);
+        d_out_recv = out;
+        d_noutput_items_recv = noutput_items;
+        d_thread_recv = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this));
         
         // Wait for threads to complete
+        d_thread_send.join();
+        d_thread_recv.join();
+        
+        // Setup rx_time tag
+         add_item_tag(0, nitems_written(0), d_time_key, d_time_val, d_srcid);
 
         // Tell runtime system how many output items we produced.
         return noutput_items;

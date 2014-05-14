@@ -362,8 +362,8 @@ namespace gr {
      public:
       usrp_echotimer_cc_impl(int samp_rate, float center_freq, const std::string& len_key);
       ~usrp_echotimer_cc_impl();
-      int send(const gr_complex *in, int noutput_items);
-      int receive(const gr_complex *out, int noutput_items);
+      void send();
+      void receive();
       
       int d_samp_rate;
       float d_center_freq, d_amplitude_rx;
@@ -381,6 +381,15 @@ namespace gr {
       uhd::rx_metadata_t d_metadata_rx;
       double d_lo_offset_tx, d_lo_offset_rx;
       float d_timeout_tx, d_timeout_rx;
+      
+      gr::thread::thread d_thread_recv;
+      gr_complex *d_out_recv;
+      int d_noutput_items_recv;
+      pmt::pmt_t d_time_key, d_time_val, d_srcid;
+      
+      gr::thread::thread d_thread_send;
+      gr_complex *d_in_send;
+      int d_noutput_items_send;
 
       // Where all the action really happens
       int work(int noutput_items,
