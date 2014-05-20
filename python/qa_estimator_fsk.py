@@ -364,7 +364,7 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		
 		center_freq = 5.7e9
 		
-		Range = 20
+		Range = 90
 		velocity = 10
 				
 		samp_per_freq = 1
@@ -383,7 +383,7 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		sim = radar.static_target_simulator_cc((Range,Range),(velocity,velocity),(1e12,1e12),(0,0),samp_rate,center_freq,1,False,False)
 		sim.set_min_output_buffer(min_output_buffer)
 		
-		mult = blocks.multiply_cc()
+		mult = blocks.multiply_conjugate_cc()
 		mult.set_min_output_buffer(min_output_buffer)
 		
 		fft1 = radar.ts_fft_cc()
