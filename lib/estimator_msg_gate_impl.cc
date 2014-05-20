@@ -385,16 +385,19 @@ namespace gr {
 		d_msg_size = pmt::length(msg);
 		d_msg_part_hold.clear();
 		d_msg_part_hold.resize(0);
+		
 		for(int k=0; k<d_msg_size; k++){ // go through msg
 			d_msg_part = pmt::nth(k,msg);
 			d_msg_key = pmt::symbol_to_string(pmt::nth(0,d_msg_part)); // get key
 			d_key_found = false;
 			for(int l=0; l<d_keys.size(); l++){ // search for key in input keys
+				std::cout << "KEY: " << d_keys[l] << std::endl; // FIXME: remove output
 				if(d_msg_key==d_keys[l]){
 					// If key is found check for vector and repack msg
 					d_key_found = true;
 					if(pmt::is_f32vector(pmt::nth(1,d_msg_part))){ // only f32 vector works
 						d_vec_size = pmt::length(pmt::nth(1,d_msg_part));
+						d_val_store.clear();
 						d_val_store.resize(d_vec_size);
 						d_val_store = pmt::f32vector_elements(pmt::nth(1,d_msg_part));
 						// Check if element is in boundries
@@ -411,16 +414,17 @@ namespace gr {
 					}
 				} // end repacking
 			} // end checking keys
+			
 			// Store pmt
 			if(d_key_found){
-				std::cout << "FOUND!" << std::endl;
 				d_msg_part_hold.push_back(pmt::list2(pmt::nth(0,d_msg_part),pmt::init_f32vector(d_val_accept.size(),d_val_accept))); // push back new pmt if key is found
 			}
 			else{
-				std::cout << "BLA!" << std::endl;
 				d_msg_part_hold.push_back(d_msg_part); // push back old msg part if not
 			}
+			
 		} // end check msg
+		
 		// Rebuild msg and push to output
 		pmt::pmt_t msg_out;
 		if(d_msg_part_hold.size()==1){
