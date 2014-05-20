@@ -1,0 +1,38 @@
+<block>
+  <name>Estimator Message Gate</name>
+  <key>radar_estimator_msg_gate</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.estimator_msg_gate($keys, $val_min, $val_max, $verbose)</make>
+  <param>
+    <name>Keys</name>
+    <key>keys</key>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>Value min</name>
+    <key>val_min</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Value max</name>
+    <key>val_max</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Verbose</name>
+    <key>verbose</key>
+    <value>0</value>
+    <type>int</type>
+  </param>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+  <source>
+    <name>Msg out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

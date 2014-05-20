@@ -52,3 +52,4 @@ GR_ADD_TEST(qa_signal_generator_fsk_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURC
 GR_ADD_TEST(qa_split_fsk_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_split_fsk_cc.py)
 GR_ADD_TEST(qa_estimator_fsk ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_fsk.py)
 GR_ADD_TEST(qa_usrp_echotimer_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_usrp_echotimer_cc.py)
+GR_ADD_TEST(qa_estimator_msg_gate ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_msg_gate.py)

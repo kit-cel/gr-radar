@@ -340,265 +340,39 @@
  * Public License instead of this License.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
-#include <gnuradio/io_signature.h>
-#include "usrp_echotimer_cc_impl.h"
-#include <iostream>
+#ifndef INCLUDED_RADAR_ESTIMATOR_MSG_GATE_H
+#define INCLUDED_RADAR_ESTIMATOR_MSG_GATE_H
+
+#include <radar/api.h>
+#include <gnuradio/block.h>
 
 namespace gr {
   namespace radar {
 
-    usrp_echotimer_cc::sptr
-    usrp_echotimer_cc::make(int samp_rate, float center_freq, const std::string& len_key)
-    {
-      return gnuradio::get_initial_sptr
-        (new usrp_echotimer_cc_impl(samp_rate, center_freq, len_key));
-    }
-
-    /*
-     * The private constructor
+    /*!
+     * \brief <+description of block+>
+     * \ingroup radar
+     *
      */
-    usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate, float center_freq, const std::string& len_key)
-      : gr::tagged_stream_block("usrp_echotimer_cc",
-              gr::io_signature::make(1, 1, sizeof(gr_complex)),
-              gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
+    class RADAR_API estimator_msg_gate : virtual public gr::block
     {
-		d_samp_rate = samp_rate;
-		d_center_freq = center_freq;
-		
-		//***** Setup USRP TX *****//
-		
-		d_args_tx = "addr=192.168.10.6";
-		d_wire_tx = "";
-		d_clock_source_tx = "internal";
-		d_time_source_tx = "none";
-		d_antenna_tx = "J1";
-		d_lo_offset_tx = 0;
-		d_timeout_tx = 0.1; // timeout for sending
-		d_wait_tx = 0.1; // secs to wait befor sending
-		
-		// Setup USRP TX: args (addr,...)
-		d_usrp_tx = uhd::usrp::multi_usrp::make(d_args_tx);
-		std::cout << "Using USRP Device (TX): " << std::endl << d_usrp_tx->get_pp_string() << std::endl;
-		
-		// Setup USRP TX: sample rate
-		std::cout << "Setting TX Rate: " << d_samp_rate << std::endl;
-		d_usrp_tx->set_tx_rate(d_samp_rate);
-		std::cout << "Actual TX Rate: " << d_usrp_tx->get_tx_rate() << std::endl;
-		
-		// Setup USRP TX: tune request
-		d_tune_request_tx = uhd::tune_request_t(d_center_freq); // FIXME: add alternative tune requests
-		d_usrp_tx->set_tx_freq(d_tune_request_tx);
-		
-		// Setup USRP TX: antenna
-		d_usrp_tx->set_tx_antenna(d_antenna_tx);
-		
-		// Setup USRP TX: clock source
-		d_usrp_tx->set_clock_source(d_clock_source_tx); // Set TX clock, TX is master
-		
-		// Setup USRP TX: time source
-		d_usrp_tx->set_time_source(d_time_source_tx); // Set TX time, TX is master
-		
-		// Setup USRP TX: timestamp
-		d_usrp_tx->set_time_now(uhd::time_spec_t(0.0)); // Set to 0 on startup
-		// FIXME: need to set time source? internal on default?
-		
-		// Setup transmit streamer
-		uhd::stream_args_t stream_args_tx("fc32", d_wire_tx); // complex floats
-		d_tx_stream = d_usrp_tx->get_tx_stream(stream_args_tx);
-		
-		//***** Setup USRP RX *****//
-		
-		d_amplitude_rx = 0.5;
-		d_args_rx = "addr=192.168.10.4";
-		d_wire_rx = "";
-		d_clock_source_rx = "mimo";
-		d_time_source_rx = "mimo";
-		d_antenna_rx = "J1";
-		d_lo_offset_rx = 2*d_samp_rate;
-		d_timeout_rx = 0.1; // timeout for receiving
-		d_wait_rx = d_wait_tx; // secs to wait befor receiving
-		
-		// Setup USRP RX: args (addr,...)
-		d_usrp_rx = uhd::usrp::multi_usrp::make(d_args_rx);
-		std::cout << "Using USRP Device (RX): " << std::endl << d_usrp_rx->get_pp_string() << std::endl;
-		
-		// Setup USRP RX: sample rate
-		std::cout << "Setting RX Rate: " << d_samp_rate << std::endl;
-		d_usrp_rx->set_rx_rate(d_samp_rate);
-		std::cout << "Actual RX Rate: " << d_usrp_rx->get_rx_rate() << std::endl;
-		
-		// Setup USRP RX: tune request
-		d_tune_request_rx = uhd::tune_request_t(d_center_freq, d_lo_offset_rx); // FIXME: add alternative tune requests
-		d_usrp_rx->set_rx_freq(d_tune_request_rx);
-		
-		// Setup USRP RX: antenna
-		d_usrp_rx->set_rx_antenna(d_antenna_rx);
-		
-		// Setup USRP RX: clock source
-		d_usrp_rx->set_clock_source(d_clock_source_rx); // RX is slave, clock is set on TX
-		
-		// Setup USRP RX: time source
-		d_usrp_rx->set_time_source(d_time_source_rx);
-		
-		// Setup receive streamer
-		uhd::stream_args_t stream_args_rx("fc32", d_wire_rx); // complex floats
-		std::vector<size_t> channel_nums; channel_nums.push_back(0); // define channel!
-		stream_args_rx.channels = channel_nums;
-		d_rx_stream = d_usrp_rx->get_rx_stream(stream_args_rx);
-		
-		//***** Misc *****//
-		
-		// Setup rx_time pmt
-		d_time_key = pmt::string_to_symbol("rx_time");
-		d_srcid = pmt::string_to_symbol("usrp_echotimer");
-		
-		// Setup thread priority
-		//uhd::set_thread_priority_safe(); // necessary? doesnt work...
-		
-		// Sleep to get sync done
-		boost::this_thread::sleep(boost::posix_time::milliseconds(500)); // FIXME: necessary?
-	}
+     public:
+      typedef boost::shared_ptr<estimator_msg_gate> sptr;
 
-    /*
-     * Our virtual destructor.
-     */
-    usrp_echotimer_cc_impl::~usrp_echotimer_cc_impl()
-    {
-    }
+      /*!
+       * \brief Return a shared_ptr to a new instance of radar::estimator_msg_gate.
+       *
+       * To avoid accidental use of raw pointers, radar::estimator_msg_gate's
+       * constructor is in a private implementation
+       * class. radar::estimator_msg_gate::make is the public interface for
+       * creating new instances.
+       */
+      static sptr make(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose=0);
+    };
 
-    int
-    usrp_echotimer_cc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
-    {
-      int noutput_items = ninput_items[0];
-      return noutput_items ;
-    }
-    
-    void
-    usrp_echotimer_cc_impl::send()
-    {
-		// Setup metadata for first package
-        d_metadata_tx.start_of_burst = true;
-		d_metadata_tx.end_of_burst = false;
-		d_metadata_tx.has_time_spec = true;
-		d_metadata_tx.time_spec = uhd::time_spec_t(d_time_now_tx.get_real_secs()+d_wait_tx); // Timespec needed?
-		
-		// Send input buffer
-		size_t num_acc_samps = 0; // Number of accumulated samples
-		size_t samps_to_send, num_tx_samps, total_num_samps;
-		total_num_samps = d_noutput_items_send;
-		bool first_loop = true;
-		while(num_acc_samps < total_num_samps){
-			samps_to_send = std::min(total_num_samps - num_acc_samps, d_tx_stream->get_max_num_samps());
+  } // namespace radar
+} // namespace gr
 
-			// Send a single packet
-			num_tx_samps = d_tx_stream->send(d_in_send, samps_to_send, d_metadata_tx, d_timeout_tx);
-			d_in_send = d_in_send + num_tx_samps;
-
-			// Process first loop
-			if(first_loop){
-				// Do not use time spec for subsequent packets
-				d_metadata_tx.has_time_spec = false;
-				
-				first_loop = false;
-			}
-
-			if (num_tx_samps < samps_to_send) std::cerr << "Send timeout..." << std::endl;
-
-			num_acc_samps += num_tx_samps;
-		}
-
-		// Send a mini EOB packet
-		d_metadata_tx.end_of_burst = true;
-		d_tx_stream->send("", 0, d_metadata_tx);
-    }
-    
-    void
-    usrp_echotimer_cc_impl::receive()
-    {
-		// Setup RX streaming
-		size_t total_num_samps = d_noutput_items_recv;
-		uhd::stream_cmd_t stream_cmd(uhd::stream_cmd_t::STREAM_MODE_NUM_SAMPS_AND_DONE);
-		stream_cmd.num_samps = total_num_samps;
-		stream_cmd.stream_now = true;
-		stream_cmd.time_spec = uhd::time_spec_t(d_time_now_rx.get_real_secs()+d_wait_rx);
-		d_rx_stream->issue_stream_cmd(stream_cmd);
-		
-		size_t num_acc_samps = 0; // Number of accumulated samples
-		size_t num_rx_samps, samps_to_recv;
-		bool first_loop = true;
-		while(num_acc_samps < total_num_samps){
-			// Receive a single packet
-			samps_to_recv = std::min(total_num_samps-num_acc_samps, d_rx_stream->get_max_num_samps());
-			num_rx_samps = d_rx_stream->recv(d_out_recv, samps_to_recv, d_metadata_rx, d_timeout_rx, true);
-			d_out_recv = d_out_recv + num_rx_samps;
-			
-			// Process first loop
-			if(first_loop){
-				// Save timestamp of first loop
-				d_time_val = pmt::make_tuple
-				(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
-				 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
-				 
-				 // Set streaming to now
-				 stream_cmd.stream_now = true;
-				 d_rx_stream->issue_stream_cmd(stream_cmd);
-				 
-				 first_loop = false;
-			 }
-
-			// Handle the error code
-			if (d_metadata_rx.error_code == uhd::rx_metadata_t::ERROR_CODE_TIMEOUT) break;
-			if (d_metadata_rx.error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
-				throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx.strerror()));
-			}
-
-			num_acc_samps += num_rx_samps;
-		}
-
-		if (num_acc_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
-    }
-
-    int
-    usrp_echotimer_cc_impl::work (int noutput_items,
-                       gr_vector_int &ninput_items,
-                       gr_vector_const_void_star &input_items,
-                       gr_vector_void_star &output_items)
-    {
-        gr_complex *in = (gr_complex *) input_items[0]; // remove const
-        gr_complex *out = (gr_complex *) output_items[0];
-        
-        // Set output items on packet length
-        noutput_items = ninput_items[0];
-        
-        // Get time from USRP TX
-        d_time_now_tx = d_usrp_tx->get_time_now();
-        d_time_now_rx = d_time_now_tx;
-        
-        // Send thread
-        d_in_send = in;
-        d_noutput_items_send = noutput_items;
-        d_thread_send = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::send, this));
-        
-        // Receive thread
-        d_out_recv = out;
-        d_noutput_items_recv = noutput_items;
-        d_thread_recv = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this));
-        
-        // Wait for threads to complete
-        d_thread_send.join();
-        d_thread_recv.join();
-        
-        // Setup rx_time tag
-         add_item_tag(0, nitems_written(0), d_time_key, d_time_val, d_srcid);
-
-        // Tell runtime system how many output items we produced.
-        return noutput_items;
-    }
-
-  } /* namespace radar */
-} /* namespace gr */
+#endif /* INCLUDED_RADAR_ESTIMATOR_MSG_GATE_H */
 

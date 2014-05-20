@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed May 14 16:35:47 2014
+# Generated: Mon May 19 19:06:14 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -72,6 +72,7 @@ class top_block(grc_wxgui.top_block_gui):
         self.radar_print_results_0 = radar.print_results()
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/decimator_fac, 15, 0, 0.78, 10, True, "packet_len")
         (self.radar_os_cfar_c_0).set_min_output_buffer(262144)
+        self.radar_estimator_msg_gate_0 = radar.estimator_msg_gate(['self', 'write', '_filter', 'SL', 'trans', '_dummyTrans'], ((8), ), ((18), ), 0)
         self.radar_estimator_cw_0 = radar.estimator_cw(center_freq)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         (self.blocks_throttle_0).set_min_output_buffer(262144)
@@ -102,7 +103,8 @@ class top_block(grc_wxgui.top_block_gui):
         # Asynch Message Connections
         ##################################################
         self.msg_connect(self.radar_os_cfar_c_0, "Msg out", self.radar_estimator_cw_0, "Msg in")
-        self.msg_connect(self.radar_estimator_cw_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_msg_gate_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_cw_0, "Msg out", self.radar_estimator_msg_gate_0, "Msg in")
 
 # QT sink close method reimplementation
 

@@ -21,6 +21,7 @@
 #include "radar/split_fsk_cc.h"
 #include "radar/estimator_fsk.h"
 #include "radar/usrp_echotimer_cc.h"
+#include "radar/estimator_msg_gate.h"
 %}
 
 
@@ -52,3 +53,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, split_fsk_cc);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_fsk);
 %include "radar/usrp_echotimer_cc.h"
 GR_SWIG_BLOCK_MAGIC2(radar, usrp_echotimer_cc);
+%include "radar/estimator_msg_gate.h"
+GR_SWIG_BLOCK_MAGIC2(radar, estimator_msg_gate);
