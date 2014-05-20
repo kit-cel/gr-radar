@@ -474,8 +474,8 @@ namespace gr {
 					d_filt_doppler[k][i] = std::exp(d_phase_doppler)*d_scale_ampl[k];
 					d_phase_doppler = 1j*std::fmod(std::imag(d_phase_doppler)+2*M_PI*d_doppler[k]/(float)d_samp_rate,2*M_PI); // integrate phase (with plus!)
 					// Time shift filter
-					d_filt_time[k][i] = std::exp(d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
-					d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*d_timeshift[k]*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with plus!)
+					d_filt_time[k][i] = std::exp(-d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
+					d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*d_timeshift[k]*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with minus!)
 				}
 			}
 			

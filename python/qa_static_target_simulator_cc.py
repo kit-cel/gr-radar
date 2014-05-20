@@ -430,7 +430,7 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		data_in = snk1.data()
 		data_out = snk0.data()
 		data_out = data_out/max(np.real(data_out)) # rescale output data
-		self.assertComplexTuplesAlmostEqual(data_out[0:len(data_out)-2],data_in[1:len(data_in)-1],4)
+		self.assertComplexTuplesAlmostEqual(data_out[1:len(data_out)-1],data_in[0:len(data_in)-2],4)
 
 if __name__ == '__main__':
 	gr_unittest.run(qa_static_target_simulator_cc)#, "qa_static_target_simulator_cc.xml")

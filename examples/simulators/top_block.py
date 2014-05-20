@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Tue May 20 12:44:56 2014
+# Generated: Tue May 20 17:40:52 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -67,9 +67,9 @@ class top_block(grc_wxgui.top_block_gui):
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, 0, delta_freq, 1, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
+        self.radar_print_results_0 = radar.print_results()
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/2/decimator_fac, 5, 0, 0.78, 30, True, "packet_len")
         (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
-        self.radar_estimator_msg_gate_0 = radar.estimator_msg_gate(['self', 'write', '_filter', 'SL', 'trans', '_dummyTrans'], ((8.0,8.0)), ((18.0,18.0)), 0)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         (self.blocks_throttle_0).set_min_output_buffer(524288)
@@ -101,16 +101,16 @@ class top_block(grc_wxgui.top_block_gui):
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0, 0))
         self.connect((self.radar_split_fsk_cc_0, 1), (self.rational_resampler_xxx_0_0, 0))
         self.connect((self.radar_split_fsk_cc_0, 0), (self.rational_resampler_xxx_0, 0))
-        self.connect((self.ts_fft_py_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
-        self.connect((self.ts_fft_py_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
         self.connect((self.blocks_tagged_stream_multiply_length_0_0, 0), (self.ts_fft_py_cc_0_0, 0))
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.ts_fft_py_cc_0, 0))
+        self.connect((self.ts_fft_py_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
+        self.connect((self.ts_fft_py_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
 
         ##################################################
         # Asynch Message Connections
         ##################################################
         self.msg_connect(self.radar_os_cfar_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_estimator_msg_gate_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
 
 # QT sink close method reimplementation
 
@@ -119,21 +119,21 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.set_delta_freq(self.samp_rate/4)
+        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.ts_fft_py_cc_0.set_samp_rate(self.samp_rate)
         self.ts_fft_py_cc_0_0.set_samp_rate(self.samp_rate)
+        self.ts_fft_py_cc_0.set_samp_rate(self.samp_rate)
 
     def get_blocks_per_tag(self):
         return self.blocks_per_tag
 
     def set_blocks_per_tag(self, blocks_per_tag):
         self.blocks_per_tag = blocks_per_tag
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.set_min_output_buffer(2*(self.blocks_per_tag*self.samp_per_freq*2))
-        self.ts_fft_py_cc_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
+        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.ts_fft_py_cc_0_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
+        self.ts_fft_py_cc_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
 
     def get_samp_per_freq(self):
         return self.samp_per_freq
@@ -186,10 +186,10 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_decimator_fac(self, decimator_fac):
         self.decimator_fac = decimator_fac
-        self.ts_fft_py_cc_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
-        self.ts_fft_py_cc_0_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decimator_fac)
         self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1.0/self.decimator_fac)
+        self.ts_fft_py_cc_0_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
+        self.ts_fft_py_cc_0.set_packet_len(self.blocks_per_tag/self.decimator_fac)
 
     def get_R_max(self):
         return self.R_max
