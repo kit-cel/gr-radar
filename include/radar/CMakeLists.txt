@@ -35,5 +35,6 @@ install(FILES
     split_fsk_cc.h
     estimator_fsk.h
     usrp_echotimer_cc.h
-    estimator_msg_gate.h DESTINATION include/radar
+    estimator_msg_gate.h
+    estimator_fmcw.h DESTINATION include/radar
 )

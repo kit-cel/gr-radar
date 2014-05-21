@@ -38,7 +38,8 @@ list(APPEND radar_sources
     split_fsk_cc_impl.cc
     estimator_fsk_impl.cc
     usrp_echotimer_cc_impl.cc
-    estimator_msg_gate_impl.cc )
+    estimator_msg_gate_impl.cc
+    estimator_fmcw_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

@@ -345,87 +345,175 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "estimator_fsk_impl.h"
+#include "estimator_fmcw_impl.h"
+#include <iostream>
 
 namespace gr {
   namespace radar {
 
-    estimator_fsk::sptr
-    estimator_fsk::make(float center_freq, float delta_freq)
+    estimator_fmcw::sptr
+    estimator_fmcw::make(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_fsk_impl(center_freq, delta_freq));
+        (new estimator_fmcw_impl(samp_rate, center_freq, sweep_freq, samp_up, samp_down));
     }
 
     /*
      * The private constructor
      */
-    estimator_fsk_impl::estimator_fsk_impl(float center_freq, float delta_freq)
-      : gr::block("estimator_fsk",
+    estimator_fmcw_impl::estimator_fmcw_impl(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down)
+      : gr::block("estimator_fmcw",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
+		d_samp_rate = samp_rate;
 		d_center_freq = center_freq;
-		d_delta_freq = delta_freq;
+		d_sweep_freq = sweep_freq;
+		d_samp_up = samp_up;
+		d_samp_down = samp_down;
 		
-		// Register input message port
-		d_port_id_in = pmt::mp("Msg in");
-		message_port_register_in(d_port_id_in);
-		set_msg_handler(d_port_id_in, boost::bind(&estimator_fsk_impl::handle_msg, this, _1));
+		d_msg_cw_in = false;
+		d_msg_up_in = false;
+		d_msg_down_in = false;
+		
+		// Setup estimation constants
+		d_const_doppler = 2*d_center_freq/c_light;
+		d_const_up = 2*d_sweep_freq/c_light*(float)d_samp_rate/(float)d_samp_up;
+		d_const_down = 2*d_sweep_freq/c_light*(float)d_samp_rate/(float)d_samp_down;
+		
+		// Register input message ports
+		d_port_id_in_cw = pmt::mp("Msg in CW");
+		message_port_register_in(d_port_id_in_cw);
+		set_msg_handler(d_port_id_in_cw, boost::bind(&estimator_fmcw_impl::handle_msg_cw, this, _1));
+		
+		d_port_id_in_up = pmt::mp("Msg in UP");
+		message_port_register_in(d_port_id_in_up);
+		set_msg_handler(d_port_id_in_up, boost::bind(&estimator_fmcw_impl::handle_msg_up, this, _1));
+		
+		d_port_id_in_down = pmt::mp("Msg in DOWN");
+		message_port_register_in(d_port_id_in_down);
+		set_msg_handler(d_port_id_in_down, boost::bind(&estimator_fmcw_impl::handle_msg_down, this, _1));
 		
 		// Register output message port
 		d_port_id_out = pmt::mp("Msg out");
 		message_port_register_out(d_port_id_out);
 	}
+	
+	void
+    estimator_fmcw_impl::handle_msg_cw(pmt::pmt_t msg)
+    {
+		// Handle CW msg and call estimate if all msgs are available
+		d_msg_cw = msg;
+		d_msg_cw_in = true;
+		if(d_msg_cw_in&&d_msg_up_in&&d_msg_down_in){
+			d_msg_cw_in = false;
+			d_msg_up_in = false;
+			d_msg_down_in = false;
+			estimate();
+		}
+	}
+	
+	void
+    estimator_fmcw_impl::handle_msg_up(pmt::pmt_t msg)
+    {
+		// Handle UP msg and call estimate if all msgs are available
+		d_msg_up = msg;
+		d_msg_up_in = true;
+		if(d_msg_cw_in&&d_msg_up_in&&d_msg_down_in){
+			d_msg_cw_in = false;
+			d_msg_up_in = false;
+			d_msg_down_in = false;
+			estimate();
+		}
+	}
+	
+	void
+    estimator_fmcw_impl::handle_msg_down(pmt::pmt_t msg)
+    {
+		// Handle DOWN msg and call estimate if all msgs are available
+		d_msg_down = msg;
+		d_msg_down_in = true;
+		if(d_msg_cw_in&&d_msg_up_in&&d_msg_down_in){
+			d_msg_cw_in = false;
+			d_msg_up_in = false;
+			d_msg_down_in = false;
+			estimate();
+		}
+	}
+	
+	void
+    estimator_fmcw_impl::estimate()
+    {
+		// Get timestamp and frequencies (cw, up-chirp, down-chirp)
+		std::vector<float> freq_cw, freq_up, freq_down;
+		pmt::pmt_t timestamp;
+		
+		timestamp = pmt::nth(0,d_msg_cw);
+		freq_cw = pmt::f32vector_elements(pmt::nth(1,d_msg_cw));
+		freq_up = pmt::f32vector_elements(pmt::nth(1,d_msg_up));
+		freq_down = pmt::f32vector_elements(pmt::nth(1,d_msg_down));
+		
+		// Get velocities out of CW frequencies
+		std::vector<float> velocity_cw;
+		for(int k=0; k<freq_cw.size(); k++){
+			velocity_cw.push_back(-c_light/2/d_center_freq*freq_cw[k]); // with minus! for same sign as all_velocities
+		}
+		
+		// Get all possible range/velocity pairs
+		std::vector<float> all_ranges, all_velocities;
+		float v1, v2, r;
+		for(int m=0; m<freq_up.size(); m++){
+			for(int n=0; n<freq_down.size(); n++){
+				r = (freq_up[m]-freq_down[n])/(d_const_up+d_const_down); // range from up- and down-chirp
+				all_ranges.push_back(r);
+				v1 = (d_const_up*r-freq_up[m])/d_const_doppler; // velocity from up-chirp
+				v2 = (-d_const_down*r-freq_down[n])/d_const_doppler; // velocity from down-chirp
+				all_velocities.push_back((v1+v2)/2.0); // median of up- and down-chirp
+			}
+		}
+		
+		// Minimize velocity from CW with all possible velocities from up-/down-chirp
+		std::vector<float> velocity, range;
+		int min_vel_index; // FIXME: need errorhandler!
+		float min_vel;
+		for(int k=0; k<velocity_cw.size(); k++){
+			min_vel = 1e20;
+			min_vel_index = -1;
+			
+			for(int l=0; l<all_velocities.size(); l++){
+				if(min_vel>std::abs(velocity_cw[k]-all_velocities[l])){
+					min_vel = std::abs(velocity_cw[k]-all_velocities[l]);
+					min_vel_index = l;
+				}
+			}
+			
+			velocity.push_back(velocity_cw[k]); // push back cw velocity because of (probably) better resolution
+			range.push_back(all_ranges[min_vel_index]);
+		}
+		
+		// Pack output msg and push to output
+		pmt::pmt_t time_pack;
+		time_pack = pmt::list2(pmt::string_to_symbol("rx_time"), timestamp); // make list for timestamp information
+		
+		pmt::pmt_t vel_value, vel_pack;
+		vel_value = pmt::init_f32vector(velocity.size(), velocity); // vector to pmt
+		vel_pack = pmt::list2(pmt::string_to_symbol("velocity"), vel_value); // make list for velocity information
+		
+		pmt::pmt_t range_value, range_pack;
+		range_value = pmt::init_f32vector(range.size(), range); // vector to pmt
+		range_pack = pmt::list2(pmt::string_to_symbol("range"), range_value); // make list for range information
+		
+		pmt::pmt_t value;
+		value = pmt::list3(time_pack, vel_pack, range_pack); // all information to one pmt list
+		message_port_pub(d_port_id_out,value);
+	}
 
     /*
      * Our virtual destructor.
      */
-    estimator_fsk_impl::~estimator_fsk_impl()
+    estimator_fmcw_impl::~estimator_fmcw_impl()
     {
     }
-    
-    void
-    estimator_fsk_impl::handle_msg(pmt::pmt_t msg)
-    {
-		// Read msg from peak detector
-		d_ptimestamp = pmt::nth(0,msg);
-		d_pfreq = pmt::nth(1,msg);
-		d_ppks = pmt::nth(2,msg);
-		d_pphase = pmt::nth(3,msg);
-		
-		d_freq = pmt::f32vector_elements(d_pfreq);
-		d_pks = pmt::f32vector_elements(d_ppks);
-		d_phase = pmt::f32vector_elements(d_pphase);
-		
-		// Calc velocities and write to vector
-		d_vel.clear();
-		for(int k=0; k<d_freq.size(); k++){
-			d_vel.push_back(d_freq[k]*c_light/2/d_center_freq); // calc with doppler formula
-		}
-		
-		// Calc ranges and write to vector
-		d_range.clear();
-		for(int k=0; k<d_phase.size(); k++){
-			if(d_phase[k]>0) d_range.push_back((d_phase[k])*c_light/4/M_PI/d_delta_freq); // calc with fsk range formula
-			else d_range.push_back((2*M_PI+d_phase[k])*c_light/4/M_PI/d_delta_freq); // phase jumps from pi to -pi
-		}
-		
-		// Push pmt to output msg port
-		d_vel_key = pmt::string_to_symbol("velocity"); // identifier velocity
-		d_vel_value = pmt::init_f32vector(d_vel.size(), d_vel); // vector to pmt
-		d_vel_pack = pmt::list2(d_vel_key, d_vel_value); // make list for velocity information
-		
-		d_range_key = pmt::string_to_symbol("range"); // identifier range
-		d_range_value = pmt::init_f32vector(d_range.size(), d_range); // vector to pmt
-		d_range_pack = pmt::list2(d_range_key, d_range_value); // make list for range information
-		
-		d_time_key = pmt::string_to_symbol("rx_time"); // identifier timestamp
-		d_time_pack = pmt::list2(d_time_key, d_ptimestamp); // make list for timestamp information
-		
-		d_value = pmt::list3(d_time_pack, d_vel_pack, d_range_pack); // all information to one pmt list
-		message_port_pub(d_port_id_out,d_value);
-	}
 
   } /* namespace radar */
 } /* namespace gr */
