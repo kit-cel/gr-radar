@@ -378,7 +378,7 @@ namespace gr {
 		d_antenna_tx = "J1";
 		d_lo_offset_tx = 0;
 		d_timeout_tx = 0.1; // timeout for sending
-		d_wait_tx = 0.1; // secs to wait befor sending
+		d_wait_tx = 0.05; // secs to wait befor sending
 		
 		// Setup USRP TX: args (addr,...)
 		d_usrp_tx = uhd::usrp::multi_usrp::make(d_args_tx);
@@ -494,11 +494,6 @@ namespace gr {
 		num_tx_samps = d_tx_stream->send(d_in_send, total_num_samps, d_metadata_tx, total_num_samps/(float)d_samp_rate+d_timeout_tx);
 		// Get timeout
 		if (num_tx_samps < total_num_samps) std::cerr << "Send timeout..." << std::endl;
-
-		// Send a mini EOB packet
-		d_metadata_tx.end_of_burst = true;
-		d_metadata_tx.has_time_spec = false;
-		d_tx_stream->send("", 0, d_metadata_tx);
     }
     
     void
@@ -514,9 +509,9 @@ namespace gr {
 		
 		size_t num_rx_samps;
 		// Receive a packet
-		num_rx_samps = d_rx_stream->recv(d_out_recv, total_num_samps, d_metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout_rx, false);
+		num_rx_samps = d_rx_stream->recv(d_out_recv, total_num_samps, d_metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout_rx);
 		
-		// Save timestamp of first loop
+		// Save timestamp
 		d_time_val = pmt::make_tuple
 			(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
 			 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));

@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri May 23 15:00:52 2014
+# Generated: Fri May 23 15:58:21 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -48,7 +48,7 @@ class top_block(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 1000000
-        self.packet_len = packet_len = 2**14
+        self.packet_len = packet_len = 2**16
         self.decim_fac = decim_fac = 2**2
         self.packet_len_red = packet_len_red = packet_len/decim_fac
         self.min_output_buffer = min_output_buffer = packet_len*2
@@ -65,14 +65,14 @@ class top_block(gr.top_block, Qt.QWidget):
                 fractional_bw=None,
         )
         self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, "packet_len")
-        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(32768)
+        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(131072)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(0,  "packet_len")
-        (self.radar_ts_fft_cc_0).set_min_output_buffer(32768)
+        (self.radar_ts_fft_cc_0).set_min_output_buffer(131072)
         self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, ((50000), ), 0.5, "packet_len")
-        (self.radar_signal_generator_cw_c_0).set_min_output_buffer(32768)
+        (self.radar_signal_generator_cw_c_0).set_min_output_buffer(131072)
         self.radar_print_peaks_0 = radar.print_peaks()
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/decim_fac, 15, 0, 0.78, 15, True, "packet_len")
-        (self.radar_os_cfar_c_0).set_min_output_buffer(32768)
+        (self.radar_os_cfar_c_0).set_min_output_buffer(131072)
         self.qtgui_sink_x_0 = qtgui.sink_c(
         	packet_len/decim_fac, #fftsize
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -90,17 +90,17 @@ class top_block(gr.top_block, Qt.QWidget):
         
         
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/decim_fac)
-        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(32768)
+        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(131072)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.radar_ts_fft_cc_0, 0))
-        self.connect((self.radar_ts_fft_cc_0, 0), (self.radar_os_cfar_c_0, 0))
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.radar_signal_generator_cw_c_0, 0), (self.radar_usrp_echotimer_cc_0, 0))
+        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
+        self.connect((self.radar_ts_fft_cc_0, 0), (self.radar_os_cfar_c_0, 0))
+        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.radar_ts_fft_cc_0, 0))
 
         ##################################################
         # Asynch Message Connections
@@ -136,8 +136,8 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_decim_fac(self, decim_fac):
         self.decim_fac = decim_fac
         self.set_packet_len_red(self.packet_len/self.decim_fac)
-        self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decim_fac)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
+        self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decim_fac)
 
     def get_packet_len_red(self):
         return self.packet_len_red
