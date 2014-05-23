@@ -508,6 +508,12 @@ namespace gr {
 		num_tx_samps = d_tx_stream->send(d_in_send, total_num_samps, d_metadata_tx, total_num_samps/(float)d_samp_rate+d_timeout_tx);
 		// Get timeout
 		if (num_tx_samps < total_num_samps) std::cerr << "Send timeout..." << std::endl;
+		
+		//send a mini EOB packet
+		d_metadata_tx.start_of_burst = false;
+		d_metadata_tx.end_of_burst = true;
+		d_metadata_tx.has_time_spec = false;
+		d_tx_stream->send("", 0, d_metadata_tx); // FIXME: do i need this?
     }
     
     void
