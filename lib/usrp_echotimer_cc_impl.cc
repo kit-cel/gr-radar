@@ -418,7 +418,7 @@ namespace gr {
 		d_clock_source_rx = "mimo";
 		d_time_source_rx = "mimo";
 		d_antenna_rx = "J1";
-		d_lo_offset_rx = 2*d_samp_rate;
+		d_lo_offset_rx = samp_rate;
 		d_timeout_rx = 0.1; // timeout for receiving
 		d_wait_rx = d_wait_tx; // secs to wait befor receiving
 		
@@ -460,7 +460,7 @@ namespace gr {
 		//uhd::set_thread_priority_safe(); // necessary? doesnt work...
 		
 		// Sleep to get sync done
-		boost::this_thread::sleep(boost::posix_time::milliseconds(500)); // FIXME: necessary?
+		boost::this_thread::sleep(boost::posix_time::milliseconds(1000)); // FIXME: necessary?
 	}
 
     /*
@@ -484,35 +484,20 @@ namespace gr {
         d_metadata_tx.start_of_burst = true;
 		d_metadata_tx.end_of_burst = false;
 		d_metadata_tx.has_time_spec = true;
-		d_metadata_tx.time_spec = uhd::time_spec_t(d_time_now_tx.get_real_secs()+d_wait_tx); // Timespec needed?
+		d_metadata_tx.time_spec = d_time_now_tx+uhd::time_spec_t(d_wait_tx); // Timespec needed?
 		
 		// Send input buffer
 		size_t num_acc_samps = 0; // Number of accumulated samples
-		size_t samps_to_send, num_tx_samps, total_num_samps;
+		size_t num_tx_samps, total_num_samps;
 		total_num_samps = d_noutput_items_send;
-		bool first_loop = true;
-		while(num_acc_samps < total_num_samps){
-			samps_to_send = std::min(total_num_samps - num_acc_samps, d_tx_stream->get_max_num_samps());
-
-			// Send a single packet
-			num_tx_samps = d_tx_stream->send(d_in_send, samps_to_send, d_metadata_tx, d_timeout_tx);
-			d_in_send = d_in_send + num_tx_samps;
-
-			// Process first loop
-			if(first_loop){
-				// Do not use time spec for subsequent packets
-				d_metadata_tx.has_time_spec = false;
-				
-				first_loop = false;
-			}
-
-			if (num_tx_samps < samps_to_send) std::cerr << "Send timeout..." << std::endl;
-
-			num_acc_samps += num_tx_samps;
-		}
+		// Data to USRP
+		num_tx_samps = d_tx_stream->send(d_in_send, total_num_samps, d_metadata_tx, total_num_samps/(float)d_samp_rate+d_timeout_tx);
+		// Get timeout
+		if (num_tx_samps < total_num_samps) std::cerr << "Send timeout..." << std::endl;
 
 		// Send a mini EOB packet
 		d_metadata_tx.end_of_burst = true;
+		d_metadata_tx.has_time_spec = false;
 		d_tx_stream->send("", 0, d_metadata_tx);
     }
     
@@ -523,43 +508,25 @@ namespace gr {
 		size_t total_num_samps = d_noutput_items_recv;
 		uhd::stream_cmd_t stream_cmd(uhd::stream_cmd_t::STREAM_MODE_NUM_SAMPS_AND_DONE);
 		stream_cmd.num_samps = total_num_samps;
-		stream_cmd.stream_now = true;
-		stream_cmd.time_spec = uhd::time_spec_t(d_time_now_rx.get_real_secs()+d_wait_rx);
+		stream_cmd.stream_now = false;
+		stream_cmd.time_spec = d_time_now_rx+uhd::time_spec_t(d_wait_rx);
 		d_rx_stream->issue_stream_cmd(stream_cmd);
 		
-		size_t num_acc_samps = 0; // Number of accumulated samples
-		size_t num_rx_samps, samps_to_recv;
-		bool first_loop = true;
-		while(num_acc_samps < total_num_samps){
-			// Receive a single packet
-			samps_to_recv = std::min(total_num_samps-num_acc_samps, d_rx_stream->get_max_num_samps());
-			num_rx_samps = d_rx_stream->recv(d_out_recv, samps_to_recv, d_metadata_rx, d_timeout_rx, true);
-			d_out_recv = d_out_recv + num_rx_samps;
-			
-			// Process first loop
-			if(first_loop){
-				// Save timestamp of first loop
-				d_time_val = pmt::make_tuple
-				(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
-				 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
-				 
-				 // Set streaming to now
-				 stream_cmd.stream_now = true;
-				 d_rx_stream->issue_stream_cmd(stream_cmd);
-				 
-				 first_loop = false;
-			 }
+		size_t num_rx_samps;
+		// Receive a packet
+		num_rx_samps = d_rx_stream->recv(d_out_recv, total_num_samps, d_metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout_rx, false);
+		
+		// Save timestamp of first loop
+		d_time_val = pmt::make_tuple
+			(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
+			 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
 
-			// Handle the error code
-			if (d_metadata_rx.error_code == uhd::rx_metadata_t::ERROR_CODE_TIMEOUT) break;
-			if (d_metadata_rx.error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
-				throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx.strerror()));
-			}
-
-			num_acc_samps += num_rx_samps;
+		// Handle the error code
+		if (d_metadata_rx.error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
+			throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx.strerror()));
 		}
 
-		if (num_acc_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
+		if (num_rx_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
     }
 
     int
@@ -593,7 +560,7 @@ namespace gr {
         d_thread_recv.join();
         
         // Setup rx_time tag
-         add_item_tag(0, nitems_written(0), d_time_key, d_time_val, d_srcid);
+        add_item_tag(0, nitems_written(0), d_time_key, d_time_val, d_srcid);
 
         // Tell runtime system how many output items we produced.
         return noutput_items;
