@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri May 23 17:39:16 2014
+# Generated: Fri May 23 17:54:43 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -65,7 +65,7 @@ class top_block(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0.1, wait_to_start, samp_rate/2, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, 1000, 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0.1, wait_to_start, samp_rate/2, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(131072)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(0,  "packet_len")
         (self.radar_ts_fft_cc_0).set_min_output_buffer(131072)
@@ -127,9 +127,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_min_output_buffer(self.packet_len*2)
-        self.set_packet_len_red(self.packet_len/self.decim_fac)
         self.set_freq_res(self.samp_rate/self.packet_len)
+        self.set_packet_len_red(self.packet_len/self.decim_fac)
+        self.set_min_output_buffer(self.packet_len*2)
 
     def get_decim_fac(self):
         return self.decim_fac

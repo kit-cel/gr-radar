@@ -3,7 +3,7 @@
   <key>radar_usrp_echotimer_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
   <param>
     <name>Sample rate</name>
     <key>samp_rate</key>
@@ -13,6 +13,12 @@
     <name>Center frequency</name>
     <key>center_freq</key>
     <type>float</type>
+  </param>
+  <param>
+    <name>Number delay samples</name>
+    <key>num_delay_samps</key>
+    <value>0</value>
+    <type>int</type>
   </param>
   <param>
     <name>TX Arguments</name>
