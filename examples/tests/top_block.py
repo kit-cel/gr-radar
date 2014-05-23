@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri May 23 15:58:21 2014
+# Generated: Fri May 23 16:49:06 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -50,6 +50,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 1000000
         self.packet_len = packet_len = 2**16
         self.decim_fac = decim_fac = 2**2
+        self.wait_to_start = wait_to_start = 0.02
         self.packet_len_red = packet_len_red = packet_len/decim_fac
         self.min_output_buffer = min_output_buffer = packet_len*2
         self.freq_res = freq_res = samp_rate/packet_len
@@ -64,7 +65,7 @@ class top_block(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0.1, wait_to_start, samp_rate/2, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(131072)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(0,  "packet_len")
         (self.radar_ts_fft_cc_0).set_min_output_buffer(131072)
@@ -96,11 +97,11 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.qtgui_sink_x_0, 0))
-        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.rational_resampler_xxx_0, 0))
-        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.radar_usrp_echotimer_cc_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
         self.connect((self.radar_ts_fft_cc_0, 0), (self.radar_os_cfar_c_0, 0))
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.radar_ts_fft_cc_0, 0))
+        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.radar_usrp_echotimer_cc_0, 0))
+        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.rational_resampler_xxx_0, 0))
 
         ##################################################
         # Asynch Message Connections
@@ -126,9 +127,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_freq_res(self.samp_rate/self.packet_len)
-        self.set_packet_len_red(self.packet_len/self.decim_fac)
         self.set_min_output_buffer(self.packet_len*2)
+        self.set_packet_len_red(self.packet_len/self.decim_fac)
+        self.set_freq_res(self.samp_rate/self.packet_len)
 
     def get_decim_fac(self):
         return self.decim_fac
@@ -138,6 +139,12 @@ class top_block(gr.top_block, Qt.QWidget):
         self.set_packet_len_red(self.packet_len/self.decim_fac)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decim_fac)
+
+    def get_wait_to_start(self):
+        return self.wait_to_start
+
+    def set_wait_to_start(self, wait_to_start):
+        self.wait_to_start = wait_to_start
 
     def get_packet_len_red(self):
         return self.packet_len_red

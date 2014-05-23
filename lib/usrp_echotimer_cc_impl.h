@@ -360,13 +360,18 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      usrp_echotimer_cc_impl(int samp_rate, float center_freq, const std::string& len_key);
+      usrp_echotimer_cc_impl(int samp_rate, float center_freq,
+		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, 
+		float timeout_tx, float wait_tx, float lo_offset_tx,
+		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx,
+		float timeout_rx, float wait_rx, float lo_offset_rx,
+		const std::string& len_key);
       ~usrp_echotimer_cc_impl();
       void send();
       void receive();
       
       int d_samp_rate;
-      float d_center_freq, d_amplitude_rx;
+      float d_center_freq;
       
       std::string d_args_tx, d_args_rx;
       std::string d_clock_source_tx, d_clock_source_rx;

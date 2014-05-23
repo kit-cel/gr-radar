@@ -1,30 +1,142 @@
 <block>
-  <name>Usrp echotimer cc</name>
+  <name>USRP Echotimer</name>
   <key>radar_usrp_echotimer_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $len_key)</make>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
   <param>
-    <name>Samp_rate</name>
+    <name>Sample rate</name>
     <key>samp_rate</key>
     <type>int</type>
   </param>
   <param>
-    <name>Center_freq</name>
+    <name>Center frequency</name>
     <key>center_freq</key>
     <type>float</type>
   </param>
   <param>
-    <name>Len_key</name>
-    <key>len_key</key>
+    <name>TX Arguments</name>
+    <key>args_tx</key>
+    <value>'addr=192.168.xx.xx'</value>
     <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Wire</name>
+    <key>wire_tx</key>
+    <value>''</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Clock source</name>
+    <key>clock_source_tx</key>
+    <value>'internal'</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Time source</name>
+    <key>time_source_tx</key>
+    <value>'none'</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Antenna</name>
+    <key>antenna_tx</key>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Timeout</name>
+    <key>timeout_tx</key>
+    <value>0.1</value>
+    <type>float</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Wait to start</name>
+    <key>wait_tx</key>
+    <value>0.05</value>
+    <type>float</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Lo offset</name>
+    <key>lo_offset_tx</key>
+    <value>0</value>
+    <type>float</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Arguments</name>
+    <key>args_rx</key>
+    <value>'addr=192.168.xx.xx'</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Wire</name>
+    <key>wire_rx</key>
+    <value>''</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Clock source</name>
+    <key>clock_source_rx</key>
+    <value>'mimo'</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Time Source</name>
+    <key>time_source_rx</key>
+    <value>'mimo'</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Antenna</name>
+    <key>antenna_rx</key>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Timeout</name>
+    <key>timeout_rx</key>
+    <value>0.1</value>
+    <type>float</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Wait to start</name>
+    <key>wait_rx</key>
+    <value>0.05</value>
+    <type>float</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Lo offset</name>
+    <key>lo_offset_rx</key>
+    <value>0</value>
+    <type>float</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value>"packet_len"</value>
+    <type>string</type>
+    <hide>part</hide>
   </param>
   <sink>
-    <name>in</name>
+    <name>IQ in</name>
     <type>complex</type>
   </sink>
   <source>
-    <name>out</name>
+    <name>IQ out</name>
     <type>complex</type>
   </source>
 </block>
