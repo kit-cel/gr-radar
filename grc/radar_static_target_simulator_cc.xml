@@ -4,6 +4,7 @@
   <category>RADAR</category>
   <import>import radar</import>
   <make>radar.static_target_simulator_cc($range, $velocity, $rcs, $azimuth, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling, $len_key)</make>
+  <callback>setup_targets($range, $velocity, $rcs, $azimuth, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling)</callback>
   <param>
     <name>Range [m]</name>
     <key>range</key>

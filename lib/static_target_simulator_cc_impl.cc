@@ -368,6 +368,20 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
     {
+		setup_targets(range, velocity, rcs, azimuth, samp_rate, center_freq, self_coupling_db, rndm_phaseshift, self_coupling);
+	}
+
+    /*
+     * Our virtual destructor.
+     */
+    static_target_simulator_cc_impl::~static_target_simulator_cc_impl()
+    {
+    }
+    
+    void
+    static_target_simulator_cc_impl::setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+				int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling){
+		
 		d_range = range;
 		d_velocity = velocity;
 		d_rcs = rcs;
@@ -409,14 +423,7 @@ namespace gr {
 			// Setup random numbers
 			std::srand(std::time(NULL)); // initial with time
 		}
-	}
-
-    /*
-     * Our virtual destructor.
-     */
-    static_target_simulator_cc_impl::~static_target_simulator_cc_impl()
-    {
-    }
+													}
 
     int
     static_target_simulator_cc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)

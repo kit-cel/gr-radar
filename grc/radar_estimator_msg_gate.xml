@@ -3,10 +3,10 @@
   <key>radar_estimator_msg_gate</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.estimator_msg_gate($keys, $val_min, $val_max, $verbose)</make>
+  <make>radar.estimator_msg_gate($msg_keys, $val_min, $val_max, $verbose)</make>
   <param>
     <name>Keys</name>
-    <key>keys</key>
+    <key>msg_keys</key>
     <type>raw</type>
   </param>
   <param>

@@ -374,6 +374,8 @@ namespace gr {
 		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx,
 		float timeout_rx, float wait_rx, float lo_offset_rx,
 		const std::string& len_key="packet_len");
+		
+	  virtual void set_num_delay_samps(int num_samps) = 0;
     };
 
   } // namespace radar

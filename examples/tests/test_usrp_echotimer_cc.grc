@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri May 23 17:54:54 2014</timestamp>
+  <timestamp>Mon May 26 18:08:49 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -1425,6 +1425,61 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>num_delay_samps</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(411, 748)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>radar_usrp_echotimer_cc</key>
     <param>
       <key>id</key>
@@ -1444,7 +1499,7 @@
     </param>
     <param>
       <key>num_delay_samps</key>
-      <value>0</value>
+      <value>int(num_delay_samps)</value>
     </param>
     <param>
       <key>args_tx</key>
@@ -1528,7 +1583,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(433, 559)</value>
+      <value>(434, 559)</value>
     </param>
     <param>
       <key>_rotation</key>

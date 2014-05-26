@@ -346,7 +346,6 @@
 
 #include <gnuradio/io_signature.h>
 #include "estimator_msg_gate_impl.h"
-#include <iostream>
 
 namespace gr {
   namespace radar {
@@ -391,7 +390,6 @@ namespace gr {
 			d_msg_key = pmt::symbol_to_string(pmt::nth(0,d_msg_part)); // get key
 			d_key_found = false;
 			for(int l=0; l<d_keys.size(); l++){ // search for key in input keys
-				std::cout << "KEY: " << d_keys[l] << std::endl; // FIXME: remove output
 				if(d_msg_key==d_keys[l]){
 					// If key is found check for vector and repack msg
 					d_key_found = true;

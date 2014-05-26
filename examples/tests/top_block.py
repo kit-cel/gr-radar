@@ -2,10 +2,11 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri May 23 17:54:43 2014
+# Generated: Mon May 26 18:29:57 2014
 ##################################################
 
 from PyQt4 import Qt
+from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
@@ -14,6 +15,7 @@ from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+import PyQt4.Qwt5 as Qwt
 import radar
 import sip
 import sys
@@ -52,6 +54,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.decim_fac = decim_fac = 2**2
         self.wait_to_start = wait_to_start = 0.05
         self.packet_len_red = packet_len_red = packet_len/decim_fac
+        self.num_delay_samps = num_delay_samps = 0
         self.min_output_buffer = min_output_buffer = packet_len*2
         self.freq_res = freq_res = samp_rate/packet_len
         self.center_freq = center_freq = 5800000000
@@ -59,13 +62,36 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
+        self._num_delay_samps_layout = Qt.QVBoxLayout()
+        self._num_delay_samps_tool_bar = Qt.QToolBar(self)
+        self._num_delay_samps_layout.addWidget(self._num_delay_samps_tool_bar)
+        self._num_delay_samps_tool_bar.addWidget(Qt.QLabel("num_delay_samps"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._num_delay_samps_counter = qwt_counter_pyslot()
+        self._num_delay_samps_counter.setRange(0, 1000, 1)
+        self._num_delay_samps_counter.setNumButtons(2)
+        self._num_delay_samps_counter.setValue(self.num_delay_samps)
+        self._num_delay_samps_tool_bar.addWidget(self._num_delay_samps_counter)
+        self._num_delay_samps_counter.valueChanged.connect(self.set_num_delay_samps)
+        self._num_delay_samps_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._num_delay_samps_slider.setRange(0, 1000, 1)
+        self._num_delay_samps_slider.setValue(self.num_delay_samps)
+        self._num_delay_samps_slider.setMinimumWidth(200)
+        self._num_delay_samps_slider.valueChanged.connect(self.set_num_delay_samps)
+        self._num_delay_samps_layout.addWidget(self._num_delay_samps_slider)
+        self.top_layout.addLayout(self._num_delay_samps_layout)
         self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
                 interpolation=1,
                 decimation=decim_fac,
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, 1000, 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0.1, wait_to_start, samp_rate/2, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(num_delay_samps), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0.1, wait_to_start, samp_rate/2, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(131072)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(0,  "packet_len")
         (self.radar_ts_fft_cc_0).set_min_output_buffer(131072)
@@ -127,9 +153,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_freq_res(self.samp_rate/self.packet_len)
-        self.set_packet_len_red(self.packet_len/self.decim_fac)
         self.set_min_output_buffer(self.packet_len*2)
+        self.set_packet_len_red(self.packet_len/self.decim_fac)
+        self.set_freq_res(self.samp_rate/self.packet_len)
 
     def get_decim_fac(self):
         return self.decim_fac
@@ -151,6 +177,15 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len_red(self, packet_len_red):
         self.packet_len_red = packet_len_red
+
+    def get_num_delay_samps(self):
+        return self.num_delay_samps
+
+    def set_num_delay_samps(self, num_delay_samps):
+        self.num_delay_samps = num_delay_samps
+        Qt.QMetaObject.invokeMethod(self._num_delay_samps_counter, "setValue", Qt.Q_ARG("double", self.num_delay_samps))
+        Qt.QMetaObject.invokeMethod(self._num_delay_samps_slider, "setValue", Qt.Q_ARG("double", self.num_delay_samps))
+        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.num_delay_samps))
 
     def get_min_output_buffer(self):
         return self.min_output_buffer

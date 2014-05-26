@@ -361,6 +361,8 @@ namespace gr {
       static_target_simulator_cc_impl(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
 													int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling, const std::string& len_key);
       ~static_target_simulator_cc_impl();
+      void setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+													int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling);
       
       std::vector<float> d_range, d_velocity, d_rcs, d_azimuth;
       int d_samp_rate;

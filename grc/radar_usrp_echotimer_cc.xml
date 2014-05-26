@@ -4,6 +4,7 @@
   <category>RADAR</category>
   <import>import radar</import>
   <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
+  <callback>set_num_delay_samps($num_delay_samps)</callback>
   <param>
     <name>Sample rate</name>
     <key>samp_rate</key>

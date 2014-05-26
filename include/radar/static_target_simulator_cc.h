@@ -370,6 +370,9 @@ namespace gr {
        */
       static sptr make(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
 						int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift=true, bool self_coupling=true, const std::string& len_key="packet_len");
+						
+	  virtual void setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+													int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling) = 0;
     };
 
   } // namespace radar
