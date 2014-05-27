@@ -365,7 +365,7 @@ class qa_ts_fft_cc (gr_unittest.TestCase):
 		
 		src = radar.signal_generator_cw_c(packet_len,samp_rate,frequency,amplitude)
 		head = blocks.head(8,test_len)
-		fft = radar.ts_fft_cc()
+		fft = radar.ts_fft_cc(packet_len)
 		snk1 = blocks.vector_sink_c()
 		snk2 = blocks.vector_sink_c()
 		
@@ -394,7 +394,7 @@ class qa_ts_fft_cc (gr_unittest.TestCase):
 		head = blocks.head(8,test_len)
 		head.set_min_output_buffer(min_output_buffer)
 		
-		fft1 = radar.ts_fft_cc()
+		fft1 = radar.ts_fft_cc(packet_len)
 		fft1.set_min_output_buffer(min_output_buffer)
 		#fft2 = radar.ts_fft_cc()
 		#fft2.set_min_output_buffer(min_output_buffer)

@@ -386,9 +386,9 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		mult = blocks.multiply_conjugate_cc()
 		mult.set_min_output_buffer(min_output_buffer)
 		
-		fft1 = radar.ts_fft_cc()
+		fft1 = radar.ts_fft_cc(packet_len/2)
 		fft1.set_min_output_buffer(min_output_buffer)
-		fft2 = radar.ts_fft_cc()
+		fft2 = radar.ts_fft_cc(packet_len/2)
 		fft2.set_min_output_buffer(min_output_buffer)
 		
 		split = radar.split_fsk_cc(samp_per_freq,samp_discard)

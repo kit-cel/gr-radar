@@ -369,7 +369,7 @@ class qa_os_cfar_c (gr_unittest.TestCase):
         src = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq, ampl)
         head = blocks.head(8,test_len)
         s2ts = blocks.stream_to_tagged_stream(8,1,packet_len,"packet_len")
-        fft = radar.ts_fft_cc()
+        fft = radar.ts_fft_cc(packet_len)
         cfar = radar.os_cfar_c(samp_rate, compare_sample, protect_sample, rel_threshold, mult_threshold)
         debug = blocks.message_debug()
         

@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon May 26 18:29:10 2014
+# Generated: Tue May 27 17:39:22 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -165,8 +165,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_time_res(self.packet_len/float(self.samp_rate))
         self.set_freq_res(self.samp_rate/float(self.packet_len))
+        self.set_time_res(self.packet_len/float(self.samp_rate))
         self.ts_fft_py_cc_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac)
@@ -177,9 +177,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_time_res(self.packet_len/float(self.samp_rate))
-        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_min_output_buffer(int(self.packet_len*2))
+        self.set_freq_res(self.samp_rate/float(self.packet_len))
+        self.set_time_res(self.packet_len/float(self.samp_rate))
         self.ts_fft_py_cc_0.set_packet_len(self.packet_len/self.decimator_fac)
 
     def get_freq_res(self):

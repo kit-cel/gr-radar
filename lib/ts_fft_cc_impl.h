@@ -360,12 +360,10 @@ namespace gr {
      public:
       ts_fft_cc_impl(int apply_filter, const std::string& len_key);
       ~ts_fft_cc_impl();
-      
-      int d_apply_filter;
+
       fftwf_plan d_fft_plan;
-      gr_complex *d_buffer;
-      std::vector<gr_complex> d_filter;
-      int d_hold_noutput_items;
+      std::vector<gr_complex> d_buffer;
+      int d_size_fft;
 
       // Where all the action really happens
       int work(int noutput_items,

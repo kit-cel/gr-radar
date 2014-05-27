@@ -368,7 +368,7 @@ class qa_estimator_cw (gr_unittest.TestCase):
 		head = blocks.head(8,test_len)
 		sim = radar.static_target_simulator_cc((10,10),(velocity,velocity),(1e9,1e9),(0,0),samp_rate,center_freq,1,True,False)
 		mult = blocks.multiply_cc()
-		fft = radar.ts_fft_cc()
+		fft = radar.ts_fft_cc(packet_len)
 		cfar = radar.os_cfar_c(samp_rate, 5, 0, 0.78, 10, True)
 		est = radar.estimator_cw(center_freq)
 		res = radar.print_results()
