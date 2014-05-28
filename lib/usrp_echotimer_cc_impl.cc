@@ -353,17 +353,17 @@ namespace gr {
 
     usrp_echotimer_cc::sptr
     usrp_echotimer_cc::make(int samp_rate, float center_freq, int num_delay_samps,
-		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, 
+		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
 		float timeout_tx, float wait_tx, float lo_offset_tx,
-		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx,
+		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
 		float timeout_rx, float wait_rx, float lo_offset_rx,
 		const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
         (new usrp_echotimer_cc_impl(samp_rate, center_freq, num_delay_samps,
-        args_tx, wire_tx, clock_source_tx, time_source_tx, antenna_tx,
+        args_tx, wire_tx, clock_source_tx, time_source_tx, antenna_tx, gain_tx,
         timeout_tx, wait_tx, lo_offset_tx,
-        args_rx, wire_rx, clock_source_rx, time_source_rx, antenna_rx,
+        args_rx, wire_rx, clock_source_rx, time_source_rx, antenna_rx, gain_rx,
         timeout_rx, wait_rx, lo_offset_rx,
 		len_key));
     }
@@ -372,9 +372,9 @@ namespace gr {
      * The private constructor
      */
     usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate, float center_freq, int num_delay_samps,
-		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, 
+		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
 		float timeout_tx, float wait_tx, float lo_offset_tx,
-		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx,
+		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
 		float timeout_rx, float wait_rx, float lo_offset_rx,
 		const std::string& len_key)
       : gr::tagged_stream_block("usrp_echotimer_cc",
@@ -394,6 +394,7 @@ namespace gr {
 		d_time_source_tx = time_source_tx;
 		d_antenna_tx = antenna_tx;
 		d_lo_offset_tx = lo_offset_tx;
+		d_gain_tx = gain_tx;
 		d_timeout_tx = timeout_tx; // timeout for sending
 		d_wait_tx = wait_tx; // secs to wait befor sending
 		
@@ -405,6 +406,9 @@ namespace gr {
 		std::cout << "Setting TX Rate: " << d_samp_rate << std::endl;
 		d_usrp_tx->set_tx_rate(d_samp_rate);
 		std::cout << "Actual TX Rate: " << d_usrp_tx->get_tx_rate() << std::endl;
+		
+		// Setup USRP TX: gain
+		d_usrp_tx->set_tx_gain(d_gain_tx);
 		
 		// Setup USRP TX: tune request
 		d_tune_request_tx = uhd::tune_request_t(d_center_freq); // FIXME: add alternative tune requests
@@ -435,6 +439,7 @@ namespace gr {
 		d_time_source_rx = time_source_rx;
 		d_antenna_rx = antenna_rx;
 		d_lo_offset_rx = lo_offset_rx;
+		d_gain_rx = gain_rx;
 		d_timeout_rx = timeout_rx; // timeout for receiving
 		d_wait_rx = wait_rx; // secs to wait befor receiving
 		
@@ -446,6 +451,9 @@ namespace gr {
 		std::cout << "Setting RX Rate: " << d_samp_rate << std::endl;
 		d_usrp_rx->set_rx_rate(d_samp_rate);
 		std::cout << "Actual RX Rate: " << d_usrp_rx->get_rx_rate() << std::endl;
+		
+		// Setup USRP RX: gain
+		d_usrp_rx->set_rx_gain(d_gain_rx);
 		
 		// Setup USRP RX: tune request
 		d_tune_request_rx = uhd::tune_request_t(d_center_freq, d_lo_offset_rx); // FIXME: add alternative tune requests

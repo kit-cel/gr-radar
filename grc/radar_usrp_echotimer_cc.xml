@@ -3,7 +3,7 @@
   <key>radar_usrp_echotimer_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $gain_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $gain_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
   <callback>set_num_delay_samps($num_delay_samps)</callback>
   <param>
     <name>Sample rate</name>
@@ -53,6 +53,12 @@
     <name>TX Antenna</name>
     <key>antenna_tx</key>
     <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Gain</name>
+    <key>gain_tx</key>
+    <type>float</type>
     <hide>part</hide>
   </param>
   <param>
@@ -108,6 +114,12 @@
     <name>RX Antenna</name>
     <key>antenna_rx</key>
     <type>string</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Gain</name>
+    <key>gain_rx</key>
+    <type>float</type>
     <hide>part</hide>
   </param>
   <param>
