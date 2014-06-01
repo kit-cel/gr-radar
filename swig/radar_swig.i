@@ -23,6 +23,7 @@
 #include "radar/usrp_echotimer_cc.h"
 #include "radar/estimator_msg_gate.h"
 #include "radar/estimator_fmcw.h"
+#include "radar/signal_generator_sync_pulse_c.h"
 %}
 
 
@@ -58,3 +59,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, usrp_echotimer_cc);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_msg_gate);
 %include "radar/estimator_fmcw.h"
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_fmcw);
+%include "radar/signal_generator_sync_pulse_c.h"
+GR_SWIG_BLOCK_MAGIC2(radar, signal_generator_sync_pulse_c);

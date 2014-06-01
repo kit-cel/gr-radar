@@ -1,0 +1,37 @@
+<block>
+  <name>Signal generator sync pulse</name>
+  <key>radar_signal_generator_sync_pulse_c</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.signal_generator_sync_pulse_c($packet_len, $pulse_len, $pulse_pause, $pulse_amplitude, $len_key)</make>
+  <param>
+    <name>Packet length</name>
+    <key>packet_len</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Send pulse length</name>
+    <key>pulse_len</key>
+    <type>int_vector</type>
+  </param>
+  <param>
+    <name>Wait pulse length</name>
+    <key>pulse_pause</key>
+    <type>int_vector</type>
+  </param>
+  <param>
+    <name>Pulse amplitude</name>
+    <key>pulse_amplitude</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value>"packet_len"</value>
+    <type>string</type>
+  </param>
+  <source>
+    <name>IQ out</name>
+    <type>complex</type>
+  </source>
+</block>
