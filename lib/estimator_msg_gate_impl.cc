@@ -24,6 +24,7 @@
 
 #include <gnuradio/io_signature.h>
 #include "estimator_msg_gate_impl.h"
+#include <algorithm> // needed for std::find
 
 namespace gr {
   namespace radar {
@@ -43,6 +44,7 @@ namespace gr {
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
+		d_verbose = verbose;
 		d_keys = keys;
 		d_val_min = val_min;
 		d_val_max = val_max;
@@ -57,6 +59,97 @@ namespace gr {
 		message_port_register_out(d_port_id_out);
 	}
 	
+	void
+	estimator_msg_gate_impl::handle_msg(pmt::pmt_t msg){
+		size_t msg_size = pmt::length(msg);
+		std::vector<pmt::pmt_t> msg_parts_f32_key;
+		std::vector<std::vector<float> > msg_parts_f32_val; // take f32 vectors of msg
+		std::vector<pmt::pmt_t> msg_parts_rest; // take rest
+		std::vector<int> index_remove_items;
+		
+		// Push back float32 vectors in msg to separate vectors (only valid type for data) // FIXME: allow other data types?
+		for(int k=0; k<msg_size; k++){
+			if(pmt::is_f32vector(pmt::nth(1,pmt::nth(k,msg)))){
+				msg_parts_f32_key.push_back(pmt::nth(0,pmt::nth(k,msg))); // save key (pmt symbol)
+				msg_parts_f32_val.push_back(pmt::f32vector_elements(pmt::nth(1,pmt::nth(k,msg)))); // save value of f32 vec
+			}
+			else{
+				msg_parts_rest.push_back(pmt::nth(k,msg));
+			}
+		}
+		
+		if(msg_parts_f32_key.size()!=0){
+		
+		// Filter f32 vectors with string keys and save index of items out of boundries
+		size_t key_size;
+		key_size = d_keys.size();
+		size_t counter, size_vec;
+		for(int k=0; k<msg_parts_f32_key.size(); k++){ // go through msg_parts keys
+			for(int p=0; p<key_size; p++){ // go through string keys
+				if(d_keys[p]==pmt::symbol_to_string(msg_parts_f32_key[k])){ // if matching key is found apply filter
+					for(int q=0; q<msg_parts_f32_val[k].size(); q++){ // look for items out of boundries and store index
+						if(msg_parts_f32_val[k][q]<d_val_min[p] || msg_parts_f32_val[k][q]>d_val_max[p]){
+							if(index_remove_items.end()==std::find(index_remove_items.begin(), index_remove_items.end(), q)){ // check if item is not already in vector
+								index_remove_items.push_back(q);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		// Copy valid items from f32 vectors
+		std::vector<std::vector<float> > f32_hold;
+		f32_hold.resize(msg_parts_f32_val.size());
+		
+		for(int p=0; p<msg_parts_f32_val[0].size(); p++){
+			if(index_remove_items.end()==std::find(index_remove_items.begin(), index_remove_items.end(), p)){ // if index is not in vector for removed items
+				for(int k=0; k<msg_parts_f32_val.size(); k++){
+					f32_hold[k].push_back(msg_parts_f32_val[k][p]);
+				}
+			}
+		}
+		
+		if(f32_hold[0].size()!=0){ // if there is any item left after filtering
+			// Repack msg
+			pmt::pmt_t msg_out_rest, msg_out_f32, msg_out;
+			std::vector<pmt::pmt_t > f32_hold_pmt;
+			bool is_msg_rest;
+			is_msg_rest = true;
+			
+			// Repack rest pmts (not f32)
+			if(msg_parts_rest.size()!=0){
+				msg_out_rest = pmt::list1(msg_parts_rest[0]);
+				for(int k=1; k<msg_parts_rest.size(); k++){
+					msg_out_rest = pmt::list_add(msg_out_rest,msg_parts_rest[k]);
+				}
+			}
+			
+			// Repack f32 pmts
+			f32_hold_pmt.resize(f32_hold.size());
+			for(int k=0; k<f32_hold.size(); k++){
+				f32_hold_pmt[k] = list2(msg_parts_f32_key[k],pmt::init_f32vector(f32_hold[k].size(),f32_hold[k]));
+			}
+			if(is_msg_rest){
+				msg_out = msg_out_rest;
+				for(int k=0; k<f32_hold_pmt.size(); k++){
+					msg_out = list_add(msg_out,f32_hold_pmt[k]);
+				}
+			}
+			else{
+				msg_out = list1(f32_hold_pmt[0]);
+				for(int k=1; k<f32_hold_pmt.size(); k++){
+					msg_out = pmt::list_add(msg_out,f32_hold_pmt[k]);
+				}
+			}
+		
+			message_port_pub(d_port_id_out,msg_out);
+		}
+		
+		} // end if msg_parts_f32.size() != 0
+	}
+	
+	/*
 	void
 	estimator_msg_gate_impl::handle_msg(pmt::pmt_t msg){
 		d_msg_size = pmt::length(msg);
@@ -114,7 +207,8 @@ namespace gr {
 		}
 		message_port_pub(d_port_id_out,msg_out);
 	}
-
+	*/
+	
     /*
      * Our virtual destructor.
      */

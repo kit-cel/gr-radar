@@ -36,19 +36,12 @@ namespace gr {
       ~estimator_msg_gate_impl();
       void handle_msg(pmt::pmt_t msg);
       
+      int d_verbose;
       std::vector<std::string> d_keys;
       std::vector<float> d_val_max;
       std::vector<float> d_val_min;
-      std::vector<float> d_val_store, d_val_accept;
-      std::vector<pmt::pmt_t> d_msg_part_hold;
       
       pmt::pmt_t d_port_id_in, d_port_id_out;
-      pmt::pmt_t d_msg_part, d_msg_val;
-      std::string d_msg_key;
-      size_t d_msg_size, d_vec_size;
-      
-      bool d_key_found;
-      
     };
 
   } // namespace radar
