@@ -1,5 +1,5 @@
 <block>
-  <name>Tagged stream FFT</name>
+  <name>Tagged Stream FFT</name>
   <key>radar_ts_fft_cc</key>
   <category>RADAR</category>
   <import>import radar</import>

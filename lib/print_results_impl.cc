@@ -72,6 +72,9 @@ namespace gr {
 				d_size_part = pmt::length(pmt::nth(1,d_msg_part));
 				for(int l=0; l<d_size_part; l++) std::cout << pmt::f32vector_elements(pmt::nth(1,d_msg_part),d_size_part)[l] << " ";
 			}
+			else if(pmt::is_integer(pmt::nth(1,d_msg_part))){
+				std::cout << pmt::to_long(pmt::nth(1,d_msg_part)) << " ";
+			}
 			else if(pmt::is_tuple(pmt::nth(1,d_msg_part))){
 				std::cout << pmt::to_uint64(pmt::tuple_ref(pmt::nth(1,d_msg_part),0)) << ":" << pmt::to_double(pmt::tuple_ref(pmt::nth(1,d_msg_part),1)) << " ";
 			}

@@ -1,5 +1,5 @@
 <block>
-  <name>Signal generator FSK</name>
+  <name>Signal Generator FSK</name>
   <key>radar_signal_generator_fsk_c</key>
   <category>RADAR</category>
   <import>import radar</import>

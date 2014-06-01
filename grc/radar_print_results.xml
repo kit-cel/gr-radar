@@ -1,5 +1,5 @@
 <block>
-  <name>Print results</name>
+  <name>Print Results</name>
   <key>radar_print_results</key>
   <category>RADAR</category>
   <import>import radar</import>

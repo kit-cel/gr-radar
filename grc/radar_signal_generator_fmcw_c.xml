@@ -1,5 +1,5 @@
 <block>
-  <name>Signal generator FMCW</name>
+  <name>Signal Generator FMCW</name>
   <key>radar_signal_generator_fmcw_c</key>
   <category>RADAR</category>
   <import>import radar</import>

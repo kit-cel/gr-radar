@@ -1,0 +1,32 @@
+<block>
+  <name>Estimator Sync Pulse</name>
+  <key>radar_estimator_sync_pulse_c</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.estimator_sync_pulse_c($num_xcorr, $len_key)</make>
+  <callback>set_num_xcorr($num_xcorr)</callback>
+  <param>
+    <name>Number cross correlations</name>
+    <key>num_xcorr</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value>"packet_len"</value>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>IQ in TX</name>
+    <type>complex</type>
+  </sink>
+  <sink>
+    <name>IQ in RX</name>
+    <type>complex</type>
+  </sink>
+  <source>
+    <name>Msg out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

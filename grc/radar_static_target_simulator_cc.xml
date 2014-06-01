@@ -1,5 +1,5 @@
 <block>
-  <name>Static target simulator</name>
+  <name>Static Target Simulator</name>
   <key>radar_static_target_simulator_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
