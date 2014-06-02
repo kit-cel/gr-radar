@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun Jun  1 20:14:51 2014</timestamp>
+  <timestamp>Mon Jun  2 15:30:06 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,29 +64,6 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>num_skip</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>50</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 269)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
       <value>samp_rate</value>
     </param>
     <param>
@@ -107,22 +84,22 @@
     </param>
   </block>
   <block>
-    <key>radar_print_results</key>
+    <key>variable</key>
     <param>
       <key>id</key>
-      <value>radar_print_results_0</value>
+      <value>num_skip</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
+      <key>value</key>
+      <value>50</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(999, 273)</value>
+      <value>(544, 269)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -170,100 +147,6 @@
     <param>
       <key>_coordinate</key>
       <value>(536, 424)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_signal_generator_sync_pulse_c</key>
-    <param>
-      <key>id</key>
-      <value>radar_signal_generator_sync_pulse_c_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>2**12</value>
-    </param>
-    <param>
-      <key>pulse_len</key>
-      <value>(300,50,200)</value>
-    </param>
-    <param>
-      <key>pulse_pause</key>
-      <value>(100,200,50)</value>
-    </param>
-    <param>
-      <key>pulse_amplitude</key>
-      <value>0.5</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(197, 351)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_skiphead</key>
-    <param>
-      <key>id</key>
-      <value>blocks_skiphead_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>num_skip</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(530, 346)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -364,12 +247,123 @@
       <value>0</value>
     </param>
   </block>
-  <connection>
-    <source_block_id>radar_estimator_sync_pulse_c_0</source_block_id>
-    <sink_block_id>radar_print_results_0</sink_block_id>
-    <source_key>Msg out</source_key>
-    <sink_key>Msg in</sink_key>
-  </connection>
+  <block>
+    <key>radar_print_results</key>
+    <param>
+      <key>id</key>
+      <value>radar_print_results_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(999, 273)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_skiphead</key>
+    <param>
+      <key>id</key>
+      <value>blocks_skiphead_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>num_items</key>
+      <value>num_skip</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(536, 348)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_signal_generator_sync_pulse_c</key>
+    <param>
+      <key>id</key>
+      <value>radar_signal_generator_sync_pulse_c_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>packet_len</key>
+      <value>2**12</value>
+    </param>
+    <param>
+      <key>pulse_len</key>
+      <value>(300,50,200)</value>
+    </param>
+    <param>
+      <key>pulse_pause</key>
+      <value>(100,200,50)</value>
+    </param>
+    <param>
+      <key>pulse_amplitude</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(197, 351)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>radar_signal_generator_sync_pulse_c_0</source_block_id>
     <sink_block_id>blocks_skiphead_0</sink_block_id>
@@ -393,5 +387,11 @@
     <sink_block_id>radar_estimator_sync_pulse_c_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_estimator_sync_pulse_c_0</source_block_id>
+    <sink_block_id>radar_print_results_0</sink_block_id>
+    <source_key>Msg out</source_key>
+    <sink_key>Msg in</sink_key>
   </connection>
 </flow_graph>

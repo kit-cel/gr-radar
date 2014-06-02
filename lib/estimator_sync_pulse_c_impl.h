@@ -41,6 +41,8 @@ namespace gr {
       
       int d_num_xcorr;
       pmt::pmt_t d_port_id;
+      int d_noutput_items_vec;
+      std::vector<float> d_in_tx_real, d_in_rx_real;
 
       // Where all the action really happens
       int work(int noutput_items,

@@ -271,8 +271,8 @@ namespace gr {
         d_thread_recv.join();
         
         // Shift of number delay samples (fill with zeros)
-        memset(out,0,d_num_delay_samps*sizeof(gr_complex)); // set zeros
-        memcpy(out+d_num_delay_samps,&d_out_buffer[0],(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
+        memcpy(out,&d_out_buffer[0]+d_num_delay_samps,(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
+        memset(out+(noutput_items-d_num_delay_samps),0,d_num_delay_samps*sizeof(gr_complex)); // set zeros
         
         // Setup rx_time tag
         add_item_tag(0, nitems_written(0), d_time_key, d_time_val, d_srcid);

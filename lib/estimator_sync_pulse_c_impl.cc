@@ -45,6 +45,7 @@ namespace gr {
               gr::io_signature::make(0, 0, 0), len_key)
     {
 		d_num_xcorr = num_xcorr;
+		d_noutput_items_vec = -1;
 		
 		// Register message port
 		d_port_id = pmt::mp("Msg out");
@@ -80,34 +81,46 @@ namespace gr {
         const gr_complex *in_tx = (const gr_complex *) input_items[0];
         const gr_complex *in_rx = (const gr_complex *) input_items[1];
         
+        // Resize buffers
+        int ninput_items_min = std::min(ninput_items[0],ninput_items[1]);
+        if(d_noutput_items_vec!=ninput_items_min){
+			d_in_tx_real.resize(ninput_items_min);
+			d_in_rx_real.resize(ninput_items_min);
+		}
+		
+		// Copy complex to float and get abs
+		for(int k=0; k<ninput_items_min; k++){
+			d_in_tx_real[k] = std::abs(std::real(in_tx[k]));
+			d_in_rx_real[k] = std::abs(std::real(in_rx[k]));
+		}
+        
         // Do cross correlation and find max
-        std::complex<float> xcorr, xcorr_hold;
-        int ninput_items_min, num_delay;
+        float xcorr, xcorr_hold;
+        int num_delay;
         num_delay = -1;
         xcorr_hold = -1;
         
-        ninput_items_min = std::min(ninput_items[0],ninput_items[1]);
         for(int k=0; k<d_num_xcorr; k++){
-			volk_32fc_x2_conjugate_dot_prod_32fc(&xcorr, in_tx,in_rx+k,ninput_items_min-k);
-			if(xcorr.real()>xcorr_hold.real()){
-				xcorr_hold = xcorr.real();
+			volk_32f_x2_dot_prod_32f(&xcorr,&d_in_tx_real[0],&d_in_rx_real[0]+k,ninput_items_min-k);
+			if(xcorr>xcorr_hold){
+				xcorr_hold = xcorr;
 				num_delay = k;
 			}
 		}
         
-        // get rx_time tag
-         std::vector< tag_t > tags;
+        // Get rx_time tag
+        std::vector< tag_t > tags;
         pmt::pmt_t ptimestamp, msg_out, pxcorr;
 		get_tags_in_range(tags,0,nitems_read(0),nitems_read(0)+1,pmt::string_to_symbol("rx_time"));
 		
-		// setup msg pmt
-		if(tags.size()>0) ptimestamp = tags[0].value;
+		// Setup msg pmt
+		if(tags.size()>0) ptimestamp = pmt::list2(pmt::string_to_symbol("rx_time"),tags[0].value);
 		else ptimestamp = pmt::list2(pmt::string_to_symbol("rx_time"),pmt::make_tuple(pmt::from_uint64(0),pmt::from_double(-1))); // if no timetag is found, set to 0 and frac_sec to -1
 		
 		pxcorr = pmt::list2(pmt::string_to_symbol("sync_pulse"),pmt::from_long(std::abs(num_delay)));
 		msg_out = pmt::list2(ptimestamp,pxcorr);
 		
-		// publish message
+		// Publish message
 		message_port_pub(d_port_id,msg_out);
 
         // Do <+signal processing+>
