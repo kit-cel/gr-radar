@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jun  2 18:48:31 2014
+# Generated: Mon Jun  2 19:18:16 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -48,10 +48,10 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.packet_len = packet_len = 50
+        self.packet_len = packet_len = 200
         self.wait_to_start = wait_to_start = 0.02
-        self.wait_samp = wait_samp = 10
-        self.send_samp = send_samp = 10
+        self.wait_samp = wait_samp = 10,10,10
+        self.send_samp = send_samp = 10,40,30
         self.samp_rate = samp_rate = 250000
         self.num_delay_samp = num_delay_samp = 0
         self.num_corr = num_corr = 50
@@ -108,9 +108,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self._num_corr_layout.addWidget(self._num_corr_slider)
         self.top_layout.addLayout(self._num_corr_layout)
         self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(num_delay_samp), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0, 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 65, 0.1, wait_to_start, 0, "packet_len")
-        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(100)
-        self.radar_signal_generator_sync_pulse_c_0 = radar.signal_generator_sync_pulse_c(packet_len, (send_samp, ), (wait_samp, ), 0.5, "packet_len")
-        (self.radar_signal_generator_sync_pulse_c_0).set_min_output_buffer(100)
+        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(400)
+        self.radar_signal_generator_sync_pulse_c_0 = radar.signal_generator_sync_pulse_c(packet_len, (send_samp), (wait_samp), 0.5, "packet_len")
+        (self.radar_signal_generator_sync_pulse_c_0).set_min_output_buffer(400)
         self.radar_print_results_0 = radar.print_results()
         self.radar_estimator_sync_pulse_c_0 = radar.estimator_sync_pulse_c(int(num_corr), "packet_len")
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(

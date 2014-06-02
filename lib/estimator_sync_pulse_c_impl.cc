@@ -111,7 +111,7 @@ namespace gr {
         // Get rx_time tag
         std::vector< tag_t > tags;
         pmt::pmt_t ptimestamp, msg_out, pxcorr;
-		get_tags_in_range(tags,0,nitems_read(0),nitems_read(0)+1,pmt::string_to_symbol("rx_time"));
+		get_tags_in_range(tags,1,nitems_read(1),nitems_read(1)+1,pmt::string_to_symbol("rx_time"));
 		
 		// Setup msg pmt
 		if(tags.size()>0) ptimestamp = pmt::list2(pmt::string_to_symbol("rx_time"),tags[0].value);
