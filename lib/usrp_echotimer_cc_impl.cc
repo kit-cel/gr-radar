@@ -86,7 +86,7 @@ namespace gr {
 		std::cout << "Actual TX Rate: " << d_usrp_tx->get_tx_rate() << std::endl;
 		
 		// Setup USRP TX: gain
-		d_usrp_tx->set_tx_gain(d_gain_tx);
+		set_tx_gain(d_gain_tx);
 		
 		// Setup USRP TX: tune request
 		d_tune_request_tx = uhd::tune_request_t(d_center_freq); // FIXME: add alternative tune requests
@@ -131,7 +131,7 @@ namespace gr {
 		std::cout << "Actual RX Rate: " << d_usrp_rx->get_rx_rate() << std::endl;
 		
 		// Setup USRP RX: gain
-		d_usrp_rx->set_rx_gain(d_gain_rx);
+		set_rx_gain(d_gain_rx);
 		
 		// Setup USRP RX: tune request
 		d_tune_request_rx = uhd::tune_request_t(d_center_freq, d_lo_offset_rx); // FIXME: add alternative tune requests
@@ -182,6 +182,16 @@ namespace gr {
     void
     usrp_echotimer_cc_impl::set_num_delay_samps(int num_samps){
 		d_num_delay_samps = num_samps;
+	}
+	
+	void
+    usrp_echotimer_cc_impl::set_rx_gain(float gain){
+		d_usrp_rx->set_rx_gain(gain);
+	}
+	
+	void
+    usrp_echotimer_cc_impl::set_tx_gain(float gain){
+		d_usrp_tx->set_tx_gain(gain);
 	}
     
     void

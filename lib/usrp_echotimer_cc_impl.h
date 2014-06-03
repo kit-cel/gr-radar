@@ -48,6 +48,8 @@ namespace gr {
       void send();
       void receive();
       void set_num_delay_samps(int num_samps);
+      void set_rx_gain(float gain);
+      void set_tx_gain(float gain);
       
       int d_samp_rate;
       float d_center_freq;

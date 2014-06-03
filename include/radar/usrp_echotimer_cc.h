@@ -53,6 +53,8 @@ namespace gr {
 		const std::string& len_key="packet_len");
 		
 	  virtual void set_num_delay_samps(int num_samps) = 0;
+	  virtual void set_rx_gain(float gain) = 0;
+      virtual void set_tx_gain(float gain) = 0;
     };
 
   } // namespace radar
