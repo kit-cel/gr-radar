@@ -90,8 +90,8 @@ namespace gr {
 		
 		// Copy complex to float and get abs
 		for(int k=0; k<ninput_items_min; k++){
-			d_in_tx_real[k] = std::abs(std::real(in_tx[k]));
-			d_in_rx_real[k] = std::abs(std::real(in_rx[k]));
+			d_in_tx_real[k] = std::abs(in_tx[k]);
+			d_in_rx_real[k] = std::abs(in_rx[k]);
 		}
         
         // Do cross correlation and find max
