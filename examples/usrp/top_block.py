@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Jun  3 13:01:41 2014
+# Generated: Tue Jun  3 13:05:31 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -64,7 +64,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._num_delay_samp_layout = Qt.QVBoxLayout()
         self._num_delay_samp_tool_bar = Qt.QToolBar(self)
         self._num_delay_samp_layout.addWidget(self._num_delay_samp_tool_bar)
-        self._num_delay_samp_tool_bar.addWidget(Qt.QLabel("num_delay_samp"+": "))
+        self._num_delay_samp_tool_bar.addWidget(Qt.QLabel("Number of delayed samples"+": "))
         class qwt_counter_pyslot(Qwt.QwtCounter):
             def __init__(self, parent=None):
                 Qwt.QwtCounter.__init__(self, parent)
@@ -87,7 +87,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._num_corr_layout = Qt.QVBoxLayout()
         self._num_corr_tool_bar = Qt.QToolBar(self)
         self._num_corr_layout.addWidget(self._num_corr_tool_bar)
-        self._num_corr_tool_bar.addWidget(Qt.QLabel("num_corr"+": "))
+        self._num_corr_tool_bar.addWidget(Qt.QLabel("Number of cross correlations"+": "))
         class qwt_counter_pyslot(Qwt.QwtCounter):
             def __init__(self, parent=None):
                 Qwt.QwtCounter.__init__(self, parent)
@@ -213,18 +213,18 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_num_delay_samp(self, num_delay_samp):
         self.num_delay_samp = num_delay_samp
+        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.num_delay_samp))
         Qt.QMetaObject.invokeMethod(self._num_delay_samp_counter, "setValue", Qt.Q_ARG("double", self.num_delay_samp))
         Qt.QMetaObject.invokeMethod(self._num_delay_samp_slider, "setValue", Qt.Q_ARG("double", self.num_delay_samp))
-        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.num_delay_samp))
 
     def get_num_corr(self):
         return self.num_corr
 
     def set_num_corr(self, num_corr):
         self.num_corr = num_corr
+        self.radar_estimator_sync_pulse_c_0.set_num_xcorr(int(self.num_corr))
         Qt.QMetaObject.invokeMethod(self._num_corr_counter, "setValue", Qt.Q_ARG("double", self.num_corr))
         Qt.QMetaObject.invokeMethod(self._num_corr_slider, "setValue", Qt.Q_ARG("double", self.num_corr))
-        self.radar_estimator_sync_pulse_c_0.set_num_xcorr(int(self.num_corr))
 
     def get_min_output_buffer(self):
         return self.min_output_buffer
