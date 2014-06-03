@@ -2,14 +2,15 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed May 28 17:18:00 2014
+# Generated: Tue Jun  3 15:43:03 2014
 ##################################################
 
+execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
 from PyQt4 import Qt
 from PyQt4.QtCore import QObject, pyqtSlot
+from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
-from gnuradio import filter
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
@@ -49,60 +50,47 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 1000000
-        self.packet_len = packet_len = 2**18
-        self.decim_fac = decim_fac = 2**10
-        self.wait_to_start = wait_to_start = 0.05
-        self.packet_len_red = packet_len_red = packet_len/decim_fac
-        self.num_delay_samps = num_delay_samps = 0
-        self.min_output_buffer = min_output_buffer = packet_len*2
-        self.freq_res = freq_res = samp_rate/packet_len
-        self.center_freq = center_freq = 5800000000
+        self.threshold = threshold = -120
+        self.samp_rate = samp_rate = 32000
+        self.packet_len = packet_len = 2048
 
         ##################################################
         # Blocks
         ##################################################
-        self._num_delay_samps_layout = Qt.QVBoxLayout()
-        self._num_delay_samps_tool_bar = Qt.QToolBar(self)
-        self._num_delay_samps_layout.addWidget(self._num_delay_samps_tool_bar)
-        self._num_delay_samps_tool_bar.addWidget(Qt.QLabel("num_delay_samps"+": "))
+        self._threshold_layout = Qt.QVBoxLayout()
+        self._threshold_tool_bar = Qt.QToolBar(self)
+        self._threshold_layout.addWidget(self._threshold_tool_bar)
+        self._threshold_tool_bar.addWidget(Qt.QLabel("threshold"+": "))
         class qwt_counter_pyslot(Qwt.QwtCounter):
             def __init__(self, parent=None):
                 Qwt.QwtCounter.__init__(self, parent)
             @pyqtSlot('double')
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
-        self._num_delay_samps_counter = qwt_counter_pyslot()
-        self._num_delay_samps_counter.setRange(0, 1000, 1)
-        self._num_delay_samps_counter.setNumButtons(2)
-        self._num_delay_samps_counter.setValue(self.num_delay_samps)
-        self._num_delay_samps_tool_bar.addWidget(self._num_delay_samps_counter)
-        self._num_delay_samps_counter.valueChanged.connect(self.set_num_delay_samps)
-        self._num_delay_samps_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._num_delay_samps_slider.setRange(0, 1000, 1)
-        self._num_delay_samps_slider.setValue(self.num_delay_samps)
-        self._num_delay_samps_slider.setMinimumWidth(200)
-        self._num_delay_samps_slider.valueChanged.connect(self.set_num_delay_samps)
-        self._num_delay_samps_layout.addWidget(self._num_delay_samps_slider)
-        self.top_layout.addLayout(self._num_delay_samps_layout)
-        self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
-                interpolation=1,
-                decimation=decim_fac,
-                taps=None,
-                fractional_bw=None,
+        self._threshold_counter = qwt_counter_pyslot()
+        self._threshold_counter.setRange(-200, 100, 1)
+        self._threshold_counter.setNumButtons(2)
+        self._threshold_counter.setValue(self.threshold)
+        self._threshold_tool_bar.addWidget(self._threshold_counter)
+        self._threshold_counter.valueChanged.connect(self.set_threshold)
+        self._threshold_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._threshold_slider.setRange(-200, 100, 1)
+        self._threshold_slider.setValue(self.threshold)
+        self._threshold_slider.setMinimumWidth(200)
+        self._threshold_slider.valueChanged.connect(self.set_threshold)
+        self._threshold_layout.addWidget(self._threshold_slider)
+        self.top_layout.addLayout(self._threshold_layout)
+        self.ts_fft_py_cc_0 = ts_fft_py_cc(
+            samp_rate=samp_rate,
+            packet_len=packet_len,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(num_delay_samps), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0.1, wait_to_start, samp_rate/2, "packet_len")
-        (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(524288)
-        self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (10000, ), 0.5, "packet_len")
-        (self.radar_signal_generator_cw_c_0).set_min_output_buffer(524288)
         self.radar_print_peaks_0 = radar.print_peaks()
-        self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/decim_fac, 15, 0, 0.78, 15, True, "packet_len")
-        (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
+        self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate, threshold, "packet_len")
         self.qtgui_sink_x_0 = qtgui.sink_c(
-        	packet_len/decim_fac, #fftsize
+        	packet_len, #fftsize
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
         	0, #fc
-        	samp_rate/decim_fac, #bw
+        	samp_rate, #bw
         	"QT GUI Plot", #name
         	True, #plotfreq
         	True, #plotwaterfall
@@ -114,26 +102,23 @@ class top_block(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
         
         
-        self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/decim_fac)
-        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(524288)
-        self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(1)
-        (self.blocks_multiply_conjugate_cc_0).set_min_output_buffer(524288)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_gr_complex, 1, packet_len, "packet_len")
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 5000, 1, 0)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.qtgui_sink_x_0, 0))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
-        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.radar_usrp_echotimer_cc_0, 0))
-        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
-        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
-        self.connect((self.blocks_multiply_conjugate_cc_0, 0), (self.rational_resampler_xxx_0, 0))
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.radar_os_cfar_c_0, 0))
+        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.qtgui_sink_x_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.ts_fft_py_cc_0, 0))
+        self.connect((self.ts_fft_py_cc_0, 0), (self.radar_find_max_peak_c_0, 0))
 
         ##################################################
         # Asynch Message Connections
         ##################################################
-        self.msg_connect(self.radar_os_cfar_c_0, "Msg out", self.radar_print_peaks_0, "Msg in")
+        self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_print_peaks_0, "Msg in")
 
 # QT sink close method reimplementation
     def closeEvent(self, event):
@@ -141,70 +126,31 @@ class top_block(gr.top_block, Qt.QWidget):
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
+    def get_threshold(self):
+        return self.threshold
+
+    def set_threshold(self, threshold):
+        self.threshold = threshold
+        Qt.QMetaObject.invokeMethod(self._threshold_counter, "setValue", Qt.Q_ARG("double", self.threshold))
+        Qt.QMetaObject.invokeMethod(self._threshold_slider, "setValue", Qt.Q_ARG("double", self.threshold))
+        self.radar_find_max_peak_c_0.set_threshold(self.threshold)
+
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/self.packet_len)
-        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
+        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
+        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
+        self.ts_fft_py_cc_0.set_samp_rate(self.samp_rate)
 
     def get_packet_len(self):
         return self.packet_len
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_freq_res(self.samp_rate/self.packet_len)
-        self.set_min_output_buffer(self.packet_len*2)
-        self.set_packet_len_red(self.packet_len/self.decim_fac)
-
-    def get_decim_fac(self):
-        return self.decim_fac
-
-    def set_decim_fac(self, decim_fac):
-        self.decim_fac = decim_fac
-        self.set_packet_len_red(self.packet_len/self.decim_fac)
-        self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decim_fac)
-        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
-
-    def get_wait_to_start(self):
-        return self.wait_to_start
-
-    def set_wait_to_start(self, wait_to_start):
-        self.wait_to_start = wait_to_start
-
-    def get_packet_len_red(self):
-        return self.packet_len_red
-
-    def set_packet_len_red(self, packet_len_red):
-        self.packet_len_red = packet_len_red
-
-    def get_num_delay_samps(self):
-        return self.num_delay_samps
-
-    def set_num_delay_samps(self, num_delay_samps):
-        self.num_delay_samps = num_delay_samps
-        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.num_delay_samps))
-        Qt.QMetaObject.invokeMethod(self._num_delay_samps_counter, "setValue", Qt.Q_ARG("double", self.num_delay_samps))
-        Qt.QMetaObject.invokeMethod(self._num_delay_samps_slider, "setValue", Qt.Q_ARG("double", self.num_delay_samps))
-
-    def get_min_output_buffer(self):
-        return self.min_output_buffer
-
-    def set_min_output_buffer(self, min_output_buffer):
-        self.min_output_buffer = min_output_buffer
-
-    def get_freq_res(self):
-        return self.freq_res
-
-    def set_freq_res(self, freq_res):
-        self.freq_res = freq_res
-
-    def get_center_freq(self):
-        return self.center_freq
-
-    def set_center_freq(self, center_freq):
-        self.center_freq = center_freq
+        self.ts_fft_py_cc_0.set_packet_len(self.packet_len)
 
 if __name__ == '__main__':
     import ctypes

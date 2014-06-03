@@ -45,7 +45,7 @@ class qa_estimator_msg_gate (gr_unittest.TestCase):
 
 		src = radar.signal_generator_cw_c(packet_len,samp_rate,(0,0),1)
 		head = blocks.head(8,test_len)
-		sim = radar.static_target_simulator_cc((10,10,10),velocity,(1e9,1e9,1e9),(0,0,0),samp_rate,center_freq,1,True,False)
+		sim = radar.static_target_simulator_cc((10,10,10),velocity,(1e12,1e12,1e12),(0,0,0),samp_rate,center_freq,1,True,False)
 		mult = blocks.multiply_cc()
 		fft = radar.ts_fft_cc(packet_len)
 		cfar = radar.os_cfar_c(samp_rate, 5, 0, 0.78, 10, True)

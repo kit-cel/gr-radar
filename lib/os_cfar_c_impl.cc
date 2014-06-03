@@ -147,7 +147,7 @@ namespace gr {
 		message_port_pub(d_port_id,d_value);
 
         // Tell runtime system how many output items we produced.
-        return noutput_items;
+        return 0;
     }
 
   } /* namespace radar */

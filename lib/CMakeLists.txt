@@ -41,7 +41,8 @@ list(APPEND radar_sources
     estimator_msg_gate_impl.cc
     estimator_fmcw_impl.cc
     signal_generator_sync_pulse_c_impl.cc
-    estimator_sync_pulse_c_impl.cc )
+    estimator_sync_pulse_c_impl.cc
+    find_max_peak_c_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)
