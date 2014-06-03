@@ -18,8 +18,8 @@
   <param>
     <name>Packet length key</name>
     <key>len_key</key>
-    <type>string</type>
     <value>"packet_len"</value>
+    <type>string</type>
   </param>
   <sink>
     <name>IQ in</name>

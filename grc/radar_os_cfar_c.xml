@@ -4,6 +4,10 @@
   <category>RADAR</category>
   <import>import radar</import>
   <make>radar.os_cfar_c($samp_rate, $samp_compare, $samp_protect, $rel_threshold, $mult_threshold, $merge_consecutive, $len_key)</make>
+  <callback>set_rel_threshold($rel_threshold)</callback>
+  <callback>set_mult_threshold($mult_threshold)</callback>
+  <callback>set_samp_compare($samp_compare)</callback>
+  <callback>set_samp_protect($samp_protect)</callback>
   <param>
     <name>Sample rate</name>
     <key>samp_rate</key>

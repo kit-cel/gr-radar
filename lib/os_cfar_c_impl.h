@@ -37,6 +37,10 @@ namespace gr {
      public:
       os_cfar_c_impl(int samp_rate, int samp_compare, int samp_protect, float rel_threshold, float mult_threshold, bool merge_consecutive, const std::string& len_key);
       ~os_cfar_c_impl();
+      void set_rel_threshold(float inp);
+      void set_mult_threshold(float inp);
+      void set_samp_compare(int inp);
+      void set_samp_protect(int inp);
       
       int d_samp_compare, d_samp_protect, d_samp_rate;
       float d_rel_threshold, d_mult_threshold;

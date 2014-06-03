@@ -55,6 +55,11 @@ namespace gr {
 		d_port_id = pmt::mp("Msg out");
 		message_port_register_out(d_port_id);
 	}
+	
+	void os_cfar_c_impl::set_rel_threshold(float inp){ d_rel_threshold = inp; }
+	void os_cfar_c_impl::set_mult_threshold(float inp){ d_mult_threshold = inp; }
+	void os_cfar_c_impl::set_samp_compare(int inp){ d_samp_compare = inp; }
+	void os_cfar_c_impl::set_samp_protect(int inp){ d_samp_protect = inp; }
 
     /*
      * Our virtual destructor.

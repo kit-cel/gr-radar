@@ -46,6 +46,10 @@ namespace gr {
        * creating new instances.
        */
       static sptr make(int samp_rate, int samp_compare, int samp_protect, float rel_threshold, float mult_threshold, bool merge_consecutive=true, const std::string& len_key="packet_len");
+      virtual void set_rel_threshold(float inp) = 0;
+      virtual void set_mult_threshold(float inp) = 0;
+      virtual void set_samp_compare(int inp) = 0;
+      virtual void set_samp_protect(int inp) = 0;
     };
 
   } // namespace radar
