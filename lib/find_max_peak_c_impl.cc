@@ -29,22 +29,23 @@ namespace gr {
   namespace radar {
 
     find_max_peak_c::sptr
-    find_max_peak_c::make(int samp_rate, float threshold, const std::string& len_key)
+    find_max_peak_c::make(int samp_rate, float threshold, int samp_protect, const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
-        (new find_max_peak_c_impl(samp_rate, threshold, len_key));
+        (new find_max_peak_c_impl(samp_rate, threshold, samp_protect, len_key));
     }
 
     /*
      * The private constructor
      */
-    find_max_peak_c_impl::find_max_peak_c_impl(int samp_rate, float threshold, const std::string& len_key)
+    find_max_peak_c_impl::find_max_peak_c_impl(int samp_rate, float threshold, int samp_protect, const std::string& len_key)
       : gr::tagged_stream_block("find_max_peak_c",
               gr::io_signature::make(1,1,sizeof(gr_complex)),
               gr::io_signature::make(0,0,0),len_key)
     {
 		d_samp_rate = samp_rate;
 		d_threshold = threshold;
+		d_samp_protect = samp_protect;
 		
 		// Register message port
 		d_port_id = pmt::mp("Msg out");
@@ -70,6 +71,12 @@ namespace gr {
     {
       d_threshold = threshold;
     }
+    
+    void
+    find_max_peak_c_impl::set_samp_protect(int samp)
+    {
+      d_samp_protect = samp;
+    }
 
     int
     find_max_peak_c_impl::work (int noutput_items,
@@ -88,7 +95,7 @@ namespace gr {
         
         int k = -1;
         float hold = -1;
-        for(int p=0; p<ninput_items[0]; p++){
+        for(int p=d_samp_protect; p<ninput_items[0]-d_samp_protect; p++){ // implementation of protected samples
 			if(std::pow(std::abs(in[p]),2)>hold && std::pow(std::abs(in[p]),2)>std::pow(10,d_threshold/10.0)){
 				hold = std::pow(std::abs(in[p]),2);
 				k = p;

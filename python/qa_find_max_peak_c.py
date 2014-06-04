@@ -41,12 +41,13 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		ampl = 1
 		packet_len = test_len
 		threshold = -100
+		samp_protect = 2
 		
 		src = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq, ampl)
 		head = blocks.head(8,test_len)
 		s2ts = blocks.stream_to_tagged_stream(8,1,packet_len,"packet_len")
 		fft = radar.ts_fft_cc(packet_len)
-		peak = radar.find_max_peak_c(samp_rate, threshold)
+		peak = radar.find_max_peak_c(samp_rate, threshold, samp_protect)
 		debug = blocks.message_debug()
 		
 		self.tb.connect(src,head,s2ts,fft,peak)
