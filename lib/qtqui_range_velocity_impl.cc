@@ -26,7 +26,6 @@
 #include "qtqui_range_velocity_impl.h"
 
 #include <QApplication>
-#include <QColor>
 
 namespace gr {
   namespace radar {
@@ -62,6 +61,10 @@ namespace gr {
 		d_argc = 1;
 		d_argv = new char;
 		d_argv[0] = '\0';
+		
+		QApplication *qapp;
+		qapp = new QApplication(d_argc, &d_argv);
+		qapp->exec();
 	}
 
     /*
