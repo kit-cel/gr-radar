@@ -60,6 +60,8 @@ namespace gr {
      */
     ts_fft_cc_impl::~ts_fft_cc_impl()
     {
+		fftwf_destroy_plan(d_fft_plan);
+        fftwf_free(d_buffer);
     }
 
     int
