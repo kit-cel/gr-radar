@@ -100,6 +100,9 @@ if(NOT CPPUNIT_FOUND)
     message(FATAL_ERROR "CppUnit required to compile radar")
 endif()
 
+# populate the environment with QT variables
+include(GrSetupQt4)
+
 ########################################################################
 # Setup the include and linker paths
 ########################################################################
@@ -123,6 +126,7 @@ link_directories(
     ${GNURADIO_RUNTIME_LIBRARY_DIRS}
     ${FFTW3F_LIBRARY_DIRS}
     ${QWT_LIBRARY_DIRS}
+    ${QT_LIBRARY_DIRS}
     ${UHD_LIBRARY_DIRS}
 )
 

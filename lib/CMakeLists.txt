@@ -42,7 +42,8 @@ list(APPEND radar_sources
     estimator_fmcw_impl.cc
     signal_generator_sync_pulse_c_impl.cc
     estimator_sync_pulse_c_impl.cc
-    find_max_peak_c_impl.cc )
+    find_max_peak_c_impl.cc
+    qtqui_range_velocity_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)
@@ -89,8 +90,8 @@ target_link_libraries(
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
   ${FFTW3F_LIBRARY_DIRS}
-  ${QWT_LIBRARY_DIRS} # FIXME: correct dirs for qwt?
-  ${QT_LIBRARY_DIRS} # FIXME: correct dirs for qt?
+  ${QWT_LIBRARIES} # FIXME: correct dirs for qwt?
+  ${QT_LIBRARIES} # FIXME: correct dirs for qt?
   ${UHD_LIBRARY_DIRS}
   gnuradio-radar
 )

@@ -39,5 +39,6 @@ install(FILES
     estimator_fmcw.h
     signal_generator_sync_pulse_c.h
     estimator_sync_pulse_c.h
-    find_max_peak_c.h DESTINATION include/radar
+    find_max_peak_c.h
+    qtqui_range_velocity.h DESTINATION include/radar
 )
