@@ -30,24 +30,29 @@ namespace gr {
   namespace radar {
 
     ts_fft_cc::sptr
-    ts_fft_cc::make(int apply_filter, const std::string& len_key)
+    ts_fft_cc::make(int packet_len, const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
-        (new ts_fft_cc_impl(apply_filter, len_key));
+        (new ts_fft_cc_impl(packet_len, len_key));
     }
 
     /*
      * The private constructor
      */
-    ts_fft_cc_impl::ts_fft_cc_impl(int apply_filter, const std::string& len_key)
+    ts_fft_cc_impl::ts_fft_cc_impl(int packet_len, const std::string& len_key)
       : gr::tagged_stream_block("ts_fft_cc",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
     {
-		d_size_fft = apply_filter;
-		d_buffer.resize(d_size_fft);
-		d_fft_plan = fftwf_plan_dft_1d(d_size_fft, reinterpret_cast<fftwf_complex *>(&d_buffer[0]),
-			reinterpret_cast<fftwf_complex *>(&d_buffer[0]), FFTW_FORWARD, FFTW_ESTIMATE);
+		d_packet_len = packet_len;
+		d_buffer = (fftwf_complex*) fftwf_malloc(sizeof(fftw_complex) * d_packet_len);
+		
+		// Check datatype
+		if(sizeof(gr_complex)!=sizeof(fftw_complex)) std::runtime_error("sizeof(gr_complex)!=sizeof(fftw_complex)");
+		
+		// Setup plan
+		//d_fft_plan = fftwf_plan_dft_1d(d_packet_len, reinterpret_cast<fftwf_complex *>(&d_buffer[0]), reinterpret_cast<fftwf_complex *>(&d_buffer[0]), FFTW_FORWARD, FFTW_ESTIMATE);
+		d_fft_plan = fftwf_plan_dft_1d(d_packet_len, d_buffer, d_buffer, FFTW_FORWARD, FFTW_ESTIMATE);
 	}
 
     /*
@@ -79,9 +84,9 @@ namespace gr {
 		noutput_items = ninput_items[0];
 			
         // Execute fft plan
-        memcpy(&d_buffer[0],in,d_size_fft*sizeof(gr_complex));
+        memcpy(d_buffer,in,d_packet_len*sizeof(gr_complex));
 		fftwf_execute(d_fft_plan);
-		memcpy(out,&d_buffer[0],d_size_fft*sizeof(gr_complex));
+		memcpy(out,d_buffer,d_packet_len*sizeof(gr_complex));
 
         // Tell runtime system how many output items we produced.
         return noutput_items;

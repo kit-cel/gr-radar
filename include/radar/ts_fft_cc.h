@@ -45,7 +45,7 @@ namespace gr {
        * class. radar::ts_fft_cc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int apply_filter = 0, const std::string& len_key = "packet_len");
+      static sptr make(int packet_len, const std::string& len_key = "packet_len");
     };
 
   } // namespace radar

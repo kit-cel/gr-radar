@@ -36,12 +36,12 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      ts_fft_cc_impl(int apply_filter, const std::string& len_key);
+      ts_fft_cc_impl(int packet_len, const std::string& len_key);
       ~ts_fft_cc_impl();
 
       fftwf_plan d_fft_plan;
-      std::vector<gr_complex> d_buffer;
-      int d_size_fft;
+      fftwf_complex* d_buffer;
+      int d_packet_len;
 
       // Where all the action really happens
       int work(int noutput_items,

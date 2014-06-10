@@ -34,6 +34,7 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		self.tb = None
 
 	def test_001_t (self):
+		# test on positive frequencies
 		# set up fg
 		test_len = 1000
 		samp_rate = 2000
@@ -63,6 +64,7 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,msg),0),8)
 		
 	def test_002_t (self):
+		#test on negative frequencies
 		# set up fg
 		test_len = 1000
 		samp_rate = 2000

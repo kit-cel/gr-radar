@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Jun 10 21:11:35 2014
+# Generated: Tue Jun 10 22:23:22 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -79,7 +79,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._freq_slider.valueChanged.connect(self.set_freq)
         self._freq_layout.addWidget(self._freq_slider)
         self.top_layout.addLayout(self._freq_layout)
-        self.radar_ts_fft_cc_0 = radar.ts_fft_cc(0,  "packet_len")
+        self.radar_ts_fft_cc_0 = radar.ts_fft_cc(packet_len,  "packet_len")
         self.radar_print_peaks_0_0 = radar.print_peaks()
         self.radar_find_max_peak_c_0_0 = radar.find_max_peak_c(samp_rate, -200, 0, "packet_len")
         self.qtgui_sink_x_0_0 = qtgui.sink_c(
