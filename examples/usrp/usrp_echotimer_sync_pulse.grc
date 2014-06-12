@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Tue Jun 10 20:17:34 2014</timestamp>
+  <timestamp>Wed Jun 11 16:01:24 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -846,6 +846,61 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>tx_gain</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>TX Gain</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>20</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(369, 634)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>radar_usrp_echotimer_cc</key>
     <param>
       <key>id</key>
@@ -957,62 +1012,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(397, 551)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_qtgui_range</key>
-    <param>
-      <key>id</key>
-      <value>tx_gain</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>TX Gain</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>20</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(369, 634)</value>
+      <value>(397, 550)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1035,7 +1035,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>60</value>
+      <value>40</value>
     </param>
     <param>
       <key>start</key>
@@ -1099,12 +1099,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>radar_signal_generator_sync_pulse_c_0</source_block_id>
-    <sink_block_id>blocks_complex_to_mag_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_complex_to_mag_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
     <source_key>0</source_key>
@@ -1119,6 +1113,12 @@
   <connection>
     <source_block_id>radar_signal_generator_sync_pulse_c_0</source_block_id>
     <sink_block_id>radar_estimator_sync_pulse_c_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_signal_generator_sync_pulse_c_0</source_block_id>
+    <sink_block_id>blocks_complex_to_mag_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

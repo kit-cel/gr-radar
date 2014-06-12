@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Jun 11 00:20:19 2014
+# Generated: Thu Jun 12 00:25:39 2014
 ##################################################
 
 from gnuradio import eng_notation
@@ -27,7 +27,7 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Blocks
         ##################################################
-        self.radar_qtqui_range_velocity_0 = radar.qtqui_range_velocity((), ())
+        self.radar_qtqui_range_velocity_0 = radar.qtqui_range_velocity((0,10), (-5,5))
 
 
 # QT sink close method reimplementation

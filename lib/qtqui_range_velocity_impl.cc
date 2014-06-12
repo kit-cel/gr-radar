@@ -25,8 +25,6 @@
 #include <gnuradio/io_signature.h>
 #include "qtqui_range_velocity_impl.h"
 
-#include <QApplication>
-
 namespace gr {
   namespace radar {
 
@@ -45,8 +43,8 @@ namespace gr {
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
-		d_axis_range = d_axis_range;
-		d_axis_velocity = d_axis_velocity;
+		d_axis_range = axis_range;
+		d_axis_velocity = axis_velocity;
 		pmt::pmt_t d_port_id_in;
 		
 		// Register input message port
@@ -54,17 +52,36 @@ namespace gr {
 		message_port_register_in(d_port_id_in);
 		set_msg_handler(d_port_id_in, boost::bind(&qtqui_range_velocity_impl::handle_msg, this, _1));
 		
-		// Required now for Qt; argc must be greater than 0 and argv
-		// must have at least one valid character. Must be valid through
-		// life of the qApplication:
-		// http://harmattan-dev.nokia.com/docs/library/html/qt4/qapplication.html
+		// Setup QWT
 		d_argc = 1;
 		d_argv = new char;
 		d_argv[0] = '\0';
 		
-		QApplication *qapp;
-		qapp = new QApplication(d_argc, &d_argv);
-		qapp->exec();
+		if(qApp!=NULL){
+			d_qapp = qApp;
+		}
+		else{
+			d_qapp = new QApplication(d_argc, &d_argv);
+		}
+		d_plot = new QwtPlot;
+		d_symbol = new QwtSymbol(QwtSymbol::Diamond,Qt::red,Qt::NoPen,QSize(20,20));
+		d_grid = new QwtPlotGrid;
+		
+		d_plot->setTitle(QwtText("Range Velocity Diagram")); 
+		d_plot->setGeometry(0,0,600,600);
+		d_plot->setAxisScale(QwtPlot::xBottom,d_axis_range[0],d_axis_range[1]);
+		d_plot->setAxisTitle(QwtPlot::xBottom, "Range");
+		d_plot->setAxisScale(QwtPlot::yLeft,d_axis_velocity[0],d_axis_velocity[1]);
+		d_plot->setAxisTitle(QwtPlot::yLeft, "Velocity");
+		
+		d_grid->setPen(QPen(QColor(119,136,153),0.5, Qt::DashLine));
+		d_grid->attach(d_plot);
+		
+		d_plot->show();
+		
+		// Spawn GUI thread with QThread
+		d_thread = gr::thread::thread(boost::bind(&qtqui_range_velocity_impl::gui_thread, this));
+		boost::this_thread::sleep(boost::posix_time::milliseconds(500));
 	}
 
     /*
@@ -75,8 +92,50 @@ namespace gr {
     }
     
     void
-    qtqui_range_velocity_impl::handle_msg(pmt::pmt_t msg){
+    qtqui_range_velocity_impl::gui_thread(){
 		
+		while(1){
+			d_plot->replot();
+			std::cout << "REPLOT" << std::endl;
+			boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
+		}
+	}
+    
+    void
+    qtqui_range_velocity_impl::handle_msg(pmt::pmt_t msg){
+		size_t size_msg;
+		d_range.clear();
+		d_velocity.clear();
+		
+		size_msg = pmt::length(msg);
+		pmt::pmt_t msg_part;
+		// Go through msg and search for key symbols "range" and "velocity" and get data
+		for(int k=0; k<size_msg; k++){ // FIXME: errorhandling for wrong input?
+			msg_part = pmt::nth(k,msg);
+			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="velocity"){
+				d_velocity = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			}
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="range"){
+				d_range = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			}
+		}
+		
+		// Clear plot from old markers
+		for(int k=0; k<d_marker.size(); k++) d_marker[k]->detach();
+		
+		// Set new marker
+		for(int k=0; k<d_velocity.size(); k++){ // len(velocity)==len(range)
+			if(k<d_marker.size()){
+				d_marker[k]->setValue(QPointF(d_range[k],d_velocity[k]));
+				d_marker[k]->attach(d_plot);
+			}
+			else{
+				d_marker.push_back(new QwtPlotMarker);
+				d_marker[k]->setSymbol(d_symbol);
+				d_marker[k]->setValue(QPointF(d_range[k],d_velocity[k]));
+				d_marker[k]->attach(d_plot);
+			}
+		}
 	}
 
   } /* namespace radar */

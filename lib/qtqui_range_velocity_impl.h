@@ -23,6 +23,13 @@
 
 #include <radar/qtqui_range_velocity.h>
 
+#include <QApplication> 
+#include <qwt_plot.h> 
+#include <qwt_plot_curve.h>
+#include <qwt_symbol.h>
+#include <qwt_plot_marker.h>
+#include <qwt_plot_grid.h>
+
 namespace gr {
   namespace radar {
 
@@ -35,11 +42,21 @@ namespace gr {
       qtqui_range_velocity_impl(std::vector<float> axis_range, std::vector<float> axis_velocity);
       ~qtqui_range_velocity_impl();
       void handle_msg(pmt::pmt_t msg);
+      void gui_thread();
       
       std::vector<float> d_axis_range, d_axis_velocity;
       
       int d_argc;
 	  char *d_argv;
+	  
+	  QApplication *d_qapp;
+	  QwtPlot *d_plot;
+	  QwtSymbol *d_symbol;
+	  QwtPlotGrid *d_grid;
+	  std::vector<QwtPlotMarker*> d_marker;
+	  
+	  std::vector<float> d_range, d_velocity;
+	  gr::thread::thread d_thread;
     };
 
   } // namespace radar

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Wed Jun 11 00:20:19 2014</timestamp>
+  <timestamp>Thu Jun 12 00:28:22 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -95,11 +95,11 @@
     </param>
     <param>
       <key>axis_range</key>
-      <value></value>
+      <value>0,10</value>
     </param>
     <param>
       <key>axis_velocity</key>
-      <value></value>
+      <value>-5,5</value>
     </param>
     <param>
       <key>affinity</key>
@@ -107,7 +107,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(361, 509)</value>
+      <value>(402, 460)</value>
     </param>
     <param>
       <key>_rotation</key>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Tue Jun 10 22:21:39 2014</timestamp>
+  <timestamp>Wed Jun 11 16:24:00 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,7 +64,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>samp_cw</value>
+      <value>decim_fac</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,287 +72,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**14</value>
+      <value>2**3</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(280, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>10000000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(182, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0.02</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(355, 224)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>meas_duration</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>(samp_cw+samp_up+samp_down)/float(samp_rate)</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(741, 122)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>range_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>3e8/2/sweep_freq</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(555, 122)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_up</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2**14</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(396, 9)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_down</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_up</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(505, 8)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>5.9e9</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(13, 81)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>int((samp_up+samp_down+samp_cw)*2)</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(619, 14)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>max_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(754, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>v_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate/samp_cw*3e8/2/center_freq</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(648, 122)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>freq_res_cw</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate/samp_cw</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(856, 121)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>freq_res_up</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate/samp_up</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(956, 122)</value>
+      <value>(114, 80)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -386,7 +110,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>decim_fac</value>
+      <value>freq_res_up</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -394,11 +118,287 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**3</value>
+      <value>samp_rate/samp_up</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(114, 80)</value>
+      <value>(956, 122)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>freq_res_cw</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>samp_rate/samp_cw</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(856, 121)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>v_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>samp_rate/samp_cw*3e8/2/center_freq</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(648, 122)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>max_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(754, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>int((samp_up+samp_down+samp_cw)*2)</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(619, 14)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>5.9e9</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(13, 81)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_down</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>samp_up</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(505, 8)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_up</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2**14</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(396, 9)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>range_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>3e8/2/sweep_freq</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(555, 122)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>meas_duration</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>(samp_cw+samp_up+samp_down)/float(samp_rate)</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(741, 122)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.02</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(355, 224)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>10000000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(182, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_cw</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2**14</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(280, 10)</value>
     </param>
     <param>
       <key>_rotation</key>
