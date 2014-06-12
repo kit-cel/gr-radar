@@ -2,10 +2,11 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Jun 12 13:20:33 2014
+# Generated: Thu Jun 12 13:37:49 2014
 ##################################################
 
 from PyQt4 import Qt
+from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
@@ -15,6 +16,7 @@ from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+import PyQt4.Qwt5 as Qwt
 import radar
 import sip
 import sys
@@ -54,15 +56,63 @@ class top_block(gr.top_block, Qt.QWidget):
         self.freq_res = freq_res = samp_rate/2/blocks_per_tag
         self.delta_freq = delta_freq = samp_rate/4
         self.center_freq = center_freq = 2.4e9
+        self.velocity = velocity = 10
         self.v_res = v_res = freq_res*3e8/2/center_freq
         self.samp_discard = samp_discard = 0
         self.min_output_buffer = min_output_buffer = 2*(blocks_per_tag*samp_per_freq*2)
         self.decimator_fac = decimator_fac = 2**8
+        self.Range = Range = 10
         self.R_max = R_max = 3e8/2/delta_freq
 
         ##################################################
         # Blocks
         ##################################################
+        self._velocity_layout = Qt.QVBoxLayout()
+        self._velocity_tool_bar = Qt.QToolBar(self)
+        self._velocity_layout.addWidget(self._velocity_tool_bar)
+        self._velocity_tool_bar.addWidget(Qt.QLabel("velocity"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._velocity_counter = qwt_counter_pyslot()
+        self._velocity_counter.setRange(-20, 20, 1)
+        self._velocity_counter.setNumButtons(2)
+        self._velocity_counter.setValue(self.velocity)
+        self._velocity_tool_bar.addWidget(self._velocity_counter)
+        self._velocity_counter.valueChanged.connect(self.set_velocity)
+        self._velocity_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._velocity_slider.setRange(-20, 20, 1)
+        self._velocity_slider.setValue(self.velocity)
+        self._velocity_slider.setMinimumWidth(200)
+        self._velocity_slider.valueChanged.connect(self.set_velocity)
+        self._velocity_layout.addWidget(self._velocity_slider)
+        self.top_layout.addLayout(self._velocity_layout)
+        self._Range_layout = Qt.QVBoxLayout()
+        self._Range_tool_bar = Qt.QToolBar(self)
+        self._Range_layout.addWidget(self._Range_tool_bar)
+        self._Range_tool_bar.addWidget(Qt.QLabel("Range"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._Range_counter = qwt_counter_pyslot()
+        self._Range_counter.setRange(0, R_max, 1)
+        self._Range_counter.setNumButtons(2)
+        self._Range_counter.setValue(self.Range)
+        self._Range_tool_bar.addWidget(self._Range_counter)
+        self._Range_counter.valueChanged.connect(self.set_Range)
+        self._Range_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._Range_slider.setRange(0, R_max, 1)
+        self._Range_slider.setValue(self.Range)
+        self._Range_slider.setMinimumWidth(200)
+        self._Range_slider.valueChanged.connect(self.set_Range)
+        self._Range_layout.addWidget(self._Range_slider)
+        self.top_layout.addLayout(self._Range_layout)
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
                 interpolation=1,
                 decimation=decimator_fac,
@@ -77,13 +127,13 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
-        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc(((10, 15, 50)), ((5, 10, 15)), ((1e9, 1e9, 1e12)), ((0,0, 0)), samp_rate, center_freq, -10, True, True, "packet_len")
+        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (velocity,), (1e16,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(524288)
         self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_discard, "packet_len")
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, 0, delta_freq, 1, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
-        self.radar_qtqui_range_velocity_0 = radar.qtqui_range_velocity((0,60), (0,30))
+        self.radar_qtqui_range_velocity_0 = radar.qtqui_range_velocity((0,R_max), (-20,20))
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/2/decimator_fac, 15, 0, 0.78, 30, True, "packet_len")
         (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
@@ -156,19 +206,19 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.set_delta_freq(self.samp_rate/4)
+        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.radar_static_target_simulator_cc_0.setup_targets(((10, 15, 50)), ((5, 10, 15)), ((1e9, 1e9, 1e12)), ((0,0, 0)), self.samp_rate, self.center_freq, -10, True, True)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac/2)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_blocks_per_tag(self):
         return self.blocks_per_tag
 
     def set_blocks_per_tag(self, blocks_per_tag):
         self.blocks_per_tag = blocks_per_tag
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.set_min_output_buffer(2*(self.blocks_per_tag*self.samp_per_freq*2))
+        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
 
     def get_samp_per_freq(self):
         return self.samp_per_freq
@@ -197,7 +247,16 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
         self.set_v_res(self.freq_res*3e8/2/self.center_freq)
-        self.radar_static_target_simulator_cc_0.setup_targets(((10, 15, 50)), ((5, 10, 15)), ((1e9, 1e9, 1e12)), ((0,0, 0)), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+
+    def get_velocity(self):
+        return self.velocity
+
+    def set_velocity(self, velocity):
+        self.velocity = velocity
+        Qt.QMetaObject.invokeMethod(self._velocity_counter, "setValue", Qt.Q_ARG("double", self.velocity))
+        Qt.QMetaObject.invokeMethod(self._velocity_slider, "setValue", Qt.Q_ARG("double", self.velocity))
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_v_res(self):
         return self.v_res
@@ -225,6 +284,15 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decimator_fac)
         self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1.0/self.decimator_fac)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac/2)
+
+    def get_Range(self):
+        return self.Range
+
+    def set_Range(self, Range):
+        self.Range = Range
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
+        Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
 
     def get_R_max(self):
         return self.R_max

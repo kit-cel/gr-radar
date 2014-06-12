@@ -57,7 +57,7 @@ namespace gr {
 		d_argv = new char;
 		d_argv[0] = '\0';
 		
-		if(qApp!=NULL){
+		if(qApp!=NULL){ // prevents crash if grc uses qt gui
 			d_qapp = qApp;
 		}
 		else{
@@ -81,7 +81,7 @@ namespace gr {
 		
 		// Spawn GUI thread with QThread
 		d_thread = gr::thread::thread(boost::bind(&qtqui_range_velocity_impl::gui_thread, this));
-		boost::this_thread::sleep(boost::posix_time::milliseconds(500));
+		boost::this_thread::sleep(boost::posix_time::milliseconds(100)); // wait for spawning thread
 	}
 
     /*
@@ -93,11 +93,10 @@ namespace gr {
     
     void
     qtqui_range_velocity_impl::gui_thread(){
-		
+		// Replot with attached markers
 		while(1){
 			d_plot->replot();
-			std::cout << "REPLOT" << std::endl;
-			boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
+			boost::this_thread::sleep(boost::posix_time::milliseconds(100));
 		}
 	}
     

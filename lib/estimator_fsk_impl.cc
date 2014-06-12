@@ -85,8 +85,11 @@ namespace gr {
 		// Calc ranges and write to vector
 		d_range.clear();
 		for(int k=0; k<d_phase.size(); k++){
-			if(d_phase[k]>0) d_range.push_back((d_phase[k])*c_light/4/M_PI/d_delta_freq); // calc with fsk range formula
-			else d_range.push_back((2*M_PI+d_phase[k])*c_light/4/M_PI/d_delta_freq); // phase jumps from pi to -pi
+			if(d_freq[k]>0 && d_phase[k]>=0) d_range.push_back((d_phase[k])*c_light/4/M_PI/d_delta_freq); // calc with fsk range formula
+			else if(d_freq[k]>0 && d_phase[k]<0) d_range.push_back((2*M_PI+d_phase[k])*c_light/4/M_PI/d_delta_freq); // phase jumps from pi to -pi
+			// Difference if velocity is negative
+			else if(d_freq[k]<0 && d_phase[k]<0) d_range.push_back((-d_phase[k])*c_light/4/M_PI/d_delta_freq); // calc with fsk range formula
+			else if(d_freq[k]<0 && d_phase[k]>=0) d_range.push_back((2*M_PI-d_phase[k])*c_light/4/M_PI/d_delta_freq); // phase jumps from pi to -pi
 		}
 		
 		// Push pmt to output msg port
