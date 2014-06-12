@@ -26,7 +26,6 @@
 #include "radar/signal_generator_sync_pulse_c.h"
 #include "radar/estimator_sync_pulse_c.h"
 #include "radar/find_max_peak_c.h"
-#include "radar/qtqui_range_velocity.h"
 %}
 
 
@@ -68,5 +67,4 @@ GR_SWIG_BLOCK_MAGIC2(radar, signal_generator_sync_pulse_c);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_sync_pulse_c);
 %include "radar/find_max_peak_c.h"
 GR_SWIG_BLOCK_MAGIC2(radar, find_max_peak_c);
-%include "radar/qtqui_range_velocity.h"
-GR_SWIG_BLOCK_MAGIC2(radar, qtqui_range_velocity);
+

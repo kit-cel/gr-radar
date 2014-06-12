@@ -35,5 +35,5 @@ install(FILES
     radar_signal_generator_sync_pulse_c.xml
     radar_estimator_sync_pulse_c.xml
     radar_find_max_peak_c.xml
-    radar_qtqui_range_velocity.xml DESTINATION share/gnuradio/grc/blocks
+    DESTINATION share/gnuradio/grc/blocks
 )
