@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Jun 13 17:50:41 2014
+# Generated: Fri Jun 13 18:10:23 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -52,7 +52,7 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate = samp_rate = 2000000
         self.samp_per_freq = samp_per_freq = 2
-        self.decim_fac = decim_fac = 2**10
+        self.decim_fac = decim_fac = 2**9
         self.block_per_tag = block_per_tag = 2**17
         self.samp_rate_red = samp_rate_red = samp_rate/2/samp_per_freq/decim_fac
         self.packet_len_red = packet_len_red = block_per_tag/decim_fac
@@ -216,6 +216,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(1048576)
         self.radar_print_results_0 = radar.print_results()
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate_red, threshold, int(samp_protect), "packet_len")
+        self.radar_estimator_msg_gate_0 = radar.estimator_msg_gate(('range',), (0, ), (20, ), 0)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
         self.qtgui_sink_x_0 = qtgui.sink_c(
         	packet_len_red, #fftsize
@@ -234,11 +235,11 @@ class top_block(gr.top_block, Qt.QWidget):
         
         
         self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1/float(decim_fac))
-        (self.blocks_tagged_stream_multiply_length_0_0).set_min_output_buffer(256)
+        (self.blocks_tagged_stream_multiply_length_0_0).set_min_output_buffer(512)
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1/float(decim_fac))
-        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(256)
+        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(512)
         self.blocks_multiply_conjugate_cc_1 = blocks.multiply_conjugate_cc(1)
-        (self.blocks_multiply_conjugate_cc_1).set_min_output_buffer(256)
+        (self.blocks_multiply_conjugate_cc_1).set_min_output_buffer(512)
         self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(1)
         (self.blocks_multiply_conjugate_cc_0).set_min_output_buffer(1048576)
 
@@ -264,7 +265,8 @@ class top_block(gr.top_block, Qt.QWidget):
         # Asynch Message Connections
         ##################################################
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_estimator_msg_gate_0, "Msg in")
+        self.msg_connect(self.radar_estimator_msg_gate_0, "Msg out", self.radar_print_results_0, "Msg in")
 
 # QT sink close method reimplementation
     def closeEvent(self, event):
