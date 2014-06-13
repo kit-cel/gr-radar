@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Jun 13 17:29:13 2014
+# Generated: Fri Jun 13 17:50:41 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -62,10 +62,12 @@ class top_block(gr.top_block, Qt.QWidget):
         self.wait_to_start = wait_to_start = 0.02
         self.vel_res = vel_res = freq_res/2.0/center_freq*3e8
         self.threshold = threshold = -200
-        self.samp_protect = samp_protect = 0
+        self.samp_protect = samp_protect = 3
         self.range_res = range_res = 3e8/2/delta_freq
         self.min_output_buffer = min_output_buffer = 2*samp_per_freq*block_per_tag*2
         self.measure_time = measure_time = (block_per_tag*samp_per_freq*2)/float(samp_rate)
+        self.gain_tx = gain_tx = 10
+        self.gain_rx = gain_rx = 10
         self.delay_samp = delay_samp = 24
 
         ##################################################
@@ -93,7 +95,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._threshold_slider.setMinimumWidth(200)
         self._threshold_slider.valueChanged.connect(self.set_threshold)
         self._threshold_layout.addWidget(self._threshold_slider)
-        self.top_layout.addLayout(self._threshold_layout)
+        self.top_grid_layout.addLayout(self._threshold_layout, 1,0)
         self._samp_protect_layout = Qt.QVBoxLayout()
         self._samp_protect_tool_bar = Qt.QToolBar(self)
         self._samp_protect_layout.addWidget(self._samp_protect_tool_bar)
@@ -116,7 +118,53 @@ class top_block(gr.top_block, Qt.QWidget):
         self._samp_protect_slider.setMinimumWidth(200)
         self._samp_protect_slider.valueChanged.connect(self.set_samp_protect)
         self._samp_protect_layout.addWidget(self._samp_protect_slider)
-        self.top_layout.addLayout(self._samp_protect_layout)
+        self.top_grid_layout.addLayout(self._samp_protect_layout, 1,1)
+        self._gain_tx_layout = Qt.QVBoxLayout()
+        self._gain_tx_tool_bar = Qt.QToolBar(self)
+        self._gain_tx_layout.addWidget(self._gain_tx_tool_bar)
+        self._gain_tx_tool_bar.addWidget(Qt.QLabel("TX gain"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._gain_tx_counter = qwt_counter_pyslot()
+        self._gain_tx_counter.setRange(0, 100, 1)
+        self._gain_tx_counter.setNumButtons(2)
+        self._gain_tx_counter.setValue(self.gain_tx)
+        self._gain_tx_tool_bar.addWidget(self._gain_tx_counter)
+        self._gain_tx_counter.valueChanged.connect(self.set_gain_tx)
+        self._gain_tx_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._gain_tx_slider.setRange(0, 100, 1)
+        self._gain_tx_slider.setValue(self.gain_tx)
+        self._gain_tx_slider.setMinimumWidth(200)
+        self._gain_tx_slider.valueChanged.connect(self.set_gain_tx)
+        self._gain_tx_layout.addWidget(self._gain_tx_slider)
+        self.top_grid_layout.addLayout(self._gain_tx_layout, 0,0)
+        self._gain_rx_layout = Qt.QVBoxLayout()
+        self._gain_rx_tool_bar = Qt.QToolBar(self)
+        self._gain_rx_layout.addWidget(self._gain_rx_tool_bar)
+        self._gain_rx_tool_bar.addWidget(Qt.QLabel("RX gain"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._gain_rx_counter = qwt_counter_pyslot()
+        self._gain_rx_counter.setRange(0, 100, 1)
+        self._gain_rx_counter.setNumButtons(2)
+        self._gain_rx_counter.setValue(self.gain_rx)
+        self._gain_rx_tool_bar.addWidget(self._gain_rx_counter)
+        self._gain_rx_counter.valueChanged.connect(self.set_gain_rx)
+        self._gain_rx_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._gain_rx_slider.setRange(0, 100, 1)
+        self._gain_rx_slider.setValue(self.gain_rx)
+        self._gain_rx_slider.setMinimumWidth(200)
+        self._gain_rx_slider.valueChanged.connect(self.set_gain_rx)
+        self._gain_rx_layout.addWidget(self._gain_rx_slider)
+        self.top_grid_layout.addLayout(self._gain_rx_layout, 0,1)
         self._delay_samp_layout = Qt.QVBoxLayout()
         self._delay_samp_tool_bar = Qt.QToolBar(self)
         self._delay_samp_layout.addWidget(self._delay_samp_tool_bar)
@@ -160,7 +208,7 @@ class top_block(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', 0, 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', 0, 0.1, wait_to_start, 0, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', gain_tx, 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', gain_rx, 0.1, wait_to_start, 0, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(1048576)
         self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_per_freq-1, "packet_len")
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
@@ -209,8 +257,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.radar_signal_generator_fsk_c_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
         self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
-        self.connect((self.ts_fft_py_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_1, 0))
-        self.connect((self.ts_fft_py_cc_0, 0), (self.blocks_multiply_conjugate_cc_1, 1))
+        self.connect((self.ts_fft_py_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_1, 1))
+        self.connect((self.ts_fft_py_cc_0, 0), (self.blocks_multiply_conjugate_cc_1, 0))
 
         ##################################################
         # Asynch Message Connections
@@ -229,25 +277,25 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
         self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
 
     def get_samp_per_freq(self):
         return self.samp_per_freq
 
     def set_samp_per_freq(self, samp_per_freq):
         self.samp_per_freq = samp_per_freq
-        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
-        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
         self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
+        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
 
     def get_decim_fac(self):
         return self.decim_fac
 
     def set_decim_fac(self, decim_fac):
         self.decim_fac = decim_fac
-        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
         self.set_packet_len_red(self.block_per_tag/self.decim_fac)
+        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
         self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1/float(self.decim_fac))
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1/float(self.decim_fac))
         self.ts_fft_py_cc_0_0.set_packet_len(self.block_per_tag/self.decim_fac)
@@ -257,9 +305,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_block_per_tag(self, block_per_tag):
         self.block_per_tag = block_per_tag
-        self.set_packet_len_red(self.block_per_tag/self.decim_fac)
-        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
         self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
+        self.set_packet_len_red(self.block_per_tag/self.decim_fac)
         self.ts_fft_py_cc_0_0.set_packet_len(self.block_per_tag/self.decim_fac)
 
     def get_samp_rate_red(self):
@@ -318,18 +366,18 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_threshold(self, threshold):
         self.threshold = threshold
+        self.radar_find_max_peak_c_0.set_threshold(self.threshold)
         Qt.QMetaObject.invokeMethod(self._threshold_counter, "setValue", Qt.Q_ARG("double", self.threshold))
         Qt.QMetaObject.invokeMethod(self._threshold_slider, "setValue", Qt.Q_ARG("double", self.threshold))
-        self.radar_find_max_peak_c_0.set_threshold(self.threshold)
 
     def get_samp_protect(self):
         return self.samp_protect
 
     def set_samp_protect(self, samp_protect):
         self.samp_protect = samp_protect
+        self.radar_find_max_peak_c_0.set_samp_protect(int(self.samp_protect))
         Qt.QMetaObject.invokeMethod(self._samp_protect_counter, "setValue", Qt.Q_ARG("double", self.samp_protect))
         Qt.QMetaObject.invokeMethod(self._samp_protect_slider, "setValue", Qt.Q_ARG("double", self.samp_protect))
-        self.radar_find_max_peak_c_0.set_samp_protect(int(self.samp_protect))
 
     def get_range_res(self):
         return self.range_res
@@ -348,6 +396,24 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_measure_time(self, measure_time):
         self.measure_time = measure_time
+
+    def get_gain_tx(self):
+        return self.gain_tx
+
+    def set_gain_tx(self, gain_tx):
+        self.gain_tx = gain_tx
+        self.radar_usrp_echotimer_cc_0.set_tx_gain(self.gain_tx)
+        Qt.QMetaObject.invokeMethod(self._gain_tx_counter, "setValue", Qt.Q_ARG("double", self.gain_tx))
+        Qt.QMetaObject.invokeMethod(self._gain_tx_slider, "setValue", Qt.Q_ARG("double", self.gain_tx))
+
+    def get_gain_rx(self):
+        return self.gain_rx
+
+    def set_gain_rx(self, gain_rx):
+        self.gain_rx = gain_rx
+        self.radar_usrp_echotimer_cc_0.set_rx_gain(self.gain_rx)
+        Qt.QMetaObject.invokeMethod(self._gain_rx_counter, "setValue", Qt.Q_ARG("double", self.gain_rx))
+        Qt.QMetaObject.invokeMethod(self._gain_rx_slider, "setValue", Qt.Q_ARG("double", self.gain_rx))
 
     def get_delay_samp(self):
         return self.delay_samp
