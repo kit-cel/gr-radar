@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Jun 13 18:36:49 2014
+# Generated: Fri Jun 13 19:48:18 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -61,7 +61,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.center_freq = center_freq = 2400000000
         self.wait_to_start = wait_to_start = 0.02
         self.vel_res = vel_res = freq_res/2.0/center_freq*3e8
-        self.threshold = threshold = -200
+        self.threshold = threshold = -100
         self.samp_protect = samp_protect = 3
         self.range_res = range_res = 3e8/2/delta_freq
         self.min_output_buffer = min_output_buffer = 2*samp_per_freq*block_per_tag*2
@@ -214,7 +214,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, block_per_tag, -delta_freq/2, delta_freq/2, 0.5, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(1048576)
-        self.radar_print_results_0 = radar.print_results()
+        self.radar_print_results_1 = radar.print_results(True, "store_msgs.txt")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate_red, threshold, int(samp_protect), "packet_len")
         self.radar_estimator_msg_gate_0 = radar.estimator_msg_gate(('range',), (0, ), (20, ), 0)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
@@ -266,7 +266,7 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_estimator_msg_gate_0, "Msg in")
-        self.msg_connect(self.radar_estimator_msg_gate_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_msg_gate_0, "Msg out", self.radar_print_results_1, "Msg in")
 
 # QT sink close method reimplementation
     def closeEvent(self, event):
