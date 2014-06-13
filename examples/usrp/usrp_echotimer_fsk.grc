@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Wed Jun  4 16:00:07 2014</timestamp>
+  <timestamp>Fri Jun 13 17:29:01 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -72,264 +72,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**9</value>
+      <value>2**10</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1184, 572)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0.02</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(310, 762)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>delta_freq</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1.25e6</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(123, 786)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2400000000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(285, 17)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>range_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>3e8/2/delta_freq</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(28, 786)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>measure_time</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>(block_per_tag*samp_per_freq*2)/float(samp_rate)</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(34, 653)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2000000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(184, 19)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2*samp_per_freq*block_per_tag*2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(393, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>packet_len_red</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>block_per_tag/decim_fac</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(796, 390)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate_red</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate/2/samp_per_freq/decim_fac</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(677, 389)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>vel_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>freq_res/2.0/center_freq*3e8</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(118, 717)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>freq_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate_red/packet_len_red</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(28, 717)</value>
+      <value>(1183, 572)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -376,6 +123,259 @@
     <param>
       <key>_coordinate</key>
       <value>(781, 953)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>freq_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>samp_rate_red/packet_len_red</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(28, 717)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>vel_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>freq_res/2.0/center_freq*3e8</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(118, 717)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate_red</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>samp_rate/2/samp_per_freq/decim_fac</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(677, 389)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>packet_len_red</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>block_per_tag/decim_fac</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(796, 390)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2*samp_per_freq*block_per_tag*2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(393, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2000000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(184, 19)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>measure_time</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>(block_per_tag*samp_per_freq*2)/float(samp_rate)</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(34, 653)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>range_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>3e8/2/delta_freq</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(28, 786)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2400000000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(285, 17)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>delta_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1.25e6</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(123, 786)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.02</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(310, 762)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -666,125 +666,6 @@
     <param>
       <key>_coordinate</key>
       <value>(574, 865)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_usrp_echotimer_cc</key>
-    <param>
-      <key>id</key>
-      <value>radar_usrp_echotimer_cc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>num_delay_samps</key>
-      <value>int(delay_samp)</value>
-    </param>
-    <param>
-      <key>args_tx</key>
-      <value>'addr=192.168.10.6'</value>
-    </param>
-    <param>
-      <key>wire_tx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_tx</key>
-      <value>'internal'</value>
-    </param>
-    <param>
-      <key>time_source_tx</key>
-      <value>'none'</value>
-    </param>
-    <param>
-      <key>antenna_tx</key>
-      <value>'J1'</value>
-    </param>
-    <param>
-      <key>gain_tx</key>
-      <value>10</value>
-    </param>
-    <param>
-      <key>timeout_tx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_tx</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>lo_offset_tx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>args_rx</key>
-      <value>'addr=192.168.10.4'</value>
-    </param>
-    <param>
-      <key>wire_rx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>time_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>antenna_rx</key>
-      <value>'J1'</value>
-    </param>
-    <param>
-      <key>gain_rx</key>
-      <value>30</value>
-    </param>
-    <param>
-      <key>timeout_rx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_rx</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>lo_offset_rx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(329, 824)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1329,30 +1210,102 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_msg_gate</key>
+    <key>radar_usrp_echotimer_cc</key>
     <param>
       <key>id</key>
-      <value>radar_estimator_msg_gate_0</value>
+      <value>radar_usrp_echotimer_cc_0</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
-      <key>msg_keys</key>
-      <value>('velocity',)</value>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
     </param>
     <param>
-      <key>val_min</key>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>num_delay_samps</key>
+      <value>int(delay_samp)</value>
+    </param>
+    <param>
+      <key>args_tx</key>
+      <value>'addr=192.168.10.6'</value>
+    </param>
+    <param>
+      <key>wire_tx</key>
+      <value>''</value>
+    </param>
+    <param>
+      <key>clock_source_tx</key>
+      <value>'internal'</value>
+    </param>
+    <param>
+      <key>time_source_tx</key>
+      <value>'none'</value>
+    </param>
+    <param>
+      <key>antenna_tx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_tx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>timeout_tx</key>
       <value>0.1</value>
     </param>
     <param>
-      <key>val_max</key>
-      <value>20</value>
+      <key>wait_tx</key>
+      <value>wait_to_start</value>
     </param>
     <param>
-      <key>verbose</key>
+      <key>lo_offset_tx</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>args_rx</key>
+      <value>'addr=192.168.10.4'</value>
+    </param>
+    <param>
+      <key>wire_rx</key>
+      <value>''</value>
+    </param>
+    <param>
+      <key>clock_source_rx</key>
+      <value>'mimo'</value>
+    </param>
+    <param>
+      <key>time_source_rx</key>
+      <value>'mimo'</value>
+    </param>
+    <param>
+      <key>antenna_rx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>timeout_rx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_rx</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>lo_offset_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
     </param>
     <param>
       <key>affinity</key>
@@ -1360,7 +1313,7 @@
     </param>
     <param>
       <key>minoutbuf</key>
-      <value>0</value>
+      <value>min_output_buffer</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1368,7 +1321,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(708, 353)</value>
+      <value>(329, 824)</value>
     </param>
     <param>
       <key>_rotation</key>
