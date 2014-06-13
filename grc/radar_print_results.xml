@@ -3,7 +3,28 @@
   <key>radar_print_results</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.print_results()</make>
+  <make>radar.print_results($store_msg, $filename)</make>
+  <param>
+    <name>Store messages</name>
+    <key>store_msg</key>
+    <value>False</value>
+    <type>bool</type>
+      <option>
+		<name>True</name>
+		<key>True</key>
+	  </option>
+	  <option>
+		<name>False</name>
+		<key>False</key>
+	  </option>
+  </param>
+  <param>
+    <name>Filename</name>
+    <key>filename</key>
+    <value>""</value>
+    <type>string</type>
+    <hide>part</hide>
+  </param>
   <sink>
     <name>Msg in</name>
     <type>message</type>

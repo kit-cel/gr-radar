@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri Jun 13 18:10:22 2014</timestamp>
+  <timestamp>Fri Jun 13 18:37:30 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -1407,29 +1407,6 @@
     </param>
   </block>
   <block>
-    <key>radar_print_results</key>
-    <param>
-      <key>id</key>
-      <value>radar_print_results_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1011, 480)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>radar_estimator_msg_gate</key>
     <param>
       <key>id</key>
@@ -1470,6 +1447,37 @@
     <param>
       <key>_coordinate</key>
       <value>(695, 452)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_print_results</key>
+    <param>
+      <key>id</key>
+      <value>radar_print_results_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>store_msg</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>filename</key>
+      <value>"store_msgs.txt"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1005, 468)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1580,7 +1588,7 @@
   </connection>
   <connection>
     <source_block_id>radar_estimator_msg_gate_0</source_block_id>
-    <sink_block_id>radar_print_results_0</sink_block_id>
+    <sink_block_id>radar_print_results_1</sink_block_id>
     <source_key>Msg out</source_key>
     <sink_key>Msg in</sink_key>
   </connection>

@@ -22,6 +22,7 @@
 #define INCLUDED_RADAR_PRINT_RESULTS_IMPL_H
 
 #include <radar/print_results.h>
+#include <fstream>
 
 namespace gr {
   namespace radar {
@@ -32,13 +33,17 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      print_results_impl();
+      print_results_impl(bool store_msg, const std::string filename);
       ~print_results_impl();
       void handle_msg(pmt::pmt_t msg);
       
       pmt::pmt_t d_port_id_in;
       size_t d_size_msg, d_size_part;
       pmt::pmt_t d_msg_part;
+      
+      std::ofstream d_file;
+      std::string d_filename;
+      bool d_store_msg;
     };
 
   } // namespace radar

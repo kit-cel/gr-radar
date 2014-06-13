@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Jun 13 17:22:11 2014
+# Generated: Fri Jun 13 19:03:00 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -133,7 +133,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, -delta_freq/2, delta_freq/2, 1, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
-        self.radar_print_results_0 = radar.print_results()
+        self.radar_print_results_0 = radar.print_results(True, "")
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/2/decimator_fac, 15, 0, 0.78, 30, True, "packet_len")
         (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
@@ -206,8 +206,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.set_delta_freq(self.samp_rate/4)
+        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac/2)
         self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
@@ -217,8 +217,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_blocks_per_tag(self, blocks_per_tag):
         self.blocks_per_tag = blocks_per_tag
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
         self.set_min_output_buffer(2*(self.blocks_per_tag*self.samp_per_freq*2))
+        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
 
     def get_samp_per_freq(self):
         return self.samp_per_freq

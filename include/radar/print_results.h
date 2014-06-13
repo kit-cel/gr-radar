@@ -45,7 +45,7 @@ namespace gr {
        * class. radar::print_results::make is the public interface for
        * creating new instances.
        */
-      static sptr make();
+      static sptr make(bool store_msg=false, const std::string filename="");
     };
 
   } // namespace radar
