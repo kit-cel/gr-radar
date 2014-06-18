@@ -25,6 +25,7 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND radar_sources
+	range_velocity_diagram.cc
     signal_generator_cw_c_impl.cc
     signal_generator_fmcw_c_impl.cc
     split_cc_impl.cc
@@ -43,7 +44,7 @@ list(APPEND radar_sources
     signal_generator_sync_pulse_c_impl.cc
     estimator_sync_pulse_c_impl.cc
     find_max_peak_c_impl.cc
-    )
+    qtgui_rv_diagram_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

@@ -22,6 +22,7 @@
 ########################################################################
 install(FILES
     api.h
+    ../../lib/range_velocity_diagram.h
     signal_generator_cw_c.h
     signal_generator_fmcw_c.h
     split_cc.h
@@ -40,5 +41,5 @@ install(FILES
     signal_generator_sync_pulse_c.h
     estimator_sync_pulse_c.h
     find_max_peak_c.h
-    DESTINATION include/radar
+    qtgui_rv_diagram.h DESTINATION include/radar
 )
