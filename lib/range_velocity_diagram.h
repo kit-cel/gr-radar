@@ -31,8 +31,8 @@ namespace gr {
 		
 		class range_velocity_diagram : public QWidget
 		{
-		Q_OBJECT;
-		
+		Q_OBJECT
+
 		public:
 			range_velocity_diagram();
 			~range_velocity_diagram();
@@ -42,9 +42,9 @@ namespace gr {
 			QwtPlot* d_plot;
 			QwtPlotCurve* d_curve;
 			
-		//public slots:
-		
-		//signals:
+		public slots:
+
+		signals:
 			
 		};
 

@@ -31,6 +31,7 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND radar_sources
+	${QTGUI_MOC_OUTFILES}
 	range_velocity_diagram.cc
     signal_generator_cw_c_impl.cc
     signal_generator_fmcw_c_impl.cc
@@ -58,7 +59,7 @@ if(NOT radar_sources)
 	return()
 endif(NOT radar_sources)
 
-add_library(gnuradio-radar SHARED ${radar_sources} ${QTGUI_MOC_OUTFILES})
+add_library(gnuradio-radar SHARED ${radar_sources})
 target_link_libraries(gnuradio-radar ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${FFTW3F_LIBRARIES} ${QWT_LIBRARIES} ${QT_LIBRARIES} ${UHD_LIBRARIES})
 set_target_properties(gnuradio-radar PROPERTIES DEFINE_SYMBOL "gnuradio_radar_EXPORTS")
 
