@@ -18,16 +18,34 @@
  * Boston, MA 02110-1301, USA.
  */
 
-//#include <QWidget>
+#include <QApplication>
+#include <QObject>
+#include <QWidget>
+
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
+#include <qwt_series_data.h>
 
 namespace gr {
 	namespace radar {
-
-		class range_velocity_diagram
+		
+		class range_velocity_diagram : public QWidget
 		{
+		Q_OBJECT;
+		
 		public:
 			range_velocity_diagram();
 			~range_velocity_diagram();
+			void refresh();
+			
+		private:
+			QwtPlot* d_plot;
+			QwtPlotCurve* d_curve;
+			
+		//public slots:
+		
+		//signals:
+			
 		};
 
 	}

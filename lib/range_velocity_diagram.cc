@@ -25,11 +25,35 @@ namespace gr {
 	namespace radar {
 
 		range_velocity_diagram::range_velocity_diagram(){
-			std::cout << "BUILD IT!" << std::endl;
+			setWindowTitle("Range Velocity Diagram");
+			setFixedSize(600, 600);
+			
+			d_plot = new QwtPlot(this);
+
+			d_curve = new QwtPlotCurve("Curve 1");
+
+
+			QwtPointSeriesData* myData = new QwtPointSeriesData;
+
+			QVector<QPointF>* samples = new QVector<QPointF>;
+			samples->push_back(QPointF(1.0,1.0));
+			samples->push_back(QPointF(2.0,2.0));
+			samples->push_back(QPointF(3.0,3.0));
+			samples->push_back(QPointF(4.0,5.0));
+			myData->setSamples(*samples);
+			d_curve->setData(myData);
+
+			d_curve->attach(d_plot);
+
+			d_plot->replot();
 		}
 
 		range_velocity_diagram::~range_velocity_diagram(){
-			
+		}
+		
+		void
+		range_velocity_diagram::refresh(){
+			d_plot->replot();
 		}
 
 	}

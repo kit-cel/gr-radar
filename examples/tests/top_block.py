@@ -2,22 +2,43 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Jun 12 00:25:39 2014
+# Generated: Wed Jun 18 18:03:56 2014
 ##################################################
 
+from PyQt4 import Qt
 from gnuradio import eng_notation
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import radar
-import wx
+import sys
 
-class top_block(grc_wxgui.top_block_gui):
+class top_block(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        grc_wxgui.top_block_gui.__init__(self, title="Top Block")
+        gr.top_block.__init__(self, "Top Block")
+        Qt.QWidget.__init__(self)
+        self.setWindowTitle("Top Block")
+        try:
+             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
+        except:
+             pass
+        self.top_scroll_layout = Qt.QVBoxLayout()
+        self.setLayout(self.top_scroll_layout)
+        self.top_scroll = Qt.QScrollArea()
+        self.top_scroll.setFrameStyle(Qt.QFrame.NoFrame)
+        self.top_scroll_layout.addWidget(self.top_scroll)
+        self.top_scroll.setWidgetResizable(True)
+        self.top_widget = Qt.QWidget()
+        self.top_scroll.setWidget(self.top_widget)
+        self.top_layout = Qt.QVBoxLayout(self.top_widget)
+        self.top_grid_layout = Qt.QGridLayout()
+        self.top_layout.addLayout(self.top_grid_layout)
+
+        self.settings = Qt.QSettings("GNU Radio", "top_block")
+        self.restoreGeometry(self.settings.value("geometry").toByteArray())
+
 
         ##################################################
         # Variables
@@ -27,10 +48,14 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Blocks
         ##################################################
-        self.radar_qtqui_range_velocity_0 = radar.qtqui_range_velocity((0,10), (-5,5))
+        self.radar_qtgui_rv_diagram_0 = radar.qtgui_rv_diagram((), ())
 
 
 # QT sink close method reimplementation
+    def closeEvent(self, event):
+        self.settings = Qt.QSettings("GNU Radio", "top_block")
+        self.settings.setValue("geometry", self.saveGeometry())
+        event.accept()
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -49,7 +74,15 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
+    Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
+    qapp = Qt.QApplication(sys.argv)
     tb = top_block()
-    tb.Start(True)
-    tb.Wait()
+    tb.start()
+    tb.show()
+    def quitting():
+        tb.stop()
+        tb.wait()
+    qapp.connect(qapp, Qt.SIGNAL("aboutToQuit()"), quitting)
+    qapp.exec_()
+    tb = None #to clean up Qt widgets
 

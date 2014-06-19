@@ -18,6 +18,12 @@
 # Boston, MA 02110-1301, USA.
 
 ########################################################################
+# QT GUI file generation stuff (Q_OBJECT)
+########################################################################
+set(QTGUI_MOC_HEADERS range_velocity_diagram.h)
+QT4_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
+
+########################################################################
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
@@ -52,7 +58,7 @@ if(NOT radar_sources)
 	return()
 endif(NOT radar_sources)
 
-add_library(gnuradio-radar SHARED ${radar_sources})
+add_library(gnuradio-radar SHARED ${radar_sources} ${QTGUI_MOC_OUTFILES})
 target_link_libraries(gnuradio-radar ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES} ${FFTW3F_LIBRARIES} ${QWT_LIBRARIES} ${QT_LIBRARIES} ${UHD_LIBRARIES})
 set_target_properties(gnuradio-radar PROPERTIES DEFINE_SYMBOL "gnuradio_radar_EXPORTS")
 

@@ -1,59 +1,31 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Thu Jun 12 00:28:22 2014</timestamp>
+  <timestamp>Wed Jun 18 17:16:50 2014</timestamp>
   <block>
-    <key>options</key>
+    <key>radar_qtgui_rv_diagram</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>radar_qtgui_rv_diagram_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>title</key>
+      <key>axis_range</key>
       <value></value>
     </param>
     <param>
-      <key>author</key>
+      <key>axis_velocity</key>
       <value></value>
     </param>
     <param>
-      <key>description</key>
-      <value></value>
-    </param>
-    <param>
-      <key>window_size</key>
-      <value>1280, 1024</value>
-    </param>
-    <param>
-      <key>generate_options</key>
-      <value>wx_gui</value>
-    </param>
-    <param>
-      <key>category</key>
-      <value>Custom</value>
-    </param>
-    <param>
-      <key>run_options</key>
-      <value>prompt</value>
-    </param>
-    <param>
-      <key>run</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>max_nouts</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>realtime_scheduling</key>
+      <key>affinity</key>
       <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(10, 10)</value>
+      <value>(494, 279)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -84,30 +56,58 @@
     </param>
   </block>
   <block>
-    <key>radar_qtqui_range_velocity</key>
+    <key>options</key>
     <param>
       <key>id</key>
-      <value>radar_qtqui_range_velocity_0</value>
+      <value>top_block</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>axis_range</key>
-      <value>0,10</value>
+      <key>title</key>
+      <value></value>
     </param>
     <param>
-      <key>axis_velocity</key>
-      <value>-5,5</value>
+      <key>author</key>
+      <value></value>
     </param>
     <param>
-      <key>affinity</key>
+      <key>description</key>
+      <value></value>
+    </param>
+    <param>
+      <key>window_size</key>
+      <value>1280, 1024</value>
+    </param>
+    <param>
+      <key>generate_options</key>
+      <value>qt_gui</value>
+    </param>
+    <param>
+      <key>category</key>
+      <value>Custom</value>
+    </param>
+    <param>
+      <key>run_options</key>
+      <value>prompt</value>
+    </param>
+    <param>
+      <key>run</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>max_nouts</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>realtime_scheduling</key>
       <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(402, 460)</value>
+      <value>(10, 10)</value>
     </param>
     <param>
       <key>_rotation</key>

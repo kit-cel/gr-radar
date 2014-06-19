@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri Jun 13 19:34:51 2014</timestamp>
+  <timestamp>Wed Jun 18 16:31:21 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -1352,84 +1352,6 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_msg_gate</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_msg_gate_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>msg_keys</key>
-      <value>('range',)</value>
-    </param>
-    <param>
-      <key>val_min</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>val_max</key>
-      <value>20</value>
-    </param>
-    <param>
-      <key>verbose</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(695, 452)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_print_results</key>
-    <param>
-      <key>id</key>
-      <value>radar_print_results_1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>store_msg</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>filename</key>
-      <value>"store_msgs.txt"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1005, 468)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
@@ -1478,6 +1400,84 @@
     <param>
       <key>_coordinate</key>
       <value>(189, 297)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_print_results</key>
+    <param>
+      <key>id</key>
+      <value>radar_print_results_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>store_msg</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>filename</key>
+      <value>"store_msgs.txt"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1005, 468)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_estimator_msg_gate</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_msg_gate_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>msg_keys</key>
+      <value>('range',)</value>
+    </param>
+    <param>
+      <key>val_min</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>val_max</key>
+      <value>20</value>
+    </param>
+    <param>
+      <key>verbose</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(695, 452)</value>
     </param>
     <param>
       <key>_rotation</key>

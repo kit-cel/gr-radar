@@ -20,6 +20,7 @@
 ########################################################################
 # Install public header files
 ########################################################################
+message(STATUS ${QTGUI_MOC_OUTFILES})
 install(FILES
     api.h
     ../../lib/range_velocity_diagram.h

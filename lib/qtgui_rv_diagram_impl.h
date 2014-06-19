@@ -36,10 +36,15 @@ namespace gr {
       qtgui_rv_diagram_impl(std::vector<float> axis_range, std::vector<float> axis_velocity);
       ~qtgui_rv_diagram_impl();
       void handle_msg(pmt::pmt_t msg);
+      void run_gui();
       
       std::vector<float> d_axis_range, d_axis_velocity;
       std::vector<float> d_range, d_velocity;
       pmt::pmt_t d_port_id_in;
+      
+      int d_argc;
+      char *d_argv;
+      QApplication *d_qApplication;
       
       range_velocity_diagram d_main_gui;
     };

@@ -50,6 +50,9 @@ namespace gr {
 		d_port_id_in = pmt::mp("Msg in");
 		message_port_register_in(d_port_id_in);
 		set_msg_handler(d_port_id_in, boost::bind(&qtgui_rv_diagram_impl::handle_msg, this, _1));
+		
+		// Setup GUI
+		run_gui();
 	}
 	
 	void
@@ -72,6 +75,18 @@ namespace gr {
 			}
 		}
     }
+    
+    void
+    qtgui_rv_diagram_impl::run_gui(){
+		if(qApp != NULL) {
+			d_qApplication = qApp;
+		}
+		else {
+			d_qApplication = new QApplication(d_argc, &d_argv);
+		}
+		
+		d_main_gui.show();
+	}
 
     /*
      * Our virtual destructor.
