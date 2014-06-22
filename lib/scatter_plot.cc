@@ -24,7 +24,9 @@
 namespace gr {
 	namespace radar {
 
-		scatter_plot::scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y){
+		scatter_plot::scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, 
+		QWidget* parent) : QWidget(parent)
+		{
 			d_interval = interval;
 			d_axis_x = axis_x;
 			d_axis_y = axis_y;
@@ -35,12 +37,12 @@ namespace gr {
 			d_marker.resize(0);
 			
 			// Setup GUI
+			resize(QSize(600,600));
 			d_plot = new QwtPlot(this);
 			d_symbol = new QwtSymbol(QwtSymbol::Diamond,Qt::red,Qt::NoPen,QSize(20,20));
 			d_grid = new QwtPlotGrid;
 			
 			d_plot->setTitle(QwtText("Scatter Plot")); 
-			d_plot->setGeometry(0,0,600,600);
 			d_plot->setAxisScale(QwtPlot::xBottom,d_axis_x[0],d_axis_x[1]);
 			d_plot->setAxisTitle(QwtPlot::xBottom, d_label_x.c_str());
 			d_plot->setAxisScale(QwtPlot::yLeft,d_axis_y[0],d_axis_y[1]);
@@ -50,6 +52,7 @@ namespace gr {
 			d_grid->setPen(QPen(QColor(119,136,153),0.5, Qt::DashLine));
 			d_grid->attach(d_plot);
 			
+			// Plot grid and axis
 			d_plot->replot();
 			
 			// Setup timer and connect refreshing plot
@@ -59,6 +62,11 @@ namespace gr {
 		}
 
 		scatter_plot::~scatter_plot(){
+		}
+		
+		void
+		scatter_plot::resizeEvent( QResizeEvent * event ){
+			d_plot->setGeometry(0,0,this->width(),this->height());
 		}
 		
 		void

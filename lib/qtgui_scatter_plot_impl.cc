@@ -108,6 +108,9 @@ namespace gr {
 			d_qApplication = qApp;
 		}
 		else {
+			d_argc = 1;
+			d_argv = new char;
+			d_argv[0] = '\0';
 			d_qApplication = new QApplication(d_argc, &d_argv);
 		}
 		

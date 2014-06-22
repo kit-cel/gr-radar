@@ -20,10 +20,8 @@
 ########################################################################
 # Install public header files
 ########################################################################
-message(STATUS ${QTGUI_MOC_OUTFILES})
 install(FILES
     api.h
-    ../../lib/range_velocity_diagram.h
     signal_generator_cw_c.h
     signal_generator_fmcw_c.h
     split_cc.h

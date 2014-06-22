@@ -35,7 +35,7 @@ namespace gr {
 		Q_OBJECT
 
 		public:
-			scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y);
+			scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, QWidget* parent = 0);
 			~scatter_plot();
 			
 		private:
@@ -49,10 +49,11 @@ namespace gr {
 			std::vector<QwtPlotMarker*> d_marker;
 			QTimer *d_timer;
 			
+		protected:
+			void resizeEvent(QResizeEvent * event);
+			
 		public slots:
 			void refresh();
-
-		signals:
 			
 		};
 

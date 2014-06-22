@@ -5,7 +5,7 @@
   <import>import radar</import>
   <make>radar.qtgui_scatter_plot($interval, $label_x, $label_y, $axis_x, $axis_y)</make>
   <param>
-    <name>Interval</name>
+    <name>Update interval [ms]</name>
     <key>interval</key>
     <type>int</type>
   </param>
