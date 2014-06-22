@@ -3,7 +3,12 @@
   <key>radar_qtgui_rv_diagram</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.qtgui_rv_diagram($axis_range, $axis_velocity)</make>
+  <make>radar.qtgui_rv_diagram($interval, $axis_range, $axis_velocity)</make>
+  <param>
+    <name>Update interval</name>
+    <key>interval</key>
+    <type>int</type>
+  </param>
   <param>
     <name>Axis Range</name>
     <key>axis_range</key>

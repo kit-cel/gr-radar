@@ -33,7 +33,7 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      qtgui_rv_diagram_impl(std::vector<float> axis_range, std::vector<float> axis_velocity);
+      qtgui_rv_diagram_impl(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity);
       ~qtgui_rv_diagram_impl();
       void handle_msg(pmt::pmt_t msg);
       void run_gui();
@@ -46,7 +46,8 @@ namespace gr {
       char *d_argv;
       QApplication *d_qApplication;
       
-      range_velocity_diagram d_main_gui;
+      int d_interval;
+      range_velocity_diagram* d_main_gui;
     };
 
   } // namespace radar

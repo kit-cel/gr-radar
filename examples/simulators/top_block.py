@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Jun 20 00:14:22 2014
+# Generated: Sun Jun 22 11:49:10 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -60,7 +60,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.v_res = v_res = freq_res*3e8/2/center_freq
         self.samp_discard = samp_discard = 0
         self.min_output_buffer = min_output_buffer = 2*(blocks_per_tag*samp_per_freq*2)
-        self.decimator_fac = decimator_fac = 2**8
+        self.decimator_fac = decimator_fac = 2**7
         self.Range = Range = 10
         self.R_max = R_max = 3e8/2/delta_freq
 
@@ -127,13 +127,14 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
-        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (velocity,), (1e16,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
+        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,10,20), (velocity,10,-30), (1e16,1e16,1e16), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(524288)
         self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_discard, "packet_len")
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, -delta_freq/2, delta_freq/2, 1, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
-        self.radar_qtgui_rv_diagram_0 = radar.qtgui_rv_diagram((), ())
+        self.radar_qtgui_rv_diagram_0 = radar.qtgui_rv_diagram(100, (0,R_max+R_max/2), (-30,30))
+        self.radar_print_results_0 = radar.print_results(False, "test.txt")
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/2/decimator_fac, 15, 0, 0.78, 30, True, "packet_len")
         (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
@@ -193,6 +194,7 @@ class top_block(gr.top_block, Qt.QWidget):
         # Asynch Message Connections
         ##################################################
         self.msg_connect(self.radar_os_cfar_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_rv_diagram_0, "Msg in")
 
 # QT sink close method reimplementation
@@ -208,9 +210,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.set_delta_freq(self.samp_rate/4)
         self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac/2)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,10,20), (self.velocity,10,-30), (1e16,1e16,1e16), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_blocks_per_tag(self):
         return self.blocks_per_tag
@@ -247,16 +249,16 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
         self.set_v_res(self.freq_res*3e8/2/self.center_freq)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,10,20), (self.velocity,10,-30), (1e16,1e16,1e16), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_velocity(self):
         return self.velocity
 
     def set_velocity(self, velocity):
         self.velocity = velocity
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
         Qt.QMetaObject.invokeMethod(self._velocity_counter, "setValue", Qt.Q_ARG("double", self.velocity))
         Qt.QMetaObject.invokeMethod(self._velocity_slider, "setValue", Qt.Q_ARG("double", self.velocity))
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,10,20), (self.velocity,10,-30), (1e16,1e16,1e16), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_v_res(self):
         return self.v_res
@@ -290,9 +292,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_Range(self, Range):
         self.Range = Range
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
         Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
         Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,10,20), (self.velocity,10,-30), (1e16,1e16,1e16), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_R_max(self):
         return self.R_max

@@ -19,12 +19,13 @@
  */
 
 #include <QApplication>
-#include <QObject>
-#include <QWidget>
+#include <QTimer>
 
 #include <qwt_plot.h>
+#include <qwt_plot_grid.h>
 #include <qwt_plot_curve.h>
-#include <qwt_series_data.h>
+#include <qwt_symbol.h>
+#include <qwt_plot_marker.h>
 
 namespace gr {
 	namespace radar {
@@ -34,15 +35,21 @@ namespace gr {
 		Q_OBJECT
 
 		public:
-			range_velocity_diagram();
+			range_velocity_diagram(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity, std::vector<float>* range, std::vector<float>* velocity);
 			~range_velocity_diagram();
-			void refresh();
 			
 		private:
+			int d_interval;
+			std::vector<float> d_axis_range, d_axis_velocity;
+			std::vector<float>* d_range, *d_velocity;
 			QwtPlot* d_plot;
-			QwtPlotCurve* d_curve;
+			QwtSymbol* d_symbol;
+			QwtPlotGrid* d_grid;
+			std::vector<QwtPlotMarker*> d_marker;
+			QTimer *d_timer;
 			
 		public slots:
+			void refresh();
 
 		signals:
 			

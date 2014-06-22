@@ -29,20 +29,21 @@ namespace gr {
   namespace radar {
 
     qtgui_rv_diagram::sptr
-    qtgui_rv_diagram::make(std::vector<float> axis_range, std::vector<float> axis_velocity)
+    qtgui_rv_diagram::make(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity)
     {
       return gnuradio::get_initial_sptr
-        (new qtgui_rv_diagram_impl(axis_range, axis_velocity));
+        (new qtgui_rv_diagram_impl(interval, axis_range, axis_velocity));
     }
 
     /*
      * The private constructor
      */
-    qtgui_rv_diagram_impl::qtgui_rv_diagram_impl(std::vector<float> axis_range, std::vector<float> axis_velocity)
+    qtgui_rv_diagram_impl::qtgui_rv_diagram_impl(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity)
       : gr::block("qtgui_rv_diagram",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
+		d_interval = interval;
 		d_axis_range = axis_range;
 		d_axis_velocity = axis_velocity;
 		
@@ -85,7 +86,11 @@ namespace gr {
 			d_qApplication = new QApplication(d_argc, &d_argv);
 		}
 		
-		d_main_gui.show();
+		d_range.resize(0); d_velocity.resize(0);
+		d_range.push_back(3); d_range.push_back(6);
+		d_velocity.push_back(-3); d_velocity.push_back(6);
+		d_main_gui = new range_velocity_diagram(d_interval, d_axis_range, d_axis_velocity, &d_range, &d_velocity);
+		d_main_gui->show();
 	}
 
     /*

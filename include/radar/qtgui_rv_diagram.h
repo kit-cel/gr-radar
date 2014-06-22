@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::qtgui_rv_diagram::make is the public interface for
        * creating new instances.
        */
-      static sptr make(std::vector<float> axis_range, std::vector<float> axis_velocity);
+      static sptr make(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity);
     };
 
   } // namespace radar
