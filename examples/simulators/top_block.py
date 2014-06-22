@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Sun Jun 22 21:14:20 2014
+# Generated: Sun Jun 22 23:59:58 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -131,7 +131,8 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, -delta_freq/2, delta_freq/2, 1, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
-        self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(10, 'velocity', (-30,30), 0.5)
+        self.radar_qtgui_time_plot_0_0 = radar.qtgui_time_plot(100, 'range', (0,120), 10)
+        self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'velocity', (-30,30), 10)
         self.radar_qtgui_scatter_plot_0 = radar.qtgui_scatter_plot(500, 'range', 'velocity', (-10,120), (-40,40))
         self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/2/decimator_fac, 15, 0, 0.78, 30, True, "packet_len")
         (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
@@ -177,6 +178,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.msg_connect(self.radar_os_cfar_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_scatter_plot_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0_0, "Msg in")
 
 # QT sink close method reimplementation
     def closeEvent(self, event):

@@ -48,8 +48,7 @@ namespace gr {
 			QwtPlot* d_plot;
 			QwtSymbol* d_symbol;
 			QwtPlotGrid* d_grid;
-			std::vector<QwtPlotMarker*> d_marker;
-			std::vector<int> d_marker_num;
+			std::vector<std::vector<QwtPlotMarker*> > d_marker;
 			
 			QTimer *d_timer;
 			

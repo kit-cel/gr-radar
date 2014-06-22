@@ -33,8 +33,8 @@ namespace gr {
 			d_label_y = label_y;
 			d_range_time = range_time;
 			d_refresh_counter = 0;
-			d_marker.resize(0);
-			d_marker_num.resize(0);
+			d_marker.resize((int)(range_time/interval*1000));
+			std::cout << "CHECK:" << d_marker.size() << std::endl;
 			
 			// Setup GUI
 			resize(QSize(600,300));
@@ -76,29 +76,25 @@ namespace gr {
 				d_plot->setAxisScale(QwtPlot::xBottom,d_refresh_counter*float(d_interval)/1000.0-d_range_time,d_refresh_counter*float(d_interval)/1000.0);
 			}
 			
-			// Detach and delete outdated markers
-			if(d_marker_num.size()>d_range_time/(float)d_interval*1000.0){ // FIXME: errorhandling for interval>range_time?
-				for(int k=0; k<d_marker_num[0]; k++){
-					delete d_marker[k]; // FIXME: object is not deleted! segfault, why?
-				}
-				if(d_marker_num[0]!=0){
-					d_marker.erase(d_marker.begin(),d_marker.begin()+d_marker_num[0]); // delete marker pointers
-				}
-				d_marker_num.erase(d_marker_num.begin()); // delete first element counting vector
+			// Detach old markers
+			int marker_index = d_refresh_counter%d_marker.size();
+			for(int k=0; k<d_marker[marker_index].size(); k++){
+				d_marker[marker_index][k]->detach();
 			}
 			
 			// Set new marker
 			for(int k=0; k<d_y->size(); k++){
-				d_marker.push_back(new QwtPlotMarker);
-				d_marker[d_marker.size()-1]->setSymbol(d_symbol);
-				d_marker[d_marker.size()-1]->setValue(QPointF(d_refresh_counter*float(d_interval)/1000.0,(*d_y)[k]));
+				if(k<d_marker[marker_index].size()){
+					d_marker[marker_index][k]->setValue(QPointF(d_refresh_counter*float(d_interval)/1000.0,(*d_y)[k]));
+					d_marker[marker_index][k]->attach(d_plot);
+				}
+				else{
+					d_marker[marker_index].push_back(new QwtPlotMarker);
+					d_marker[marker_index][k]->setSymbol(d_symbol);
+					d_marker[marker_index][k]->setValue(QPointF(d_refresh_counter*float(d_interval)/1000.0,(*d_y)[k]));
+					d_marker[marker_index][k]->attach(d_plot);
+				}
 			}
-			for(int k=0; k<d_marker.size(); k++){
-				d_marker[k]->attach(d_plot);
-			}
-			d_marker_num.push_back(d_y->size()); // Save number of new markers
-			
-			std::cout << "NUM: " << d_y->size() << "->" << d_marker.size() << " / " << d_marker_num.size() << std::endl;
 			
 			// Replot and increment counter
 			d_plot->replot();
