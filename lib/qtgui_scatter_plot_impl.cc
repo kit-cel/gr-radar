@@ -75,10 +75,10 @@ namespace gr {
 		size_msg = pmt::length(msg);
 		pmt::pmt_t msg_part;
 		bool item_found_x, item_found_y;
-		// Go through msg and search for key symbols "range" and "velocity" (or other keys) and get data
+		// Go through msg and search for key symbols "range" and "velocity" (or other keys!) and get data
+		item_found_x = false;
+		item_found_y = false;
 		for(int k=0; k<size_msg; k++){ // FIXME: errorhandling for wrong input?
-			item_found_x = false;
-			item_found_y = false;
 			msg_part = pmt::nth(k,msg);
 			if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_x.c_str()){
 				d_x = pmt::f32vector_elements(pmt::nth(1,msg_part));
@@ -90,13 +90,13 @@ namespace gr {
 			}
 		}
 		// Fill zeros in vector if only one label is found
-		if(~item_found_x&&item_found_y){
+		if(not(item_found_x)&&item_found_y){
 			d_x.resize(d_y.size());
 		}
-		if(item_found_x&&~item_found_y){
+		if(item_found_x&&not(item_found_y)){
 			d_y.resize(d_x.size());
 		}
-		if(~item_found_x&&~item_found_y){
+		if(not(item_found_x)&&not(item_found_y)){
 			// FIXME: throw exception, no label found
 		}
     }
