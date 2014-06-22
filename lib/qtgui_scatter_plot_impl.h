@@ -18,24 +18,24 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_RADAR_QTGUI_RV_DIAGRAM_IMPL_H
-#define INCLUDED_RADAR_QTGUI_RV_DIAGRAM_IMPL_H
+#ifndef INCLUDED_RADAR_QTGUI_SCATTER_PLOT_IMPL_H
+#define INCLUDED_RADAR_QTGUI_SCATTER_PLOT_IMPL_H
 
-#include <radar/qtgui_rv_diagram.h>
+#include <radar/qtgui_scatter_plot.h>
 #include "scatter_plot.h"
 
 namespace gr {
   namespace radar {
 
-    class qtgui_rv_diagram_impl : public qtgui_rv_diagram
+    class qtgui_scatter_plot_impl : public qtgui_scatter_plot
     {
      private:
       // Nothing to declare in this block.
 
      public:
-      qtgui_rv_diagram_impl(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity);
-      ~qtgui_rv_diagram_impl();
-      void handle_msg(pmt::pmt_t msg);
+      qtgui_scatter_plot_impl(int interval, std::string label_x, std::string label_y, std::vector<float> axis_x, std::vector<float> axis_y);
+      ~qtgui_scatter_plot_impl();
+	  void handle_msg(pmt::pmt_t msg);
       void run_gui();
       
       std::vector<float> d_axis_x, d_axis_y;
@@ -54,5 +54,5 @@ namespace gr {
   } // namespace radar
 } // namespace gr
 
-#endif /* INCLUDED_RADAR_QTGUI_RV_DIAGRAM_IMPL_H */
+#endif /* INCLUDED_RADAR_QTGUI_SCATTER_PLOT_IMPL_H */
 

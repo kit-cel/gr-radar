@@ -1,0 +1,37 @@
+<block>
+  <name>QT GUI Scatter Plot</name>
+  <key>radar_qtgui_scatter_plot</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.qtgui_scatter_plot($interval, $label_x, $label_y, $axis_x, $axis_y)</make>
+  <param>
+    <name>Interval</name>
+    <key>interval</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Label x</name>
+    <key>label_x</key>
+    <type>string</type>
+  </param>
+  <param>
+    <name>Label y</name>
+    <key>label_y</key>
+    <type>string</type>
+  </param>
+  <param>
+    <name>Axis x</name>
+    <key>axis_x</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Axis y</name>
+    <key>axis_y</key>
+    <type>real_vector</type>
+  </param>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+</block>

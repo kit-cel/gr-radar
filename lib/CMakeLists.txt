@@ -51,7 +51,7 @@ list(APPEND radar_sources
     signal_generator_sync_pulse_c_impl.cc
     estimator_sync_pulse_c_impl.cc
     find_max_peak_c_impl.cc
-    qtgui_rv_diagram_impl.cc )
+    qtgui_scatter_plot_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

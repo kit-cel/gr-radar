@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun Jun 22 13:55:40 2014</timestamp>
+  <timestamp>Sun Jun 22 14:48:40 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -979,45 +979,6 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_fsk</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_fsk_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>delta_freq</key>
-      <value>delta_freq</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(347, 781)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>qtgui_sink_x</key>
     <param>
       <key>id</key>
@@ -1141,41 +1102,6 @@
     <param>
       <key>_coordinate</key>
       <value>(855, 867)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_qtgui_rv_diagram</key>
-    <param>
-      <key>id</key>
-      <value>radar_qtgui_rv_diagram_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>interval</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>axis_range</key>
-      <value>0,R_max+R_max/2</value>
-    </param>
-    <param>
-      <key>axis_velocity</key>
-      <value>-30,30</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(608, 709)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1339,6 +1265,88 @@
       <value>0</value>
     </param>
   </block>
+  <block>
+    <key>radar_estimator_fsk</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_fsk_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>delta_freq</key>
+      <value>delta_freq</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(347, 781)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_scatter_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_scatter_plot_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>label_x</key>
+      <value>'range'</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'velocity'</value>
+    </param>
+    <param>
+      <key>axis_x</key>
+      <value>0,120</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>-40,40</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(627, 651)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>analog_noise_source_x_0</source_block_id>
     <sink_block_id>blocks_add_xx_0</sink_block_id>
@@ -1454,15 +1462,15 @@
     <sink_key>Msg in</sink_key>
   </connection>
   <connection>
-    <source_block_id>radar_estimator_fsk_0</source_block_id>
-    <sink_block_id>radar_qtgui_rv_diagram_0</sink_block_id>
-    <source_key>Msg out</source_key>
-    <sink_key>Msg in</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_add_xx_0</source_block_id>
     <sink_block_id>blocks_multiply_conjugate_cc_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_estimator_fsk_0</source_block_id>
+    <sink_block_id>radar_qtgui_scatter_plot_0</sink_block_id>
+    <source_key>Msg out</source_key>
+    <sink_key>Msg in</sink_key>
   </connection>
 </flow_graph>

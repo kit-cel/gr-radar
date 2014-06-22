@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_RADAR_QTGUI_RV_DIAGRAM_H
-#define INCLUDED_RADAR_QTGUI_RV_DIAGRAM_H
+#ifndef INCLUDED_RADAR_QTGUI_SCATTER_PLOT_H
+#define INCLUDED_RADAR_QTGUI_SCATTER_PLOT_H
 
 #include <radar/api.h>
 #include <gnuradio/block.h>
@@ -33,24 +33,24 @@ namespace gr {
      * \ingroup radar
      *
      */
-    class RADAR_API qtgui_rv_diagram : virtual public gr::block
+    class RADAR_API qtgui_scatter_plot : virtual public gr::block
     {
      public:
-      typedef boost::shared_ptr<qtgui_rv_diagram> sptr;
+      typedef boost::shared_ptr<qtgui_scatter_plot> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of radar::qtgui_rv_diagram.
+       * \brief Return a shared_ptr to a new instance of radar::qtgui_scatter_plot.
        *
-       * To avoid accidental use of raw pointers, radar::qtgui_rv_diagram's
+       * To avoid accidental use of raw pointers, radar::qtgui_scatter_plot's
        * constructor is in a private implementation
-       * class. radar::qtgui_rv_diagram::make is the public interface for
+       * class. radar::qtgui_scatter_plot::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int interval, std::vector<float> axis_range, std::vector<float> axis_velocity);
+      static sptr make(int interval, std::string label_x, std::string label_y, std::vector<float> axis_x, std::vector<float> axis_y);
     };
 
   } // namespace radar
 } // namespace gr
 
-#endif /* INCLUDED_RADAR_QTGUI_RV_DIAGRAM_H */
+#endif /* INCLUDED_RADAR_QTGUI_SCATTER_PLOT_H */
 
