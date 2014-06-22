@@ -20,7 +20,9 @@
 ########################################################################
 # QT GUI file generation stuff (Q_OBJECT)
 ########################################################################
-set(QTGUI_MOC_HEADERS scatter_plot.h)
+set(QTGUI_MOC_HEADERS
+	scatter_plot.h
+	time_plot.h)
 QT4_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
 
 ########################################################################
@@ -33,6 +35,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND radar_sources
 	${QTGUI_MOC_OUTFILES}
 	scatter_plot.cc
+	time_plot.cc
     signal_generator_cw_c_impl.cc
     signal_generator_fmcw_c_impl.cc
     split_cc_impl.cc
@@ -51,7 +54,8 @@ list(APPEND radar_sources
     signal_generator_sync_pulse_c_impl.cc
     estimator_sync_pulse_c_impl.cc
     find_max_peak_c_impl.cc
-    qtgui_scatter_plot_impl.cc )
+    qtgui_scatter_plot_impl.cc
+    qtgui_time_plot_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun Jun 22 15:52:26 2014</timestamp>
+  <timestamp>Sun Jun 22 20:52:27 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -885,65 +885,6 @@
     </param>
   </block>
   <block>
-    <key>radar_os_cfar_c</key>
-    <param>
-      <key>id</key>
-      <value>radar_os_cfar_c_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate/2/decimator_fac</value>
-    </param>
-    <param>
-      <key>samp_compare</key>
-      <value>15</value>
-    </param>
-    <param>
-      <key>samp_protect</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>rel_threshold</key>
-      <value>0.78</value>
-    </param>
-    <param>
-      <key>mult_threshold</key>
-      <value>30</value>
-    </param>
-    <param>
-      <key>merge_consecutive</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(278, 514)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_multiply_conjugate_cc</key>
     <param>
       <key>id</key>
@@ -1043,45 +984,6 @@
     <param>
       <key>_coordinate</key>
       <value>(428, 233)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_estimator_fsk</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_fsk_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>delta_freq</key>
-      <value>delta_freq</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(347, 781)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1316,7 +1218,7 @@
     </param>
     <param>
       <key>interval</key>
-      <value>100</value>
+      <value>500</value>
     </param>
     <param>
       <key>label_x</key>
@@ -1340,11 +1242,187 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(628, 655)</value>
+      <value>(628, 654)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_estimator_fsk</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_fsk_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>delta_freq</key>
+      <value>delta_freq</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(347, 781)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_time_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_time_plot_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'range'</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>0,120</value>
+    </param>
+    <param>
+      <key>range_time</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(637, 978)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_time_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_time_plot_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'velocity'</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>-30,30</value>
+    </param>
+    <param>
+      <key>range_time</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(640, 875)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_os_cfar_c</key>
+    <param>
+      <key>id</key>
+      <value>radar_os_cfar_c_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate/2/decimator_fac</value>
+    </param>
+    <param>
+      <key>samp_compare</key>
+      <value>15</value>
+    </param>
+    <param>
+      <key>samp_protect</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>rel_threshold</key>
+      <value>0.78</value>
+    </param>
+    <param>
+      <key>mult_threshold</key>
+      <value>30</value>
+    </param>
+    <param>
+      <key>merge_consecutive</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(277, 510)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
     </param>
   </block>
   <connection>
@@ -1470,6 +1548,18 @@
   <connection>
     <source_block_id>radar_estimator_fsk_0</source_block_id>
     <sink_block_id>radar_qtgui_scatter_plot_0</sink_block_id>
+    <source_key>Msg out</source_key>
+    <sink_key>Msg in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_estimator_fsk_0</source_block_id>
+    <sink_block_id>radar_qtgui_time_plot_0</sink_block_id>
+    <source_key>Msg out</source_key>
+    <sink_key>Msg in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_estimator_fsk_0</source_block_id>
+    <sink_block_id>radar_qtgui_time_plot_0_0</sink_block_id>
     <source_key>Msg out</source_key>
     <sink_key>Msg in</sink_key>
   </connection>

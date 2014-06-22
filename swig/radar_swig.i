@@ -27,6 +27,7 @@
 #include "radar/estimator_sync_pulse_c.h"
 #include "radar/find_max_peak_c.h"
 #include "radar/qtgui_scatter_plot.h"
+#include "radar/qtgui_time_plot.h"
 %}
 
 
@@ -71,3 +72,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, find_max_peak_c);
 
 %include "radar/qtgui_scatter_plot.h"
 GR_SWIG_BLOCK_MAGIC2(radar, qtgui_scatter_plot);
+%include "radar/qtgui_time_plot.h"
+GR_SWIG_BLOCK_MAGIC2(radar, qtgui_time_plot);

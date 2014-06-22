@@ -40,5 +40,6 @@ install(FILES
     signal_generator_sync_pulse_c.h
     estimator_sync_pulse_c.h
     find_max_peak_c.h
-    qtgui_scatter_plot.h DESTINATION include/radar
+    qtgui_scatter_plot.h
+    qtgui_time_plot.h DESTINATION include/radar
 )

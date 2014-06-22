@@ -75,7 +75,7 @@ namespace gr {
 			for(int k=0; k<d_marker.size(); k++) d_marker[k]->detach();
 			
 			// Set new marker
-			for(int k=0; k<(*d_x).size(); k++){ // len(range)==len(velocity), same size x and y! FIXME: errorhandling!
+			for(int k=0; k<d_x->size(); k++){ // len(range)==len(velocity), same size x and y! FIXME: errorhandling!
 				if(k<d_marker.size()){
 					d_marker[k]->setValue(QPointF((*d_x)[k],(*d_y)[k]));
 					d_marker[k]->attach(d_plot);
