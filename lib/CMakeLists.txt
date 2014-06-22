@@ -20,7 +20,7 @@
 ########################################################################
 # QT GUI file generation stuff (Q_OBJECT)
 ########################################################################
-set(QTGUI_MOC_HEADERS range_velocity_diagram.h)
+set(QTGUI_MOC_HEADERS scatter_plot.h)
 QT4_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
 
 ########################################################################
@@ -32,7 +32,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND radar_sources
 	${QTGUI_MOC_OUTFILES}
-	range_velocity_diagram.cc
+	scatter_plot.cc
     signal_generator_cw_c_impl.cc
     signal_generator_fmcw_c_impl.cc
     split_cc_impl.cc

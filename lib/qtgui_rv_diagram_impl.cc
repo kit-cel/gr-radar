@@ -44,8 +44,10 @@ namespace gr {
               gr::io_signature::make(0,0,0))
     {
 		d_interval = interval;
-		d_axis_range = axis_range;
-		d_axis_velocity = axis_velocity;
+		d_axis_x = axis_range;
+		d_axis_y = axis_velocity;
+		d_label_x = "range";
+		d_label_y = "velocity";
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -60,25 +62,41 @@ namespace gr {
     qtgui_rv_diagram_impl::handle_msg(pmt::pmt_t msg)
     {
 		size_t size_msg;
-		d_range.clear();
-		d_velocity.clear();
+		d_x.clear();
+		d_y.clear();
 		
 		size_msg = pmt::length(msg);
 		pmt::pmt_t msg_part;
-		// Go through msg and search for key symbols "range" and "velocity" and get data
+		bool item_found_x, item_found_y;
+		// Go through msg and search for key symbols "range" and "velocity" (or other keys) and get data
 		for(int k=0; k<size_msg; k++){ // FIXME: errorhandling for wrong input?
+			item_found_x = false;
+			item_found_y = false;
 			msg_part = pmt::nth(k,msg);
-			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="velocity"){
-				d_velocity = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_x.c_str()){
+				d_x = pmt::f32vector_elements(pmt::nth(1,msg_part));
+				item_found_x = true;
 			}
-			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="range"){
-				d_range = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_y.c_str()){
+				d_y = pmt::f32vector_elements(pmt::nth(1,msg_part));
+				item_found_y = true;
 			}
+		}
+		// Fill zeros in vector if only one label is found
+		if(~item_found_x&&item_found_y){
+			d_x.resize(d_y.size());
+		}
+		if(item_found_x&&~item_found_y){
+			d_y.resize(d_x.size());
+		}
+		if(~item_found_x&&~item_found_y){
+			// FIXME: throw exception, no label found
 		}
     }
     
     void
     qtgui_rv_diagram_impl::run_gui(){
+		// Set QT window
 		if(qApp != NULL) {
 			d_qApplication = qApp;
 		}
@@ -86,10 +104,8 @@ namespace gr {
 			d_qApplication = new QApplication(d_argc, &d_argv);
 		}
 		
-		d_range.resize(0); d_velocity.resize(0);
-		d_range.push_back(3); d_range.push_back(6);
-		d_velocity.push_back(-3); d_velocity.push_back(6);
-		d_main_gui = new range_velocity_diagram(d_interval, d_axis_range, d_axis_velocity, &d_range, &d_velocity);
+		// Set QWT plot widget
+		d_main_gui = new scatter_plot(d_interval, d_axis_x, d_axis_y, &d_x, &d_y, d_label_x, d_label_y);
 		d_main_gui->show();
 	}
 

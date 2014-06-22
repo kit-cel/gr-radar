@@ -22,7 +22,7 @@
 #define INCLUDED_RADAR_QTGUI_RV_DIAGRAM_IMPL_H
 
 #include <radar/qtgui_rv_diagram.h>
-#include "range_velocity_diagram.h"
+#include "scatter_plot.h"
 
 namespace gr {
   namespace radar {
@@ -38,8 +38,9 @@ namespace gr {
       void handle_msg(pmt::pmt_t msg);
       void run_gui();
       
-      std::vector<float> d_axis_range, d_axis_velocity;
-      std::vector<float> d_range, d_velocity;
+      std::vector<float> d_axis_x, d_axis_y;
+      std::vector<float> d_x, d_y;
+      std::string d_label_x, d_label_y;
       pmt::pmt_t d_port_id_in;
       
       int d_argc;
@@ -47,7 +48,7 @@ namespace gr {
       QApplication *d_qApplication;
       
       int d_interval;
-      range_velocity_diagram* d_main_gui;
+      scatter_plot* d_main_gui;
     };
 
   } // namespace radar

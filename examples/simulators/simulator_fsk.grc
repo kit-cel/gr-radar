@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun Jun 22 11:49:10 2014</timestamp>
+  <timestamp>Sun Jun 22 13:55:40 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -1148,6 +1148,72 @@
     </param>
   </block>
   <block>
+    <key>radar_qtgui_rv_diagram</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_rv_diagram_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>axis_range</key>
+      <value>0,R_max+R_max/2</value>
+    </param>
+    <param>
+      <key>axis_velocity</key>
+      <value>-30,30</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(608, 709)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_print_results</key>
+    <param>
+      <key>id</key>
+      <value>radar_print_results_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>store_msg</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>filename</key>
+      <value>"test.txt"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(619, 791)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
@@ -1163,7 +1229,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>10</value>
+      <value>20</value>
     </param>
     <param>
       <key>start</key>
@@ -1203,41 +1269,6 @@
     </param>
   </block>
   <block>
-    <key>radar_qtgui_rv_diagram</key>
-    <param>
-      <key>id</key>
-      <value>radar_qtgui_rv_diagram_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>interval</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>axis_range</key>
-      <value>0,R_max+R_max/2</value>
-    </param>
-    <param>
-      <key>axis_velocity</key>
-      <value>-30,30</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(608, 709)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>radar_static_target_simulator_cc</key>
     <param>
       <key>id</key>
@@ -1253,7 +1284,7 @@
     </param>
     <param>
       <key>velocity</key>
-      <value>velocity,10,-30</value>
+      <value>velocity,10,-10</value>
     </param>
     <param>
       <key>rcs</key>
@@ -1301,38 +1332,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(426, 236)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_print_results</key>
-    <param>
-      <key>id</key>
-      <value>radar_print_results_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>store_msg</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>filename</key>
-      <value>"test.txt"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(619, 791)</value>
+      <value>(428, 233)</value>
     </param>
     <param>
       <key>_rotation</key>
