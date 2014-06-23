@@ -34,7 +34,6 @@ namespace gr {
 			d_range_time = range_time;
 			d_refresh_counter = 0;
 			d_marker.resize((int)(range_time/interval*1000));
-			std::cout << "CHECK:" << d_marker.size() << std::endl;
 			
 			// Setup GUI
 			resize(QSize(600,300));
