@@ -47,6 +47,7 @@ namespace gr {
 		d_label_y = label_y;
 		d_axis_y = axis_y;
 		d_range_time = range_time;
+		d_y_read = false;
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -80,6 +81,7 @@ namespace gr {
 			if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_y.c_str()){
 				d_y = pmt::f32vector_elements(pmt::nth(1,msg_part));
 				item_found_y = true;
+				d_y_read = false;
 			}
 		}
 		// Error handling
@@ -102,7 +104,7 @@ namespace gr {
 		}
 		
 		// Set QWT plot widget
-		d_main_gui = new time_plot(d_interval, d_label_y, d_axis_y, d_range_time, &d_y);
+		d_main_gui = new time_plot(d_interval, d_label_y, d_axis_y, d_range_time, &d_y, &d_y_read);
 		d_main_gui->show();
 	}
 

@@ -44,6 +44,7 @@ namespace gr {
       float d_range_time;
       pmt::pmt_t d_port_id_in;
       std::vector<float> d_y;
+      bool d_y_read;
       
       int d_argc;
       char *d_argv;

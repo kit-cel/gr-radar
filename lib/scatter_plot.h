@@ -35,7 +35,8 @@ namespace gr {
 		Q_OBJECT
 
 		public:
-			scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, QWidget* parent = 0);
+			scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, bool* xy_read,
+			QWidget* parent = 0);
 			~scatter_plot();
 			
 		private:
@@ -43,6 +44,7 @@ namespace gr {
 			std::string d_label_x, d_label_y;
 			std::vector<float> d_axis_x, d_axis_y;
 			std::vector<float>* d_x, *d_y;
+			bool* d_xy_read;
 			QwtPlot* d_plot;
 			QwtSymbol* d_symbol;
 			QwtPlotGrid* d_grid;

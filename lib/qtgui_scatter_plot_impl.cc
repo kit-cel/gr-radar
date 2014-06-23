@@ -48,6 +48,7 @@ namespace gr {
 		d_axis_y = axis_y;
 		d_label_x = label_x;
 		d_label_y = label_y;
+		d_xy_read = false;
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -83,10 +84,12 @@ namespace gr {
 			if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_x.c_str()){
 				d_x = pmt::f32vector_elements(pmt::nth(1,msg_part));
 				item_found_x = true;
+				d_xy_read = false;
 			}
 			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_y.c_str()){
 				d_y = pmt::f32vector_elements(pmt::nth(1,msg_part));
 				item_found_y = true;
+				d_xy_read = false;
 			}
 		}
 		// Fill zeros in vector if only one label is found
@@ -115,7 +118,7 @@ namespace gr {
 		}
 		
 		// Set QWT plot widget
-		d_main_gui = new scatter_plot(d_interval, d_axis_x, d_axis_y, &d_x, &d_y, d_label_x, d_label_y);
+		d_main_gui = new scatter_plot(d_interval, d_axis_x, d_axis_y, &d_x, &d_y, d_label_x, d_label_y, &d_xy_read);
 		d_main_gui->show();
 	}
 

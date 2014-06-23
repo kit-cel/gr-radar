@@ -35,7 +35,7 @@ namespace gr {
 		Q_OBJECT
 
 		public:
-			time_plot(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::vector<float>* y, QWidget* parent = 0);
+			time_plot(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::vector<float>* y, bool* y_read, QWidget* parent = 0);
 			~time_plot();
 			
 		private:
@@ -43,6 +43,7 @@ namespace gr {
 			std::string d_label_y;
 			std::vector<float> d_axis_y;
 			std::vector<float>* d_y;
+			bool* d_y_read;
 			float d_range_time;
 			
 			QwtPlot* d_plot;

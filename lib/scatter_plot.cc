@@ -24,10 +24,11 @@
 namespace gr {
 	namespace radar {
 
-		scatter_plot::scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, 
+		scatter_plot::scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, bool* xy_read,
 		QWidget* parent) : QWidget(parent)
 		{
 			d_interval = interval;
+			d_xy_read = xy_read;
 			d_axis_x = axis_x;
 			d_axis_y = axis_y;
 			d_x = x;
@@ -42,7 +43,11 @@ namespace gr {
 			d_symbol = new QwtSymbol(QwtSymbol::Diamond,Qt::red,Qt::NoPen,QSize(20,20));
 			d_grid = new QwtPlotGrid;
 			
-			d_plot->setTitle(QwtText("Scatter Plot")); 
+			std::string label_title = "Scatter Plot: ";
+			label_title.append(label_x);
+			label_title.append("/");
+			label_title.append(label_y);
+			d_plot->setTitle(QwtText(label_title.c_str())); 
 			d_plot->setAxisScale(QwtPlot::xBottom,d_axis_x[0],d_axis_x[1]);
 			d_plot->setAxisTitle(QwtPlot::xBottom, d_label_x.c_str());
 			d_plot->setAxisScale(QwtPlot::yLeft,d_axis_y[0],d_axis_y[1]);
@@ -74,18 +79,21 @@ namespace gr {
 			// Clear plot from old markers
 			for(int k=0; k<d_marker.size(); k++) d_marker[k]->detach();
 			
-			// Set new marker
-			for(int k=0; k<d_x->size(); k++){ // len(range)==len(velocity), same size x and y! FIXME: errorhandling!
-				if(k<d_marker.size()){
-					d_marker[k]->setValue(QPointF((*d_x)[k],(*d_y)[k]));
-					d_marker[k]->attach(d_plot);
+			if(not(*d_xy_read)){
+				// Set new marker
+				for(int k=0; k<d_x->size(); k++){ // len(range)==len(velocity), same size x and y! FIXME: errorhandling!
+					if(k<d_marker.size()){
+						d_marker[k]->setValue(QPointF((*d_x)[k],(*d_y)[k]));
+						d_marker[k]->attach(d_plot);
+					}
+					else{
+						d_marker.push_back(new QwtPlotMarker);
+						d_marker[k]->setSymbol(d_symbol);
+						d_marker[k]->setValue(QPointF((*d_x)[k],(*d_y)[k]));
+						d_marker[k]->attach(d_plot);
+					}
 				}
-				else{
-					d_marker.push_back(new QwtPlotMarker);
-					d_marker[k]->setSymbol(d_symbol);
-					d_marker[k]->setValue(QPointF((*d_x)[k],(*d_y)[k]));
-					d_marker[k]->attach(d_plot);
-				}
+				*d_xy_read = true; // set points as read
 			}
 			
 			// Replot

@@ -41,6 +41,7 @@ namespace gr {
       std::vector<float> d_axis_x, d_axis_y;
       std::vector<float> d_x, d_y;
       std::string d_label_x, d_label_y;
+      bool d_xy_read;
       pmt::pmt_t d_port_id_in;
       
       int d_argc;
