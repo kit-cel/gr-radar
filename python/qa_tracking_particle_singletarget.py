@@ -25,6 +25,7 @@ import radar_swig as radar
 from time import sleep
 import pmt
 import numpy as np
+from matplotlib import pyplot as plt
 
 class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 
@@ -87,6 +88,19 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 		print vec_out_range
 		print "VELOCITY:"
 		print vec_out_velocity
+		
+		# make plots
+		show_plots = False # Toggle visibility of plots
+		if show_plots:
+			time = range(len(vec_out_range))
+			plt.figure(1)
+			marker = 'o'
+			p1 = plt.plot(time,vec_range,marker,time,vec_velocity,marker,time,vec_out_range,marker,time,vec_out_velocity,marker)
+			plt.legend(p1,["IN range", "IN velocity", "OUT range","OUT velocity"])
+			plt.title("OUTPUT")
+			plt.xlabel('time')
+			
+			plt.show()
 
 if __name__ == '__main__':
 	gr_unittest.run(qa_tracking_particle_singletarget)#, "qa_tracking_particle_singletarget.xml")

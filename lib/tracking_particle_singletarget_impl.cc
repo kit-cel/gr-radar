@@ -129,6 +129,8 @@ namespace gr {
     void
     tracking_particle_singletarget_impl::tracking(){
 		// Overwrite d_range and d_velocity with tracked values
+		d_range = d_range+0.1*d_range;
+		d_velocity = d_velocity+0.1*d_velocity;
 	}
 
   } /* namespace radar */
