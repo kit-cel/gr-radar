@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Mon Jun 23 16:29:55 2014</timestamp>
+  <timestamp>Tue Jun 24 16:58:56 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -860,45 +860,6 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_fsk</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_fsk_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>delta_freq</key>
-      <value>delta_freq</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(429, 467)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>rational_resampler_xxx</key>
     <param>
       <key>id</key>
@@ -1052,65 +1013,6 @@
     </param>
   </block>
   <block>
-    <key>radar_signal_generator_fsk_c</key>
-    <param>
-      <key>id</key>
-      <value>radar_signal_generator_fsk_c_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>samp_per_freq</key>
-      <value>samp_per_freq</value>
-    </param>
-    <param>
-      <key>blocks_per_tag</key>
-      <value>block_per_tag</value>
-    </param>
-    <param>
-      <key>freq_low</key>
-      <value>-delta_freq/2</value>
-    </param>
-    <param>
-      <key>freq_high</key>
-      <value>delta_freq/2</value>
-    </param>
-    <param>
-      <key>amplitude</key>
-      <value>0.5</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(27, 856)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>qtgui_sink_x</key>
     <param>
       <key>id</key>
@@ -1212,162 +1114,8 @@
       <value>range_time</value>
     </param>
     <param>
-      <key>affinity</key>
+      <key>label</key>
       <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1075, 270)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_usrp_echotimer_cc</key>
-    <param>
-      <key>id</key>
-      <value>radar_usrp_echotimer_cc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>num_delay_samps</key>
-      <value>int(delay_samp)</value>
-    </param>
-    <param>
-      <key>args_tx</key>
-      <value>'addr=192.168.10.4'</value>
-    </param>
-    <param>
-      <key>wire_tx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_tx</key>
-      <value>'internal'</value>
-    </param>
-    <param>
-      <key>time_source_tx</key>
-      <value>'none'</value>
-    </param>
-    <param>
-      <key>antenna_tx</key>
-      <value>'J1'</value>
-    </param>
-    <param>
-      <key>gain_tx</key>
-      <value>gain_tx</value>
-    </param>
-    <param>
-      <key>timeout_tx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_tx</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>lo_offset_tx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>args_rx</key>
-      <value>'addr=192.168.10.6'</value>
-    </param>
-    <param>
-      <key>wire_rx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>time_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>antenna_rx</key>
-      <value>'J1'</value>
-    </param>
-    <param>
-      <key>gain_rx</key>
-      <value>gain_rx</value>
-    </param>
-    <param>
-      <key>timeout_rx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_rx</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>lo_offset_rx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(347, 798)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_qtgui_time_plot</key>
-    <param>
-      <key>id</key>
-      <value>radar_qtgui_time_plot_0_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>interval</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>label_y</key>
-      <value>'range'</value>
-    </param>
-    <param>
-      <key>axis_y</key>
-      <value>0,120</value>
-    </param>
-    <param>
-      <key>range_time</key>
-      <value>range_time</value>
     </param>
     <param>
       <key>affinity</key>
@@ -1375,46 +1123,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(856, 152)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_qtgui_time_plot</key>
-    <param>
-      <key>id</key>
-      <value>radar_qtgui_time_plot_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>interval</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>label_y</key>
-      <value>'range'</value>
-    </param>
-    <param>
-      <key>axis_y</key>
-      <value>0,10</value>
-    </param>
-    <param>
-      <key>range_time</key>
-      <value>range_time</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1080, 156)</value>
+      <value>(1075, 270)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1555,6 +1264,266 @@
     </param>
   </block>
   <block>
+    <key>radar_usrp_echotimer_cc</key>
+    <param>
+      <key>id</key>
+      <value>radar_usrp_echotimer_cc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>num_delay_samps</key>
+      <value>int(delay_samp)</value>
+    </param>
+    <param>
+      <key>args_tx</key>
+      <value>'addr=192.168.10.6'</value>
+    </param>
+    <param>
+      <key>wire_tx</key>
+      <value>''</value>
+    </param>
+    <param>
+      <key>clock_source_tx</key>
+      <value>'internal'</value>
+    </param>
+    <param>
+      <key>time_source_tx</key>
+      <value>'none'</value>
+    </param>
+    <param>
+      <key>antenna_tx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_tx</key>
+      <value>gain_tx</value>
+    </param>
+    <param>
+      <key>timeout_tx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_tx</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>lo_offset_tx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>args_rx</key>
+      <value>'addr=192.168.10.4'</value>
+    </param>
+    <param>
+      <key>wire_rx</key>
+      <value>''</value>
+    </param>
+    <param>
+      <key>clock_source_rx</key>
+      <value>'mimo'</value>
+    </param>
+    <param>
+      <key>time_source_rx</key>
+      <value>'mimo'</value>
+    </param>
+    <param>
+      <key>antenna_rx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_rx</key>
+      <value>gain_rx</value>
+    </param>
+    <param>
+      <key>timeout_rx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_rx</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>lo_offset_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(347, 798)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_signal_generator_fsk_c</key>
+    <param>
+      <key>id</key>
+      <value>radar_signal_generator_fsk_c_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>samp_per_freq</key>
+      <value>samp_per_freq</value>
+    </param>
+    <param>
+      <key>blocks_per_tag</key>
+      <value>block_per_tag</value>
+    </param>
+    <param>
+      <key>freq_low</key>
+      <value>-delta_freq/2</value>
+    </param>
+    <param>
+      <key>freq_high</key>
+      <value>delta_freq/2</value>
+    </param>
+    <param>
+      <key>amplitude</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(28, 856)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_estimator_fsk</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_fsk_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>delta_freq</key>
+      <value>delta_freq/2</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(427, 468)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_time_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_time_plot_0_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'range'</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>0,6</value>
+    </param>
+    <param>
+      <key>range_time</key>
+      <value>range_time</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>"MAX RANGE"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(856, 151)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>radar_qtgui_scatter_plot</key>
     <param>
       <key>id</key>
@@ -1578,11 +1547,15 @@
     </param>
     <param>
       <key>axis_x</key>
-      <value>0,10</value>
+      <value>0,15</value>
     </param>
     <param>
       <key>axis_y</key>
       <value>-3,3</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -1591,6 +1564,49 @@
     <param>
       <key>_coordinate</key>
       <value>(656, 146)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_time_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_time_plot_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'range'</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>0,15</value>
+    </param>
+    <param>
+      <key>range_time</key>
+      <value>range_time</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1083, 155)</value>
     </param>
     <param>
       <key>_rotation</key>

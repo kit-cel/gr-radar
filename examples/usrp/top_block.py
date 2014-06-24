@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jun 23 16:46:06 2014
+# Generated: Tue Jun 24 17:15:14 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -209,18 +209,18 @@ class top_block(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.4', '', 'internal', 'none', 'J1', gain_tx, 0.1, wait_to_start, 0, 'addr=192.168.10.6', '', 'mimo', 'mimo', 'J1', gain_rx, 0.1, wait_to_start, 0, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', gain_tx, 0.1, wait_to_start, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', gain_rx, 0.1, wait_to_start, 0, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(1048576)
         self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_per_freq-1, "packet_len")
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, block_per_tag, -delta_freq/2, delta_freq/2, 0.5, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(1048576)
-        self.radar_qtgui_time_plot_0_0 = radar.qtgui_time_plot(100, 'range', (0,10), range_time)
-        self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'velocity', (-3,3), range_time)
-        self.radar_qtgui_scatter_plot_0 = radar.qtgui_scatter_plot(250, 'range', 'velocity', (0,10), (-3,3))
+        self.radar_qtgui_time_plot_0_0 = radar.qtgui_time_plot(100, 'range', (0,15), range_time, "")
+        self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'velocity', (-3,3), range_time, "")
+        self.radar_qtgui_scatter_plot_0 = radar.qtgui_scatter_plot(250, 'range', 'velocity', (0,15), (-3,3), "")
         self.radar_print_results_1 = radar.print_results(False, "store_msgs.txt")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate_red, threshold, int(samp_protect), "packet_len")
-        self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
+        self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq/2)
         self.qtgui_sink_x_0 = qtgui.sink_c(
         	packet_len_red, #fftsize
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -284,25 +284,25 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
         self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
 
     def get_samp_per_freq(self):
         return self.samp_per_freq
 
     def set_samp_per_freq(self, samp_per_freq):
         self.samp_per_freq = samp_per_freq
-        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
-        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
         self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
+        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
 
     def get_decim_fac(self):
         return self.decim_fac
 
     def set_decim_fac(self, decim_fac):
         self.decim_fac = decim_fac
-        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
         self.set_packet_len_red(self.block_per_tag/self.decim_fac)
+        self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1/float(self.decim_fac))
         self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1/float(self.decim_fac))
 
@@ -311,9 +311,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_block_per_tag(self, block_per_tag):
         self.block_per_tag = block_per_tag
-        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
-        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
         self.set_packet_len_red(self.block_per_tag/self.decim_fac)
+        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
+        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
 
     def get_samp_rate_red(self):
         return self.samp_rate_red
