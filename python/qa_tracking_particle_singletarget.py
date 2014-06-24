@@ -22,20 +22,71 @@
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import radar_swig as radar
+from time import sleep
+import pmt
+import numpy as np
 
 class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 
-    def setUp (self):
-        self.tb = gr.top_block ()
+	def setUp (self):
+		self.tb = gr.top_block ()
 
-    def tearDown (self):
-        self.tb = None
+	def tearDown (self):
+		self.tb = None
 
-    def test_001_t (self):
-        # set up fg
-        self.tb.run ()
-        # check data
-
+	def test_001_t (self):
+		# create input data (pmts)
+		vec_velocity = np.linspace(-5,5,20)
+		vec_range = np.linspace(1,10,20)
+		target_pmts = [0]*len(vec_velocity)
+		for k in range(len(vec_velocity)):
+			pmt_velocity = pmt.list2(pmt.string_to_symbol("velocity"),pmt.init_f32vector(1,(vec_velocity[k],)))
+			pmt_range = pmt.list2(pmt.string_to_symbol("range"),pmt.init_f32vector(1,(vec_range[k],)))
+			target_pmts[k] = pmt.list2(pmt_velocity,pmt_range)
+		
+		# set up fg
+		test_duration = 1000 # ms, do not change!
+		
+		num_particle = 0
+		std_freq_meas = 0
+		std_accel = 0
+		
+		# connect multiple strobes for different msgs
+		src = [0]*len(target_pmts)
+		for k in range(len(target_pmts)):
+			src[k] = blocks.message_strobe(target_pmts[k], test_duration-400+400/len(target_pmts)*k)
+		tracking = radar.tracking_particle_singletarget(num_particle, std_freq_meas, std_accel)
+		snk = blocks.message_debug()
+		
+		for k in range(len(target_pmts)):
+			self.tb.msg_connect(src[k],"strobe",tracking,"Msg in")
+		self.tb.msg_connect(tracking,"Msg out",snk,"store")
+		
+		self.tb.start()
+		sleep(test_duration/1000.0)
+		self.tb.stop()
+		self.tb.wait
+		()
+		# check data
+		show_data = False # Toggle visibility of single messages
+		msg_num = snk.num_messages()
+		vec_out_range = []
+		vec_out_velocity = []
+		for k in range(msg_num):
+			msg_part = snk.get_message(k)
+			vel = pmt.nth(0,msg_part)
+			rgn = pmt.nth(1,msg_part)
+			vec_out_range.append(pmt.f32vector_elements(pmt.nth(1,rgn))[0])
+			vec_out_velocity.append(pmt.f32vector_elements(pmt.nth(1,vel))[0])
+			if show_data:
+				print "msg:", k
+				print pmt.symbol_to_string(pmt.nth(0,vel)), pmt.f32vector_elements(pmt.nth(1,vel))[0]
+				print pmt.symbol_to_string(pmt.nth(0,rgn)), pmt.f32vector_elements(pmt.nth(1,rgn))[0]
+				print 
+		print "RANGE:"
+		print vec_out_range
+		print "VELOCITY:"
+		print vec_out_velocity
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_tracking_particle_singletarget, "qa_tracking_particle_singletarget.xml")
+	gr_unittest.run(qa_tracking_particle_singletarget)#, "qa_tracking_particle_singletarget.xml")
