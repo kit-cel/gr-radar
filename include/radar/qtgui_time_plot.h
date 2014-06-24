@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::qtgui_time_plot::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int interval, std::string label_y, std::vector<float> axis_y, float range_time);
+      static sptr make(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::string label="");
     };
 
   } // namespace radar

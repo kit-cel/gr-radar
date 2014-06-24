@@ -29,16 +29,16 @@ namespace gr {
   namespace radar {
 
     qtgui_time_plot::sptr
-    qtgui_time_plot::make(int interval, std::string label_y, std::vector<float> axis_y, float range_time)
+    qtgui_time_plot::make(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::string label)
     {
       return gnuradio::get_initial_sptr
-        (new qtgui_time_plot_impl(interval, label_y, axis_y, range_time));
+        (new qtgui_time_plot_impl(interval, label_y, axis_y, range_time, label));
     }
 
     /*
      * The private constructor
      */
-    qtgui_time_plot_impl::qtgui_time_plot_impl(int interval, std::string label_y, std::vector<float> axis_y, float range_time)
+    qtgui_time_plot_impl::qtgui_time_plot_impl(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::string label)
       : gr::block("qtgui_time_plot",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -48,6 +48,7 @@ namespace gr {
 		d_axis_y = axis_y;
 		d_range_time = range_time;
 		d_y_read = false;
+		d_label = label;
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -104,7 +105,7 @@ namespace gr {
 		}
 		
 		// Set QWT plot widget
-		d_main_gui = new time_plot(d_interval, d_label_y, d_axis_y, d_range_time, &d_y, &d_y_read);
+		d_main_gui = new time_plot(d_interval, d_label_y, d_axis_y, d_range_time, &d_y, &d_y_read, d_label);
 		d_main_gui->show();
 	}
 

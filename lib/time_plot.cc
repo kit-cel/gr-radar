@@ -24,7 +24,7 @@
 namespace gr {
 	namespace radar {
 
-		time_plot::time_plot(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::vector<float>* y, bool* y_read,
+		time_plot::time_plot(int interval, std::string label_y, std::vector<float> axis_y, float range_time, std::vector<float>* y, bool* y_read, std::string label,
 		QWidget* parent) : QWidget(parent)
 		{
 			d_interval = interval;
@@ -44,6 +44,11 @@ namespace gr {
 			
 			std::string label_title = "Time Plot: ";
 			label_title.append(label_y);
+			if(label!=""){
+				label_title.append(" (");
+				label_title.append(label);
+				label_title.append(")");
+			}
 			d_plot->setTitle(QwtText(label_title.c_str())); 
 			d_plot->setAxisScale(QwtPlot::xBottom,0,d_range_time);
 			d_plot->setAxisTitle(QwtPlot::xBottom, "time");

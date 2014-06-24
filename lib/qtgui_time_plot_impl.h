@@ -33,7 +33,7 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      qtgui_time_plot_impl(int interval, std::string label_y, std::vector<float> axis_y, float range_time);
+      qtgui_time_plot_impl(int interval, std::string label_y, std::vector<float> axis_y, float range_time,  std::string label);
       ~qtgui_time_plot_impl();
       void handle_msg(pmt::pmt_t msg);
       void run_gui();
@@ -45,6 +45,7 @@ namespace gr {
       pmt::pmt_t d_port_id_in;
       std::vector<float> d_y;
       bool d_y_read;
+      std::string d_label;
       
       int d_argc;
       char *d_argv;

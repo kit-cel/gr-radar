@@ -3,7 +3,7 @@
   <key>radar_qtgui_time_plot</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.qtgui_time_plot($interval, $label_y, $axis_y, $range_time)</make>
+  <make>radar.qtgui_time_plot($interval, $label_y, $axis_y, $range_time, $label)</make>
   <param>
     <name>Update interval [ms]</name>
     <key>interval</key>
@@ -23,6 +23,11 @@
     <name>Range time [s]</name>
     <key>range_time</key>
     <type>float</type>
+  </param>
+  <param>
+    <name>Label title</name>
+    <key>label</key>
+    <type>string</type>
   </param>
   <sink>
     <name>Msg in</name>

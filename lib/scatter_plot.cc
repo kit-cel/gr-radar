@@ -24,7 +24,7 @@
 namespace gr {
 	namespace radar {
 
-		scatter_plot::scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, bool* xy_read,
+		scatter_plot::scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, bool* xy_read, std::string label,
 		QWidget* parent) : QWidget(parent)
 		{
 			d_interval = interval;
@@ -47,6 +47,11 @@ namespace gr {
 			label_title.append(label_x);
 			label_title.append("/");
 			label_title.append(label_y);
+			if(label!=""){
+				label_title.append(" (");
+				label_title.append(label);
+				label_title.append(")");
+			}
 			d_plot->setTitle(QwtText(label_title.c_str())); 
 			d_plot->setAxisScale(QwtPlot::xBottom,d_axis_x[0],d_axis_x[1]);
 			d_plot->setAxisTitle(QwtPlot::xBottom, d_label_x.c_str());

@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::qtgui_scatter_plot::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int interval, std::string label_x, std::string label_y, std::vector<float> axis_x, std::vector<float> axis_y);
+      static sptr make(int interval, std::string label_x, std::string label_y, std::vector<float> axis_x, std::vector<float> axis_y, std::string label="");
     };
 
   } // namespace radar

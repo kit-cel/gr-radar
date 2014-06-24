@@ -33,7 +33,7 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      qtgui_scatter_plot_impl(int interval, std::string label_x, std::string label_y, std::vector<float> axis_x, std::vector<float> axis_y);
+      qtgui_scatter_plot_impl(int interval, std::string label_x, std::string label_y, std::vector<float> axis_x, std::vector<float> axis_y, std::string label);
       ~qtgui_scatter_plot_impl();
 	  void handle_msg(pmt::pmt_t msg);
       void run_gui();
@@ -42,6 +42,7 @@ namespace gr {
       std::vector<float> d_x, d_y;
       std::string d_label_x, d_label_y;
       bool d_xy_read;
+      std::string d_label;
       pmt::pmt_t d_port_id_in;
       
       int d_argc;
