@@ -1,0 +1,32 @@
+<block>
+  <name>Tracking Particle Filter Singe Target</name>
+  <key>radar_tracking_particle_singletarget</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.tracking_particle_singletarget($num_particle, $std_freq_meas, $std_accel)</make>
+  <param>
+    <name>Particle number</name>
+    <key>num_particle</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Std frequency measurement</name>
+    <key>std_freq_meas</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Std acceleration</name>
+    <key>std_accel</key>
+    <type>float</type>
+  </param>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+  <source>
+    <name>Msg out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

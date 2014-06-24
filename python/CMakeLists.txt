@@ -57,3 +57,4 @@ GR_ADD_TEST(qa_estimator_fmcw ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/q
 GR_ADD_TEST(qa_signal_generator_sync_pulse_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_signal_generator_sync_pulse_c.py)
 GR_ADD_TEST(qa_estimator_sync_pulse_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_sync_pulse_c.py)
 GR_ADD_TEST(qa_find_max_peak_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_max_peak_c.py)
+GR_ADD_TEST(qa_tracking_particle_singletarget ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_tracking_particle_singletarget.py)

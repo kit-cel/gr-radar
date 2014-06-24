@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jun 23 16:29:56 2014
+# Generated: Mon Jun 23 16:46:06 2014
 ##################################################
 
 execfile("/home/stefan/.grc_gnuradio/ts_fft_py_cc.py")
@@ -284,25 +284,25 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
         self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
+        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
 
     def get_samp_per_freq(self):
         return self.samp_per_freq
 
     def set_samp_per_freq(self, samp_per_freq):
         self.samp_per_freq = samp_per_freq
-        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
-        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
         self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
+        self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
 
     def get_decim_fac(self):
         return self.decim_fac
 
     def set_decim_fac(self, decim_fac):
         self.decim_fac = decim_fac
-        self.set_packet_len_red(self.block_per_tag/self.decim_fac)
         self.set_samp_rate_red(self.samp_rate/2/self.samp_per_freq/self.decim_fac)
+        self.set_packet_len_red(self.block_per_tag/self.decim_fac)
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1/float(self.decim_fac))
         self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1/float(self.decim_fac))
 
@@ -311,9 +311,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_block_per_tag(self, block_per_tag):
         self.block_per_tag = block_per_tag
-        self.set_packet_len_red(self.block_per_tag/self.decim_fac)
-        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
         self.set_measure_time((self.block_per_tag*self.samp_per_freq*2)/float(self.samp_rate))
+        self.set_min_output_buffer(2*self.samp_per_freq*self.block_per_tag*2)
+        self.set_packet_len_red(self.block_per_tag/self.decim_fac)
 
     def get_samp_rate_red(self):
         return self.samp_rate_red

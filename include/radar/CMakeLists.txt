@@ -41,5 +41,6 @@ install(FILES
     estimator_sync_pulse_c.h
     find_max_peak_c.h
     qtgui_scatter_plot.h
-    qtgui_time_plot.h DESTINATION include/radar
+    qtgui_time_plot.h
+    tracking_particle_singletarget.h DESTINATION include/radar
 )

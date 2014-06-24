@@ -55,7 +55,8 @@ list(APPEND radar_sources
     estimator_sync_pulse_c_impl.cc
     find_max_peak_c_impl.cc
     qtgui_scatter_plot_impl.cc
-    qtgui_time_plot_impl.cc )
+    qtgui_time_plot_impl.cc
+    tracking_particle_singletarget_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

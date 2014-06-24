@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Mon Jun 23 08:29:07 2014</timestamp>
+  <timestamp>Tue Jun 24 11:13:57 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,7 +64,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>center_freq</value>
+      <value>time_res</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,149 +72,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>5.7e9</value>
+      <value>packet_len/float(samp_rate)</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(291, 12)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>int(packet_len*2)</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(630, 6)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>max_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(628, 75)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>250000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(187, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>decimator_fac</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2**6</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(497, 13)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2**15</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(396, 12)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>v_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>freq_res*3e8/2/center_freq</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(662, 241)</value>
+      <value>(773, 174)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -248,7 +110,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>time_res</value>
+      <value>v_res</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -256,11 +118,149 @@
     </param>
     <param>
       <key>value</key>
-      <value>packet_len/float(samp_rate)</value>
+      <value>freq_res*3e8/2/center_freq</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(773, 174)</value>
+      <value>(662, 241)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2**15</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(396, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>decimator_fac</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2**6</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(497, 13)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>250000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(187, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>max_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(628, 75)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>int(packet_len*2)</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(630, 6)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>5.7e9</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(291, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -660,72 +660,6 @@
     </param>
   </block>
   <block>
-    <key>radar_print_results</key>
-    <param>
-      <key>id</key>
-      <value>radar_print_results_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>store_msg</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>filename</key>
-      <value>""</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(40, 647)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_estimator_cw</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_cw_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(308, 646)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
     <key>rational_resampler_xxx</key>
     <param>
       <key>id</key>
@@ -1058,6 +992,72 @@
       <value>0</value>
     </param>
   </block>
+  <block>
+    <key>radar_print_results</key>
+    <param>
+      <key>id</key>
+      <value>radar_print_results_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>store_msg</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>filename</key>
+      <value>""</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(23, 662)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_estimator_cw</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_cw_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(308, 646)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>radar_os_cfar_c_0</source_block_id>
     <sink_block_id>radar_estimator_cw_0</sink_block_id>
@@ -1138,12 +1138,6 @@
   </connection>
   <connection>
     <source_block_id>radar_estimator_cw_0</source_block_id>
-    <sink_block_id>radar_print_results_0</sink_block_id>
-    <source_key>Msg out</source_key>
-    <sink_key>Msg in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>radar_estimator_cw_0</source_block_id>
     <sink_block_id>radar_qtgui_scatter_plot_0</sink_block_id>
     <source_key>Msg out</source_key>
     <sink_key>Msg in</sink_key>
@@ -1151,6 +1145,12 @@
   <connection>
     <source_block_id>radar_estimator_cw_0</source_block_id>
     <sink_block_id>radar_qtgui_time_plot_0</sink_block_id>
+    <source_key>Msg out</source_key>
+    <sink_key>Msg in</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_estimator_cw_0</source_block_id>
+    <sink_block_id>radar_print_results_0</sink_block_id>
     <source_key>Msg out</source_key>
     <sink_key>Msg in</sink_key>
   </connection>

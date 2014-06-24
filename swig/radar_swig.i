@@ -28,6 +28,7 @@
 #include "radar/find_max_peak_c.h"
 #include "radar/qtgui_scatter_plot.h"
 #include "radar/qtgui_time_plot.h"
+#include "radar/tracking_particle_singletarget.h"
 %}
 
 
@@ -74,3 +75,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, find_max_peak_c);
 GR_SWIG_BLOCK_MAGIC2(radar, qtgui_scatter_plot);
 %include "radar/qtgui_time_plot.h"
 GR_SWIG_BLOCK_MAGIC2(radar, qtgui_time_plot);
+%include "radar/tracking_particle_singletarget.h"
+GR_SWIG_BLOCK_MAGIC2(radar, tracking_particle_singletarget);
