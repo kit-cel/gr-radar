@@ -1,4 +1,4 @@
 # Updates for Gnu Radio
 sudo sysctl -w net.core.rmem_max=50000000
 sudo sysctl -w net.core.wmem_max=1048576
-sudo sysctl -w kernel.shmmax=2147483648
+sudo sysctl -w kernel.shmmax=1048576

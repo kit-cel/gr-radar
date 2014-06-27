@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Tue Jun 24 16:40:12 2014</timestamp>
+  <timestamp>Fri Jun 27 15:28:19 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,7 +64,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>center_freq</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,57 +72,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2400000000</value>
+      <value>20000000</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(285, 17)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(282, 765)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>send_samp</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>10,40,30</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(281, 895)</value>
+      <value>(184, 17)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -141,11 +95,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>10,10,10</value>
+      <value>100,100,100,100</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(283, 829)</value>
+      <value>(284, 831)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -156,7 +110,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>samp_rate</value>
+      <value>packet_len</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -164,11 +118,34 @@
     </param>
     <param>
       <key>value</key>
-      <value>250000</value>
+      <value>sum(wait_samp)+sum(send_samp)</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(185, 18)</value>
+      <value>(282, 767)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>send_samp</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>100,400,300</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(281, 895)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -191,7 +168,30 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(431, 18)</value>
+      <value>(395, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2400000000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(283, 17)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -210,7 +210,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0.02</value>
+      <value>0.01</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -612,61 +612,6 @@
     <param>
       <key>_coordinate</key>
       <value>(660, 872)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_qtgui_range</key>
-    <param>
-      <key>id</key>
-      <value>num_corr</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Number of cross correlations</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>50</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(753, 688)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2483,6 +2428,61 @@
       <value>0</value>
     </param>
   </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>num_corr</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Number of cross correlations</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(752, 690)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>radar_signal_generator_sync_pulse_c_0</source_block_id>
     <sink_block_id>radar_usrp_echotimer_cc_0</sink_block_id>
@@ -2548,11 +2548,5 @@
     <sink_block_id>radar_estimator_sync_pulse_c_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
-    <sink_block_id>blocks_complex_to_mag_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
   </connection>
 </flow_graph>
