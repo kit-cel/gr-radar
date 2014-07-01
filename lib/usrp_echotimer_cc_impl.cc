@@ -30,15 +30,15 @@ namespace gr {
   namespace radar {
 
     usrp_echotimer_cc::sptr
-    usrp_echotimer_cc::make(int samp_rate, float center_freq, int num_delay_samps,
+    usrp_echotimer_cc::make(int n_outputs, int samp_rate, float center_freq, std::vector<int> num_delay_samps,
 		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
 		float timeout_tx, float wait_tx, float lo_offset_tx,
-		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
-		float timeout_rx, float wait_rx, float lo_offset_rx,
+		std::vector<std::string> args_rx, std::vector<std::string> wire_rx, std::vector<std::string> clock_source_rx, std::vector<std::string> time_source_rx, std::vector<std::string> antenna_rx, std::vector<float> gain_rx,
+		std::vector<float> timeout_rx, std::vector<float> wait_rx, std::vector<double> lo_offset_rx,
 		const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
-        (new usrp_echotimer_cc_impl(samp_rate, center_freq, num_delay_samps,
+        (new usrp_echotimer_cc_impl(n_outputs, samp_rate, center_freq, num_delay_samps,
         args_tx, wire_tx, clock_source_tx, time_source_tx, antenna_tx, gain_tx,
         timeout_tx, wait_tx, lo_offset_tx,
         args_rx, wire_rx, clock_source_rx, time_source_rx, antenna_rx, gain_rx,
@@ -49,20 +49,23 @@ namespace gr {
     /*
      * The private constructor
      */
-    usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate, float center_freq, int num_delay_samps,
+    usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int n_outputs, int samp_rate, float center_freq, std::vector<int> num_delay_samps,
 		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
 		float timeout_tx, float wait_tx, float lo_offset_tx,
-		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
-		float timeout_rx, float wait_rx, float lo_offset_rx,
+		std::vector<std::string> args_rx, std::vector<std::string> wire_rx, std::vector<std::string> clock_source_rx, std::vector<std::string> time_source_rx, std::vector<std::string> antenna_rx, std::vector<float> gain_rx,
+		std::vector<float> timeout_rx, std::vector<float> wait_rx, std::vector<double> lo_offset_rx,
 		const std::string& len_key)
       : gr::tagged_stream_block("usrp_echotimer_cc",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
-              gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
+              gr::io_signature::make(n_outputs, n_outputs, sizeof(gr_complex)), len_key)
     {
 		d_samp_rate = samp_rate;
 		d_center_freq = center_freq;
 		d_num_delay_samps = num_delay_samps;
-		d_out_buffer.resize(0);
+		d_n_outputs = n_outputs;
+		
+		d_out_buffer.resize(d_n_outputs);
+		for(int k=0; k<d_n_outputs; k++) d_out_buffer[k].resize(0);
 		
 		//***** Setup USRP TX *****//
 		
@@ -110,7 +113,7 @@ namespace gr {
 		d_tx_stream = d_usrp_tx->get_tx_stream(stream_args_tx);
 		
 		//***** Setup USRP RX *****//
-		
+			
 		d_args_rx = args_rx;
 		d_wire_rx = wire_rx;
 		d_clock_source_rx = clock_source_rx;
@@ -121,36 +124,42 @@ namespace gr {
 		d_timeout_rx = timeout_rx; // timeout for receiving
 		d_wait_rx = wait_rx; // secs to wait befor receiving
 		
+		for(int k=0; k<d_n_outputs; k++){ // begin loop RX USRPs
+		
 		// Setup USRP RX: args (addr,...)
-		d_usrp_rx = uhd::usrp::multi_usrp::make(d_args_rx);
-		std::cout << "Using USRP Device (RX): " << std::endl << d_usrp_rx->get_pp_string() << std::endl;
+		d_usrp_rx[k] = uhd::usrp::multi_usrp::make(d_args_rx[k]);
 		
 		// Setup USRP RX: sample rate
-		std::cout << "Setting RX Rate: " << d_samp_rate << std::endl;
-		d_usrp_rx->set_rx_rate(d_samp_rate);
-		std::cout << "Actual RX Rate: " << d_usrp_rx->get_rx_rate() << std::endl;
+		d_usrp_rx[k]->set_rx_rate(d_samp_rate);
 		
 		// Setup USRP RX: gain
-		set_rx_gain(d_gain_rx);
+		d_usrp_rx[k]->set_rx_gain(d_gain_rx[k]);
 		
 		// Setup USRP RX: tune request
-		d_tune_request_rx = uhd::tune_request_t(d_center_freq, d_lo_offset_rx); // FIXME: add alternative tune requests
-		d_usrp_rx->set_rx_freq(d_tune_request_rx);
+		d_tune_request_rx = uhd::tune_request_t(d_center_freq, d_lo_offset_rx[k]); // FIXME: add alternative tune requests
+		d_usrp_rx[k]->set_rx_freq(d_tune_request_rx);
 		
 		// Setup USRP RX: antenna
-		d_usrp_rx->set_rx_antenna(d_antenna_rx);
+		d_usrp_rx[k]->set_rx_antenna(d_antenna_rx[k]);
 		
 		// Setup USRP RX: clock source
-		d_usrp_rx->set_clock_source(d_clock_source_rx); // RX is slave, clock is set on TX
+		d_usrp_rx[k]->set_clock_source(d_clock_source_rx[k]); // RX is slave, clock is set on TX
 		
 		// Setup USRP RX: time source
-		d_usrp_rx->set_time_source(d_time_source_rx);
+		d_usrp_rx[k]->set_time_source(d_time_source_rx[k]);
 		
 		// Setup receive streamer
-		uhd::stream_args_t stream_args_rx("fc32", d_wire_rx); // complex floats
+		uhd::stream_args_t stream_args_rx("fc32", d_wire_rx[k]); // complex floats
 		std::vector<size_t> channel_nums; channel_nums.push_back(0); // define channel!
 		stream_args_rx.channels = channel_nums;
-		d_rx_stream = d_usrp_rx->get_rx_stream(stream_args_rx);
+		d_rx_stream[k] = d_usrp_rx[k]->get_rx_stream(stream_args_rx);
+		
+		// Console output
+		std::cout << "Using USRP Device (RX " << k << "): " << std::endl << d_usrp_rx[k]->get_pp_string() << std::endl;
+		std::cout << "Setting RX " << k << " Rate: " << d_samp_rate << std::endl;
+		std::cout << "Actual RX " << k << " Rate: " << d_usrp_rx[k]->get_rx_rate() << std::endl;
+		
+		} // end loop RX USRPs
 		
 		//***** Misc *****//
 		
@@ -180,13 +189,13 @@ namespace gr {
     }
     
     void
-    usrp_echotimer_cc_impl::set_num_delay_samps(int num_samps){
-		d_num_delay_samps = num_samps;
+    usrp_echotimer_cc_impl::set_num_delay_samps(std::vector<int> num_samps){
+		for(int k=0; k<d_n_outputs; k++) d_num_delay_samps[k] = num_samps[k];
 	}
 	
 	void
-    usrp_echotimer_cc_impl::set_rx_gain(float gain){
-		d_usrp_rx->set_rx_gain(gain);
+    usrp_echotimer_cc_impl::set_rx_gain(std::vector<float> gain){
+		for(int k=0; k<d_n_outputs; k++) d_usrp_rx[k]->set_rx_gain(gain[k]);
 	}
 	
 	void
@@ -220,28 +229,30 @@ namespace gr {
     }
     
     void
-    usrp_echotimer_cc_impl::receive()
+    usrp_echotimer_cc_impl::receive(int k)
     {
 		// Setup RX streaming
-		size_t total_num_samps = d_noutput_items_recv;
+		size_t total_num_samps = d_noutput_items_recv[k];
 		uhd::stream_cmd_t stream_cmd(uhd::stream_cmd_t::STREAM_MODE_NUM_SAMPS_AND_DONE);
 		stream_cmd.num_samps = total_num_samps;
 		stream_cmd.stream_now = false;
-		stream_cmd.time_spec = d_time_now_rx+uhd::time_spec_t(d_wait_rx);
-		d_rx_stream->issue_stream_cmd(stream_cmd);
+		stream_cmd.time_spec = d_time_now_rx[k]+uhd::time_spec_t(d_wait_rx[k]);
+		d_rx_stream[k]->issue_stream_cmd(stream_cmd);
 		
 		size_t num_rx_samps;
 		// Receive a packet
-		num_rx_samps = d_rx_stream->recv(d_out_recv, total_num_samps, d_metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout_rx);
+		num_rx_samps = d_rx_stream[k]->recv(d_out_recv[k], total_num_samps, d_metadata_rx[k], total_num_samps/(float)d_samp_rate+d_timeout_rx[k]);
 		
-		// Save timestamp
-		d_time_val = pmt::make_tuple
-			(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
-			 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
+		// Save timestamp if RX (k=0) USRP
+		if(k==0){
+			d_time_val = pmt::make_tuple
+				(pmt::from_uint64(d_metadata_rx[k].time_spec.get_full_secs()),
+				 pmt::from_double(d_metadata_rx[k].time_spec.get_frac_secs()));
+		}
 
 		// Handle the error code
-		if (d_metadata_rx.error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
-			throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx.strerror()));
+		if (d_metadata_rx[k].error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
+			throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx[k].strerror()));
 		}
 
 		if (num_rx_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
@@ -254,17 +265,24 @@ namespace gr {
                        gr_vector_void_star &output_items)
     {
         gr_complex *in = (gr_complex *) input_items[0]; // remove const
-        gr_complex *out = (gr_complex *) output_items[0];
         
-        // Set output items on packet length
+        std::vector<gr_complex*> out;
+        out.resize(d_n_outputs);
+        for(int k=0; k<d_n_outputs; k++){
+			out[k] = (gr_complex *) output_items[k];
+		}
+        
+        // Set output items on packet length (assume that all input packet have same length)
         noutput_items = ninput_items[0];
         
         // Resize output buffer
-        if(d_out_buffer.size()!=noutput_items) d_out_buffer.resize(noutput_items);
+        if(d_out_buffer[0].size()!=noutput_items){
+			for(int k=0; k<d_n_outputs; k++) d_out_buffer[k].resize(noutput_items);
+		}
         
         // Get time from USRP TX
         d_time_now_tx = d_usrp_tx->get_time_now();
-        d_time_now_rx = d_time_now_tx;
+        for(int k=0; k<d_n_outputs; k++) d_time_now_rx[k] = d_time_now_tx;
         
         // Send thread
         d_in_send = in;
@@ -272,20 +290,26 @@ namespace gr {
         d_thread_send = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::send, this));
         
         // Receive thread
-        d_out_recv = &d_out_buffer[0];
-        d_noutput_items_recv = noutput_items;
-        d_thread_recv = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this));
+        for(int k=0; k<d_n_outputs; k++){
+			d_out_recv[k] = &d_out_buffer[k][0];
+			d_noutput_items_recv[k] = noutput_items;
+			d_thread_recv[k] = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this, k));
+		}
         
         // Wait for threads to complete
         d_thread_send.join();
-        d_thread_recv.join();
+        for(int k=0; k<d_n_outputs; k++) d_thread_recv[k].join();
         
         // Shift of number delay samples (fill with zeros)
-        memcpy(out,&d_out_buffer[0]+d_num_delay_samps,(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
-        memset(out+(noutput_items-d_num_delay_samps),0,d_num_delay_samps*sizeof(gr_complex)); // set zeros
+        for(int k=0; k<d_n_outputs; k++){
+			memcpy(out[k],&d_out_buffer[k][0]+d_num_delay_samps[k],(noutput_items-d_num_delay_samps[k])*sizeof(gr_complex)); // push buffer to output
+			memset(out[k]+(noutput_items-d_num_delay_samps[k]),0,d_num_delay_samps[k]*sizeof(gr_complex)); // set zeros
+		}
         
         // Setup rx_time tag
-        add_item_tag(0, nitems_written(0), d_time_key, d_time_val, d_srcid);
+        for(int k=0; k<d_n_outputs; k++){
+			add_item_tag(k, nitems_written(k), d_time_key, d_time_val, d_srcid);
+		}
 
         // Tell runtime system how many output items we produced.
         return noutput_items;
