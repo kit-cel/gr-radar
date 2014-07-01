@@ -64,8 +64,14 @@ namespace gr {
 		d_num_delay_samps = num_delay_samps;
 		d_n_outputs = n_outputs;
 		
+		// Resize buffers for multiple RX USRPs
 		d_out_buffer.resize(d_n_outputs);
 		for(int k=0; k<d_n_outputs; k++) d_out_buffer[k].resize(0);
+		d_time_now_rx.resize(d_n_outputs);
+		d_out_recv.resize(d_n_outputs);
+		d_noutput_items_recv.resize(d_n_outputs);
+		d_thread_recv.resize(d_n_outputs);
+		d_metadata_rx.resize(d_n_outputs);
 		
 		//***** Setup USRP TX *****//
 		
@@ -123,6 +129,9 @@ namespace gr {
 		d_gain_rx = gain_rx;
 		d_timeout_rx = timeout_rx; // timeout for receiving
 		d_wait_rx = wait_rx; // secs to wait befor receiving
+		
+		d_usrp_rx.resize(d_n_outputs);
+		d_rx_stream.resize(d_n_outputs);
 		
 		for(int k=0; k<d_n_outputs; k++){ // begin loop RX USRPs
 		
@@ -242,7 +251,6 @@ namespace gr {
 		size_t num_rx_samps;
 		// Receive a packet
 		num_rx_samps = d_rx_stream[k]->recv(d_out_recv[k], total_num_samps, d_metadata_rx[k], total_num_samps/(float)d_samp_rate+d_timeout_rx[k]);
-		
 		// Save timestamp if RX (k=0) USRP
 		if(k==0){
 			d_time_val = pmt::make_tuple
@@ -271,7 +279,7 @@ namespace gr {
         for(int k=0; k<d_n_outputs; k++){
 			out[k] = (gr_complex *) output_items[k];
 		}
-        
+		
         // Set output items on packet length (assume that all input packet have same length)
         noutput_items = ninput_items[0];
         
@@ -279,7 +287,7 @@ namespace gr {
         if(d_out_buffer[0].size()!=noutput_items){
 			for(int k=0; k<d_n_outputs; k++) d_out_buffer[k].resize(noutput_items);
 		}
-        
+		
         // Get time from USRP TX
         d_time_now_tx = d_usrp_tx->get_time_now();
         for(int k=0; k<d_n_outputs; k++) d_time_now_rx[k] = d_time_now_tx;
@@ -293,13 +301,16 @@ namespace gr {
         for(int k=0; k<d_n_outputs; k++){
 			d_out_recv[k] = &d_out_buffer[k][0];
 			d_noutput_items_recv[k] = noutput_items;
-			d_thread_recv[k] = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this, k));
+			d_thread_recv[k] = new gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this, k));
 		}
-        
+		
         // Wait for threads to complete
         d_thread_send.join();
-        for(int k=0; k<d_n_outputs; k++) d_thread_recv[k].join();
-        
+        for(int k=0; k<d_n_outputs; k++){
+			d_thread_recv[k]->join();
+			delete d_thread_recv[k];
+		}
+		
         // Shift of number delay samples (fill with zeros)
         for(int k=0; k<d_n_outputs; k++){
 			memcpy(out[k],&d_out_buffer[k][0]+d_num_delay_samps[k],(noutput_items-d_num_delay_samps[k])*sizeof(gr_complex)); // push buffer to output

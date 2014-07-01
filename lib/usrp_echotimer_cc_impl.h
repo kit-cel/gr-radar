@@ -87,7 +87,7 @@ namespace gr {
       uhd::time_spec_t d_time_now_tx;
       std::vector<uhd::time_spec_t> d_time_now_rx;
       
-      std::vector<gr::thread::thread> d_thread_recv;
+      std::vector<gr::thread::thread*> d_thread_recv;
       std::vector<gr_complex*> d_out_recv;
       std::vector<int> d_noutput_items_recv;
       pmt::pmt_t d_time_key, d_time_val, d_srcid;
