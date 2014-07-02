@@ -26,6 +26,7 @@ from time import sleep
 import pmt
 import numpy as np
 from matplotlib import pyplot as plt
+import random
 
 class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 
@@ -36,27 +37,50 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 		self.tb = None
 
 	def test_001_t (self):
-		# create input data (pmts)
-		vec_velocity = np.linspace(-5,5,20)
-		vec_range = np.linspace(1,10,20)
-		target_pmts = [0]*len(vec_velocity)
+		# create input data
+		steps = 40
+		vec_time = np.linspace(0,10,steps);
+		vec_velocity = np.linspace(-4,-5,steps)
+		vec_range = np.linspace(1,20,steps)
+		
+		# random data on trajectory
+		mu = 0
+		sigma_vel = 2
+		sigma_rge = 3
 		for k in range(len(vec_velocity)):
-			pmt_velocity = pmt.list2(pmt.string_to_symbol("velocity"),pmt.init_f32vector(1,(vec_velocity[k],)))
-			pmt_range = pmt.list2(pmt.string_to_symbol("range"),pmt.init_f32vector(1,(vec_range[k],)))
-			target_pmts[k] = pmt.list2(pmt_velocity,pmt_range)
+			vec_velocity[k] = vec_velocity[k] + random.gauss(mu,sigma_vel)
+			vec_range[k] = vec_range[k] + random.gauss(mu,sigma_rge)
+		
+		# set up pmts with zero points
+		target_pmts = [0]*len(vec_velocity)
+		#zero_points = (5,12,17)
+		zero_points = ()
+		for k in range(len(vec_velocity)):
+			pmt_time = pmt.list2(pmt.string_to_symbol("rx_time"),pmt.make_tuple(pmt.from_long(int(vec_time[k])),pmt.from_double(vec_time[k]-int(vec_time[k]))))
+			if k in zero_points:
+				vec = [0]
+				pmt_velocity = pmt.list2(pmt.string_to_symbol("velocity"),pmt.init_f32vector(1,vec))
+				pmt_range = pmt.list2(pmt.string_to_symbol("range"),pmt.init_f32vector(1,vec))
+			else:
+				pmt_velocity = pmt.list2(pmt.string_to_symbol("velocity"),pmt.init_f32vector(1,(vec_velocity[k],)))
+				pmt_range = pmt.list2(pmt.string_to_symbol("range"),pmt.init_f32vector(1,(vec_range[k],)))
+			target_pmts[k] = pmt.list3(pmt_time,pmt_velocity,pmt_range)
 		
 		# set up fg
 		test_duration = 1000 # ms, do not change!
 		
-		num_particle = 0
-		std_freq_meas = 0
-		std_accel = 0
+		num_particle = 200
+		std_range_meas = sigma_rge*1.5
+		std_velocity_meas = sigma_vel*1.5
+		std_accel_sys = 0.5
+		threshold_track = 0.01
+		threshold_lost = 5
 		
 		# connect multiple strobes for different msgs
 		src = [0]*len(target_pmts)
 		for k in range(len(target_pmts)):
 			src[k] = blocks.message_strobe(target_pmts[k], test_duration-400+400/len(target_pmts)*k)
-		tracking = radar.tracking_particle_singletarget(num_particle, std_freq_meas, std_accel)
+		tracking = radar.tracking_particle_singletarget(num_particle, std_range_meas, std_velocity_meas, std_accel_sys, threshold_track, threshold_lost)
 		snk = blocks.message_debug()
 		
 		for k in range(len(target_pmts)):
@@ -69,34 +93,44 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 		self.tb.wait
 		()
 		# check data
-		show_data = False # Toggle visibility of single messages
+#		show_data = False # Toggle visibility of single messages # broken
 		msg_num = snk.num_messages()
 		vec_out_range = []
 		vec_out_velocity = []
 		for k in range(msg_num):
 			msg_part = snk.get_message(k)
-			vel = pmt.nth(0,msg_part)
-			rgn = pmt.nth(1,msg_part)
+			tme = pmt.nth(0,msg_part) # not used
+			vel = pmt.nth(1,msg_part)
+			rgn = pmt.nth(2,msg_part)
 			vec_out_range.append(pmt.f32vector_elements(pmt.nth(1,rgn))[0])
 			vec_out_velocity.append(pmt.f32vector_elements(pmt.nth(1,vel))[0])
-			if show_data:
-				print "msg:", k
-				print pmt.symbol_to_string(pmt.nth(0,vel)), pmt.f32vector_elements(pmt.nth(1,vel))[0]
-				print pmt.symbol_to_string(pmt.nth(0,rgn)), pmt.f32vector_elements(pmt.nth(1,rgn))[0]
-				print 
-		print "RANGE:"
-		print vec_out_range
-		print "VELOCITY:"
-		print vec_out_velocity
+#			if show_data:
+#				print "msg:", k
+#				print pmt.symbol_to_string(pmt.nth(0,vel)), pmt.f32vector_elements(pmt.nth(1,vel))[0]
+#				print pmt.symbol_to_string(pmt.nth(0,rgn)), pmt.f32vector_elements(pmt.nth(1,rgn))[0]
+#				print 
+#		print "RANGE:"
+#		print vec_out_range
+#		print "VELOCITY:"
+#		print vec_out_velocity
 		
 		# make plots
 		show_plots = True # Toggle visibility of plots
 		if show_plots:
-			time = range(len(vec_out_range))
+			time = range(len(vec_range))
+			time_out = range(len(vec_out_range))
 			plt.figure(1)
+			plt.subplot(211)
 			marker = 'o'
-			p1 = plt.plot(time,vec_range,marker,time,vec_velocity,marker,time,vec_out_range,marker,time,vec_out_velocity,marker)
-			plt.legend(p1,["IN range", "IN velocity", "OUT range","OUT velocity"])
+			p1 = plt.plot(time,vec_range,marker,time,vec_velocity,marker)
+			plt.legend(p1,["IN range", "IN velocity"])
+			plt.title("INPUT")
+			plt.xlabel('time')
+			
+			plt.subplot(212)
+			marker = 'o'
+			p1 = plt.plot(time_out,vec_out_range,marker,time_out,vec_out_velocity,marker)
+			plt.legend(p1,["OUT range","OUT velocity"])
 			plt.title("OUTPUT")
 			plt.xlabel('time')
 			

@@ -3,21 +3,36 @@
   <key>radar_tracking_particle_singletarget</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.tracking_particle_singletarget($num_particle, $std_freq_meas, $std_accel)</make>
+  <make>radar.tracking_particle_singletarget($num_particle, $std_range_meas, $std_velocity_meas, $std_accel_sys, $threshold_track, $threshold_lost)</make>
   <param>
     <name>Particle number</name>
     <key>num_particle</key>
     <type>int</type>
   </param>
   <param>
-    <name>Std frequency measurement</name>
-    <key>std_freq_meas</key>
+    <name>Std range measurement</name>
+    <key>std_range_meas</key>
     <type>float</type>
   </param>
   <param>
-    <name>Std acceleration</name>
-    <key>std_accel</key>
+    <name>Std velocity measurement</name>
+    <key>std_velocity_meas</key>
     <type>float</type>
+  </param>
+  <param>
+    <name>Std system acceleration</name>
+    <key>std_accel_sys</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Threshold track acceptance</name>
+    <key>threshold_track</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Threshold lost track</name>
+    <key>threshold_lost</key>
+    <type>int</type>
   </param>
   <sink>
     <name>Msg in</name>

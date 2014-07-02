@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Tue Jul  1 17:28:33 2014</timestamp>
+  <timestamp>Tue Jul  1 17:58:15 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,29 +64,6 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>250000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(184, 17)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
       <value>wait_to_start</value>
     </param>
     <param>
@@ -95,7 +72,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0.01</value>
+      <value>0.02</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -110,7 +87,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>center_freq</value>
+      <value>wait_samp</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -118,57 +95,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2400000000</value>
+      <value>100,100,100,100</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(283, 17)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>packet_len*2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(395, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>send_samp</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>100,400,300</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(281, 895)</value>
+      <value>(284, 831)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -202,7 +133,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>wait_samp</value>
+      <value>send_samp</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -210,11 +141,80 @@
     </param>
     <param>
       <key>value</key>
-      <value>100,100,100,100</value>
+      <value>100,400,300</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(284, 831)</value>
+      <value>(281, 895)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>packet_len*2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(395, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2400000000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(283, 17)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>250000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(184, 17)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2416,7 +2416,7 @@
     </param>
     <param>
       <key>timeout_tx</key>
-      <value>0.1</value>
+      <value>0.2</value>
     </param>
     <param>
       <key>wait_tx</key>
@@ -2428,7 +2428,7 @@
     </param>
     <param>
       <key>args_rx</key>
-      <value>('addr=192.168.10.6','addr=192.168.10.6')</value>
+      <value>('addr=192.168.10.6','addr=192.168.10.3')</value>
     </param>
     <param>
       <key>wire_rx</key>
@@ -2452,7 +2452,7 @@
     </param>
     <param>
       <key>timeout_rx</key>
-      <value>(0.1,0.1)</value>
+      <value>(0.2,0.2)</value>
     </param>
     <param>
       <key>wait_rx</key>
@@ -2480,7 +2480,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(386, 556)</value>
+      <value>(385, 555)</value>
     </param>
     <param>
       <key>_rotation</key>

@@ -32,16 +32,28 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      tracking_particle_singletarget_impl(int num_particle, float std_freq_meas, float std_accel);
+      tracking_particle_singletarget_impl(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost);
       ~tracking_particle_singletarget_impl();
       void handle_msg(pmt::pmt_t msg);
-      void tracking();
+      bool tracking();
+      void filter();
+      float random_normal(float mean, float std);
       
       int d_num_particle;
-      float d_std_freq_meas, d_std_accel;
-      float d_range, d_velocity;
+      float d_std_range_meas, d_std_velocity_meas, d_std_accel_sys;
+      float d_range, d_velocity, d_time;
       
       pmt::pmt_t d_port_id_in, d_port_id_out;
+      
+      float d_range_last, d_velocity_last, d_time_last;
+      float d_delta_t;
+      int d_lost;
+      bool d_is_track, d_is_empty;
+      std::vector<std::vector<float> > Q, R, R_inv;
+      std::vector<float> d_particle_range, d_particle_velocity, d_particle_weight;
+      float R_det;
+      float d_threshold_track;
+      int d_threshold_lost;
     };
 
   } // namespace radar

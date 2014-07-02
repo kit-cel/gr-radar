@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Jul  1 17:25:08 2014
+# Generated: Tue Jul  1 17:58:56 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -51,7 +51,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.wait_samp = wait_samp = 100,100,100,100
         self.send_samp = send_samp = 100,400,300
         self.packet_len = packet_len = sum(wait_samp)+sum(send_samp)
-        self.wait_to_start = wait_to_start = 0.01
+        self.wait_to_start = wait_to_start = 0.02
         self.tx_gain = tx_gain = 20
         self.samp_rate = samp_rate = 250000
         self.rx_gain = rx_gain = 40
@@ -155,7 +155,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._num_corr_slider.valueChanged.connect(self.set_num_corr)
         self._num_corr_layout.addWidget(self._num_corr_slider)
         self.top_layout.addLayout(self._num_corr_layout)
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(2, samp_rate, center_freq, (int(num_delay_samp),), 'addr=192.168.10.4', '', 'internal', 'none', 'J1', tx_gain, 0.1, wait_to_start, 0, ('addr=192.168.10.6','addr=192.168.10.6'), ('',''), ('mimo','internal'), ('mimo','none'), ('J1','J1'), (rx_gain,rx_gain), (0.1,0.1), (wait_to_start,wait_to_start), (0,0), "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(1, samp_rate, center_freq, (int(num_delay_samp),), 'addr=192.168.10.4', '', 'internal', 'none', 'J1', tx_gain, 0.2, wait_to_start, 0, ('addr=192.168.10.6','addr=192.168.10.3'), ('',''), ('mimo','internal'), ('mimo','none'), ('J1','J1'), (rx_gain,rx_gain), (0.2,0.2), (wait_to_start,wait_to_start), (0,0), "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(2400)
         self.radar_signal_generator_sync_pulse_c_0 = radar.signal_generator_sync_pulse_c(packet_len, (send_samp), (wait_samp), 0.5, "packet_len")
         (self.radar_signal_generator_sync_pulse_c_0).set_min_output_buffer(2400)
@@ -165,7 +165,7 @@ class top_block(gr.top_block, Qt.QWidget):
         	packet_len, #size
         	samp_rate, #samp_rate
         	"QT GUI Plot", #name
-        	3 #number of inputs
+        	2 #number of inputs
         )
         self.qtgui_time_sink_x_0.set_update_time(0.10)
         self.qtgui_time_sink_x_0.set_y_axis(-1, 1)
@@ -186,7 +186,7 @@ class top_block(gr.top_block, Qt.QWidget):
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
         
-        for i in xrange(3):
+        for i in xrange(2):
             if len(labels[i]) == 0:
                 self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -199,7 +199,6 @@ class top_block(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.blocks_complex_to_mag_0_0_0 = blocks.complex_to_mag(1)
         self.blocks_complex_to_mag_0_0 = blocks.complex_to_mag(1)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
 
@@ -213,8 +212,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_complex_to_mag_0_0, 0), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.radar_signal_generator_sync_pulse_c_0, 0), (self.radar_estimator_sync_pulse_c_0, 0))
         self.connect((self.radar_signal_generator_sync_pulse_c_0, 0), (self.blocks_complex_to_mag_0_0, 0))
-        self.connect((self.radar_usrp_echotimer_cc_0, 1), (self.blocks_complex_to_mag_0_0_0, 0))
-        self.connect((self.blocks_complex_to_mag_0_0_0, 0), (self.qtgui_time_sink_x_0, 2))
 
         ##################################################
         # Asynch Message Connections
