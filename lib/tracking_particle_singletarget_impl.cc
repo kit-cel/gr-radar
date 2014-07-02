@@ -188,21 +188,22 @@ namespace gr {
 		sum_weight_square = 0;
 		for(int k=0; k<d_num_particle; k++){
 			// calc particle range, velocity and weights
-			d_particle_range[k] = random_normal(d_range-d_velocity*d_delta_t, std::sqrt(Q[0][0]));
-			d_particle_velocity[k] = random_normal(d_velocity, std::sqrt(Q[1][1]));
+			d_particle_range[k] = random_normal(d_particle_range[k]-d_particle_velocity[k]*d_delta_t, std::sqrt(Q[0][0]));
+			d_particle_velocity[k] = random_normal(d_particle_velocity[k], std::sqrt(Q[1][1]));
 			range_dif = d_range-d_particle_range[k];
 			velocity_dif = d_velocity-d_particle_velocity[k];
-			lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+range_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // get likelihood
+			lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+velocity_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // get likelihood
 			d_particle_weight[k] = d_particle_weight[k]*lh;
 			// calc sum of weights and sum of weight square
-			sum_weight += d_particle_weight[k];
-			sum_weight_square += d_particle_weight[k]*d_particle_weight[k];
+			sum_weight = sum_weight + d_particle_weight[k];
+			sum_weight_square = sum_weight_square + d_particle_weight[k]*d_particle_weight[k];
 		}
 		for(int k=0; k<d_num_particle; k++) d_particle_weight[k] = d_particle_weight[k]/sum_weight;
-		float n_eff = 1/sum_weight_square;
+		float n_eff = 1/(float)sum_weight_square;
 		
 		if(n_eff<d_num_particle/(float)2){
 			// do systematic resampling
+			std::cout << "DO RESAMP" << std::endl;
 			int num_range = 1000000;
 			float u1 = (rand()%num_range)/(float)num_range;
 			u1 = u1/d_num_particle;
@@ -245,6 +246,7 @@ namespace gr {
 			
 		// Calc time difference and matrix Q
 		d_delta_t = d_time-d_time_last; // time difference
+		
 		Q[0][0] = 0.25*std::pow(d_delta_t,4)*d_std_accel_sys*d_std_accel_sys;
 		Q[0][1] = 0.5*std::pow(d_delta_t,3)*d_std_accel_sys*d_std_accel_sys;
 		Q[1][0] = 0.5*std::pow(d_delta_t,3)*d_std_accel_sys*d_std_accel_sys;
@@ -256,20 +258,21 @@ namespace gr {
 				float range_dif, velocity_dif;
 				range_dif = d_range-d_range_last;
 				velocity_dif = d_velocity-d_velocity_last;
-				float lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+range_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // calc likelihood
+				float lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+velocity_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // calc likelihood
 				
 				if(d_threshold_track<lh){ // if new sample is accepted as track
 					filter();
-					std::cout << "TRACK 1 VALID 1 LIKE 1: filter" << std::endl;
+					std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE "<<lh<<":\t\trun FILTER" << std::endl;
 					d_lost = 0;
 				}
 				else{ // if sample is rejected, do simple estimation based on system model (v=const, R=v*dt)
 					d_range = d_range_last-d_velocity_last*d_delta_t; // velocity < 0 for movement to radar
 					d_velocity = d_velocity_last; // v=const.
 					d_lost++;
-					std::cout << "TRACK 1 VALID 1 LIKE 0: lost" << std::endl;
+					std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE ("<<lh<<"):\t\tbad LIKELIHOOD" << std::endl;
 					if(d_lost>d_threshold_lost){
 						d_is_track = false;
+						std::cout << "REJECT TRACK" << std::endl;
 						return false; // tracking is not successfull
 					}
 				}
@@ -278,8 +281,9 @@ namespace gr {
 				d_range = d_range_last-d_velocity_last*d_delta_t; // velocity < 0 for movement to radar
 				d_velocity = d_velocity_last; // v=const.
 				d_lost++;
-				std::cout << "TRACK 1 VALID 0: lost" << std::endl;
+				std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tbad SAMPLE" << std::endl;
 				if(d_lost>d_threshold_lost){
+					std::cout << "REJECT TRACK" << std::endl;
 					d_is_track = false;
 					return false; // tracking is not successfull
 				}
@@ -293,7 +297,7 @@ namespace gr {
 					d_particle_velocity[k] = random_normal(d_velocity, d_std_velocity_meas);
 					d_particle_weight[k] = 1/float(d_num_particle);
 				}
-				std::cout << "TRACK 0 VALID 1: init" << std::endl;
+				std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tINITIALIZE" << std::endl;
 				d_is_track = true;
 				d_lost = 0;
 			}

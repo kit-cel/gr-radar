@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Jul  2 13:49:40 2014
+# Generated: Wed Jul  2 16:58:02 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -58,6 +58,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.v_res = v_res = freq_res*3e8/2/center_freq
         self.threshold = threshold = -120
         self.samp_discard = samp_discard = 0
+        self.range_time = range_time = 10
         self.min_output_buffer = min_output_buffer = 2*(blocks_per_tag*samp_per_freq*2)
         self.decimator_fac = decimator_fac = 2**7
         self.Range = Range = 10
@@ -149,13 +150,15 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
-        self.radar_tracking_particle_singletarget_0 = radar.tracking_particle_singletarget(100, 1, v_res, 0.1, 0.1, 5)
+        self.radar_tracking_particle_singletarget_0 = radar.tracking_particle_singletarget(100, 1, v_res, 0.1, 0.01, 5)
         self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (velocity,), (1e16,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(524288)
         self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_discard, "packet_len")
         (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
         self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, -delta_freq/2, delta_freq/2, 1, "packet_len")
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
+        self.radar_qtgui_time_plot_0_0_0 = radar.qtgui_time_plot(250, 'range', (0,R_max), range_time, "")
+        self.radar_qtgui_time_plot_0_0 = radar.qtgui_time_plot(250, 'range', (0,R_max), range_time, "TRACKING")
         self.radar_print_results_0 = radar.print_results(False, "test.txt")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decimator_fac/2, threshold, 0, "packet_len")
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
@@ -200,6 +203,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_tracking_particle_singletarget_0, "Msg in")
         self.msg_connect(self.radar_tracking_particle_singletarget_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_tracking_particle_singletarget_0, "Msg out", self.radar_qtgui_time_plot_0_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0_0_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -258,9 +263,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_velocity(self, velocity):
         self.velocity = velocity
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
         Qt.QMetaObject.invokeMethod(self._velocity_counter, "setValue", Qt.Q_ARG("double", self.velocity))
         Qt.QMetaObject.invokeMethod(self._velocity_slider, "setValue", Qt.Q_ARG("double", self.velocity))
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_v_res(self):
         return self.v_res
@@ -282,6 +287,12 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_discard(self, samp_discard):
         self.samp_discard = samp_discard
+
+    def get_range_time(self):
+        return self.range_time
+
+    def set_range_time(self, range_time):
+        self.range_time = range_time
 
     def get_min_output_buffer(self):
         return self.min_output_buffer

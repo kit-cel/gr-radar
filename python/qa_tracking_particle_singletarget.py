@@ -38,15 +38,20 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 
 	def test_001_t (self):
 		# create input data
-		steps = 40
-		vec_time = np.linspace(0,10,steps);
-		vec_velocity = np.linspace(-4,-5,steps)
-		vec_range = np.linspace(1,20,steps)
+		steps = 50
+		vec_time = np.linspace(0,20,steps);
+		vec_velocity = np.linspace(5,5,steps)
+		vec_range = np.linspace(100,1,steps)
+		vec_velocity_real = [0]*steps
+		vec_range_real = [0]*steps
+		for k in range(steps):
+			vec_velocity_real[k] = vec_velocity[k]
+			vec_range_real[k] = vec_range[k]
 		
 		# random data on trajectory
 		mu = 0
-		sigma_vel = 2
-		sigma_rge = 3
+		sigma_vel = 0.5
+		sigma_rge = 7
 		for k in range(len(vec_velocity)):
 			vec_velocity[k] = vec_velocity[k] + random.gauss(mu,sigma_vel)
 			vec_range[k] = vec_range[k] + random.gauss(mu,sigma_rge)
@@ -69,12 +74,12 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 		# set up fg
 		test_duration = 1000 # ms, do not change!
 		
-		num_particle = 200
-		std_range_meas = sigma_rge*1.5
-		std_velocity_meas = sigma_vel*1.5
-		std_accel_sys = 0.5
-		threshold_track = 0.01
-		threshold_lost = 5
+		num_particle = 300
+		std_range_meas = sigma_rge
+		std_velocity_meas = sigma_vel
+		std_accel_sys = 0.1
+		threshold_track = 0.001
+		threshold_lost = 4
 		
 		# connect multiple strobes for different msgs
 		src = [0]*len(target_pmts)
@@ -120,18 +125,19 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 			time = range(len(vec_range))
 			time_out = range(len(vec_out_range))
 			plt.figure(1)
+			
 			plt.subplot(211)
-			marker = 'o'
-			p1 = plt.plot(time,vec_range,marker,time,vec_velocity,marker)
-			plt.legend(p1,["IN range", "IN velocity"])
-			plt.title("INPUT")
+			marker = '-o'
+			p1 = plt.plot(time,vec_velocity_real,marker,time,vec_velocity,marker,time_out,vec_out_velocity,marker)
+			plt.legend(p1,["IN velocity real", "IN velocity", "OUT velocity"])
+			plt.title("VELOCITY")
 			plt.xlabel('time')
 			
 			plt.subplot(212)
-			marker = 'o'
-			p1 = plt.plot(time_out,vec_out_range,marker,time_out,vec_out_velocity,marker)
-			plt.legend(p1,["OUT range","OUT velocity"])
-			plt.title("OUTPUT")
+			marker = '-o'
+			p1 = plt.plot(time,vec_range_real,marker,time,vec_range,marker,time_out,vec_out_range,marker)
+			plt.legend(p1,["IN range real","IN range","OUT range"])
+			plt.title("RANGE")
 			plt.xlabel('time')
 			
 			plt.show()
