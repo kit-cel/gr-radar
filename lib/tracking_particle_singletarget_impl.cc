@@ -262,17 +262,17 @@ namespace gr {
 				
 				if(d_threshold_track<lh){ // if new sample is accepted as track
 					filter();
-					std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE "<<lh<<":\t\trun FILTER" << std::endl;
+					//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE "<<lh<<":\t\trun FILTER" << std::endl;
 					d_lost = 0;
 				}
 				else{ // if sample is rejected, do simple estimation based on system model (v=const, R=v*dt)
 					d_range = d_range_last-d_velocity_last*d_delta_t; // velocity < 0 for movement to radar
 					d_velocity = d_velocity_last; // v=const.
 					d_lost++;
-					std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE ("<<lh<<"):\t\tbad LIKELIHOOD" << std::endl;
+					//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE ("<<lh<<"):\t\tbad LIKELIHOOD" << std::endl;
 					if(d_lost>d_threshold_lost){
 						d_is_track = false;
-						std::cout << "REJECT TRACK" << std::endl;
+						//std::cout << "REJECT TRACK" << std::endl;
 						return false; // tracking is not successfull
 					}
 				}
@@ -281,9 +281,9 @@ namespace gr {
 				d_range = d_range_last-d_velocity_last*d_delta_t; // velocity < 0 for movement to radar
 				d_velocity = d_velocity_last; // v=const.
 				d_lost++;
-				std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tbad SAMPLE" << std::endl;
+				//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tbad SAMPLE" << std::endl;
 				if(d_lost>d_threshold_lost){
-					std::cout << "REJECT TRACK" << std::endl;
+					//std::cout << "REJECT TRACK" << std::endl;
 					d_is_track = false;
 					return false; // tracking is not successfull
 				}
@@ -297,7 +297,7 @@ namespace gr {
 					d_particle_velocity[k] = random_normal(d_velocity, d_std_velocity_meas);
 					d_particle_weight[k] = 1/float(d_num_particle);
 				}
-				std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tINITIALIZE" << std::endl;
+				//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tINITIALIZE" << std::endl;
 				d_is_track = true;
 				d_lost = 0;
 			}

@@ -120,7 +120,7 @@ class qa_tracking_particle_singletarget (gr_unittest.TestCase):
 #		print vec_out_velocity
 		
 		# make plots
-		show_plots = True # Toggle visibility of plots
+		show_plots = False # Toggle visibility of plots
 		if show_plots:
 			time = range(len(vec_range))
 			time_out = range(len(vec_out_range))
