@@ -22,6 +22,9 @@ https://grradar.wordpress.com/
 GNU Radio 3.7.4  
 Ubuntu 14.04
 
+Qt 4.8.6
+Qwt 6.0.0
+
 **Contact**  
 Stefan Wunsch  
 stefan.wunsch[at]student.kit.edu
