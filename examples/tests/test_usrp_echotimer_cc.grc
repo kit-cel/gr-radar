@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Wed May 28 17:17:51 2014</timestamp>
+  <timestamp>Sun Jul  6 17:37:59 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,7 +64,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>center_freq</value>
+      <value>decim_fac</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,126 +72,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>5800000000</value>
+      <value>2**10</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(285, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>freq_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate/packet_len</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(640, 21)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>packet_len*2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(496, 20)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0.05</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(546, 961)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>packet_len_red</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>packet_len/decim_fac</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(402, 364)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1000000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(184, 19)</value>
+      <value>(733, 22)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -225,7 +110,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>decim_fac</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -233,11 +118,126 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**10</value>
+      <value>1000000</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(733, 22)</value>
+      <value>(184, 19)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>packet_len_red</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>packet_len/decim_fac</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(402, 364)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.05</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(546, 961)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>packet_len*2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(496, 20)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>freq_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>samp_rate/packet_len</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(640, 21)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>5800000000</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(285, 16)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -498,6 +498,14 @@
       <value>False</value>
     </param>
     <param>
+      <key>store_msg</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>filename</key>
+      <value>""</value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -609,117 +617,6 @@
     </param>
   </block>
   <block>
-    <key>radar_usrp_echotimer_cc</key>
-    <param>
-      <key>id</key>
-      <value>radar_usrp_echotimer_cc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>num_delay_samps</key>
-      <value>int(num_delay_samps)</value>
-    </param>
-    <param>
-      <key>args_tx</key>
-      <value>'addr=192.168.10.6'</value>
-    </param>
-    <param>
-      <key>wire_tx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_tx</key>
-      <value>'internal'</value>
-    </param>
-    <param>
-      <key>time_source_tx</key>
-      <value>'none'</value>
-    </param>
-    <param>
-      <key>antenna_tx</key>
-      <value>'J1'</value>
-    </param>
-    <param>
-      <key>timeout_tx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_tx</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>lo_offset_tx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>args_rx</key>
-      <value>'addr=192.168.10.4'</value>
-    </param>
-    <param>
-      <key>wire_rx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>time_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>antenna_rx</key>
-      <value>'J1'</value>
-    </param>
-    <param>
-      <key>timeout_rx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_rx</key>
-      <value>wait_to_start</value>
-    </param>
-    <param>
-      <key>lo_offset_rx</key>
-      <value>samp_rate/2</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(393, 572)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
@@ -803,6 +700,129 @@
     <param>
       <key>_coordinate</key>
       <value>(689, 629)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_usrp_echotimer_cc</key>
+    <param>
+      <key>id</key>
+      <value>radar_usrp_echotimer_cc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>n_outputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>num_delay_samps</key>
+      <value>int(num_delay_samps)</value>
+    </param>
+    <param>
+      <key>args_tx</key>
+      <value>'addr=192.168.10.6'</value>
+    </param>
+    <param>
+      <key>wire_tx</key>
+      <value>''</value>
+    </param>
+    <param>
+      <key>clock_source_tx</key>
+      <value>'internal'</value>
+    </param>
+    <param>
+      <key>time_source_tx</key>
+      <value>'none'</value>
+    </param>
+    <param>
+      <key>antenna_tx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_tx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>timeout_tx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_tx</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>lo_offset_tx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>args_rx</key>
+      <value>'addr=192.168.10.4'</value>
+    </param>
+    <param>
+      <key>wire_rx</key>
+      <value>''</value>
+    </param>
+    <param>
+      <key>clock_source_rx</key>
+      <value>'mimo'</value>
+    </param>
+    <param>
+      <key>time_source_rx</key>
+      <value>'mimo'</value>
+    </param>
+    <param>
+      <key>antenna_rx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>timeout_rx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_rx</key>
+      <value>wait_to_start</value>
+    </param>
+    <param>
+      <key>lo_offset_rx</key>
+      <value>samp_rate/2</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(393, 572)</value>
     </param>
     <param>
       <key>_rotation</key>

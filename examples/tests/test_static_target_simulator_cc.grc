@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun May  4 08:38:15 2014</timestamp>
+  <timestamp>Sun Jul  6 17:36:43 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,7 +64,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>doppler_ref</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,57 +72,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2*v*center_freq/3e8</value>
+      <value>32000</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(742, 667)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>v</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(553, 663)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>shift</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0.25</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(652, 20)</value>
+      <value>(10, 170)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -156,7 +110,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>samp_rate</value>
+      <value>shift</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -164,11 +118,57 @@
     </param>
     <param>
       <key>value</key>
-      <value>32000</value>
+      <value>0.25</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(10, 170)</value>
+      <value>(652, 20)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>v</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(553, 663)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>doppler_ref</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2*v*center_freq/3e8</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(742, 667)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -870,65 +870,6 @@
     <key>radar_static_target_simulator_cc</key>
     <param>
       <key>id</key>
-      <value>radar_static_target_simulator_cc_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>range</key>
-      <value>32*3e8/2/samp_rate</value>
-    </param>
-    <param>
-      <key>velocity</key>
-      <value>v</value>
-    </param>
-    <param>
-      <key>rcs</key>
-      <value>5*1e23</value>
-    </param>
-    <param>
-      <key>azimuth</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(339, 762)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_static_target_simulator_cc</key>
-    <param>
-      <key>id</key>
       <value>radar_static_target_simulator_cc_0</value>
     </param>
     <param>
@@ -960,6 +901,18 @@
       <value>center_freq</value>
     </param>
     <param>
+      <key>self_coupling_db</key>
+      <value>-10</value>
+    </param>
+    <param>
+      <key>rndm_phaseshift</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>self_coupling</key>
+      <value>True</value>
+    </param>
+    <param>
       <key>len_key</key>
       <value>"packet_len"</value>
     </param>
@@ -977,7 +930,78 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(596, 103)</value>
+      <value>(541, 97)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_static_target_simulator_cc</key>
+    <param>
+      <key>id</key>
+      <value>radar_static_target_simulator_cc_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>range</key>
+      <value>32*3e8/2/samp_rate</value>
+    </param>
+    <param>
+      <key>velocity</key>
+      <value>v</value>
+    </param>
+    <param>
+      <key>rcs</key>
+      <value>5*1e23</value>
+    </param>
+    <param>
+      <key>azimuth</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>center_freq</value>
+    </param>
+    <param>
+      <key>self_coupling_db</key>
+      <value>-10</value>
+    </param>
+    <param>
+      <key>rndm_phaseshift</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>self_coupling</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(339, 762)</value>
     </param>
     <param>
       <key>_rotation</key>

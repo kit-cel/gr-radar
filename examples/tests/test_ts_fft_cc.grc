@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Tue Jun 10 22:23:21 2014</timestamp>
+  <timestamp>Sun Jul  6 17:37:16 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -64,29 +64,6 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2**11</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(360.5, 173.75)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
       <value>samp_rate</value>
     </param>
     <param>
@@ -100,6 +77,29 @@
     <param>
       <key>_coordinate</key>
       <value>(10, 170)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2**11</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(360.5, 173.75)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -386,115 +386,6 @@
     </param>
   </block>
   <block>
-    <key>ts_fft_py_cc</key>
-    <param>
-      <key>id</key>
-      <value>ts_fft_py_cc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(590, 563)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_find_max_peak_c</key>
-    <param>
-      <key>id</key>
-      <value>radar_find_max_peak_c_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>threshold</key>
-      <value>-200</value>
-    </param>
-    <param>
-      <key>samp_protect</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(845, 547)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_print_peaks</key>
-    <param>
-      <key>id</key>
-      <value>radar_print_peaks_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(915, 675)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
     <key>radar_print_peaks</key>
     <param>
       <key>id</key>
@@ -623,27 +514,9 @@
   </connection>
   <connection>
     <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
-    <sink_block_id>ts_fft_py_cc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
     <sink_block_id>qtgui_sink_x_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>ts_fft_py_cc_0</source_block_id>
-    <sink_block_id>radar_find_max_peak_c_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>radar_find_max_peak_c_0</source_block_id>
-    <sink_block_id>radar_print_peaks_0</sink_block_id>
-    <source_key>Msg out</source_key>
-    <sink_key>Msg in</sink_key>
   </connection>
   <connection>
     <source_block_id>radar_ts_fft_cc_0</source_block_id>
