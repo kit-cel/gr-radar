@@ -6,6 +6,7 @@ Change to any folder in your home directory and enter following commands in your
 
 `git clone https://github.com/kit-cel/gr-radar.git` // clone this repository  
 `cd gr-radar/`  
+`sudo ./examples/setup/setup_core` // increase maximum of shared memory segment and USRP stuff, needed for large buffers (change is resetted after reboot)  
 `mkdir build` // make build folder  
 `cd build/`  
 `cmake ../` // build makefiles  
