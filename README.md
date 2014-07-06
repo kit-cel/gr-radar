@@ -11,7 +11,7 @@ Change to any folder in your home directory and enter following commands in your
 `cmake ../` // build makefiles  
 `make` // build toolbox 
 
-Some testcases use huge buffer sizes. Therefore you have to increse the maximum of a single shared memory segment. Run following line to fix that. Additionally the script configures some USRP stuff. All changes will be resetted after reboot.
+Some testcases use huge buffer sizes. Therefore you have to increse the maximum size of a single shared memory segment. Run following line to fix that. Additionally the script configures some USRP stuff. All changes will be resetted after reboot.
 
 `sudo ./../examples/setup/setup_core`
 
@@ -24,7 +24,7 @@ Now you can run all testcases and install the toolbox. If `ctest` responds with 
 https://grradar.wordpress.com/
 
 **Documentation**  
-For full documentation open docs/html/index.html in any web browser.
+For full documentation open `docs/html/index.html` in any web browser.
 
 **Development platform**  
 GNU Radio 3.7.4  
