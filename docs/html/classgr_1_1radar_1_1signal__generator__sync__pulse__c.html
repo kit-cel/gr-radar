@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1signal__generator_
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between. It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals.  
  <a href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="signal__generator__sync__pulse__c_8h_source.html">signal_generator_sync_pulse_c.h</a>&gt;</code></p>
@@ -118,11 +118,17 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a35cf4c168b32911d0ddc1f069d4f5b98"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html#a19405a2d1b7d9558ce87682e3e16b574">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html#a35cf4c168b32911d0ddc1f069d4f5b98">make</a> (int packet_len, std::vector&lt; int &gt; pulse_len, std::vector&lt; int &gt; pulse_pause, float pulse_amplitude, const std::string len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a35cf4c168b32911d0ddc1f069d4f5b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_sync_pulse_c</a>.  <a href="#a35cf4c168b32911d0ddc1f069d4f5b98">More...</a><br/></td></tr>
+<tr class="memdesc:a35cf4c168b32911d0ddc1f069d4f5b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html" title="This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between. It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals. ">radar::signal_generator_sync_pulse_c</a>.  <a href="#a35cf4c168b32911d0ddc1f069d4f5b98">More...</a><br/></td></tr>
 <tr class="separator:a35cf4c168b32911d0ddc1f069d4f5b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between. It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals. </p>
+<p>packet_len : The packet length has to be longer or equal than the sum of pulse_len and pulse_pause. <br/>
+pulse_len : The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause. <br/>
+pulse_pause : The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero. <br/>
+pulse_amplitude : Pulse amplitude of real signal <br/>
+len_key : Packet length key for tagged stream <br/>
+</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a19405a2d1b7d9558ce87682e3e16b574"></a>
 <div class="memitem">
@@ -187,8 +193,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_sync_pulse_c</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_sync_pulse_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html#a35cf4c168b32911d0ddc1f069d4f5b98" title="Return a shared_ptr to a new instance of radar::signal_generator_sync_pulse_c. ">radar::signal_generator_sync_pulse_c::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html" title="This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between. It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals. ">radar::signal_generator_sync_pulse_c</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html" title="This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between. It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals. ">radar::signal_generator_sync_pulse_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html#a35cf4c168b32911d0ddc1f069d4f5b98" title="Return a shared_ptr to a new instance of radar::signal_generator_sync_pulse_c. ">radar::signal_generator_sync_pulse_c::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -201,7 +207,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html">signal_generator_sync_pulse_c</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 18:12:15 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sun Jul 6 2014 19:51:22 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

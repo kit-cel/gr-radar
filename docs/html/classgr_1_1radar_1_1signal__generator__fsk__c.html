@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1signal__generator_
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an alternating frequency. The packet length for subsequent tagged streams is calculated with two times the samples per single frequency multiplied by the blocks per tag.  
  <a href="classgr_1_1radar_1_1signal__generator__fsk__c.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="signal__generator__fsk__c_8h_source.html">signal_generator_fsk_c.h</a>&gt;</code></p>
@@ -118,11 +118,19 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7ba73c60496bd8870ab0912bcce6530"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html#a9f70150377b51856c9c5915bb4f54229">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html#aa7ba73c60496bd8870ab0912bcce6530">make</a> (int samp_rate, int samp_per_freq, int blocks_per_tag, float freq_low, float freq_high, float amplitude, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:aa7ba73c60496bd8870ab0912bcce6530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_fsk_c</a>.  <a href="#aa7ba73c60496bd8870ab0912bcce6530">More...</a><br/></td></tr>
+<tr class="memdesc:aa7ba73c60496bd8870ab0912bcce6530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html" title="This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an al...">radar::signal_generator_fsk_c</a>.  <a href="#aa7ba73c60496bd8870ab0912bcce6530">More...</a><br/></td></tr>
 <tr class="separator:aa7ba73c60496bd8870ab0912bcce6530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an alternating frequency. The packet length for subsequent tagged streams is calculated with two times the samples per single frequency multiplied by the blocks per tag. </p>
+<p>samp_rate : Signal sample rate <br/>
+samp_per_freq : Number of samples per frequency until the frequency shifts <br/>
+blocks_per_tag : A block contains samp_per_freq samples of the low frequency and samp_per_freq samples of the high frequency. The packet length for subsequent tagged stream blocks is calculated with 2*samp_per_freq*blocks_per_tag. <br/>
+freq_low : Lower frequency in baseband <br/>
+freq_high : Higher frequency in baseband <br/>
+amplitude : Signal amplitude <br/>
+len_key : Packet length key for tagged stream <br/>
+</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a9f70150377b51856c9c5915bb4f54229"></a>
 <div class="memitem">
@@ -199,8 +207,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_fsk_c</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_fsk_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html#aa7ba73c60496bd8870ab0912bcce6530" title="Return a shared_ptr to a new instance of radar::signal_generator_fsk_c. ">radar::signal_generator_fsk_c::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html" title="This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an al...">radar::signal_generator_fsk_c</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html" title="This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an al...">radar::signal_generator_fsk_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html#aa7ba73c60496bd8870ab0912bcce6530" title="Return a shared_ptr to a new instance of radar::signal_generator_fsk_c. ">radar::signal_generator_fsk_c::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -213,7 +221,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html">signal_generator_fsk_c</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 18:12:15 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sun Jul 6 2014 19:51:22 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

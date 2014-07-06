@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1signal__generator_
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block generates a signal for CW radar in baseband. The waveform consists of one (or sometimes multiple) constant frequency.  
  <a href="classgr_1_1radar_1_1signal__generator__cw__c.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="signal__generator__cw__c_8h_source.html">signal_generator_cw_c.h</a>&gt;</code></p>
@@ -118,11 +118,17 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a08f9d94406bd94635b9b451dd6957776"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html#a7498c1cdd9b10a5db75172710f12dc1b">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html#a08f9d94406bd94635b9b451dd6957776">make</a> (int packet_len, int samp_rate, std::vector&lt; float &gt; frequency, float amplitude, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a08f9d94406bd94635b9b451dd6957776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_cw_c</a>.  <a href="#a08f9d94406bd94635b9b451dd6957776">More...</a><br/></td></tr>
+<tr class="memdesc:a08f9d94406bd94635b9b451dd6957776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html" title="This block generates a signal for CW radar in baseband. The waveform consists of one (or sometimes mu...">radar::signal_generator_cw_c</a>.  <a href="#a08f9d94406bd94635b9b451dd6957776">More...</a><br/></td></tr>
 <tr class="separator:a08f9d94406bd94635b9b451dd6957776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block generates a signal for CW radar in baseband. The waveform consists of one (or sometimes multiple) constant frequency. </p>
+<p>packet_len : packet_len is the length of a single tagged stream package which will be processed in subsequent tagged stream blocks. <br/>
+samp_rate : Signal sample rate <br/>
+frequency : This parameter holds a vector of all constant frequencies in baseband. <br/>
+amplitude : Signal amplitude <br/>
+len_key : Packet length key for tagged stream <br/>
+</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a7498c1cdd9b10a5db75172710f12dc1b"></a>
 <div class="memitem">
@@ -187,8 +193,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_cw_c</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html" title="&lt;+description of block+&gt; ">radar::signal_generator_cw_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html#a08f9d94406bd94635b9b451dd6957776" title="Return a shared_ptr to a new instance of radar::signal_generator_cw_c. ">radar::signal_generator_cw_c::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html" title="This block generates a signal for CW radar in baseband. The waveform consists of one (or sometimes mu...">radar::signal_generator_cw_c</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html" title="This block generates a signal for CW radar in baseband. The waveform consists of one (or sometimes mu...">radar::signal_generator_cw_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html#a08f9d94406bd94635b9b451dd6957776" title="Return a shared_ptr to a new instance of radar::signal_generator_cw_c. ">radar::signal_generator_cw_c::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -201,7 +207,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1signal__generator__cw__c.html">signal_generator_cw_c</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 18:12:15 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sun Jul 6 2014 19:51:22 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

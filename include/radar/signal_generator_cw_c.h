@@ -28,7 +28,14 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block generates a signal for CW radar in baseband. The waveform consists of one (or sometimes multiple) constant frequency.
+     * 
+     * packet_len		:	packet_len is the length of a single tagged stream package which will be processed in subsequent tagged stream blocks. \n
+     * samp_rate		:	Signal sample rate \n
+     * frequency		:	This parameter holds a vector of all constant frequencies in baseband. \n
+     * amplitude		:	Signal amplitude \n
+     * len_key			:	Packet length key for tagged stream \n
+     * 
      * \ingroup radar
      *
      */
