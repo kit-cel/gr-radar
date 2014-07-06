@@ -19,7 +19,7 @@ If ctest responds with '100% tests passed', the toolbox should be build correctl
 **Development progress blog**  
 https://grradar.wordpress.com/
 
-**Documentation**
+**Documentation**  
 For full documentation open docs/html/index.html in any web browser.
 
 **Development platform**  
