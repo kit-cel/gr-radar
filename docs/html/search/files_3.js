@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['os_5fcfar_5fc_2eh',['os_cfar_c.h',['../os__cfar__c_8h.html',1,'']]],
-  ['os_5fcfar_5fc_5fimpl_2eh',['os_cfar_c_impl.h',['../os__cfar__c__impl_8h.html',1,'']]]
+  ['main_5fpage_2edox',['main_page.dox',['../main__page_8dox.html',1,'']]]
 ];

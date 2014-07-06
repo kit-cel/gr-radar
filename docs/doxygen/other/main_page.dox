@@ -1,0 +1,19 @@
+/*! \mainpage
+
+\section install Install guide
+
+For the actual install guide read the README at the main folder.
+
+\section basic Basics
+
+Basic idea of the toolbox. Signal generator -> Split Echotimer/Simulator -> connect sig_gen and echotimer/simulator -> estimator -> some kind of output
+
+\image html basic_flowgraph.svg
+
+\section echotimer USRP Echotimer
+
+sync clock and time between USRPs!
+
+examples/usrp use sync setup
+
+*/
