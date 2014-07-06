@@ -30,16 +30,16 @@ namespace gr {
   namespace radar {
 
     tracking_singletarget::sptr
-    tracking_singletarget::make(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost)
+    tracking_singletarget::make(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost, std::string filter)
     {
       return gnuradio::get_initial_sptr
-        (new tracking_singletarget_impl(num_particle, std_range_meas, std_velocity_meas, std_accel_sys, threshold_track, threshold_lost));
+        (new tracking_singletarget_impl(num_particle, std_range_meas, std_velocity_meas, std_accel_sys, threshold_track, threshold_lost, filter));
     }
 
     /*
      * The private constructor
      */
-    tracking_singletarget_impl::tracking_singletarget_impl(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost)
+    tracking_singletarget_impl::tracking_singletarget_impl(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost, std::string filter)
       : gr::block("tracking_singletarget",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -50,6 +50,7 @@ namespace gr {
 		d_std_accel_sys = std_accel_sys;
 		d_threshold_track = threshold_track;
 		d_threshold_lost = threshold_lost;
+		d_filter = filter;
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -181,7 +182,12 @@ namespace gr {
 	}
 	
 	void
-    tracking_singletarget_impl::filter(){
+	tracking_singletarget_impl::filter_kalman(){
+		
+	}
+	
+	void
+    tracking_singletarget_impl::filter_particle(){
 		float lh, range_dif, velocity_dif;
 		float sum_weight, sum_weight_square;
 		sum_weight = 0;
@@ -261,7 +267,9 @@ namespace gr {
 				float lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+velocity_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // calc likelihood
 				
 				if(d_threshold_track<lh){ // if new sample is accepted as track
-					filter();
+					if(d_filter == "particle") filter_particle();
+					else if(d_filter == "kalman") filter_kalman();
+					else throw std::runtime_error("No suitable filter found for given identifier.");
 					//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE "<<lh<<":\t\trun FILTER" << std::endl;
 					d_lost = 0;
 				}

@@ -56,7 +56,6 @@ list(APPEND radar_sources
     find_max_peak_c_impl.cc
     qtgui_scatter_plot_impl.cc
     qtgui_time_plot_impl.cc
-    tracking_particle_singletarget_impl.cc
     tracking_singletarget_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)

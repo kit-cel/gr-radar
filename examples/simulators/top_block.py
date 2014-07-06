@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Jul  2 16:58:02 2014
+# Generated: Sun Jul  6 14:55:16 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -150,7 +150,7 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
-        self.radar_tracking_particle_singletarget_0 = radar.tracking_particle_singletarget(100, 1, v_res, 0.1, 0.01, 5)
+        self.radar_tracking_singletarget_0 = radar.tracking_singletarget(100, 1, v_res, 0.1, 0.001, 3, "particle")
         self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (velocity,), (1e16,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(524288)
         self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_discard, "packet_len")
@@ -159,7 +159,6 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
         self.radar_qtgui_time_plot_0_0_0 = radar.qtgui_time_plot(250, 'range', (0,R_max), range_time, "")
         self.radar_qtgui_time_plot_0_0 = radar.qtgui_time_plot(250, 'range', (0,R_max), range_time, "TRACKING")
-        self.radar_print_results_0 = radar.print_results(False, "test.txt")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decimator_fac/2, threshold, 0, "packet_len")
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
@@ -201,10 +200,9 @@ class top_block(gr.top_block, Qt.QWidget):
         # Asynch Message Connections
         ##################################################
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_tracking_particle_singletarget_0, "Msg in")
-        self.msg_connect(self.radar_tracking_particle_singletarget_0, "Msg out", self.radar_print_results_0, "Msg in")
-        self.msg_connect(self.radar_tracking_particle_singletarget_0, "Msg out", self.radar_qtgui_time_plot_0_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0_0_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_tracking_singletarget_0, "Msg in")
+        self.msg_connect(self.radar_tracking_singletarget_0, "Msg out", self.radar_qtgui_time_plot_0_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")

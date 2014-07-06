@@ -32,11 +32,12 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      tracking_singletarget_impl(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost);
+      tracking_singletarget_impl(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost, std::string filter);
       ~tracking_singletarget_impl();
       void handle_msg(pmt::pmt_t msg);
       bool tracking();
-      void filter();
+      void filter_particle();
+      void filter_kalman();
       float random_normal(float mean, float std);
       
       int d_num_particle;
@@ -54,6 +55,7 @@ namespace gr {
       float R_det;
       float d_threshold_track;
       int d_threshold_lost;
+      std::string d_filter;
     };
 
   } // namespace radar

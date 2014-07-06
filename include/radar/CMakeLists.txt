@@ -42,6 +42,5 @@ install(FILES
     find_max_peak_c.h
     qtgui_scatter_plot.h
     qtgui_time_plot.h
-    tracking_particle_singletarget.h
     tracking_singletarget.h DESTINATION include/radar
 )

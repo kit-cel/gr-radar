@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::tracking_singletarget::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost);
+      static sptr make(int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost, std::string filter);
     };
 
   } // namespace radar

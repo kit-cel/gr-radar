@@ -3,7 +3,7 @@
   <key>radar_tracking_singletarget</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.tracking_singletarget($num_particle, $std_range_meas, $std_velocity_meas, $std_accel_sys, $threshold_track, $threshold_lost)</make>
+  <make>radar.tracking_singletarget($num_particle, $std_range_meas, $std_velocity_meas, $std_accel_sys, $threshold_track, $threshold_lost, $filter)</make>
   <param>
     <name>Particle number</name>
     <key>num_particle</key>
@@ -33,6 +33,11 @@
     <name>Threshold lost track</name>
     <key>threshold_lost</key>
     <type>int</type>
+  </param>
+  <param>
+    <name>Filter</name>
+    <key>filter</key>
+    <type>string</type>
   </param>
   <sink>
     <name>Msg in</name>
