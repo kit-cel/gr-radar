@@ -37,5 +37,6 @@ install(FILES
     radar_find_max_peak_c.xml
     radar_qtgui_scatter_plot.xml
     radar_qtgui_time_plot.xml
-    radar_tracking_particle_singletarget.xml DESTINATION share/gnuradio/grc/blocks
+    radar_tracking_particle_singletarget.xml
+    radar_tracking_singletarget.xml DESTINATION share/gnuradio/grc/blocks
 )

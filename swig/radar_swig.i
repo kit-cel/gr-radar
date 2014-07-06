@@ -29,6 +29,7 @@
 #include "radar/qtgui_scatter_plot.h"
 #include "radar/qtgui_time_plot.h"
 #include "radar/tracking_particle_singletarget.h"
+#include "radar/tracking_singletarget.h"
 %}
 
 
@@ -77,3 +78,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, qtgui_scatter_plot);
 GR_SWIG_BLOCK_MAGIC2(radar, qtgui_time_plot);
 %include "radar/tracking_particle_singletarget.h"
 GR_SWIG_BLOCK_MAGIC2(radar, tracking_particle_singletarget);
+%include "radar/tracking_singletarget.h"
+GR_SWIG_BLOCK_MAGIC2(radar, tracking_singletarget);
