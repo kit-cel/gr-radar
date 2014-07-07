@@ -24,7 +24,6 @@
 
 #include <gnuradio/io_signature.h>
 #include "usrp_echotimer_cc_impl.h"
-#include <iostream>
 
 namespace gr {
   namespace radar {
@@ -111,8 +110,9 @@ namespace gr {
 		d_usrp_tx->set_time_source(d_time_source_tx); // Set TX time, TX is master
 		
 		// Setup USRP TX: timestamp
-		d_usrp_tx->set_time_now(uhd::time_spec_t(0.0)); // Set to 0 on startup
-		// FIXME: need to set time source? internal on default?
+		if(d_time_source_tx!="gpsdo"){
+			d_usrp_tx->set_time_now(uhd::time_spec_t(0.0)); // Do set time on startup if not gpsdo is activated.
+		}
 		
 		// Setup transmit streamer
 		uhd::stream_args_t stream_args_tx("fc32", d_wire_tx); // complex floats
@@ -152,7 +152,7 @@ namespace gr {
 		d_usrp_rx[k]->set_rx_antenna(d_antenna_rx[k]);
 		
 		// Setup USRP RX: clock source
-		d_usrp_rx[k]->set_clock_source(d_clock_source_rx[k]); // RX is slave, clock is set on TX
+		d_usrp_rx[k]->set_clock_source(d_clock_source_rx[k]); // RX is slave, clock is set on TX for mimo, or use gpsdo
 		
 		// Setup USRP RX: time source
 		d_usrp_rx[k]->set_time_source(d_time_source_rx[k]);
@@ -219,7 +219,11 @@ namespace gr {
         d_metadata_tx.start_of_burst = true;
 		d_metadata_tx.end_of_burst = false;
 		d_metadata_tx.has_time_spec = true;
-		d_metadata_tx.time_spec = d_time_now_tx+uhd::time_spec_t(d_wait_tx); // Timespec needed?
+		d_metadata_tx.time_spec = d_time_now_tx+uhd::time_spec_t(d_wait_tx);
+		
+		uhd::time_spec_t time_now = d_usrp_tx->get_time_now();
+		/*std::cout << "TX " << ": " << d_metadata_tx.time_spec.get_full_secs() << "; " << d_metadata_tx.time_spec.get_frac_secs() << " / "
+				  << time_now.get_full_secs() << "; " << time_now.get_frac_secs() << std::endl;*/
 		
 		// Send input buffer
 		size_t num_acc_samps = 0; // Number of accumulated samples
@@ -248,6 +252,10 @@ namespace gr {
 		stream_cmd.time_spec = d_time_now_rx[k]+uhd::time_spec_t(d_wait_rx[k]);
 		d_rx_stream[k]->issue_stream_cmd(stream_cmd);
 		
+		uhd::time_spec_t time_now = d_usrp_rx[k]->get_time_now();
+		/*std::cout << "RX " << k << ": " << stream_cmd.time_spec.get_full_secs() << "; " << stream_cmd.time_spec.get_frac_secs() << " / "
+				  << time_now.get_full_secs() << "; " << time_now.get_frac_secs() << std::endl;*/
+		
 		size_t num_rx_samps;
 		// Receive a packet
 		num_rx_samps = d_rx_stream[k]->recv(d_out_recv[k], total_num_samps, d_metadata_rx[k], total_num_samps/(float)d_samp_rate+d_timeout_rx[k]);
@@ -260,10 +268,10 @@ namespace gr {
 
 		// Handle the error code
 		if (d_metadata_rx[k].error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
-			throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx[k].strerror()));
+			throw std::runtime_error(str(boost::format("RX %i: Receiver error %s") % k % d_metadata_rx[k].strerror()));
 		}
 
-		if (num_rx_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
+		if (num_rx_samps < total_num_samps) std::cerr << "RX " << k << ":Receive timeout before all samples received..." << std::endl;
     }
 
     int

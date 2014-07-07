@@ -4,6 +4,13 @@
 
 For the actual install guide read the README at the main folder.
 
+If you want to set the parameters in gr-radar/examples/setup/setup_core on every system start, edit /etc/sysctl.conf with following lines.
+
+# Updates for GNU Radio
+net.core.rmem_max=50000000
+net.core.wmem_max=1048576
+kernel.shmmax=2147483648
+
 \section basic Basics
 
 Basic idea of the toolbox. Signal generator -> Split Echotimer/Simulator -> connect sig_gen and echotimer/simulator -> estimator -> some kind of output
