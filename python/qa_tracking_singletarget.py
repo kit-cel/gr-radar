@@ -38,7 +38,7 @@ class qa_tracking_singletarget (gr_unittest.TestCase):
 
 	def test_001_t (self):
 		# create input data
-		steps = 50
+		steps = 200
 		vec_time = np.linspace(0,20,steps);
 		vec_velocity = np.linspace(5,5,steps)
 		vec_range = np.linspace(100,1,steps)
@@ -81,6 +81,7 @@ class qa_tracking_singletarget (gr_unittest.TestCase):
 		threshold_track = 0.001
 		threshold_lost = 4
 		tracking_filter = "particle"
+		#tracking_filter = "kalman"
 		
 		# connect multiple strobes for different msgs
 		src = [0]*len(target_pmts)

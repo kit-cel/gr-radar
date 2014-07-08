@@ -70,11 +70,13 @@ namespace gr {
 		d_particle_weight.resize(num_particle);
 		
 		int matrix_size = 2; // setup matrix
-		Q.resize(matrix_size); R.resize(matrix_size); R_inv.resize(matrix_size);
+		Q.resize(matrix_size); R.resize(matrix_size); R_inv.resize(matrix_size), P.resize(matrix_size), K.resize(matrix_size);
 		for(int k=0; k<matrix_size; k++){
 			Q[k].resize(matrix_size);
 			R[k].resize(matrix_size);
 			R_inv[k].resize(matrix_size);
+			P[k].resize(matrix_size);
+			K[k].resize(matrix_size);
 		}
 		
 		d_lost = 0; // number of lost tracks
@@ -117,13 +119,13 @@ namespace gr {
 			msg_part = pmt::nth(k,msg);
 			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="range"){
 				vec_pmt = (pmt::f32vector_elements(pmt::nth(1,msg_part)));
-				if(vec_pmt.size()!=0) d_range = vec_pmt[0];
+				if(vec_pmt.size()!=0)d_range_meas = vec_pmt[0];
 				else d_is_empty = true;
 				range_found = true;
 			}
 			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="velocity"){
 				vec_pmt = (pmt::f32vector_elements(pmt::nth(1,msg_part)));
-				if(vec_pmt.size()!=0) d_velocity = vec_pmt[0];
+				if(vec_pmt.size()!=0) d_velocity_meas = vec_pmt[0];
 				else d_is_empty = true;
 				velocity_found = true;
 			}
@@ -155,7 +157,7 @@ namespace gr {
 			pmt::pmt_t msg_val;
 			std::vector<float> f32_val;
 			// Add velocity
-			f32_val.push_back(d_velocity);
+			f32_val.push_back(d_velocity_est);
 			msg_val = pmt::list2(pmt::string_to_symbol("velocity"),pmt::init_f32vector(f32_val.size(), f32_val));
 			if(store_msg.size()!=0){ // if a pmt list is created before
 				msg_out = pmt::list_add(msg_out, msg_val);
@@ -164,7 +166,7 @@ namespace gr {
 			}
 			// Add range
 			f32_val.clear();
-			f32_val.push_back(d_range);
+			f32_val.push_back(d_range_est);
 			msg_val = pmt::list2(pmt::string_to_symbol("range"),pmt::init_f32vector(f32_val.size(), f32_val));
 			msg_out = pmt::list_add(msg_out, msg_val);
 			
@@ -181,42 +183,67 @@ namespace gr {
 		return mean+std*std::sqrt(-2*std::log(v1)) * std::cos(2*M_PI*v2);
 	}
 	
-	void
+	void // begin kalman-filter
 	tracking_singletarget_impl::filter_kalman(){
+		float a, b, c, d, factor;
+		/* predection based on system-model */
+		d_range_est = d_range_est - d_delta_t * d_velocity_est; // r_k = r_k-1 + delta_T * v_k-1 // v_k = v_k-1 
+		// calc state-covariance matrix
+		P[0][0] = P[0][0]+P[1][0]*d_delta_t+d_delta_t*(P[0][1]+d_delta_t*P[1][1])+Q[0][0];
+		P[0][1] = P[0][1]+d_delta_t*P[1][1]+Q[0][1];
+		P[1][0] = P[1][0]+d_delta_t*P[1][1]+Q[1][0];
+		P[1][1] = P[1][1] + Q[1][1];
 		
-	}
+		/*  filtering based on new measurement */
+		// calc Kalman-Gain: K = P*H'/(H*P*H'+R) here: K = P/(P+R)
+		a = P[0][0]+R[0][0];
+		b = P[0][1]+R[0][1];
+		c = P[1][0]+R[1][0];
+		d = P[1][1]+R[1][1];
+		factor = 1/(a*d-b*c); // for 2x2 matrix invers
+		K[0][0] = factor * (d*P[0][0] - c*P[0][1]);
+		K[0][1] = factor * (a*P[0][1] - b*P[0][0]);
+		K[1][0] = factor * (d*P[1][0] - c*P[1][1]);
+		K[1][1] = factor * (a*P[1][1] - b*P[1][0]);
+		// updated state
+		d_range_est = d_range_est + K[0][0]*(d_range_meas - d_range_est) + K[0][1]*(d_velocity_meas - d_velocity_est);
+		d_velocity_est = d_velocity_est	+ K[1][0]*(d_range_meas - d_range_est) + K[1][1]*(d_velocity_meas - d_velocity_est);
+		// update state-covariance matrix
+		P[0][0] = (1-K[0][0])*P[0][0] - P[1][0]*K[0][1];
+		P[0][1] = (1-K[0][0])*P[0][1] - P[1][1]*K[0][1];
+		P[1][0] = (1-K[1][1])*P[1][0] - P[0][0]*K[1][0];
+		P[1][1] = (1-K[1][1])*P[1][1] - P[0][1]*K[1][0];
+	} // end kalman-filter
 	
-	void
+	void // begin particle filter
     tracking_singletarget_impl::filter_particle(){
 		float lh, range_dif, velocity_dif;
 		float sum_weight, sum_weight_square;
 		sum_weight = 0;
 		sum_weight_square = 0;
 		for(int k=0; k<d_num_particle; k++){
-			// calc particle range, velocity and weights
+			// sample particles from time prosecution
 			d_particle_range[k] = random_normal(d_particle_range[k]-d_particle_velocity[k]*d_delta_t, std::sqrt(Q[0][0]));
 			d_particle_velocity[k] = random_normal(d_particle_velocity[k], std::sqrt(Q[1][1]));
-			range_dif = d_range-d_particle_range[k];
-			velocity_dif = d_velocity-d_particle_velocity[k];
+			range_dif = d_range_meas-d_particle_range[k];
+			velocity_dif = d_velocity_meas-d_particle_velocity[k];
 			lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+velocity_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // get likelihood
 			d_particle_weight[k] = d_particle_weight[k]*lh;
 			// calc sum of weights and sum of weight square
 			sum_weight = sum_weight + d_particle_weight[k];
 			sum_weight_square = sum_weight_square + d_particle_weight[k]*d_particle_weight[k];
 		}
+		// normalize particle-weight ( sum(particle_weight =! 1))
 		for(int k=0; k<d_num_particle; k++) d_particle_weight[k] = d_particle_weight[k]/sum_weight;
-		float n_eff = 1/(float)sum_weight_square;
-		
-		if(n_eff<d_num_particle/(float)2){
-			// do systematic resampling
-			std::cout << "DO RESAMP" << std::endl;
+		float n_eff = 1/(float)sum_weight_square; // measure of degeneracy
+		if(n_eff<d_num_particle/(float)2){ // if degeneracy is to high --> systematic resampling
 			int num_range = 1000000;
-			float u1 = (rand()%num_range)/(float)num_range;
-			u1 = u1/d_num_particle;
+			float u1 = (rand()%num_range)/(float)num_range; // sample random starting index ...
+			u1 = u1/d_num_particle; // ... and normalize
 			std::vector<float> cum_weight;
 			cum_weight.resize(d_num_particle);
 			cum_weight[0] = d_particle_weight[0];
-			for(int k=1; k<d_num_particle; k++){
+			for(int k=1; k<d_num_particle; k++){ // calc cummulativ sum of all particles
 				cum_weight[k] = cum_weight[k-1]+d_particle_weight[k];
 			}
 			int i = 0;
@@ -229,22 +256,23 @@ namespace gr {
 				while(u[k]>cum_weight[i]){
 					i++;
 				}
-				index[k] = i;
+				index[k] = i; // chose particle indexes with high weight
 			}
 			for(int k=0; k<d_num_particle; k++){
-				d_particle_range[k] = d_particle_range[index[k]];
+				d_particle_range[k] = d_particle_range[index[k]]; // resample only those particles with high weight ...
 				d_particle_velocity[k] = d_particle_velocity[index[k]];
-				d_particle_weight[k] = 1/(float)d_num_particle;
+				d_particle_weight[k] = 1/(float)d_num_particle; // ... and set particle_weight to the same value
 			}
 		}
 		
-		d_range = 0;
-		d_velocity = 0;
+		d_range_est = 0;
+		d_velocity_est = 0;
+		// calc mean of all weighted particles to get the estimated state
 		for(int k=0; k<d_num_particle; k++){
-			d_range += d_particle_range[k]*d_particle_weight[k];
-			d_velocity += d_particle_velocity[k]*d_particle_weight[k];
+			d_range_est += d_particle_range[k]*d_particle_weight[k];
+			d_velocity_est += d_particle_velocity[k]*d_particle_weight[k];
 		}
-	}
+	} // end particle filter
     
     bool
     tracking_singletarget_impl::tracking(){	
@@ -252,6 +280,7 @@ namespace gr {
 			
 		// Calc time difference and matrix Q
 		d_delta_t = d_time-d_time_last; // time difference
+		d_time_last = d_time;
 		
 		Q[0][0] = 0.25*std::pow(d_delta_t,4)*d_std_accel_sys*d_std_accel_sys;
 		Q[0][1] = 0.5*std::pow(d_delta_t,3)*d_std_accel_sys*d_std_accel_sys;
@@ -262,36 +291,29 @@ namespace gr {
 		if(d_is_track){ // check if track is available
 			if(is_valid){ // check if measurement is valid
 				float range_dif, velocity_dif;
-				range_dif = d_range-d_range_last;
-				velocity_dif = d_velocity-d_velocity_last;
+				range_dif = d_range_meas-d_range_est;
+				velocity_dif = d_velocity_meas-d_velocity_est;
 				float lh = std::exp(-0.5*(range_dif*range_dif*R_inv[0][0]+velocity_dif*velocity_dif*R_inv[1][1]))/2/M_PI/std::sqrt(R_det); // calc likelihood
 				
 				if(d_threshold_track<lh){ // if new sample is accepted as track
 					if(d_filter == "particle") filter_particle();
 					else if(d_filter == "kalman") filter_kalman();
 					else throw std::runtime_error("No suitable filter found for given identifier.");
-					//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE "<<lh<<":\t\trun FILTER" << std::endl;
 					d_lost = 0;
 				}
 				else{ // if sample is rejected, do simple estimation based on system model (v=const, R=v*dt)
-					d_range = d_range_last-d_velocity_last*d_delta_t; // velocity < 0 for movement to radar
-					d_velocity = d_velocity_last; // v=const.
+					d_range_est = d_range_est-d_velocity_est*d_delta_t; // velocity < 0 for movement to radar; v=const.
 					d_lost++;
-					//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<" LIKE ("<<lh<<"):\t\tbad LIKELIHOOD" << std::endl;
 					if(d_lost>d_threshold_lost){
 						d_is_track = false;
-						//std::cout << "REJECT TRACK" << std::endl;
 						return false; // tracking is not successfull
 					}
 				}
 			}
 			else{ // if sample is rejected, do simple estimation based on system model (v=const, R=v*dt)
-				d_range = d_range_last-d_velocity_last*d_delta_t; // velocity < 0 for movement to radar
-				d_velocity = d_velocity_last; // v=const.
+				d_range_est = d_range_est-d_velocity_est*d_delta_t; // velocity < 0 for movement to radar; v=const.
 				d_lost++;
-				//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tbad SAMPLE" << std::endl;
 				if(d_lost>d_threshold_lost){
-					//std::cout << "REJECT TRACK" << std::endl;
 					d_is_track = false;
 					return false; // tracking is not successfull
 				}
@@ -299,13 +321,24 @@ namespace gr {
 		}
 		else{ // if track is not available
 			if(is_valid){ // if measurement is valid, do initializiation; else do nothing
-				// push through d_range and d_velocity (do nothing)
-				for(int k=0; k<d_num_particle; k++){
-					d_particle_range[k] = random_normal(d_range, d_std_range_meas);
-					d_particle_velocity[k] = random_normal(d_velocity, d_std_velocity_meas);
-					d_particle_weight[k] = 1/float(d_num_particle);
+				if(d_filter == "particle"){ // initialize particle filter
+					for(int k=0; k<d_num_particle; k++){
+						// samle particles from importance density based on first measurement
+						d_particle_range[k] = random_normal(d_range_meas, d_std_range_meas);
+						d_particle_velocity[k] = random_normal(d_velocity_meas, d_std_velocity_meas);
+						d_particle_weight[k] = 1/float(d_num_particle); // set all particle_weights to the same value
+					}
 				}
-				//std::cout << "TRACK "<<d_is_track<<" VALID "<<is_valid<<":\t\t\t\tINITIALIZE" << std::endl;
+				else if(d_filter == "kalman"){ // initialize state-covariance matrix for the kalman filter
+					P[0][0] = d_std_range_meas * d_std_range_meas;
+					P[0][1] = 0;
+					P[1][0] = 0;
+					P[1][1] = d_std_velocity_meas * d_std_velocity_meas;
+				}
+				else throw std::runtime_error("No suitable filter found for given identifier.");					
+				// use first range & velocity measurement to intialize the state
+				d_range_est = d_range_meas;
+				d_velocity_est = d_velocity_meas;
 				d_is_track = true;
 				d_lost = 0;
 			}
@@ -315,12 +348,6 @@ namespace gr {
 				return false;
 			}
 		}
-		
-		// Store values
-		d_range_last = d_range;
-		d_velocity_last = d_velocity;
-		d_time_last = d_time;
-		
 		return true; // tracking is successfull
 	}
 

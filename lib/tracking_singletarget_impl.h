@@ -42,15 +42,15 @@ namespace gr {
       
       int d_num_particle;
       float d_std_range_meas, d_std_velocity_meas, d_std_accel_sys;
-      float d_range, d_velocity, d_time;
+      float d_range_meas, d_velocity_meas, d_time;
       
       pmt::pmt_t d_port_id_in, d_port_id_out;
       
-      float d_range_last, d_velocity_last, d_time_last;
+      float d_range_est, d_velocity_est, d_time_last;
       float d_delta_t;
       int d_lost;
       bool d_is_track, d_is_empty;
-      std::vector<std::vector<float> > Q, R, R_inv;
+      std::vector<std::vector<float> > Q, R, R_inv, P, K;
       std::vector<float> d_particle_range, d_particle_velocity, d_particle_weight;
       float R_det;
       float d_threshold_track;
