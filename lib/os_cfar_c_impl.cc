@@ -110,8 +110,12 @@ namespace gr {
 			
 			if(std::pow(std::abs(in[k]),2)>d_hold_samp[(int)((2*d_samp_compare-1)*d_rel_threshold)]*d_mult_threshold){ // check if in[k] is over dynamic threshold multiplied with mult_threshold
 				// Add peaks, frequencies and angle
-				if(k<=ninput_items[0]/2) d_freq.push_back(k*d_samp_rate/(float)ninput_items[0]); // add frequency to message vector d_freq
-				else d_freq.push_back(-(float)d_samp_rate+k*d_samp_rate/(float)ninput_items[0]);
+				if(k<=ninput_items[0]/2){
+					d_freq.push_back(k*(d_samp_rate/(float)ninput_items[0])); // add frequency to message vector d_freq
+				}
+				else{
+					d_freq.push_back(-(float)d_samp_rate+k*(d_samp_rate/(float)ninput_items[0]));
+				}
 				d_pks.push_back(pow(abs(in[k]),2)); // add abs-square to message vector d_pks
 				d_angle.push_back(std::arg(in[k])); // add angle to message vector d_angle
 				

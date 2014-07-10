@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Mon May 12 12:42:56 2014</timestamp>
+  <timestamp>Thu Jul 10 11:55:11 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -61,38 +61,42 @@
     </param>
   </block>
   <block>
-    <key>pad_sink</key>
+    <key>blocks_stream_to_vector</key>
     <param>
       <key>id</key>
-      <value>pad_sink_0</value>
+      <value>blocks_stream_to_vector_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>label</key>
-      <value>out</value>
-    </param>
-    <param>
       <key>type</key>
       <value>complex</value>
+    </param>
+    <param>
+      <key>num_items</key>
+      <value>packet_len</value>
     </param>
     <param>
       <key>vlen</key>
       <value>1</value>
     </param>
     <param>
-      <key>num_streams</key>
-      <value>1</value>
+      <key>affinity</key>
+      <value></value>
     </param>
     <param>
-      <key>optional</key>
-      <value>False</value>
+      <key>minoutbuf</key>
+      <value>packet_len*2</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1014, 431)</value>
+      <value>(300, 383)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -131,7 +135,42 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(280, 440)</value>
+      <value>(269, 467)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>id</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Packet length</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1024</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(223, 56)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -178,7 +217,7 @@
     </param>
     <param>
       <key>minoutbuf</key>
-      <value>2*packet_len</value>
+      <value>packet_len*2</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -186,7 +225,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(536, 155)</value>
+      <value>(482, 245)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -194,57 +233,18 @@
     </param>
   </block>
   <block>
-    <key>blocks_stream_to_vector</key>
+    <key>pad_sink</key>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_vector_0</value>
+      <value>pad_sink_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>2*packet_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(270, 221)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_tagged_stream</key>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
+      <key>label</key>
+      <value>out</value>
     </param>
     <param>
       <key>type</key>
@@ -255,28 +255,16 @@
       <value>1</value>
     </param>
     <param>
-      <key>packet_len</key>
-      <value>packet_len</value>
+      <key>num_streams</key>
+      <value>1</value>
     </param>
     <param>
-      <key>len_tag_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
+      <key>optional</key>
+      <value>False</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(830, 288)</value>
+      <value>(804, 463)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -311,7 +299,7 @@
     </param>
     <param>
       <key>minoutbuf</key>
-      <value>2*packet_len</value>
+      <value>0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -319,77 +307,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(885, 175)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Sample rate</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(86, 128)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>id</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Packet length</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(223, 56)</value>
+      <value>(795, 329)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -403,26 +321,20 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fft_vxx_0</source_block_id>
-    <sink_block_id>blocks_vector_to_stream_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>pad_source_0</source_block_id>
     <sink_block_id>blocks_stream_to_vector_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
-    <sink_block_id>pad_sink_0</sink_block_id>
+    <source_block_id>fft_vxx_0</source_block_id>
+    <sink_block_id>blocks_vector_to_stream_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_vector_to_stream_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0</sink_block_id>
+    <sink_block_id>pad_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

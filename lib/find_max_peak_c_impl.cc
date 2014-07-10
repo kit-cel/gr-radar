@@ -103,8 +103,8 @@ namespace gr {
 		}
         
         if(k!=-1){
-			if(k<=ninput_items[0]/2) d_freq.push_back(k*d_samp_rate/(float)ninput_items[0]); // add frequency to message vector d_freq
-			else d_freq.push_back(-(float)d_samp_rate+k*d_samp_rate/(float)ninput_items[0]);
+			if(k<=ninput_items[0]/2) d_freq.push_back(k*(d_samp_rate/(float)ninput_items[0])); // add frequency to message vector d_freq
+			else d_freq.push_back(-(float)d_samp_rate+k*(d_samp_rate/(float)ninput_items[0]));
 			d_pks.push_back(std::pow(std::abs(in[k]),2));
 			d_angle.push_back(std::arg(in[k]));
 		}
