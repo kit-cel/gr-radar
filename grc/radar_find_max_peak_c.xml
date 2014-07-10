@@ -3,7 +3,7 @@
   <key>radar_find_max_peak_c</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.find_max_peak_c($samp_rate, $threshold, $samp_protect, $len_key)</make>
+  <make>radar.find_max_peak_c($samp_rate, $threshold, $samp_protect, $max_freq, $cut_max_freq, $len_key)</make>
   <callback>set_threshold($threshold)</callback>
   <callback>set_samp_protect($samp_protect)</callback>
   <param>
@@ -20,6 +20,25 @@
     <name>Number protected samples</name>
     <key>samp_protect</key>
     <type>int</type>
+  </param>
+  <param>
+    <name>Cut frequencies</name>
+    <key>max_freq</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Use cut frequencies</name>
+    <key>cut_max_freq</key>
+    <value>False</value>
+    <type>bool</type>
+      <option>
+		<name>True</name>
+		<key>True</key>
+	  </option>
+	  <option>
+		<name>False</name>
+		<key>False</key>
+	  </option>
   </param>
   <param>
     <name>Packet length key</name>

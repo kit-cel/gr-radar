@@ -35,14 +35,17 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      find_max_peak_c_impl(int samp_rate, float threshold, int samp_protect, const std::string& len_key);
+      find_max_peak_c_impl(int samp_rate, float threshold, int samp_protect, std::vector<float> max_freq, bool cut_max_freq, const std::string& len_key);
       ~find_max_peak_c_impl();
       void set_threshold(float threshold);
       void set_samp_protect(int samp);
+      void set_max_freq(std::vector<float> freq);
       
       int d_samp_rate;
       float d_threshold;
       int d_samp_protect;
+      std::vector<float> d_max_freq;
+      bool d_cut_max_freq;
       
       std::vector<float> d_pks, d_freq, d_angle;
       

@@ -46,9 +46,10 @@ namespace gr {
        * class. radar::find_max_peak_c::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int samp_rate, float threshold, int samp_protect, const std::string& len_key="packet_len");
+      static sptr make(int samp_rate, float threshold, int samp_protect, std::vector<float> max_freq, bool cut_max_freq, const std::string& len_key="packet_len");
       virtual void set_threshold(float threshold) = 0;
       virtual void set_samp_protect(int samp) = 0;
+      virtual void set_max_freq(std::vector<float> freq) = 0;
     };
 
   } // namespace radar
