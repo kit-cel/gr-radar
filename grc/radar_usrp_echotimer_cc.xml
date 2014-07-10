@@ -3,16 +3,10 @@
   <key>radar_usrp_echotimer_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.usrp_echotimer_cc($n_outputs, $samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $gain_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $gain_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $gain_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $gain_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
   <callback>set_num_delay_samps($num_delay_samps)</callback>
   <callback>set_tx_gain($gain_tx)</callback>
   <callback>set_rx_gain($gain_rx)</callback>
-  <param>
-    <name>Number RX USRPs</name>
-    <key>n_outputs</key>
-    <value>1</value>
-    <type>int</type>
-  </param>
   <param>
     <name>Sample rate</name>
     <key>samp_rate</key>
@@ -26,8 +20,8 @@
   <param>
     <name>Number delay samples</name>
     <key>num_delay_samps</key>
-    <value>(0,)</value>
-    <type>raw</type>
+    <value>0</value>
+    <type>int</type>
   </param>
   <param>
     <name>TX Arguments</name>
@@ -93,62 +87,62 @@
   <param>
     <name>RX Arguments</name>
     <key>args_rx</key>
-    <value>('addr=192.168.xx.xx',)</value>
-    <type>raw</type>
+    <value>'addr=192.168.xx.xx'</value>
+    <type>string</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Wire</name>
     <key>wire_rx</key>
-    <value>('',)</value>
-    <type>raw</type>
+    <value>''</value>
+    <type>string</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Clock source</name>
     <key>clock_source_rx</key>
-    <value>('mimo',)</value>
-    <type>raw</type>
+    <value>'mimo'</value>
+    <type>string</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Time Source</name>
     <key>time_source_rx</key>
-    <value>('mimo',)</value>
-    <type>raw</type>
+    <value>'mimo'</value>
+    <type>string</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Antenna</name>
     <key>antenna_rx</key>
-    <type>raw</type>
+    <type>string</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Gain</name>
     <key>gain_rx</key>
-    <type>raw</type>
+    <type>float</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Timeout</name>
     <key>timeout_rx</key>
-    <value>(0.1,)</value>
-    <type>raw</type>
+    <value>0.1</value>
+    <type>float</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Wait to start</name>
     <key>wait_rx</key>
-    <value>(0.05,)</value>
-    <type>raw</type>
+    <value>0.05</value>
+    <type>float</type>
     <hide>part</hide>
   </param>
   <param>
     <name>RX Lo offset</name>
     <key>lo_offset_rx</key>
-    <value>(0,)</value>
-    <type>raw</type>
+    <value>0</value>
+    <type>float</type>
     <hide>part</hide>
   </param>
   <param>
@@ -165,6 +159,5 @@
   <source>
     <name>IQ out</name>
     <type>complex</type>
-    <nports>$n_outputs</nports>
   </source>
 </block>

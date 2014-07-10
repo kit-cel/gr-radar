@@ -89,9 +89,9 @@ class qa_estimator_fmcw (gr_unittest.TestCase):
 		
 		threshold = -300
 		samp_protect = 0
-		cfar_cw = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect)
-		cfar_up = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect)
-		cfar_down = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect)
+		cfar_cw = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect, (0,0), False)
+		cfar_up = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect, (0,0), False)
+		cfar_down = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect, (0,0), False)
 		
 		est = radar.estimator_fmcw(samp_rate/(decim_fac), center_freq, freq_sweep, samp_up/(decim_fac), samp_down/(decim_fac))
 		
