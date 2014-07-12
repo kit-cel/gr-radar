@@ -41,5 +41,6 @@ install(FILES
     qtgui_scatter_plot.h
     qtgui_time_plot.h
     tracking_singletarget.h
-    msg_gate.h DESTINATION include/radar
+    msg_gate.h
+    msg_manipulator.h DESTINATION include/radar
 )

@@ -1,22 +1,24 @@
 <block>
-  <name>Message Gate</name>
-  <key>radar_msg_gate</key>
+  <name>Message Manipulator</name>
+  <key>radar_msg_manipulator</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.msg_gate($msg_keys, $val_min, $val_max)</make>
+  <make>radar.msg_manipulator($symbols, $const_add, $const_mult)</make>
+  <callback>set_const_add($const_add)</callback>
+  <callback>set_const_mult($const_mult)</callback>
   <param>
     <name>Keys</name>
-    <key>msg_keys</key>
+    <key>symbols</key>
     <type>raw</type>
   </param>
   <param>
-    <name>Value min</name>
-    <key>val_min</key>
+    <name>Add</name>
+    <key>const_add</key>
     <type>real_vector</type>
   </param>
   <param>
-    <name>Value max</name>
-    <key>val_max</key>
+    <name>Mult</name>
+    <key>const_mult</key>
     <type>real_vector</type>
   </param>
   <sink>

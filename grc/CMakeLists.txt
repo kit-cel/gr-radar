@@ -36,5 +36,6 @@ install(FILES
     radar_qtgui_scatter_plot.xml
     radar_qtgui_time_plot.xml
     radar_tracking_singletarget.xml
-    radar_msg_gate.xml DESTINATION share/gnuradio/grc/blocks
+    radar_msg_gate.xml
+    radar_msg_manipulator.xml DESTINATION share/gnuradio/grc/blocks
 )

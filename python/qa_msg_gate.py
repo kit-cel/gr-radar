@@ -52,7 +52,7 @@ class qa_msg_gate (gr_unittest.TestCase):
 		est = radar.estimator_cw(center_freq)
 		res1 = radar.print_results()
 		res2 = radar.print_results()
-		gate = radar.msg_gate(('velocity','bla'),(8,8),(17,17),0)
+		gate = radar.msg_gate(('velocity','bla'),(8,8),(17,17))
 		debug1 = blocks.message_debug()
 		debug2 = blocks.message_debug()
 
@@ -78,7 +78,7 @@ class qa_msg_gate (gr_unittest.TestCase):
 		self.assertEqual( "velocity", pmt.symbol_to_string(pmt.nth(0,(pmt.nth(1,msg2)))) ) # check velocity message part (symbol), 2
 		self.assertEqual(pmt.length(pmt.nth(1,pmt.nth(1,msg1))),3) # check number of targets without gate
 		self.assertEqual(pmt.length(pmt.nth(1,pmt.nth(1,msg2))),1) # check nubmer of targets with gate
-		self.assertAlmostEqual( 1, velocity[1]/pmt.f32vector_ref(pmt.nth(1,(pmt.nth(1,msg2))),0), 2 ) # check velocity value
+		self.assertAlmostEqual( 1, velocity[1]/pmt.f32vector_ref(pmt.nth(1,(pmt.nth(1,msg2))),0), 1 ) # check velocity value
 
 
 if __name__ == '__main__':

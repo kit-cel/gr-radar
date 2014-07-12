@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_RADAR_MSG_GATE_H
-#define INCLUDED_RADAR_MSG_GATE_H
+#ifndef INCLUDED_RADAR_MSG_MANIPULATOR_H
+#define INCLUDED_RADAR_MSG_MANIPULATOR_H
 
 #include <radar/api.h>
 #include <gnuradio/block.h>
@@ -33,24 +33,26 @@ namespace gr {
      * \ingroup radar
      *
      */
-    class RADAR_API msg_gate : virtual public gr::block
+    class RADAR_API msg_manipulator : virtual public gr::block
     {
      public:
-      typedef boost::shared_ptr<msg_gate> sptr;
+      typedef boost::shared_ptr<msg_manipulator> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of radar::msg_gate.
+       * \brief Return a shared_ptr to a new instance of radar::msg_manipulator.
        *
-       * To avoid accidental use of raw pointers, radar::msg_gate's
+       * To avoid accidental use of raw pointers, radar::msg_manipulator's
        * constructor is in a private implementation
-       * class. radar::msg_gate::make is the public interface for
+       * class. radar::msg_manipulator::make is the public interface for
        * creating new instances.
        */
-      static sptr make(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max);
+      static sptr make(std::vector<std::string> symbols, std::vector<float> const_add, std::vector<float> const_mult);
+      virtual void set_const_add(std::vector<float> val) = 0;
+      virtual void set_const_mult(std::vector<float> val) = 0;
     };
 
   } // namespace radar
 } // namespace gr
 
-#endif /* INCLUDED_RADAR_MSG_GATE_H */
+#endif /* INCLUDED_RADAR_MSG_MANIPULATOR_H */
 

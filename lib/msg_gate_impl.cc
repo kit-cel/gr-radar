@@ -30,21 +30,20 @@ namespace gr {
   namespace radar {
 
     msg_gate::sptr
-    msg_gate::make(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose)
+    msg_gate::make(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max)
     {
       return gnuradio::get_initial_sptr
-        (new msg_gate_impl(keys, val_min, val_max, verbose));
+        (new msg_gate_impl(keys, val_min, val_max));
     }
 
     /*
      * The private constructor
      */
-    msg_gate_impl::msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose)
+    msg_gate_impl::msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max)
       : gr::block("msg_gate",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
-		d_verbose = verbose;
 		d_keys = keys;
 		d_val_min = val_min;
 		d_val_max = val_max;
@@ -61,6 +60,7 @@ namespace gr {
 	
 	void
 	msg_gate_impl::handle_msg(pmt::pmt_t msg){
+		// FIXME: remake me, pretty bad code
 		size_t msg_size = pmt::length(msg);
 		std::vector<pmt::pmt_t> msg_parts_f32_key;
 		std::vector<std::vector<float> > msg_parts_f32_val; // take f32 vectors of msg

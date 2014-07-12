@@ -17,28 +17,29 @@
  * the Free Software Foundation, Inc., 51 Franklin Street,
  * Boston, MA 02110-1301, USA.
  */
- 
-#ifndef INCLUDED_RADAR_MSG_GATE_IMPL_H
-#define INCLUDED_RADAR_MSG_GATE_IMPL_H
 
-#include <radar/msg_gate.h>
+#ifndef INCLUDED_RADAR_MSG_MANIPULATOR_IMPL_H
+#define INCLUDED_RADAR_MSG_MANIPULATOR_IMPL_H
+
+#include <radar/msg_manipulator.h>
 
 namespace gr {
   namespace radar {
 
-    class msg_gate_impl : public msg_gate
+    class msg_manipulator_impl : public msg_manipulator
     {
      private:
       // Nothing to declare in this block.
 
      public:
-      msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max);
-      ~msg_gate_impl();
+      msg_manipulator_impl(std::vector<std::string> symbols, std::vector<float> const_add, std::vector<float> const_mult);
+      ~msg_manipulator_impl();
       void handle_msg(pmt::pmt_t msg);
+      void set_const_add(std::vector<float> val);
+      void set_const_mult(std::vector<float> val);
       
-      std::vector<std::string> d_keys;
-      std::vector<float> d_val_max;
-      std::vector<float> d_val_min;
+      std::vector<std::string> d_symbols;
+      std::vector<float> d_const_add, d_const_mult;
       
       pmt::pmt_t d_port_id_in, d_port_id_out;
     };
@@ -46,5 +47,5 @@ namespace gr {
   } // namespace radar
 } // namespace gr
 
-#endif /* INCLUDED_RADAR_MSG_GATE_IMPL_H */
+#endif /* INCLUDED_RADAR_MSG_MANIPULATOR_IMPL_H */
 

@@ -28,6 +28,7 @@
 #include "radar/qtgui_time_plot.h"
 #include "radar/tracking_singletarget.h"
 #include "radar/msg_gate.h"
+#include "radar/msg_manipulator.h"
 %}
 
 
@@ -77,3 +78,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, qtgui_time_plot);
 GR_SWIG_BLOCK_MAGIC2(radar, tracking_singletarget);
 %include "radar/msg_gate.h"
 GR_SWIG_BLOCK_MAGIC2(radar, msg_gate);
+%include "radar/msg_manipulator.h"
+GR_SWIG_BLOCK_MAGIC2(radar, msg_manipulator);

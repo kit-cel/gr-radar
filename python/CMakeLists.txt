@@ -58,3 +58,4 @@ GR_ADD_TEST(qa_estimator_sync_pulse_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURC
 GR_ADD_TEST(qa_find_max_peak_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_find_max_peak_c.py)
 GR_ADD_TEST(qa_tracking_singletarget ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_tracking_singletarget.py)
 GR_ADD_TEST(qa_msg_gate ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_msg_gate.py)
+GR_ADD_TEST(qa_msg_manipulator ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_msg_manipulator.py)
