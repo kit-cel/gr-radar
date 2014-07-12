@@ -61,7 +61,7 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		
 		# check frequency in os_cfar message with given one
 		msg = debug.get_message(0)
-		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,msg),0),8)
+		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,pmt.nth(1,msg)),0),8)
 		
 	def test_002_t (self):
 		# test on negative frequencies
@@ -91,7 +91,7 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		
 		# check frequency in os_cfar message with given one
 		msg = debug.get_message(0)
-		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,msg),0),8)
+		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,pmt.nth(1,msg)),0),8)
 		
 	def test_003_t (self):
 		# test cut frequency negative freq
@@ -126,7 +126,7 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		
 		# check frequency in os_cfar message with given one
 		msg = debug.get_message(0)
-		self.assertAlmostEqual(freq1,pmt.f32vector_ref(pmt.nth(1,msg),0),8)
+		self.assertAlmostEqual(freq1,pmt.f32vector_ref(pmt.nth(1,pmt.nth(1,msg)),0),8)
 		
 	def test_004t (self):
 		# test cut frequency positive freq
@@ -161,7 +161,7 @@ class qa_find_max_peak_c (gr_unittest.TestCase):
 		
 		# check frequency in os_cfar message with given one
 		msg = debug.get_message(0)
-		self.assertAlmostEqual(freq1,pmt.f32vector_ref(pmt.nth(1,msg),0),8)
+		self.assertAlmostEqual(freq1,pmt.f32vector_ref(pmt.nth(1,pmt.nth(1,msg)),0),8)
 
 
 if __name__ == '__main__':

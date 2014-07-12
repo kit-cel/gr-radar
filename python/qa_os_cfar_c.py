@@ -54,7 +54,7 @@ class qa_os_cfar_c (gr_unittest.TestCase):
 		
 		self.tb.connect(src,head,s2ts,fft,cfar)
 		self.tb.msg_connect(cfar,"Msg out",debug,"store")
-		#self.tb.msg_connect(cfar,"Msg out",debug,"print")
+		self.tb.msg_connect(cfar,"Msg out",debug,"print")
 		self.tb.start()
 		sleep(0.5)
 		self.tb.stop()
@@ -62,7 +62,7 @@ class qa_os_cfar_c (gr_unittest.TestCase):
 		
 		# check frequency in os_cfar message with given one
 		msg = debug.get_message(0)
-		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,msg),0),8)
+		self.assertAlmostEqual(freq,pmt.f32vector_ref(pmt.nth(1,pmt.nth(1,msg)),0),8)
 		
 	def test_002_t (self):
 		# set up fg
@@ -90,7 +90,7 @@ class qa_os_cfar_c (gr_unittest.TestCase):
 		
 		self.tb.connect(src,head,s2ts,fft,cfar)
 		self.tb.msg_connect(cfar,"Msg out",debug,"store")
-		#self.tb.msg_connect(cfar,"Msg out",debug,"print")
+		self.tb.msg_connect(cfar,"Msg out",debug,"print")
 		self.tb.start()
 		sleep(0.5)
 		self.tb.stop()
@@ -98,7 +98,7 @@ class qa_os_cfar_c (gr_unittest.TestCase):
 		
 		# check frequency in os_cfar message with given one
 		msg = debug.get_message(0)
-		self.assertAlmostEqual(freq/pmt.f32vector_ref(pmt.nth(1,msg),0),1,2)
+		self.assertAlmostEqual(freq/pmt.f32vector_ref(pmt.nth(1,pmt.nth(1,msg)),0),1,2)
 
 
 if __name__ == '__main__':

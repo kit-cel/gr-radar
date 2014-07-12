@@ -130,11 +130,11 @@ namespace gr {
 		get_tags_in_range(d_tags,0,nitems_read(0),nitems_read(0)+1,pmt::string_to_symbol("rx_time"));
 		
 		// setup msg pmt
-		if(d_tags.size()>0) d_ptimestamp = d_tags[0].value;
-		else d_ptimestamp = pmt::make_tuple(pmt::from_uint64(0),pmt::from_double(-1)); // if no timetag is found, set to 0 and frac_sec to -1
-		d_pfreq = pmt::init_f32vector(d_freq.size(),d_freq);
-		d_ppks = pmt::init_f32vector(d_pks.size(),d_pks);
-		d_pangle = pmt::init_f32vector(d_angle.size(),d_angle);
+		if(d_tags.size()>0) d_ptimestamp = pmt::list2(pmt::string_to_symbol("rx_time"),d_tags[0].value);
+		else d_ptimestamp = pmt::list2(pmt::string_to_symbol("rx_time"),pmt::make_tuple(pmt::from_uint64(0),pmt::from_double(-1))); // if no timetag is found, set to 0 and frac_sec to -1
+		d_pfreq = pmt::list2(pmt::string_to_symbol("frequency"),pmt::init_f32vector(d_freq.size(),d_freq));
+		d_ppks = pmt::list2(pmt::string_to_symbol("peak"),pmt::init_f32vector(d_pks.size(),d_pks));
+		d_pangle = pmt::list2(pmt::string_to_symbol("phase"),pmt::init_f32vector(d_angle.size(),d_angle));
 		d_value = pmt::list4(d_ptimestamp,d_pfreq,d_ppks,d_pangle);
 		
 		// publish message

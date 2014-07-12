@@ -67,14 +67,25 @@ namespace gr {
     estimator_fsk_impl::handle_msg(pmt::pmt_t msg)
     {
 		// Read msg from peak detector
-		d_ptimestamp = pmt::nth(0,msg);
-		d_pfreq = pmt::nth(1,msg);
-		d_ppks = pmt::nth(2,msg);
-		d_pphase = pmt::nth(3,msg);
+		pmt::pmt_t msg_part;
+		for(int k=0; k<pmt::length(msg); k++){
+			msg_part = pmt::nth(k,msg);
+			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="frequency"){
+				d_pfreq = pmt::nth(1,msg_part);
+			}
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="phase"){
+				d_pphase = pmt::nth(1,msg_part);
+			}
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="rx_time"){
+				d_ptimestamp = pmt::nth(1,msg_part);
+			}
+		}
 		
 		d_freq = pmt::f32vector_elements(d_pfreq);
-		d_pks = pmt::f32vector_elements(d_ppks);
 		d_phase = pmt::f32vector_elements(d_pphase);
+		
+		// Check read data
+		if(d_phase.size()==0 && d_freq.size()!=0) std::runtime_error("Frequency but no phase found in message");
 		
 		// Calc velocities and write to vector
 		d_vel.clear();
@@ -102,7 +113,7 @@ namespace gr {
 		d_time_pack = pmt::list2(d_time_key, d_ptimestamp); // make list for timestamp information
 		
 		d_value = pmt::list3(d_time_pack, d_vel_pack, d_range_pack); // all information to one pmt list
-		message_port_pub(d_port_id_out,d_value);
+		message_port_pub(d_port_id_out,d_value); // publish message
 	}
 
   } /* namespace radar */

@@ -39,8 +39,8 @@ namespace gr {
       float d_center_freq, d_delta_freq;
       pmt::pmt_t d_port_id_in, d_port_id_out;
       
-      std::vector<float> d_freq, d_pks, d_phase;
-	  pmt::pmt_t d_ptimestamp, d_pfreq, d_ppks, d_pphase;
+      std::vector<float> d_freq, d_phase;
+	  pmt::pmt_t d_ptimestamp, d_pfreq, d_pphase;
 	  
 	  std::vector<float> d_vel;
 	  pmt::pmt_t d_value;

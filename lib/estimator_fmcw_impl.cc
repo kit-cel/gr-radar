@@ -125,11 +125,31 @@ namespace gr {
 		// Get timestamp and frequencies (cw, up-chirp, down-chirp)
 		std::vector<float> freq_cw, freq_up, freq_down;
 		pmt::pmt_t timestamp;
+		pmt::pmt_t msg_part;
 		
-		timestamp = pmt::nth(0,d_msg_cw);
-		freq_cw = pmt::f32vector_elements(pmt::nth(1,d_msg_cw));
-		freq_up = pmt::f32vector_elements(pmt::nth(1,d_msg_up));
-		freq_down = pmt::f32vector_elements(pmt::nth(1,d_msg_down));
+		for(int k=0; k<pmt::length(d_msg_cw); k++){ // search freq CW
+			msg_part = pmt::nth(k,d_msg_cw);
+			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="frequency"){
+				freq_cw = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			}
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="rx_time"){
+				timestamp = pmt::nth(1,msg_part);
+			}
+		}
+		
+		for(int k=0; k<pmt::length(d_msg_up); k++){ // search freq UP
+			msg_part = pmt::nth(k,d_msg_up);
+			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="frequency"){
+				freq_up = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			}
+		}
+		
+		for(int k=0; k<pmt::length(d_msg_down); k++){ // search freq DOWN
+			msg_part = pmt::nth(k,d_msg_down);
+			if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="frequency"){
+				freq_down = pmt::f32vector_elements(pmt::nth(1,msg_part));
+			}
+		}
 		
 		// Get velocities out of CW frequencies
 		std::vector<float> velocity_cw;

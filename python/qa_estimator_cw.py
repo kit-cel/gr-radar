@@ -59,6 +59,7 @@ class qa_estimator_cw (gr_unittest.TestCase):
 		self.tb.msg_connect(cfar,'Msg out',est,'Msg in')
 		self.tb.msg_connect(est,'Msg out',res,'Msg in')
 		self.tb.msg_connect(est,'Msg out',debug,'store')
+		#self.tb.msg_connect(est,'Msg out',debug,'print')
 
 		self.tb.start()
 		sleep(0.5)
