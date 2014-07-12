@@ -20,7 +20,7 @@
 # 
 
 from gnuradio import gr, gr_unittest
-from gnuradio import blocks
+from gnuradio import blocks, fft
 import radar_swig as radar
 import numpy as np
 import numpy.fft
@@ -75,15 +75,48 @@ class qa_ts_fft_cc (gr_unittest.TestCase):
 		
 		fft1 = radar.ts_fft_cc(packet_len)
 		fft1.set_min_output_buffer(min_output_buffer)
-		#fft2 = radar.ts_fft_cc()
-		#fft2.set_min_output_buffer(min_output_buffer)
+		fft2 = radar.ts_fft_cc(packet_len)
+		fft2.set_min_output_buffer(min_output_buffer)
 		
 		snk1 = blocks.vector_sink_c()
-		#snk2 = blocks.vector_sink_c()
+		snk2 = blocks.vector_sink_c()
 		
 		self.tb.connect(src,head,fft1,snk1)
-		#self.tb.connect(head,fft2,snk2)
+		self.tb.connect(head,fft2,snk2)
 		self.tb.run ()
+		
+		# check both ffts
+		self.assertComplexTuplesAlmostEqual(snk1.data(),snk2.data(),2) # compare both ffts
+		
+	def test_003_t (self):
+		# test fft against gnuradio fft
+		# set up fg
+		test_len = 1024*2
+		
+		packet_len = test_len
+		samp_rate = 2000
+		frequency = (100,100)
+		amplitude = 1
+		
+		src = radar.signal_generator_cw_c(packet_len,samp_rate,frequency,amplitude)
+		head = blocks.head(8,test_len)
+		tsfft = radar.ts_fft_cc(packet_len)
+		snk1 = blocks.vector_sink_c()
+		self.tb.connect(src,head,tsfft,snk1)
+		
+		s2v = blocks.stream_to_vector(8, packet_len)
+		fft_inbuild = fft.fft_vcc(test_len,1,fft.window_rectangular(0))
+		snk2 = blocks.vector_sink_c()
+		v2s = blocks.vector_to_stream(8, packet_len);
+		self.tb.connect(head,s2v,fft_inbuild,v2s,snk2)
+		
+		self.tb.run()
+		
+		# compaire ffts
+		data_tsfft = snk1.data()
+		data_fft_inbuild = snk2.data()
+		
+		self.assertComplexTuplesAlmostEqual(data_tsfft,data_fft_inbuild,2) # compare inbuild fft and fft from block
 
 if __name__ == '__main__':
 	#raw_input('block for gdb',)
