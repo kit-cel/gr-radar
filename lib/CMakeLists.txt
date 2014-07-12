@@ -44,7 +44,6 @@ list(APPEND radar_sources
     estimator_cw_impl.cc
     print_results_impl.cc
     static_target_simulator_cc_impl.cc
-    print_peaks_impl.cc
     signal_generator_fsk_c_impl.cc
     split_fsk_cc_impl.cc
     estimator_fsk_impl.cc

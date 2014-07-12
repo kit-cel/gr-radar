@@ -16,7 +16,6 @@
 #include "radar/estimator_cw.h"
 #include "radar/print_results.h"
 #include "radar/static_target_simulator_cc.h"
-#include "radar/print_peaks.h"
 #include "radar/signal_generator_fsk_c.h"
 #include "radar/split_fsk_cc.h"
 #include "radar/estimator_fsk.h"
@@ -50,8 +49,7 @@ GR_SWIG_BLOCK_MAGIC2(radar, estimator_cw);
 GR_SWIG_BLOCK_MAGIC2(radar, print_results);
 %include "radar/static_target_simulator_cc.h"
 GR_SWIG_BLOCK_MAGIC2(radar, static_target_simulator_cc);
-%include "radar/print_peaks.h"
-GR_SWIG_BLOCK_MAGIC2(radar, print_peaks);
+
 %include "radar/signal_generator_fsk_c.h"
 GR_SWIG_BLOCK_MAGIC2(radar, signal_generator_fsk_c);
 %include "radar/split_fsk_cc.h"
