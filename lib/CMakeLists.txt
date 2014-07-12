@@ -48,14 +48,14 @@ list(APPEND radar_sources
     split_fsk_cc_impl.cc
     estimator_fsk_impl.cc
     usrp_echotimer_cc_impl.cc
-    estimator_msg_gate_impl.cc
     estimator_fmcw_impl.cc
     signal_generator_sync_pulse_c_impl.cc
     estimator_sync_pulse_c_impl.cc
     find_max_peak_c_impl.cc
     qtgui_scatter_plot_impl.cc
     qtgui_time_plot_impl.cc
-    tracking_singletarget_impl.cc )
+    tracking_singletarget_impl.cc
+    msg_gate_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

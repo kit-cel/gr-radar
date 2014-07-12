@@ -34,12 +34,12 @@ install(FILES
     split_fsk_cc.h
     estimator_fsk.h
     usrp_echotimer_cc.h
-    estimator_msg_gate.h
     estimator_fmcw.h
     signal_generator_sync_pulse_c.h
     estimator_sync_pulse_c.h
     find_max_peak_c.h
     qtgui_scatter_plot.h
     qtgui_time_plot.h
-    tracking_singletarget.h DESTINATION include/radar
+    tracking_singletarget.h
+    msg_gate.h DESTINATION include/radar
 )

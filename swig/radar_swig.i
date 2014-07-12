@@ -20,7 +20,6 @@
 #include "radar/split_fsk_cc.h"
 #include "radar/estimator_fsk.h"
 #include "radar/usrp_echotimer_cc.h"
-#include "radar/estimator_msg_gate.h"
 #include "radar/estimator_fmcw.h"
 #include "radar/signal_generator_sync_pulse_c.h"
 #include "radar/estimator_sync_pulse_c.h"
@@ -28,6 +27,7 @@
 #include "radar/qtgui_scatter_plot.h"
 #include "radar/qtgui_time_plot.h"
 #include "radar/tracking_singletarget.h"
+#include "radar/msg_gate.h"
 %}
 
 
@@ -58,8 +58,7 @@ GR_SWIG_BLOCK_MAGIC2(radar, split_fsk_cc);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_fsk);
 %include "radar/usrp_echotimer_cc.h"
 GR_SWIG_BLOCK_MAGIC2(radar, usrp_echotimer_cc);
-%include "radar/estimator_msg_gate.h"
-GR_SWIG_BLOCK_MAGIC2(radar, estimator_msg_gate);
+
 %include "radar/estimator_fmcw.h"
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_fmcw);
 %include "radar/signal_generator_sync_pulse_c.h"
@@ -76,3 +75,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, qtgui_time_plot);
 
 %include "radar/tracking_singletarget.h"
 GR_SWIG_BLOCK_MAGIC2(radar, tracking_singletarget);
+%include "radar/msg_gate.h"
+GR_SWIG_BLOCK_MAGIC2(radar, msg_gate);

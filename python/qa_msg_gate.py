@@ -25,7 +25,7 @@ import radar_swig as radar
 from time import sleep
 import pmt
 
-class qa_estimator_msg_gate (gr_unittest.TestCase):
+class qa_msg_gate (gr_unittest.TestCase):
 
 	def setUp (self):
 		self.tb = gr.top_block ()
@@ -52,7 +52,7 @@ class qa_estimator_msg_gate (gr_unittest.TestCase):
 		est = radar.estimator_cw(center_freq)
 		res1 = radar.print_results()
 		res2 = radar.print_results()
-		gate = radar.estimator_msg_gate(('velocity','bla'),(8,8),(17,17),0)
+		gate = radar.msg_gate(('velocity','bla'),(8,8),(17,17),0)
 		debug1 = blocks.message_debug()
 		debug2 = blocks.message_debug()
 
@@ -83,4 +83,4 @@ class qa_estimator_msg_gate (gr_unittest.TestCase):
 
 if __name__ == '__main__':
 	#raw_input('Block for running gdb',)
-	gr_unittest.run(qa_estimator_msg_gate)#, "qa_estimator_msg_gate.xml")
+	gr_unittest.run(qa_msg_gate)#, "qa_msg_gate.xml")

@@ -18,22 +18,22 @@
  * Boston, MA 02110-1301, USA.
  */
  
-#ifndef INCLUDED_RADAR_ESTIMATOR_MSG_GATE_IMPL_H
-#define INCLUDED_RADAR_ESTIMATOR_MSG_GATE_IMPL_H
+#ifndef INCLUDED_RADAR_MSG_GATE_IMPL_H
+#define INCLUDED_RADAR_MSG_GATE_IMPL_H
 
-#include <radar/estimator_msg_gate.h>
+#include <radar/msg_gate.h>
 
 namespace gr {
   namespace radar {
 
-    class estimator_msg_gate_impl : public estimator_msg_gate
+    class msg_gate_impl : public msg_gate
     {
      private:
       // Nothing to declare in this block.
 
      public:
-      estimator_msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose);
-      ~estimator_msg_gate_impl();
+      msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose);
+      ~msg_gate_impl();
       void handle_msg(pmt::pmt_t msg);
       
       int d_verbose;
@@ -47,5 +47,5 @@ namespace gr {
   } // namespace radar
 } // namespace gr
 
-#endif /* INCLUDED_RADAR_ESTIMATOR_MSG_GATE_IMPL_H */
+#endif /* INCLUDED_RADAR_MSG_GATE_IMPL_H */
 

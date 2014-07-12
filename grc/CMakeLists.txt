@@ -29,12 +29,12 @@ install(FILES
     radar_split_fsk_cc.xml
     radar_estimator_fsk.xml
     radar_usrp_echotimer_cc.xml
-    radar_estimator_msg_gate.xml
     radar_estimator_fmcw.xml
     radar_signal_generator_sync_pulse_c.xml
     radar_estimator_sync_pulse_c.xml
     radar_find_max_peak_c.xml
     radar_qtgui_scatter_plot.xml
     radar_qtgui_time_plot.xml
-    radar_tracking_singletarget.xml DESTINATION share/gnuradio/grc/blocks
+    radar_tracking_singletarget.xml
+    radar_msg_gate.xml DESTINATION share/gnuradio/grc/blocks
 )

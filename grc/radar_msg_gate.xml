@@ -1,9 +1,9 @@
 <block>
-  <name>Estimator Message Gate</name>
-  <key>radar_estimator_msg_gate</key>
+  <name>Message Gate</name>
+  <key>radar_msg_gate</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.estimator_msg_gate($msg_keys, $val_min, $val_max, $verbose)</make>
+  <make>radar.msg_gate($msg_keys, $val_min, $val_max, $verbose)</make>
   <param>
     <name>Keys</name>
     <key>msg_keys</key>

@@ -23,24 +23,24 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "estimator_msg_gate_impl.h"
+#include "msg_gate_impl.h"
 #include <algorithm> // needed for std::find
 
 namespace gr {
   namespace radar {
 
-    estimator_msg_gate::sptr
-    estimator_msg_gate::make(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose)
+    msg_gate::sptr
+    msg_gate::make(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_msg_gate_impl(keys, val_min, val_max, verbose));
+        (new msg_gate_impl(keys, val_min, val_max, verbose));
     }
 
     /*
      * The private constructor
      */
-    estimator_msg_gate_impl::estimator_msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose)
-      : gr::block("estimator_msg_gate",
+    msg_gate_impl::msg_gate_impl(std::vector<std::string> keys, std::vector<float> val_min, std::vector<float> val_max, int verbose)
+      : gr::block("msg_gate",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
@@ -52,7 +52,7 @@ namespace gr {
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
 		message_port_register_in(d_port_id_in);
-		set_msg_handler(d_port_id_in, boost::bind(&estimator_msg_gate_impl::handle_msg, this, _1));
+		set_msg_handler(d_port_id_in, boost::bind(&msg_gate_impl::handle_msg, this, _1));
 		
 		// Register output message port
 		d_port_id_out = pmt::mp("Msg out");
@@ -60,7 +60,7 @@ namespace gr {
 	}
 	
 	void
-	estimator_msg_gate_impl::handle_msg(pmt::pmt_t msg){
+	msg_gate_impl::handle_msg(pmt::pmt_t msg){
 		size_t msg_size = pmt::length(msg);
 		std::vector<pmt::pmt_t> msg_parts_f32_key;
 		std::vector<std::vector<float> > msg_parts_f32_val; // take f32 vectors of msg
@@ -151,7 +151,7 @@ namespace gr {
 	
 	/*
 	void
-	estimator_msg_gate_impl::handle_msg(pmt::pmt_t msg){
+	msg_gate_impl::handle_msg(pmt::pmt_t msg){
 		d_msg_size = pmt::length(msg);
 		d_msg_part_hold.clear();
 		d_msg_part_hold.resize(0);
@@ -212,7 +212,7 @@ namespace gr {
     /*
      * Our virtual destructor.
      */
-    estimator_msg_gate_impl::~estimator_msg_gate_impl()
+    msg_gate_impl::~msg_gate_impl()
     {
     }
 
