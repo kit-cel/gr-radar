@@ -109,14 +109,16 @@ Inheritance diagram for gr::radar::find_max_peak_c_impl:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adb075e219f1525f86c4e75e434ea8667"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#adb075e219f1525f86c4e75e434ea8667">find_max_peak_c_impl</a> (int samp_rate, float threshold, int samp_protect, const std::string &amp;len_key)</td></tr>
-<tr class="separator:adb075e219f1525f86c4e75e434ea8667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5450f7d067290d45d04036737763bb5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a5450f7d067290d45d04036737763bb5f">find_max_peak_c_impl</a> (int samp_rate, float threshold, int samp_protect, std::vector&lt; float &gt; max_freq, bool cut_max_freq, const std::string &amp;len_key)</td></tr>
+<tr class="separator:a5450f7d067290d45d04036737763bb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeef41ce9727b5536344189f34ad4409"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#afeef41ce9727b5536344189f34ad4409">~find_max_peak_c_impl</a> ()</td></tr>
 <tr class="separator:afeef41ce9727b5536344189f34ad4409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86f8f41f1c632cd79a43eb2d597908d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a86f8f41f1c632cd79a43eb2d597908d3">set_threshold</a> (float threshold)</td></tr>
 <tr class="separator:a86f8f41f1c632cd79a43eb2d597908d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad43be71ddea1d2a5ccf0039b232fd0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#ad43be71ddea1d2a5ccf0039b232fd0a1">set_samp_protect</a> (int samp)</td></tr>
 <tr class="separator:ad43be71ddea1d2a5ccf0039b232fd0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a831fdc228c728c13ba4225e90306bf14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a831fdc228c728c13ba4225e90306bf14">set_max_freq</a> (std::vector&lt; float &gt; freq)</td></tr>
+<tr class="separator:a831fdc228c728c13ba4225e90306bf14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc7cc518ef44f68a52f6a0237bebcb31"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#abc7cc518ef44f68a52f6a0237bebcb31">work</a> (int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</td></tr>
 <tr class="separator:abc7cc518ef44f68a52f6a0237bebcb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -128,6 +130,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a7920d1761cb2e0d194f2449141c0a52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac17c7ab64dc330f73aa1de5542d6296"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#aac17c7ab64dc330f73aa1de5542d6296">d_samp_protect</a></td></tr>
 <tr class="separator:aac17c7ab64dc330f73aa1de5542d6296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ee73648e8ec44525d338b296989aa2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a66ee73648e8ec44525d338b296989aa2">d_max_freq</a></td></tr>
+<tr class="separator:a66ee73648e8ec44525d338b296989aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4ad3b550e1b1cd4ae19e77ced20190"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a4f4ad3b550e1b1cd4ae19e77ced20190">d_cut_max_freq</a></td></tr>
+<tr class="separator:a4f4ad3b550e1b1cd4ae19e77ced20190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ca10829e672a3b4edb298a4858eae44"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a0ca10829e672a3b4edb298a4858eae44">d_pks</a></td></tr>
 <tr class="separator:a0ca10829e672a3b4edb298a4858eae44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a465232431d90bcbc957864b68ad9cad3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a465232431d90bcbc957864b68ad9cad3">d_freq</a></td></tr>
@@ -161,12 +167,12 @@ Additional Inherited Members</h2></td></tr>
 &lt; <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">find_max_peak_c</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a></td></tr>
 <tr class="separator:ac301e10b9eec76e0064c045350712115 inherit pub_types_classgr_1_1radar_1_1find__max__peak__c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classgr_1_1radar_1_1find__max__peak__c')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td></tr>
-<tr class="memitem:a3c3beaa6a19b26d88bef1bbd8023fe3b inherit pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a3c3beaa6a19b26d88bef1bbd8023fe3b">make</a> (int samp_rate, float threshold, int samp_protect, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a3c3beaa6a19b26d88bef1bbd8023fe3b inherit pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>.  <a href="#a3c3beaa6a19b26d88bef1bbd8023fe3b">More...</a><br/></td></tr>
-<tr class="separator:a3c3beaa6a19b26d88bef1bbd8023fe3b inherit pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af99e98a6c25874d01375d4325f2e0275 inherit pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#af99e98a6c25874d01375d4325f2e0275">make</a> (int samp_rate, float threshold, int samp_protect, std::vector&lt; float &gt; max_freq, bool cut_max_freq, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
+<tr class="memdesc:af99e98a6c25874d01375d4325f2e0275 inherit pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>.  <a href="#af99e98a6c25874d01375d4325f2e0275">More...</a><br/></td></tr>
+<tr class="separator:af99e98a6c25874d01375d4325f2e0275 inherit pub_static_methods_classgr_1_1radar_1_1find__max__peak__c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="adb075e219f1525f86c4e75e434ea8667"></a>
+<a class="anchor" id="a5450f7d067290d45d04036737763bb5f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -187,6 +193,18 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>samp_protect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>max_freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>cut_max_freq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -241,6 +259,32 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a831fdc228c728c13ba4225e90306bf14"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gr::radar::find_max_peak_c_impl::set_max_freq </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>freq</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a85faea414a4ed5966fb7240bc82f2826">gr::radar::find_max_peak_c</a>.</p>
 
 </div>
 </div>
@@ -347,12 +391,36 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4f4ad3b550e1b1cd4ae19e77ced20190"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gr::radar::find_max_peak_c_impl::d_cut_max_freq</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a465232431d90bcbc957864b68ad9cad3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;float&gt; gr::radar::find_max_peak_c_impl::d_freq</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a66ee73648e8ec44525d338b296989aa2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;float&gt; gr::radar::find_max_peak_c_impl::d_max_freq</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -500,7 +568,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html">find_max_peak_c_impl</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:42 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

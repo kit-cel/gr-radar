@@ -123,14 +123,18 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an alternating frequency. The packet length for subsequent tagged streams is calculated with two times the samples per single frequency multiplied by the blocks per tag. </p>
-<p>samp_rate : Signal sample rate <br/>
-samp_per_freq : Number of samples per frequency until the frequency shifts <br/>
-blocks_per_tag : A block contains samp_per_freq samples of the low frequency and samp_per_freq samples of the high frequency. The packet length for subsequent tagged stream blocks is calculated with 2*samp_per_freq*blocks_per_tag. <br/>
-freq_low : Lower frequency in baseband <br/>
-freq_high : Higher frequency in baseband <br/>
-amplitude : Signal amplitude <br/>
-len_key : Packet length key for tagged stream <br/>
-</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">samp_rate</td><td>Signal sample rate </td></tr>
+    <tr><td class="paramname">samp_per_freq</td><td>Number of samples per frequency until the frequency shifts </td></tr>
+    <tr><td class="paramname">blocks_per_tag</td><td>A block contains samp_per_freq samples of the low frequency and samp_per_freq samples of the high frequency. The packet length for subsequent tagged stream blocks is calculated with 2*samp_per_freq*blocks_per_tag. </td></tr>
+    <tr><td class="paramname">freq_low</td><td>Lower frequency in baseband </td></tr>
+    <tr><td class="paramname">freq_high</td><td>Higher frequency in baseband </td></tr>
+    <tr><td class="paramname">amplitude</td><td>Signal amplitude </td></tr>
+    <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a9f70150377b51856c9c5915bb4f54229"></a>
 <div class="memitem">
@@ -221,7 +225,7 @@ len_key : Packet length key for tagged stream <br/>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1signal__generator__fsk__c.html">signal_generator_fsk_c</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:41 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

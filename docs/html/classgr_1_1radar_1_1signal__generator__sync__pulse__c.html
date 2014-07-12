@@ -123,12 +123,16 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between. It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals. </p>
-<p>packet_len : The packet length has to be longer or equal than the sum of pulse_len and pulse_pause. <br/>
-pulse_len : The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause. <br/>
-pulse_pause : The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero. <br/>
-pulse_amplitude : Pulse amplitude of real signal <br/>
-len_key : Packet length key for tagged stream <br/>
-</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet_len</td><td>The packet length has to be longer or equal than the sum of pulse_len and pulse_pause. </td></tr>
+    <tr><td class="paramname">pulse_len</td><td>The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause. </td></tr>
+    <tr><td class="paramname">pulse_pause</td><td>The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero. </td></tr>
+    <tr><td class="paramname">pulse_amplitude</td><td>Pulse amplitude of real signal </td></tr>
+    <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a19405a2d1b7d9558ce87682e3e16b574"></a>
 <div class="memitem">
@@ -207,7 +211,7 @@ len_key : Packet length key for tagged stream <br/>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1signal__generator__sync__pulse__c.html">signal_generator_sync_pulse_c</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:41 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

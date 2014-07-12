@@ -32,14 +32,14 @@ namespace gr {
      * The chirp goes from CW frequency to CW frequency plus sweep frequency and back to the CW frequency. The CW part is first, up- and down-chirp is following.
      * The packet length for subsequent tagged streams is calculated by the sum of the number of samples of the single modulations parts.
      * 
-     * samp_rate		:	Signal sample rate \n
-     * samp_up			:	Number samples of up-chirp part \n
-     * samp_down		:	Number samples of down-chirp part \n
-     * samp_cw			:	Number samples of CW part \n
-     * freq_cw			:	CW signal frequency in baseband \n
-     * freq_sweep		:	Sweep frequency of up- and down-chirp \n
-     * amplitude		: 	Signal amplitude \n
-     * len_key			:	Packet length key for tagged stream \n
+     * \param samp_rate Signal sample rate
+     * \param samp_up Number samples of up-chirp part
+     * \param samp_down Number samples of down-chirp part
+     * \param samp_cw Number samples of CW part
+     * \param freq_cw CW signal frequency in baseband
+     * \param freq_sweep Sweep frequency of up- and down-chirp
+     * \param amplitude Signal amplitude
+     * \param len_key Packet length key for tagged stream
      * 
      * \ingroup radar
      *

@@ -122,12 +122,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adc7673c9ed04bf49b1ef7e9cb60db989"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abaf4240cdb5dcd4af0a88821221861e7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#abaf4240cdb5dcd4af0a88821221861e7">set_samp_protect</a> (int samp)=0</td></tr>
 <tr class="separator:abaf4240cdb5dcd4af0a88821221861e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85faea414a4ed5966fb7240bc82f2826"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a85faea414a4ed5966fb7240bc82f2826">set_max_freq</a> (std::vector&lt; float &gt; freq)=0</td></tr>
+<tr class="separator:a85faea414a4ed5966fb7240bc82f2826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3c3beaa6a19b26d88bef1bbd8023fe3b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a3c3beaa6a19b26d88bef1bbd8023fe3b">make</a> (int samp_rate, float threshold, int samp_protect, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a3c3beaa6a19b26d88bef1bbd8023fe3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>.  <a href="#a3c3beaa6a19b26d88bef1bbd8023fe3b">More...</a><br/></td></tr>
-<tr class="separator:a3c3beaa6a19b26d88bef1bbd8023fe3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af99e98a6c25874d01375d4325f2e0275"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#af99e98a6c25874d01375d4325f2e0275">make</a> (int samp_rate, float threshold, int samp_protect, std::vector&lt; float &gt; max_freq, bool cut_max_freq, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
+<tr class="memdesc:af99e98a6c25874d01375d4325f2e0275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>.  <a href="#af99e98a6c25874d01375d4325f2e0275">More...</a><br/></td></tr>
+<tr class="separator:af99e98a6c25874d01375d4325f2e0275"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>&lt;+description of block+&gt; </p>
@@ -145,7 +147,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a3c3beaa6a19b26d88bef1bbd8023fe3b"></a>
+<a class="anchor" id="af99e98a6c25874d01375d4325f2e0275"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -173,6 +175,18 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>max_freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>cut_max_freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>len_key</em> = <code>&quot;packet_len&quot;</code>&#160;</td>
         </tr>
@@ -190,7 +204,33 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a3c3beaa6a19b26d88bef1bbd8023fe3b" title="Return a shared_ptr to a new instance of radar::find_max_peak_c. ">radar::find_max_peak_c::make</a> is the public interface for creating new instances. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html" title="&lt;+description of block+&gt; ">radar::find_max_peak_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#af99e98a6c25874d01375d4325f2e0275" title="Return a shared_ptr to a new instance of radar::find_max_peak_c. ">radar::find_max_peak_c::make</a> is the public interface for creating new instances. </p>
+
+</div>
+</div>
+<a class="anchor" id="a85faea414a4ed5966fb7240bc82f2826"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void gr::radar::find_max_peak_c::set_max_freq </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>freq</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html#a831fdc228c728c13ba4225e90306bf14">gr::radar::find_max_peak_c_impl</a>.</p>
 
 </div>
 </div>
@@ -255,7 +295,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">find_max_peak_c</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:41 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

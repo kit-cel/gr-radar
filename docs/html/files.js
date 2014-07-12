@@ -19,12 +19,6 @@ var files =
     [ "estimator_fsk_impl.h", "estimator__fsk__impl_8h.html", [
       [ "estimator_fsk_impl", "classgr_1_1radar_1_1estimator__fsk__impl.html", "classgr_1_1radar_1_1estimator__fsk__impl" ]
     ] ],
-    [ "estimator_msg_gate.h", "estimator__msg__gate_8h.html", [
-      [ "estimator_msg_gate", "classgr_1_1radar_1_1estimator__msg__gate.html", "classgr_1_1radar_1_1estimator__msg__gate" ]
-    ] ],
-    [ "estimator_msg_gate_impl.h", "estimator__msg__gate__impl_8h.html", [
-      [ "estimator_msg_gate_impl", "classgr_1_1radar_1_1estimator__msg__gate__impl.html", "classgr_1_1radar_1_1estimator__msg__gate__impl" ]
-    ] ],
     [ "estimator_sync_pulse_c.h", "estimator__sync__pulse__c_8h.html", [
       [ "estimator_sync_pulse_c", "classgr_1_1radar_1_1estimator__sync__pulse__c.html", "classgr_1_1radar_1_1estimator__sync__pulse__c" ]
     ] ],
@@ -37,17 +31,23 @@ var files =
     [ "find_max_peak_c_impl.h", "find__max__peak__c__impl_8h.html", [
       [ "find_max_peak_c_impl", "classgr_1_1radar_1_1find__max__peak__c__impl.html", "classgr_1_1radar_1_1find__max__peak__c__impl" ]
     ] ],
+    [ "msg_gate.h", "msg__gate_8h.html", [
+      [ "msg_gate", "classgr_1_1radar_1_1msg__gate.html", "classgr_1_1radar_1_1msg__gate" ]
+    ] ],
+    [ "msg_gate_impl.h", "msg__gate__impl_8h.html", [
+      [ "msg_gate_impl", "classgr_1_1radar_1_1msg__gate__impl.html", "classgr_1_1radar_1_1msg__gate__impl" ]
+    ] ],
+    [ "msg_manipulator.h", "msg__manipulator_8h.html", [
+      [ "msg_manipulator", "classgr_1_1radar_1_1msg__manipulator.html", "classgr_1_1radar_1_1msg__manipulator" ]
+    ] ],
+    [ "msg_manipulator_impl.h", "msg__manipulator__impl_8h.html", [
+      [ "msg_manipulator_impl", "classgr_1_1radar_1_1msg__manipulator__impl.html", "classgr_1_1radar_1_1msg__manipulator__impl" ]
+    ] ],
     [ "os_cfar_c.h", "os__cfar__c_8h.html", [
       [ "os_cfar_c", "classgr_1_1radar_1_1os__cfar__c.html", "classgr_1_1radar_1_1os__cfar__c" ]
     ] ],
     [ "os_cfar_c_impl.h", "os__cfar__c__impl_8h.html", [
       [ "os_cfar_c_impl", "classgr_1_1radar_1_1os__cfar__c__impl.html", "classgr_1_1radar_1_1os__cfar__c__impl" ]
-    ] ],
-    [ "print_peaks.h", "print__peaks_8h.html", [
-      [ "print_peaks", "classgr_1_1radar_1_1print__peaks.html", "classgr_1_1radar_1_1print__peaks" ]
-    ] ],
-    [ "print_peaks_impl.h", "print__peaks__impl_8h.html", [
-      [ "print_peaks_impl", "classgr_1_1radar_1_1print__peaks__impl.html", "classgr_1_1radar_1_1print__peaks__impl" ]
     ] ],
     [ "print_results.h", "print__results_8h.html", [
       [ "print_results", "classgr_1_1radar_1_1print__results.html", "classgr_1_1radar_1_1print__results" ]

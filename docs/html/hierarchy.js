@@ -10,11 +10,11 @@ var hierarchy =
       [ "gr::radar::estimator_fsk", "classgr_1_1radar_1_1estimator__fsk.html", [
         [ "gr::radar::estimator_fsk_impl", "classgr_1_1radar_1_1estimator__fsk__impl.html", null ]
       ] ],
-      [ "gr::radar::estimator_msg_gate", "classgr_1_1radar_1_1estimator__msg__gate.html", [
-        [ "gr::radar::estimator_msg_gate_impl", "classgr_1_1radar_1_1estimator__msg__gate__impl.html", null ]
+      [ "gr::radar::msg_gate", "classgr_1_1radar_1_1msg__gate.html", [
+        [ "gr::radar::msg_gate_impl", "classgr_1_1radar_1_1msg__gate__impl.html", null ]
       ] ],
-      [ "gr::radar::print_peaks", "classgr_1_1radar_1_1print__peaks.html", [
-        [ "gr::radar::print_peaks_impl", "classgr_1_1radar_1_1print__peaks__impl.html", null ]
+      [ "gr::radar::msg_manipulator", "classgr_1_1radar_1_1msg__manipulator.html", [
+        [ "gr::radar::msg_manipulator_impl", "classgr_1_1radar_1_1msg__manipulator__impl.html", null ]
       ] ],
       [ "gr::radar::print_results", "classgr_1_1radar_1_1print__results.html", [
         [ "gr::radar::print_results_impl", "classgr_1_1radar_1_1print__results__impl.html", null ]

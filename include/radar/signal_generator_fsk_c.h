@@ -31,13 +31,13 @@ namespace gr {
      * \brief This block generates a signal for FSK radar in baseband. The waveform consists of a signal with an alternating frequency.
      * The packet length for subsequent tagged streams is calculated with two times the samples per single frequency multiplied by the blocks per tag.
      * 
-     * samp_rate		:	Signal sample rate \n
-     * samp_per_freq	:	Number of samples per frequency until the frequency shifts \n
-     * blocks_per_tag	:	A block contains samp_per_freq samples of the low frequency and samp_per_freq samples of the high frequency. The packet length for subsequent tagged stream blocks is calculated with 2*samp_per_freq*blocks_per_tag. \n
-     * freq_low			:	Lower frequency in baseband \n
-     * freq_high		:	Higher frequency in baseband \n
-     * amplitude		:	Signal amplitude \n
-     * len_key			:	Packet length key for tagged stream \n
+     * \param samp_rate Signal sample rate
+     * \param samp_per_freq Number of samples per frequency until the frequency shifts
+     * \param blocks_per_tag A block contains samp_per_freq samples of the low frequency and samp_per_freq samples of the high frequency. The packet length for subsequent tagged stream blocks is calculated with 2*samp_per_freq*blocks_per_tag.
+     * \param freq_low Lower frequency in baseband
+     * \param freq_high Higher frequency in baseband
+     * \param amplitude Signal amplitude
+     * \param len_key Packet length key for tagged stream
      * 
      * \ingroup radar
      *

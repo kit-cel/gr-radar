@@ -118,18 +118,18 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a760cbe13564acdc33094d82acdd4e01b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#a760cbe13564acdc33094d82acdd4e01b">set_num_delay_samps</a> (std::vector&lt; int &gt; num_samps)=0</td></tr>
-<tr class="separator:a760cbe13564acdc33094d82acdd4e01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cd79adbaacbcdfa19fc614fbe6905d7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#a3cd79adbaacbcdfa19fc614fbe6905d7">set_rx_gain</a> (std::vector&lt; float &gt; gain)=0</td></tr>
-<tr class="separator:a3cd79adbaacbcdfa19fc614fbe6905d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af029bf7193437c2d689058747eeb9230"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#af029bf7193437c2d689058747eeb9230">set_num_delay_samps</a> (int num_samps)=0</td></tr>
+<tr class="separator:af029bf7193437c2d689058747eeb9230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad44075270e4f4a7dca5f98f95662dde2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#ad44075270e4f4a7dca5f98f95662dde2">set_rx_gain</a> (float gain)=0</td></tr>
+<tr class="separator:ad44075270e4f4a7dca5f98f95662dde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaddeacf2db61e391ed2409766b868e2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#aaaddeacf2db61e391ed2409766b868e2">set_tx_gain</a> (float gain)=0</td></tr>
 <tr class="separator:aaaddeacf2db61e391ed2409766b868e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa85cdc8ee97fa8d915b84f7f561d1d88"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#aaa38e631afb34a7c84aedfa9a5c2f50f">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#aa85cdc8ee97fa8d915b84f7f561d1d88">make</a> (int n_outputs, int samp_rate, float center_freq, std::vector&lt; int &gt; num_delay_samps, std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx, float timeout_tx, float wait_tx, float lo_offset_tx, std::vector&lt; std::string &gt; args_rx, std::vector&lt; std::string &gt; wire_rx, std::vector&lt; std::string &gt; clock_source_rx, std::vector&lt; std::string &gt; time_source_rx, std::vector&lt; std::string &gt; antenna_rx, std::vector&lt; float &gt; gain_rx, std::vector&lt; float &gt; timeout_rx, std::vector&lt; float &gt; wait_rx, std::vector&lt; double &gt; lo_offset_rx, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:aa85cdc8ee97fa8d915b84f7f561d1d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html" title="&lt;+description of block+&gt; ">radar::usrp_echotimer_cc</a>.  <a href="#aa85cdc8ee97fa8d915b84f7f561d1d88">More...</a><br/></td></tr>
-<tr class="separator:aa85cdc8ee97fa8d915b84f7f561d1d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28724f82fe8b26282583d7c99f2c059"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#aaa38e631afb34a7c84aedfa9a5c2f50f">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#af28724f82fe8b26282583d7c99f2c059">make</a> (int samp_rate, float center_freq, int num_delay_samps, std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx, float timeout_tx, float wait_tx, float lo_offset_tx, std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx, float timeout_rx, float wait_rx, float lo_offset_rx, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
+<tr class="memdesc:af28724f82fe8b26282583d7c99f2c059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html" title="&lt;+description of block+&gt; ">radar::usrp_echotimer_cc</a>.  <a href="#af28724f82fe8b26282583d7c99f2c059">More...</a><br/></td></tr>
+<tr class="separator:af28724f82fe8b26282583d7c99f2c059"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>&lt;+description of block+&gt; </p>
@@ -147,7 +147,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aa85cdc8ee97fa8d915b84f7f561d1d88"></a>
+<a class="anchor" id="af28724f82fe8b26282583d7c99f2c059"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -157,12 +157,6 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#aaa38e631afb34a7c84aedfa9a5c2f50f">sptr</a> gr::radar::usrp_echotimer_cc::make </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n_outputs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>samp_rate</em>, </td>
         </tr>
@@ -175,7 +169,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; int &gt;&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>num_delay_samps</em>, </td>
         </tr>
         <tr>
@@ -235,55 +229,55 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>args_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>wire_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>clock_source_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>time_source_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>antenna_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>gain_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>timeout_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>wait_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>lo_offset_rx</em>, </td>
         </tr>
         <tr>
@@ -306,11 +300,11 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html" title="&lt;+description of block+&gt; ">radar::usrp_echotimer_cc</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html" title="&lt;+description of block+&gt; ">radar::usrp_echotimer_cc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#aa85cdc8ee97fa8d915b84f7f561d1d88" title="Return a shared_ptr to a new instance of radar::usrp_echotimer_cc. ">radar::usrp_echotimer_cc::make</a> is the public interface for creating new instances. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html" title="&lt;+description of block+&gt; ">radar::usrp_echotimer_cc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html#af28724f82fe8b26282583d7c99f2c059" title="Return a shared_ptr to a new instance of radar::usrp_echotimer_cc. ">radar::usrp_echotimer_cc::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
-<a class="anchor" id="a760cbe13564acdc33094d82acdd4e01b"></a>
+<a class="anchor" id="af029bf7193437c2d689058747eeb9230"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -320,7 +314,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void gr::radar::usrp_echotimer_cc::set_num_delay_samps </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; int &gt;&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>num_samps</em></td><td>)</td>
           <td></td>
         </tr>
@@ -332,11 +326,11 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc__impl.html#a9944c5ca4180221bcc08824df30c7e99">gr::radar::usrp_echotimer_cc_impl</a>.</p>
+<p>Implemented in <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc__impl.html#a11b5d6d6ae3a4de9c09ec94c7d98c60e">gr::radar::usrp_echotimer_cc_impl</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3cd79adbaacbcdfa19fc614fbe6905d7"></a>
+<a class="anchor" id="ad44075270e4f4a7dca5f98f95662dde2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -346,7 +340,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void gr::radar::usrp_echotimer_cc::set_rx_gain </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>gain</em></td><td>)</td>
           <td></td>
         </tr>
@@ -358,7 +352,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc__impl.html#a1ed7d5ce14bbbe0bac20d5c30b9e2fa7">gr::radar::usrp_echotimer_cc_impl</a>.</p>
+<p>Implemented in <a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc__impl.html#af8694db313cd74322876cf0a98601687">gr::radar::usrp_echotimer_cc_impl</a>.</p>
 
 </div>
 </div>
@@ -397,7 +391,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1usrp__echotimer__cc.html">usrp_echotimer_cc</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:42 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

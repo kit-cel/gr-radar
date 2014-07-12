@@ -93,16 +93,17 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1find__max__peak__c
 
 <p>This is the complete list of members for <a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a3c3beaa6a19b26d88bef1bbd8023fe3b">make</a>(int samp_rate, float threshold, int samp_protect, const std::string &amp;len_key=&quot;packet_len&quot;)</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#abaf4240cdb5dcd4af0a88821221861e7">set_samp_protect</a>(int samp)=0</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#adc7673c9ed04bf49b1ef7e9cb60db989">set_threshold</a>(float threshold)=0</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a> typedef</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#af99e98a6c25874d01375d4325f2e0275">make</a>(int samp_rate, float threshold, int samp_protect, std::vector&lt; float &gt; max_freq, bool cut_max_freq, const std::string &amp;len_key=&quot;packet_len&quot;)</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#a85faea414a4ed5966fb7240bc82f2826">set_max_freq</a>(std::vector&lt; float &gt; freq)=0</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#abaf4240cdb5dcd4af0a88821221861e7">set_samp_protect</a>(int samp)=0</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#adc7673c9ed04bf49b1ef7e9cb60db989">set_threshold</a>(float threshold)=0</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html#ac301e10b9eec76e0064c045350712115">sptr</a> typedef</td><td class="entry"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c.html">gr::radar::find_max_peak_c</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:41 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -93,6 +93,9 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="textblock"><h1><a class="anchor" id="install"></a>
 Install guide</h1>
 <p>For the actual install guide read the README at the main folder.</p>
+<p>If you want to set the parameters in gr-radar/examples/setup/setup_core on every system start, edit /etc/sysctl.conf with following lines.</p>
+<h1>Updates for GNU Radio</h1>
+<p>net.core.rmem_max=50000000 net.core.wmem_max=1048576 kernel.shmmax=2147483648</p>
 <h1><a class="anchor" id="basic"></a>
 Basics</h1>
 <p>Basic idea of the toolbox. Signal generator -&gt; Split Echotimer/Simulator -&gt; connect sig_gen and echotimer/simulator -&gt; estimator -&gt; some kind of output</p>
@@ -108,7 +111,7 @@ USRP Echotimer</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:42 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

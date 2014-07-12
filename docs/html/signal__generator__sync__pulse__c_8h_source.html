@@ -124,11 +124,11 @@ $(document).ready(function(){initNavTree('signal__generator__sync__pulse__c_8h_s
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \brief This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between.</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals.</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * </span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * packet_len               :       The packet length has to be longer or equal than the sum of pulse_len and pulse_pause. \n</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * pulse_len                :       The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause. \n</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * pulse_pause              :       The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero. \n</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * pulse_amplitude  :       Pulse amplitude of real signal \n</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * len_key                  :       Packet length key for tagged stream \n</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * \param packet_len The packet length has to be longer or equal than the sum of pulse_len and pulse_pause.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * \param pulse_len The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * \param pulse_pause The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * \param pulse_amplitude Pulse amplitude of real signal</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * \param len_key Packet length key for tagged stream</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * </span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * \ingroup radar</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     *</span></div>
@@ -164,7 +164,7 @@ $(document).ready(function(){initNavTree('signal__generator__sync__pulse__c_8h_s
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="signal__generator__sync__pulse__c_8h.html">signal_generator_sync_pulse_c.h</a></li>
-    <li class="footer">Generated on Sun Jul 6 2014 20:37:56 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 12 2014 20:23:41 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

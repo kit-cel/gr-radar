@@ -32,11 +32,11 @@ namespace gr {
      * \brief This block generates a signal for the synchronization of the USRP Echotimer in baseband. The signal is pulsed with a constant amplitude with various pulse length and wait samples in between.
      * It is structured by alternating wait parts and burst parts and starting with the first wait part. The pulses are full real signals.
      * 
-     * packet_len		:	The packet length has to be longer or equal than the sum of pulse_len and pulse_pause. \n
-     * pulse_len		:	The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause. \n
-     * pulse_pause		:	The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero. \n
-     * pulse_amplitude	:	Pulse amplitude of real signal \n
-     * len_key			:	Packet length key for tagged stream \n
+     * \param packet_len The packet length has to be longer or equal than the sum of pulse_len and pulse_pause.
+     * \param pulse_len The length of the pulses are defined in a vector and given in number of samples. The pulses are generated alternating with the wait samples defined in pulse_pause.
+     * \param pulse_pause The wait samples between pulses are defined in a vector. The first segment of the whole signal is the first element in the pulse_pause vector. This element can be zero.
+     * \param pulse_amplitude Pulse amplitude of real signal
+     * \param len_key Packet length key for tagged stream
      * 
      * \ingroup radar
      *
