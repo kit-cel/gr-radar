@@ -17,55 +17,55 @@
  * the Free Software Foundation, Inc., 51 Franklin Street,
  * Boston, MA 02110-1301, USA.
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "split_cc_impl.h"
+#include "ofdm_cyclic_prefix_remover_cvc_impl.h"
 
 namespace gr {
   namespace radar {
 
-    split_cc::sptr
-    split_cc::make(int packet_num, const std::vector<int> packet_parts, const std::string& len_key)
+    ofdm_cyclic_prefix_remover_cvc::sptr
+    ofdm_cyclic_prefix_remover_cvc::make(int fft_len, int cp_len, std::string len_key)
     {
       return gnuradio::get_initial_sptr
-        (new split_cc_impl(packet_num, packet_parts, len_key));
+        (new ofdm_cyclic_prefix_remover_cvc_impl(fft_len, cp_len, len_key));
     }
 
     /*
      * The private constructor
      */
-    split_cc_impl::split_cc_impl(int packet_num, const std::vector<int> packet_parts, const std::string& len_key)
-      : gr::tagged_stream_block("split_cc",
+    ofdm_cyclic_prefix_remover_cvc_impl::ofdm_cyclic_prefix_remover_cvc_impl(int fft_len, int cp_len, std::string len_key)
+      : gr::tagged_stream_block("ofdm_cyclic_prefix_remover_cvc",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
-              gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
+              gr::io_signature::make(1, 1, sizeof(gr_complex)*fft_len), len_key)
     {
-		// Set key for info pmt and store packet_part identifier
-		d_packet_parts = packet_parts;
-		d_packet_num = packet_num;
+		d_fft_len = fft_len;
+		d_cp_len = cp_len;
 		
+		// Set propagation policy
 		set_tag_propagation_policy(TPP_DONT); // does not apply on stream tags!
 	}
 
     /*
      * Our virtual destructor.
      */
-    split_cc_impl::~split_cc_impl()
+    ofdm_cyclic_prefix_remover_cvc_impl::~ofdm_cyclic_prefix_remover_cvc_impl()
     {
     }
 
     int
-    split_cc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
+    ofdm_cyclic_prefix_remover_cvc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
-      int noutput_items = ninput_items[0];
+      int noutput_items = ninput_items[0]/(d_fft_len+d_cp_len);
       return noutput_items ;
     }
 
     int
-    split_cc_impl::work (int noutput_items,
+    ofdm_cyclic_prefix_remover_cvc_impl::work (int noutput_items,
                        gr_vector_int &ninput_items,
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
@@ -73,22 +73,22 @@ namespace gr {
         const gr_complex *in = (const gr_complex *) input_items[0];
         gr_complex *out = (gr_complex *) output_items[0];
 
-        // Do <+signal processing+>
-        
-        // get all tags, reset offset and push to output
+        // Get all tags, reset offset and push to output
 		get_tags_in_range(d_tags,0,nitems_read(0),nitems_read(0)+1);
 		for(int k=0; k<d_tags.size(); k++){
 			add_item_tag(0,nitems_written(0),d_tags[k].key,d_tags[k].value,d_tags[k].srcid);
 		}
-        
-        // Push only part of input stream to output and resize length tag value
-        
-        update_length_tags(d_packet_parts[d_packet_num],0); // update length tag
-        noutput_items = d_packet_parts[d_packet_num]; // get num output items
-        
-        d_offset = 0; // calc offset in stream
-		for(int k=0; k<d_packet_num; k++) d_offset += d_packet_parts[k];
-		for(int k=0; k<noutput_items; k++) out[k] = in[k+d_offset]; // push items to output
+		
+		// Set noutput_items
+		noutput_items = ninput_items[0]/(d_fft_len+d_cp_len);
+		
+		// Update len key tag
+		update_length_tags(noutput_items,0); // update length tag
+		
+		// Remove cyclic prefix and push vectors with len fft_len to output
+		for(int k=0; k<noutput_items; k++){
+			memcpy(out+d_fft_len*k,in+d_cp_len+k*(d_fft_len+d_cp_len),d_fft_len*sizeof(gr_complex));
+		}
 
         // Tell runtime system how many output items we produced.
         return noutput_items;

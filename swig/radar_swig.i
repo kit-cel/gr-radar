@@ -29,6 +29,7 @@
 #include "radar/tracking_singletarget.h"
 #include "radar/msg_gate.h"
 #include "radar/msg_manipulator.h"
+#include "radar/ofdm_cyclic_prefix_remover_cvc.h"
 %}
 
 
@@ -80,3 +81,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, tracking_singletarget);
 GR_SWIG_BLOCK_MAGIC2(radar, msg_gate);
 %include "radar/msg_manipulator.h"
 GR_SWIG_BLOCK_MAGIC2(radar, msg_manipulator);
+%include "radar/ofdm_cyclic_prefix_remover_cvc.h"
+GR_SWIG_BLOCK_MAGIC2(radar, ofdm_cyclic_prefix_remover_cvc);

@@ -42,5 +42,6 @@ install(FILES
     qtgui_time_plot.h
     tracking_singletarget.h
     msg_gate.h
-    msg_manipulator.h DESTINATION include/radar
+    msg_manipulator.h
+    ofdm_cyclic_prefix_remover_cvc.h DESTINATION include/radar
 )

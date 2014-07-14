@@ -56,7 +56,8 @@ list(APPEND radar_sources
     qtgui_time_plot_impl.cc
     tracking_singletarget_impl.cc
     msg_gate_impl.cc
-    msg_manipulator_impl.cc )
+    msg_manipulator_impl.cc
+    ofdm_cyclic_prefix_remover_cvc_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)
