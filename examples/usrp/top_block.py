@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Jul 10 19:46:36 2014
+# Generated: Mon Jul 14 18:25:31 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -54,15 +54,16 @@ class top_block(gr.top_block, Qt.QWidget):
         self.center_freq = center_freq = 2.45e9
         self.v_res = v_res = freq_res*3e8/2/center_freq
         self.time_res = time_res = packet_len/float(samp_rate)
-        self.threshold = threshold = -200
+        self.threshold = threshold = -40
         self.samp_protect = samp_protect = 1
-        self.range_time = range_time = 60
+        self.range_time = range_time = 30
         self.range_res = range_res = 3e8/2/float((freq[1]-freq[0]))
+        self.range_calib = range_calib = -1
         self.min_output_buffer = min_output_buffer = int(packet_len*2)
         self.max_output_buffer = max_output_buffer = 0
         self.gain_tx = gain_tx = 10
         self.gain_rx = gain_rx = 10
-        self.delay_samp = delay_samp = 32
+        self.delay_samp = delay_samp = 33
         self.decim_fac = decim_fac = 2**7
         self.amplitude = amplitude = 0.5
 
@@ -115,6 +116,29 @@ class top_block(gr.top_block, Qt.QWidget):
         self._samp_protect_slider.valueChanged.connect(self.set_samp_protect)
         self._samp_protect_layout.addWidget(self._samp_protect_slider)
         self.top_grid_layout.addLayout(self._samp_protect_layout, 1,1)
+        self._range_calib_layout = Qt.QVBoxLayout()
+        self._range_calib_tool_bar = Qt.QToolBar(self)
+        self._range_calib_layout.addWidget(self._range_calib_tool_bar)
+        self._range_calib_tool_bar.addWidget(Qt.QLabel("Range calibration"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._range_calib_counter = qwt_counter_pyslot()
+        self._range_calib_counter.setRange(-range_res, range_res, 0.1)
+        self._range_calib_counter.setNumButtons(2)
+        self._range_calib_counter.setValue(self.range_calib)
+        self._range_calib_tool_bar.addWidget(self._range_calib_counter)
+        self._range_calib_counter.valueChanged.connect(self.set_range_calib)
+        self._range_calib_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._range_calib_slider.setRange(-range_res, range_res, 0.1)
+        self._range_calib_slider.setValue(self.range_calib)
+        self._range_calib_slider.setMinimumWidth(200)
+        self._range_calib_slider.valueChanged.connect(self.set_range_calib)
+        self._range_calib_layout.addWidget(self._range_calib_slider)
+        self.top_grid_layout.addLayout(self._range_calib_layout, 2,0)
         self._gain_tx_layout = Qt.QVBoxLayout()
         self._gain_tx_tool_bar = Qt.QToolBar(self)
         self._gain_tx_layout.addWidget(self._gain_tx_tool_bar)
@@ -196,7 +220,7 @@ class top_block(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', gain_tx, 0.1, 0.05, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', gain_rx, 0.1, 0.05, 0, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.6', '', 'gpsdo', 'none', 'J1', gain_tx, 0.1, 0.05, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', gain_rx, 0.1, 0.05, 0, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(4194304)
         self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(packet_len/decim_fac,  "packet_len")
         (self.radar_ts_fft_cc_0_0).set_min_output_buffer(4194304)
@@ -209,6 +233,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.radar_qtgui_time_plot_1 = radar.qtgui_time_plot(100, 'velocity', (-3,3), range_time, "")
         self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'range', (0,range_res), range_time, "")
         self.radar_print_results_0 = radar.print_results(False, "")
+        self.radar_msg_manipulator_0 = radar.msg_manipulator(('range',), (range_calib, ), (1, ))
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decim_fac, threshold, int(samp_protect), ((-300,300)), True, "packet_len")
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, (freq[1]-freq[0]))
         self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
@@ -219,8 +244,6 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.blocks_tagged_stream_multiply_length_0_0).set_min_output_buffer(4194304)
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/float(decim_fac))
         (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(4194304)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((1+1j*0, ))
-        (self.blocks_multiply_const_vxx_0).set_min_output_buffer(4194304)
         self.blocks_multiply_conjugate_cc_1 = blocks.multiply_conjugate_cc(1)
         (self.blocks_multiply_conjugate_cc_1).set_min_output_buffer(4194304)
         self.blocks_multiply_conjugate_cc_0_0 = blocks.multiply_conjugate_cc(1)
@@ -249,17 +272,17 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.radar_ts_fft_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_1, 1))
         self.connect((self.radar_ts_fft_cc_0, 0), (self.blocks_multiply_conjugate_cc_1, 0))
         self.connect((self.blocks_add_xx_1, 0), (self.radar_usrp_echotimer_cc_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0_0, 0))
-        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
+        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_conjugate_cc_0_0, 0))
 
         ##################################################
         # Asynch Message Connections
         ##################################################
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_1, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_msg_manipulator_0, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_qtgui_time_plot_1, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_print_results_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -332,9 +355,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_protect(self, samp_protect):
         self.samp_protect = samp_protect
+        self.radar_find_max_peak_c_0.set_samp_protect(int(self.samp_protect))
         Qt.QMetaObject.invokeMethod(self._samp_protect_counter, "setValue", Qt.Q_ARG("double", self.samp_protect))
         Qt.QMetaObject.invokeMethod(self._samp_protect_slider, "setValue", Qt.Q_ARG("double", self.samp_protect))
-        self.radar_find_max_peak_c_0.set_samp_protect(int(self.samp_protect))
 
     def get_range_time(self):
         return self.range_time
@@ -347,6 +370,15 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_range_res(self, range_res):
         self.range_res = range_res
+
+    def get_range_calib(self):
+        return self.range_calib
+
+    def set_range_calib(self, range_calib):
+        self.range_calib = range_calib
+        self.radar_msg_manipulator_0.set_const_add((self.range_calib, ))
+        Qt.QMetaObject.invokeMethod(self._range_calib_counter, "setValue", Qt.Q_ARG("double", self.range_calib))
+        Qt.QMetaObject.invokeMethod(self._range_calib_slider, "setValue", Qt.Q_ARG("double", self.range_calib))
 
     def get_min_output_buffer(self):
         return self.min_output_buffer
@@ -383,9 +415,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_delay_samp(self, delay_samp):
         self.delay_samp = delay_samp
-        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.delay_samp))
         Qt.QMetaObject.invokeMethod(self._delay_samp_counter, "setValue", Qt.Q_ARG("double", self.delay_samp))
         Qt.QMetaObject.invokeMethod(self._delay_samp_slider, "setValue", Qt.Q_ARG("double", self.delay_samp))
+        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.delay_samp))
 
     def get_decim_fac(self):
         return self.decim_fac
