@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jul 14 13:05:03 2014
+# Generated: Mon Jul 14 15:59:52 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -48,6 +48,7 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self.transpose_len = transpose_len = 11
         self.sync_word2 = sync_word2 = [0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, 0, 0, 0, 0, 0] 
         self.sync_word1 = sync_word1 = [0., 0., 0., 0., 0., 0., 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 0., 0., 0., 0., 0.]
         self.samp_rate_0 = samp_rate_0 = 100000
@@ -64,18 +65,22 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
+        self.radar_transpose_matrix_vcvc_0_0 = radar.transpose_matrix_vcvc(transpose_len, fft_len, "packet_len")
+        self.radar_transpose_matrix_vcvc_0 = radar.transpose_matrix_vcvc(fft_len, transpose_len, "packet_len")
         self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((100, ), (20, ), (1e12, ), (0, ), samp_rate, center_freq, -10, True, True, "packet_len")
-        self.radar_split_cc_0 = radar.split_cc(0, ((fft_len,fft_len/4)), "packet_len")
+        self.radar_ofdm_cyclic_prefix_remover_cvc_0 = radar.ofdm_cyclic_prefix_remover_cvc(fft_len, fft_len/4, "packet_len")
+        self.fft_vxx_0_1_0 = fft.fft_vcc(transpose_len, False, (()), True, 1)
+        self.fft_vxx_0_1 = fft.fft_vcc(fft_len, True, (()), True, 1)
         self.fft_vxx_0_0 = fft.fft_vcc(fft_len, True, (()), True, 1)
         self.fft_vxx_0 = fft.fft_vcc(fft_len, False, (()), True, 1)
         self.digital_ofdm_cyclic_prefixer_0 = digital.ofdm_cyclic_prefixer(fft_len, fft_len+fft_len/4, 0, length_tag_key)
         self.digital_ofdm_carrier_allocator_cvc_0 = digital.ofdm_carrier_allocator_cvc(fft_len, occupied_carriers, pilot_carriers, pilot_symbols, (sync_word1, sync_word2), length_tag_key)
         self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc((payload_mod.points()), 1)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
-        self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_gr_complex*1, "", ""); self.blocks_tag_debug_0.set_display(True)
-        self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, fft_len)
+        self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_gr_complex*fft_len, "", ""); self.blocks_tag_debug_0.set_display(True)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, packet_len, length_tag_key)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*fft_len)
+        self.blocks_divide_xx_0 = blocks.divide_cc(fft_len)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0, 255, 1000)), True)
 
         ##################################################
@@ -88,17 +93,28 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.digital_ofdm_cyclic_prefixer_0, 0), (self.radar_static_target_simulator_cc_0, 0))
         self.connect((self.digital_ofdm_carrier_allocator_cvc_0, 0), (self.fft_vxx_0, 0))
         self.connect((self.digital_chunks_to_symbols_xx_0_0, 0), (self.digital_ofdm_carrier_allocator_cvc_0, 0))
-        self.connect((self.radar_static_target_simulator_cc_0, 0), (self.radar_split_cc_0, 0))
-        self.connect((self.radar_split_cc_0, 0), (self.blocks_stream_to_vector_0, 0))
-        self.connect((self.blocks_stream_to_vector_0, 0), (self.fft_vxx_0_0, 0))
-        self.connect((self.fft_vxx_0_0, 0), (self.blocks_null_sink_0, 0))
-        self.connect((self.digital_ofdm_cyclic_prefixer_0, 0), (self.blocks_tag_debug_0, 0))
+        self.connect((self.radar_static_target_simulator_cc_0, 0), (self.radar_ofdm_cyclic_prefix_remover_cvc_0, 0))
+        self.connect((self.radar_ofdm_cyclic_prefix_remover_cvc_0, 0), (self.fft_vxx_0_0, 0))
+        self.connect((self.digital_ofdm_carrier_allocator_cvc_0, 0), (self.blocks_divide_xx_0, 1))
+        self.connect((self.fft_vxx_0_0, 0), (self.blocks_divide_xx_0, 0))
+        self.connect((self.blocks_divide_xx_0, 0), (self.fft_vxx_0_1, 0))
+        self.connect((self.fft_vxx_0_1, 0), (self.radar_transpose_matrix_vcvc_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0, 0), (self.fft_vxx_0_1_0, 0))
+        self.connect((self.fft_vxx_0_1_0, 0), (self.radar_transpose_matrix_vcvc_0_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.blocks_null_sink_0, 0))
+        self.connect((self.blocks_divide_xx_0, 0), (self.blocks_tag_debug_0, 0))
 
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
+
+    def get_transpose_len(self):
+        return self.transpose_len
+
+    def set_transpose_len(self, transpose_len):
+        self.transpose_len = transpose_len
 
     def get_sync_word2(self):
         return self.sync_word2

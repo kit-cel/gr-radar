@@ -43,5 +43,6 @@ install(FILES
     tracking_singletarget.h
     msg_gate.h
     msg_manipulator.h
-    ofdm_cyclic_prefix_remover_cvc.h DESTINATION include/radar
+    ofdm_cyclic_prefix_remover_cvc.h
+    transpose_matrix_vcvc.h DESTINATION include/radar
 )

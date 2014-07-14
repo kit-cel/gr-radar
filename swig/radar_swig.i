@@ -30,6 +30,7 @@
 #include "radar/msg_gate.h"
 #include "radar/msg_manipulator.h"
 #include "radar/ofdm_cyclic_prefix_remover_cvc.h"
+#include "radar/transpose_matrix_vcvc.h"
 %}
 
 
@@ -83,3 +84,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, msg_gate);
 GR_SWIG_BLOCK_MAGIC2(radar, msg_manipulator);
 %include "radar/ofdm_cyclic_prefix_remover_cvc.h"
 GR_SWIG_BLOCK_MAGIC2(radar, ofdm_cyclic_prefix_remover_cvc);
+%include "radar/transpose_matrix_vcvc.h"
+GR_SWIG_BLOCK_MAGIC2(radar, transpose_matrix_vcvc);

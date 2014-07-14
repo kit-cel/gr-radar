@@ -57,7 +57,8 @@ list(APPEND radar_sources
     tracking_singletarget_impl.cc
     msg_gate_impl.cc
     msg_manipulator_impl.cc
-    ofdm_cyclic_prefix_remover_cvc_impl.cc )
+    ofdm_cyclic_prefix_remover_cvc_impl.cc
+    transpose_matrix_vcvc_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

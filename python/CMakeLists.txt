@@ -60,3 +60,4 @@ GR_ADD_TEST(qa_tracking_singletarget ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE
 GR_ADD_TEST(qa_msg_gate ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_msg_gate.py)
 GR_ADD_TEST(qa_msg_manipulator ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_msg_manipulator.py)
 GR_ADD_TEST(qa_ofdm_cyclic_prefix_remover_cvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ofdm_cyclic_prefix_remover_cvc.py)
+GR_ADD_TEST(qa_transpose_matrix_vcvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_transpose_matrix_vcvc.py)
