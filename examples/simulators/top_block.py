@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jul 14 15:59:52 2014
+# Generated: Mon Jul 14 17:14:43 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -77,10 +77,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self.digital_ofdm_carrier_allocator_cvc_0 = digital.ofdm_carrier_allocator_cvc(fft_len, occupied_carriers, pilot_carriers, pilot_symbols, (sync_word1, sync_word2), length_tag_key)
         self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc((payload_mod.points()), 1)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
-        self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_gr_complex*fft_len, "", ""); self.blocks_tag_debug_0.set_display(True)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, packet_len, length_tag_key)
-        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*fft_len)
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_float*fft_len)
         self.blocks_divide_xx_0 = blocks.divide_cc(fft_len)
+        self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(fft_len)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0, 255, 1000)), True)
 
         ##################################################
@@ -100,9 +100,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_divide_xx_0, 0), (self.fft_vxx_0_1, 0))
         self.connect((self.fft_vxx_0_1, 0), (self.radar_transpose_matrix_vcvc_0, 0))
         self.connect((self.radar_transpose_matrix_vcvc_0, 0), (self.fft_vxx_0_1_0, 0))
+        self.connect((self.blocks_complex_to_mag_squared_0, 0), (self.blocks_null_sink_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.blocks_complex_to_mag_squared_0, 0))
         self.connect((self.fft_vxx_0_1_0, 0), (self.radar_transpose_matrix_vcvc_0_0, 0))
-        self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.blocks_null_sink_0, 0))
-        self.connect((self.blocks_divide_xx_0, 0), (self.blocks_tag_debug_0, 0))
 
 
     def closeEvent(self, event):
