@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jul 14 18:25:31 2014
+# Generated: Tue Jul 15 11:23:40 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -58,7 +58,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_protect = samp_protect = 1
         self.range_time = range_time = 30
         self.range_res = range_res = 3e8/2/float((freq[1]-freq[0]))
-        self.range_calib = range_calib = -1
+        self.range_calib = range_calib = 0
         self.min_output_buffer = min_output_buffer = int(packet_len*2)
         self.max_output_buffer = max_output_buffer = 0
         self.gain_tx = gain_tx = 10
@@ -294,8 +294,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_time_res(self.packet_len/float(self.samp_rate))
         self.set_freq_res(self.samp_rate/float(self.packet_len))
+        self.set_time_res(self.packet_len/float(self.samp_rate))
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
 
@@ -304,9 +304,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_time_res(self.packet_len/float(self.samp_rate))
-        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_min_output_buffer(int(self.packet_len*2))
+        self.set_freq_res(self.samp_rate/float(self.packet_len))
+        self.set_time_res(self.packet_len/float(self.samp_rate))
 
     def get_freq_res(self):
         return self.freq_res
