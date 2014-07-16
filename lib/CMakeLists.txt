@@ -22,7 +22,8 @@
 ########################################################################
 set(QTGUI_MOC_HEADERS
 	scatter_plot.h
-	time_plot.h)
+	time_plot.h
+	spectrogram_plot.h)
 QT4_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
 
 ########################################################################
@@ -36,6 +37,7 @@ list(APPEND radar_sources
 	${QTGUI_MOC_OUTFILES}
 	scatter_plot.cc
 	time_plot.cc
+	spectrogram_plot.cc
     signal_generator_cw_c_impl.cc
     signal_generator_fmcw_c_impl.cc
     split_cc_impl.cc
@@ -58,7 +60,8 @@ list(APPEND radar_sources
     msg_gate_impl.cc
     msg_manipulator_impl.cc
     ofdm_cyclic_prefix_remover_cvc_impl.cc
-    transpose_matrix_vcvc_impl.cc )
+    transpose_matrix_vcvc_impl.cc
+    qtgui_spectrogram_plot_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

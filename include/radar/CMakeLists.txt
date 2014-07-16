@@ -44,5 +44,6 @@ install(FILES
     msg_gate.h
     msg_manipulator.h
     ofdm_cyclic_prefix_remover_cvc.h
-    transpose_matrix_vcvc.h DESTINATION include/radar
+    transpose_matrix_vcvc.h
+    qtgui_spectrogram_plot.h DESTINATION include/radar
 )
