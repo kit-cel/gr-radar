@@ -36,7 +36,7 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      qtgui_spectrogram_plot_impl(int vlen, int interval, std::string len_key);
+      qtgui_spectrogram_plot_impl(int vlen, int interval, std::string xlabel, std::string ylabel, std::string label, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float> axis_z, bool autoscale_z, std::string len_key);
       ~qtgui_spectrogram_plot_impl();
       void run_gui();
       
@@ -45,7 +45,10 @@ namespace gr {
       QApplication *d_qApplication;
       
       int d_vlen, d_interval;
+      std::string d_xlabel, d_ylabel, d_label;
+      std::vector<float> d_axis_x, d_axis_y, d_axis_z;
       std::vector<float> d_buffer;
+      bool d_autoscale_z;
       spectrogram_plot* d_main_gui;
 
       // Where all the action really happens

@@ -38,19 +38,22 @@ namespace gr {
 		Q_OBJECT
 
 		public:
-			spectrogram_plot(int interval, int vlen, std::vector<float> *buffer, std::string label_x, std::string label_y, std::string label,
+			spectrogram_plot(int interval, int vlen, std::vector<float> *buffer, std::string label_x, std::string label_y, std::string label, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float> axis_z, bool autoscale_z,
 			QWidget* parent = 0);
 			~spectrogram_plot();
 			
 		private:
 			int d_interval, d_vlen;
+			std::vector<float> d_axis_x, d_axis_y, d_axis_z;
 			std::vector<float> *d_buffer;
+			bool d_autoscale_z;
 			QTimer *d_timer;
 			
 			QwtPlot *d_plot;
 			QwtPlotSpectrogram *d_spectrogram;
 			QwtMatrixRasterData *d_data;
 			QwtLinearColorMap *d_colormap;
+			QwtScaleWidget *d_scale;
 			
 			QVector<double> d_plot_data;
 			

@@ -29,22 +29,29 @@ namespace gr {
   namespace radar {
 
     qtgui_spectrogram_plot::sptr
-    qtgui_spectrogram_plot::make(int vlen, int interval, std::string len_key)
+    qtgui_spectrogram_plot::make(int vlen, int interval, std::string xlabel, std::string ylabel, std::string label, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float> axis_z, bool autoscale_z, std::string len_key)
     {
       return gnuradio::get_initial_sptr
-        (new qtgui_spectrogram_plot_impl(vlen, interval, len_key));
+        (new qtgui_spectrogram_plot_impl(vlen, interval, xlabel, ylabel, label, axis_x, axis_y, axis_z, autoscale_z, len_key));
     }
 
     /*
      * The private constructor
      */
-    qtgui_spectrogram_plot_impl::qtgui_spectrogram_plot_impl(int vlen, int interval, std::string len_key)
+    qtgui_spectrogram_plot_impl::qtgui_spectrogram_plot_impl(int vlen, int interval, std::string xlabel, std::string ylabel, std::string label, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float> axis_z, bool autoscale_z, std::string len_key)
       : gr::tagged_stream_block("qtgui_spectrogram_plot",
               gr::io_signature::make(1, 1, sizeof(float)*vlen),
               gr::io_signature::make(0, 0, 0), len_key)
     {
 		d_vlen = vlen;
 		d_interval = interval;
+		d_xlabel = xlabel;
+		d_ylabel = ylabel;
+		d_label = label;
+		d_axis_x = axis_x;
+		d_axis_y = axis_y;
+		d_axis_z = axis_z;
+		d_autoscale_z = autoscale_z;
 		d_buffer.resize(0);
 		
 		// Setup GUI
@@ -72,7 +79,7 @@ namespace gr {
 		}
 		
 		// Set QWT plot widget
-		d_main_gui = new spectrogram_plot(d_interval, d_vlen, &d_buffer, "xlabel", "ylabel", "add_label");
+		d_main_gui = new spectrogram_plot(d_interval, d_vlen, &d_buffer, d_xlabel, d_ylabel, d_label, d_axis_x, d_axis_y, d_axis_z, d_autoscale_z);
 		d_main_gui->show();
 	}
 

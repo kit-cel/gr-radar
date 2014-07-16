@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::qtgui_spectrogram_plot::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int vlen, int interval, std::string len_key="packet_len");
+      static sptr make(int vlen, int interval, std::string xlabel, std::string ylabel, std::string label, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float> axis_z, bool autoscale_z, std::string len_key="packet_len");
     };
 
   } // namespace radar
