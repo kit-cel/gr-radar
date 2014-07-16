@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Jul 16 16:55:25 2014
+# Generated: Wed Jul 16 17:07:43 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -51,7 +51,7 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.velocity = velocity = 100
+        self.velocity = velocity = 0
         self.transpose_len = transpose_len = 20
         self.sync_word2 = sync_word2 = [0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, 0, 0, 0, 0, 0] 
         self.sync_word1 = sync_word1 = [0., 0., 0., 0., 0., 0., 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 0., 0., 0., 0., 0.]
@@ -82,13 +82,13 @@ class top_block(gr.top_block, Qt.QWidget):
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
         self._velocity_counter = qwt_counter_pyslot()
-        self._velocity_counter.setRange(-10000, 10000, 1)
+        self._velocity_counter.setRange(-1000, 1000, 1)
         self._velocity_counter.setNumButtons(2)
         self._velocity_counter.setValue(self.velocity)
         self._velocity_tool_bar.addWidget(self._velocity_counter)
         self._velocity_counter.valueChanged.connect(self.set_velocity)
         self._velocity_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._velocity_slider.setRange(-10000, 10000, 1)
+        self._velocity_slider.setRange(-1000, 1000, 1)
         self._velocity_slider.setValue(self.velocity)
         self._velocity_slider.setMinimumWidth(200)
         self._velocity_slider.valueChanged.connect(self.set_velocity)
@@ -119,8 +119,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.top_layout.addLayout(self._Range_layout)
         self.radar_transpose_matrix_vcvc_0_0 = radar.transpose_matrix_vcvc(transpose_len, fft_len, "packet_len")
         self.radar_transpose_matrix_vcvc_0 = radar.transpose_matrix_vcvc(fft_len, transpose_len, "packet_len")
-        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range, ), (velocity, ), (1e20, ), (0, ), samp_rate, center_freq, -10, True, True, "packet_len")
-        self.radar_qtgui_spectrogram_plot_0 = radar.qtgui_spectrogram_plot(fft_len, 500, 'Range', 'Velocity', 'OFDM Radar', (-10,10), (-10,10), (-15,-8), True, "packet_len")
+        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range, ), (velocity, ), (1e25, ), (0, ), samp_rate, center_freq, -10, True, True, "packet_len")
+        self.radar_qtgui_spectrogram_plot_0 = radar.qtgui_spectrogram_plot(fft_len, 500, 'Range', 'Velocity', 'OFDM Radar', (0,10), (0,10), (-15,-8), True, "packet_len")
         self.radar_ofdm_cyclic_prefix_remover_cvc_0 = radar.ofdm_cyclic_prefix_remover_cvc(fft_len, fft_len/4, "packet_len")
         self.fft_vxx_0_1_0 = fft.fft_vcc(transpose_len, False, (()), True, 1)
         self.fft_vxx_0_1 = fft.fft_vcc(fft_len, True, (()), True, 1)
@@ -177,7 +177,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_velocity(self, velocity):
         self.velocity = velocity
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e20, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
         Qt.QMetaObject.invokeMethod(self._velocity_counter, "setValue", Qt.Q_ARG("double", self.velocity))
         Qt.QMetaObject.invokeMethod(self._velocity_slider, "setValue", Qt.Q_ARG("double", self.velocity))
 
@@ -205,7 +205,7 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e20, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_pilot_symbols(self):
         return self.pilot_symbols
@@ -266,16 +266,16 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e20, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_Range(self):
         return self.Range
 
     def set_Range(self, Range):
         self.Range = Range
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e20, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
         Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
         Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
 
 if __name__ == '__main__':
     import ctypes
