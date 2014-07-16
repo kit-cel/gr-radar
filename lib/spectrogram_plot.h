@@ -27,18 +27,11 @@
 #include <qwt_plot.h>
 #include <qwt_color_map.h>
 #include <qwt_plot_spectrogram.h>
+#include <qwt_matrix_raster_data.h>
+#include <qwt_scale_widget.h>
 
 namespace gr {
 	namespace radar {
-		
-		class SpectrogramData: public QwtRasterData
-		{
-		public:
-			double value(double x, double y) const
-				{
-					return 0;
-				}
-		};
 		
 		class spectrogram_plot : public QWidget
 		{
@@ -56,7 +49,10 @@ namespace gr {
 			
 			QwtPlot *d_plot;
 			QwtPlotSpectrogram *d_spectrogram;
-			SpectrogramData *d_data;
+			QwtMatrixRasterData *d_data;
+			QwtLinearColorMap *d_colormap;
+			
+			QVector<double> d_plot_data;
 			
 		protected:
 			void resizeEvent(QResizeEvent * event);

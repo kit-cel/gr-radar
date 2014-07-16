@@ -19,6 +19,7 @@
  */
 
 #include "spectrogram_plot.h"
+#include <iostream>
 
 namespace gr {
 	namespace radar {
@@ -35,11 +36,39 @@ namespace gr {
 			
 			d_plot = new QwtPlot(this); // make main plot
 			d_spectrogram = new QwtPlotSpectrogram(); // make spectrogram
-			setColorMap(gray);
 			d_spectrogram->attach(d_plot);
 			
-			d_data = new SpectrogramData(); // make data structure
+			d_data = new QwtMatrixRasterData(); // make data structure
+			
+			QVector<double> zData;
+			int columns = 100;
+			int rows = 200;
+			int data_len = rows*columns;
+			for(int i = 0; i < data_len; i++){
+				zData.push_back(i*i);
+			}
+			
+			float maximum, minimum;
+			maximum = zData[0];
+			minimum = zData[0];
+			for(int k=0; k<data_len; k++){
+				if(zData[k]>maximum) maximum = zData[k];
+				if(zData[k]<minimum) maximum = zData[k];
+			}
+			
+			d_data->setValueMatrix(zData, columns);
+			d_data->setInterval(Qt::XAxis,QwtInterval(0, 100));
+			d_data->setInterval(Qt::YAxis,QwtInterval(0, 100));
+			d_data->setInterval(Qt::ZAxis,QwtInterval(minimum, maximum));
+			
 			d_spectrogram->setData(d_data);
+			
+			d_colormap = new QwtLinearColorMap(Qt::darkCyan, Qt::red); // make colormap
+			d_colormap->addColorStop(0.1, Qt::cyan);
+			d_colormap->addColorStop(0.6, Qt::green);
+			d_colormap->addColorStop(0.95, Qt::yellow);
+			
+			d_spectrogram->setColorMap(d_colormap);
 			
 			// Plot axis and title
 			std::string label_title = "Spectrogram Plot: ";
@@ -52,11 +81,16 @@ namespace gr {
 				label_title.append(")");
 			}
 			d_plot->setTitle(QwtText(label_title.c_str())); 
-			//d_plot->setAxisScale(QwtPlot::xBottom,d_axis_x[0],d_axis_x[1]);
 			d_plot->setAxisTitle(QwtPlot::xBottom, label_x.c_str());
-			//d_plot->setAxisScale(QwtPlot::yLeft,d_axis_y[0],d_axis_y[1]);
 			d_plot->setAxisTitle(QwtPlot::yLeft, label_y.c_str());
 			
+			// Colormap
+			QwtInterval range(minimum, maximum);
+			QwtScaleWidget *scale = d_plot->axisWidget(QwtPlot::yRight);
+			scale->setColorBarEnabled(true);
+			scale->setColorMap(range, d_colormap);
+			
+			// Do replot
 			d_plot->replot();
 			
 			// Setup timer and connect refreshing plot
@@ -75,6 +109,13 @@ namespace gr {
 		
 		void
 		spectrogram_plot::refresh(){
+			// Fetch new data
+			d_plot_data.clear();
+			d_plot_data.resize(d_buffer->size());
+			for(int k=0; k<d_buffer->size(); k++) d_plot_data[k] = (*d_buffer)[k];
+			for(int k=0; k<d_buffer->size(); k++) std::cout << d_plot_data[k] << std::endl;
+			
+			// Do replot
 			d_plot->replot();
 		}
 
