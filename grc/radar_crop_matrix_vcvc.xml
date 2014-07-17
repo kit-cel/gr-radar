@@ -1,5 +1,5 @@
 <block>
-  <name>Crop Matrix</name>
+  <name>Matrix Crop</name>
   <key>radar_crop_matrix_vcvc</key>
   <category>RADAR</category>
   <import>import radar</import>
@@ -22,6 +22,7 @@
   <param>
     <name>Packet length key</name>
     <key>len_key</key>
+    <value>"packet_len"</value>
     <type>string</type>
   </param>
   <sink>
@@ -32,6 +33,6 @@
   <source>
     <name>IQ out</name>
     <type>complex</type>
-    <vlen>$(crop_x[1]-crop_x[0])</vlen>
+    <vlen>($crop_x)[1]-($crop_x)[0]</vlen>
   </source>
 </block>

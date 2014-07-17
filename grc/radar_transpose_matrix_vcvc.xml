@@ -1,5 +1,5 @@
 <block>
-  <name>Transpose Matrix</name>
+  <name>Matrix Transpose</name>
   <key>radar_transpose_matrix_vcvc</key>
   <category>RADAR</category>
   <import>import radar</import>
