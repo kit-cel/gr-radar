@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Jul 16 17:07:43 2014
+# Generated: Wed Jul 16 20:16:52 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -273,9 +273,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_Range(self, Range):
         self.Range = Range
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
         Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
         Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
 
 if __name__ == '__main__':
     import ctypes

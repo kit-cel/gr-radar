@@ -32,6 +32,7 @@
 #include "radar/ofdm_cyclic_prefix_remover_cvc.h"
 #include "radar/transpose_matrix_vcvc.h"
 #include "radar/qtgui_spectrogram_plot.h"
+#include "radar/crop_matrix_vcvc.h"
 %}
 
 
@@ -89,3 +90,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, ofdm_cyclic_prefix_remover_cvc);
 GR_SWIG_BLOCK_MAGIC2(radar, transpose_matrix_vcvc);
 %include "radar/qtgui_spectrogram_plot.h"
 GR_SWIG_BLOCK_MAGIC2(radar, qtgui_spectrogram_plot);
+%include "radar/crop_matrix_vcvc.h"
+GR_SWIG_BLOCK_MAGIC2(radar, crop_matrix_vcvc);
