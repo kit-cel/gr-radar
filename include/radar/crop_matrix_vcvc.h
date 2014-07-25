@@ -29,7 +29,13 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This matrix crops a data matrix. A tagged stream combined with vectors as items represent a matrix. crop_x and crop_y gives the ranges which shall be pushed through. Rest of the matrix is lost.
+     * 
+     * \param vlen Vector length
+     * \param crop_x Index range on x axis to crop matrix
+     * \param crop_y Index range on y axis to crop matrix
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

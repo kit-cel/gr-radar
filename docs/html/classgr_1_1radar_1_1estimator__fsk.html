@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1estimator__fsk.htm
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are 'frequency' and 'phase'. The velocity is calculated with the 'frequency' information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are 'range' and 'velocity'.  
  <a href="classgr_1_1radar_1_1estimator__fsk.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="estimator__fsk_8h_source.html">estimator_fsk.h</a>&gt;</code></p>
@@ -118,11 +118,18 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a244bb956b39175caa9d4981cf33cd6fd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#a244bb956b39175caa9d4981cf33cd6fd">make</a> (float center_freq, float delta_freq)</td></tr>
-<tr class="memdesc:a244bb956b39175caa9d4981cf33cd6fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="&lt;+description of block+&gt; ">radar::estimator_fsk</a>.  <a href="#a244bb956b39175caa9d4981cf33cd6fd">More...</a><br/></td></tr>
+<tr class="memdesc:a244bb956b39175caa9d4981cf33cd6fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...">radar::estimator_fsk</a>.  <a href="#a244bb956b39175caa9d4981cf33cd6fd">More...</a><br/></td></tr>
 <tr class="separator:a244bb956b39175caa9d4981cf33cd6fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are 'frequency' and 'phase'. The velocity is calculated with the 'frequency' information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are 'range' and 'velocity'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">center_freq</td><td>Center frequency </td></tr>
+    <tr><td class="paramname">delta_freq</td><td>Frequency difference of high and low frequency </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="ab62b0104534777d08f40690db82a94bd"></a>
 <div class="memitem">
@@ -169,8 +176,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="&lt;+description of block+&gt; ">radar::estimator_fsk</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="&lt;+description of block+&gt; ">radar::estimator_fsk</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#a244bb956b39175caa9d4981cf33cd6fd" title="Return a shared_ptr to a new instance of radar::estimator_fsk. ">radar::estimator_fsk::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...">radar::estimator_fsk</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...">radar::estimator_fsk</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#a244bb956b39175caa9d4981cf33cd6fd" title="Return a shared_ptr to a new instance of radar::estimator_fsk. ">radar::estimator_fsk::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -183,7 +190,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1estimator__fsk.html">estimator_fsk</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

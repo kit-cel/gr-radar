@@ -31,7 +31,7 @@ namespace gr {
     /*!
      * \brief This block tracks a singletarget detection with a particle or kalman filter. As input values with identifiers 'range' and 'velocity' are needed and should hold a f32vector with only one element. All input variables tagged with std gives the standard deviation of the parameter. The threshold_track is a value which decides with the likelihood of the data if the new data is accepted as a track. A good starting value is threshold_track = 0.001. threshold_lost is the number of false tracks unitel the track is lost and the tracker begins with a new one. The string filter decides which tracking kernel should be used. 'kalman' or 'particle' are valid. If 'particle' is chosen num_particle gives the number of particles for the particle filter. If 'kalman' is chosen there is no effect on the tracker.
      * 
-     * \param num_particle Number of particles for particle filter. There is no effect if the kalman filter is chosen.
+     * \param num_particle Number of particles for particle filter. There is no effect if kalman filter is chosen.
      * \param std_range_meas Standard deviation of the range measurement
      * \param std_velocity_meas Standard deviation of the velocity measurement
      * \param std_accel_sys Standard deviation of the system acceleration

@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1crop__matrix__vcvc
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This matrix crops a data matrix. A tagged stream combined with vectors as items represent a matrix. crop_x and crop_y gives the ranges which shall be pushed through. Rest of the matrix is lost.  
  <a href="classgr_1_1radar_1_1crop__matrix__vcvc.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="crop__matrix__vcvc_8h_source.html">crop_matrix_vcvc.h</a>&gt;</code></p>
@@ -118,11 +118,20 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aefd957c45a63639566fb5efd1fe82efb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html#a0fd732b05fe09339789565924856fdfc">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html#aefd957c45a63639566fb5efd1fe82efb">make</a> (int vlen, std::vector&lt; int &gt; crop_x, std::vector&lt; int &gt; crop_y, std::string len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:aefd957c45a63639566fb5efd1fe82efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html" title="&lt;+description of block+&gt; ">radar::crop_matrix_vcvc</a>.  <a href="#aefd957c45a63639566fb5efd1fe82efb">More...</a><br/></td></tr>
+<tr class="memdesc:aefd957c45a63639566fb5efd1fe82efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html" title="This matrix crops a data matrix. A tagged stream combined with vectors as items represent a matrix...">radar::crop_matrix_vcvc</a>.  <a href="#aefd957c45a63639566fb5efd1fe82efb">More...</a><br/></td></tr>
 <tr class="separator:aefd957c45a63639566fb5efd1fe82efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This matrix crops a data matrix. A tagged stream combined with vectors as items represent a matrix. crop_x and crop_y gives the ranges which shall be pushed through. Rest of the matrix is lost. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vlen</td><td>Vector length </td></tr>
+    <tr><td class="paramname">crop_x</td><td>Index range on x axis to crop matrix </td></tr>
+    <tr><td class="paramname">crop_y</td><td>Index range on y axis to crop matrix </td></tr>
+    <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a0fd732b05fe09339789565924856fdfc"></a>
 <div class="memitem">
@@ -181,8 +190,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html" title="&lt;+description of block+&gt; ">radar::crop_matrix_vcvc</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html" title="&lt;+description of block+&gt; ">radar::crop_matrix_vcvc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html#aefd957c45a63639566fb5efd1fe82efb" title="Return a shared_ptr to a new instance of radar::crop_matrix_vcvc. ">radar::crop_matrix_vcvc::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html" title="This matrix crops a data matrix. A tagged stream combined with vectors as items represent a matrix...">radar::crop_matrix_vcvc</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html" title="This matrix crops a data matrix. A tagged stream combined with vectors as items represent a matrix...">radar::crop_matrix_vcvc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html#aefd957c45a63639566fb5efd1fe82efb" title="Return a shared_ptr to a new instance of radar::crop_matrix_vcvc. ">radar::crop_matrix_vcvc::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -195,7 +204,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1crop__matrix__vcvc.html">crop_matrix_vcvc</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

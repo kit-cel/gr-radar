@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1transpose__matrix_
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block transposes a matrix. A tagged stream combined with vectors as items represent a matrix. vlen_in is the vector length of the input data and vlen_out the vector length of the output data. vlen_out is equal to the items (vectors) per tagged stream on the input stream.  
  <a href="classgr_1_1radar_1_1transpose__matrix__vcvc.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="transpose__matrix__vcvc_8h_source.html">transpose_matrix_vcvc.h</a>&gt;</code></p>
@@ -118,11 +118,19 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a6569f1d7968cb2e422900c51dc3cb102"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html#ade50c245c1c069c5061251099368734a">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html#a6569f1d7968cb2e422900c51dc3cb102">make</a> (int vlen_in, int vlen_out, std::string len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a6569f1d7968cb2e422900c51dc3cb102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html" title="&lt;+description of block+&gt; ">radar::transpose_matrix_vcvc</a>.  <a href="#a6569f1d7968cb2e422900c51dc3cb102">More...</a><br/></td></tr>
+<tr class="memdesc:a6569f1d7968cb2e422900c51dc3cb102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html" title="This block transposes a matrix. A tagged stream combined with vectors as items represent a matrix...">radar::transpose_matrix_vcvc</a>.  <a href="#a6569f1d7968cb2e422900c51dc3cb102">More...</a><br/></td></tr>
 <tr class="separator:a6569f1d7968cb2e422900c51dc3cb102"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block transposes a matrix. A tagged stream combined with vectors as items represent a matrix. vlen_in is the vector length of the input data and vlen_out the vector length of the output data. vlen_out is equal to the items (vectors) per tagged stream on the input stream. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vlen_in</td><td>Vector length input </td></tr>
+    <tr><td class="paramname">vlen_out</td><td>Vector length output </td></tr>
+    <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="ade50c245c1c069c5061251099368734a"></a>
 <div class="memitem">
@@ -175,8 +183,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html" title="&lt;+description of block+&gt; ">radar::transpose_matrix_vcvc</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html" title="&lt;+description of block+&gt; ">radar::transpose_matrix_vcvc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html#a6569f1d7968cb2e422900c51dc3cb102" title="Return a shared_ptr to a new instance of radar::transpose_matrix_vcvc. ">radar::transpose_matrix_vcvc::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html" title="This block transposes a matrix. A tagged stream combined with vectors as items represent a matrix...">radar::transpose_matrix_vcvc</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html" title="This block transposes a matrix. A tagged stream combined with vectors as items represent a matrix...">radar::transpose_matrix_vcvc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html#a6569f1d7968cb2e422900c51dc3cb102" title="Return a shared_ptr to a new instance of radar::transpose_matrix_vcvc. ">radar::transpose_matrix_vcvc::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -189,7 +197,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1transpose__matrix__vcvc.html">transpose_matrix_vcvc</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

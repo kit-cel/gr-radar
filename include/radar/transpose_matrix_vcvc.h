@@ -29,7 +29,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block transposes a matrix. A tagged stream combined with vectors as items represent a matrix. vlen_in is the vector length of the input data and vlen_out the vector length of the output data. vlen_out is equal to the items (vectors) per tagged stream on the input stream.
+     * 
+     * \param vlen_in Vector length input
+     * \param vlen_out Vector length output
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

@@ -120,34 +120,41 @@ $(document).ready(function(){initNavTree('estimator__fmcw_8h_source.html','');})
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">namespace </span>radar {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    /*!</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * \brief &lt;+description of block+&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \ingroup radar</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fmcw.html">   35</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__fmcw.html">estimator_fmcw</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">   38</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_fmcw&gt; <a class="code" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">      /*!</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_fmcw.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">       *</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_fmcw&#39;s</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">       * class. radar::estimator_fmcw::make is the public interface for</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">       * creating new instances.</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">       */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a> make(<span class="keywordtype">int</span> samp_rate, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> sweep_freq, <span class="keywordtype">int</span> samp_up, <span class="keywordtype">int</span> samp_down);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    };</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  } <span class="comment">// namespace radar</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// namespace gr</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_FMCW_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * \brief This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with the identifier &#39;frequency&#39; of the up-chirp, down-chirp and CW part. If data is available on all three message ports the estimation starts. The velocity is estimated with the frequency information of the CW block and the range is estimated with the up and down chirp. If multiple frequencies are given, the velocity is estimated first and associated with the most likely range from the up- and down-chirp. The output identifiers are &#39;range&#39; and &#39;velocity&#39;.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * \param samp_rate Sample rate</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * \param center_freq Center frequency</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * \param sweep_freq Sweep frequency</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * \param samp_up Samples of up-chirp</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * \param samp_down Samples of down-chirp</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * \ingroup radar</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fmcw.html">   42</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__fmcw.html">estimator_fmcw</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">   45</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_fmcw&gt; <a class="code" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">      /*!</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_fmcw.</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">       *</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_fmcw&#39;s</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">       * class. radar::estimator_fmcw::make is the public interface for</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">       * creating new instances.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">       */</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a> make(<span class="keywordtype">int</span> samp_rate, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> sweep_freq, <span class="keywordtype">int</span> samp_up, <span class="keywordtype">int</span> samp_down);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    };</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  } <span class="comment">// namespace radar</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace gr</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_FMCW_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="api_8h_html"><div class="ttname"><a href="api_8h.html">api.h</a></div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__fmcw_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fmcw.html">gr::radar::estimator_fmcw</a></div><div class="ttdoc">&lt;+description of block+&gt; </div><div class="ttdef"><b>Definition:</b> estimator_fmcw.h:35</div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__fmcw_html_aa4a6342d83696ecd7413331d62b3fd4e"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">gr::radar::estimator_fmcw::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_fmcw &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_fmcw.h:38</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__fmcw_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fmcw.html">gr::radar::estimator_fmcw</a></div><div class="ttdoc">This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...</div><div class="ttdef"><b>Definition:</b> estimator_fmcw.h:42</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__fmcw_html_aa4a6342d83696ecd7413331d62b3fd4e"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">gr::radar::estimator_fmcw::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_fmcw &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_fmcw.h:45</div></div>
 <div class="ttc" id="api_8h_html_a087f3342c4b5ef356c6a607f77df0ea4"><div class="ttname"><a href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a></div><div class="ttdeci">#define RADAR_API</div><div class="ttdef"><b>Definition:</b> api.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -155,7 +162,7 @@ $(document).ready(function(){initNavTree('estimator__fmcw_8h_source.html','');})
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="estimator__fmcw_8h.html">estimator_fmcw.h</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1estimator__fmcw.ht
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with the identifier 'frequency' of the up-chirp, down-chirp and CW part. If data is available on all three message ports the estimation starts. The velocity is estimated with the frequency information of the CW block and the range is estimated with the up and down chirp. If multiple frequencies are given, the velocity is estimated first and associated with the most likely range from the up- and down-chirp. The output identifiers are 'range' and 'velocity'.  
  <a href="classgr_1_1radar_1_1estimator__fmcw.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="estimator__fmcw_8h_source.html">estimator_fmcw.h</a>&gt;</code></p>
@@ -118,11 +118,21 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#ac5467d0b59c7d8e82b53ea28c3a37efd">make</a> (int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down)</td></tr>
-<tr class="memdesc:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="&lt;+description of block+&gt; ">radar::estimator_fmcw</a>.  <a href="#ac5467d0b59c7d8e82b53ea28c3a37efd">More...</a><br/></td></tr>
+<tr class="memdesc:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>.  <a href="#ac5467d0b59c7d8e82b53ea28c3a37efd">More...</a><br/></td></tr>
 <tr class="separator:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with the identifier 'frequency' of the up-chirp, down-chirp and CW part. If data is available on all three message ports the estimation starts. The velocity is estimated with the frequency information of the CW block and the range is estimated with the up and down chirp. If multiple frequencies are given, the velocity is estimated first and associated with the most likely range from the up- and down-chirp. The output identifiers are 'range' and 'velocity'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">samp_rate</td><td>Sample rate </td></tr>
+    <tr><td class="paramname">center_freq</td><td>Center frequency </td></tr>
+    <tr><td class="paramname">sweep_freq</td><td>Sweep frequency </td></tr>
+    <tr><td class="paramname">samp_up</td><td>Samples of up-chirp </td></tr>
+    <tr><td class="paramname">samp_down</td><td>Samples of down-chirp </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="aa4a6342d83696ecd7413331d62b3fd4e"></a>
 <div class="memitem">
@@ -187,8 +197,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="&lt;+description of block+&gt; ">radar::estimator_fmcw</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="&lt;+description of block+&gt; ">radar::estimator_fmcw</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#ac5467d0b59c7d8e82b53ea28c3a37efd" title="Return a shared_ptr to a new instance of radar::estimator_fmcw. ">radar::estimator_fmcw::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#ac5467d0b59c7d8e82b53ea28c3a37efd" title="Return a shared_ptr to a new instance of radar::estimator_fmcw. ">radar::estimator_fmcw::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -201,7 +211,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html">estimator_fmcw</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -28,7 +28,10 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block estimates the velocity from given peaks of a CW spectrum. The estimator looks for a f32vector tagged with a 'frequency' identifier (symbol) and calculates the velocity with the doppler formula. The identifier (symbol) of the output data is 'velocity'. Needed identifier (symbols) of the input are 'frequency'.
+     * 
+     * \param center_freq Center frequency
+     * 
      * \ingroup radar
      *
      */

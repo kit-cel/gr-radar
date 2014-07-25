@@ -28,7 +28,11 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are 'frequency' and 'phase'. The velocity is calculated with the 'frequency' information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are 'range' and 'velocity'.
+     * 
+     * \param center_freq Center frequency
+     * \param delta_freq Frequency difference of high and low frequency
+     * 
      * \ingroup radar
      *
      */

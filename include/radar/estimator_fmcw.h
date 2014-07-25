@@ -28,7 +28,14 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with the identifier 'frequency' of the up-chirp, down-chirp and CW part. If data is available on all three message ports the estimation starts. The velocity is estimated with the frequency information of the CW block and the range is estimated with the up and down chirp. If multiple frequencies are given, the velocity is estimated first and associated with the most likely range from the up- and down-chirp. The output identifiers are 'range' and 'velocity'.
+     * 
+     * \param samp_rate Sample rate
+     * \param center_freq Center frequency
+     * \param sweep_freq Sweep frequency
+     * \param samp_up Samples of up-chirp
+     * \param samp_down Samples of down-chirp
+     * 
      * \ingroup radar
      *
      */
