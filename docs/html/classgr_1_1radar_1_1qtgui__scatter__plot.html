@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1qtgui__scatter__pl
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block displays a scatter plot of two data sets. The identifiers (symbols) are given with label_x and label_y. The display range is given with axis_x and axis_y. Points that are not in range are simply not displayed (there are no errors or warnings). label gives an additional lable to differ multiple scatter plots on the screen by the titles. The update interval is given in milliseconds.  
  <a href="classgr_1_1radar_1_1qtgui__scatter__plot.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="qtgui__scatter__plot_8h_source.html">qtgui_scatter_plot.h</a>&gt;</code></p>
@@ -118,11 +118,22 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af4bf530b27b7de99c8878ad0f4613d04"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html#a7416ebbdaca7d262f6348a91dadba887">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html#af4bf530b27b7de99c8878ad0f4613d04">make</a> (int interval, std::string label_x, std::string label_y, std::vector&lt; float &gt; axis_x, std::vector&lt; float &gt; axis_y, std::string label=&quot;&quot;)</td></tr>
-<tr class="memdesc:af4bf530b27b7de99c8878ad0f4613d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html" title="&lt;+description of block+&gt; ">radar::qtgui_scatter_plot</a>.  <a href="#af4bf530b27b7de99c8878ad0f4613d04">More...</a><br/></td></tr>
+<tr class="memdesc:af4bf530b27b7de99c8878ad0f4613d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html" title="This block displays a scatter plot of two data sets. The identifiers (symbols) are given with label_x...">radar::qtgui_scatter_plot</a>.  <a href="#af4bf530b27b7de99c8878ad0f4613d04">More...</a><br/></td></tr>
 <tr class="separator:af4bf530b27b7de99c8878ad0f4613d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block displays a scatter plot of two data sets. The identifiers (symbols) are given with label_x and label_y. The display range is given with axis_x and axis_y. Points that are not in range are simply not displayed (there are no errors or warnings). label gives an additional lable to differ multiple scatter plots on the screen by the titles. The update interval is given in milliseconds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval</td><td>Update interval in milliseconds </td></tr>
+    <tr><td class="paramname">label_x</td><td>Identifier (symbol) of first data set </td></tr>
+    <tr><td class="paramname">label_y</td><td>Identifier (symbol) of second data set </td></tr>
+    <tr><td class="paramname">axis_x</td><td>Display range on x axis </td></tr>
+    <tr><td class="paramname">axis_y</td><td>Display range on y axis </td></tr>
+    <tr><td class="paramname">label</td><td>Optional label for the title </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a7416ebbdaca7d262f6348a91dadba887"></a>
 <div class="memitem">
@@ -193,8 +204,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html" title="&lt;+description of block+&gt; ">radar::qtgui_scatter_plot</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html" title="&lt;+description of block+&gt; ">radar::qtgui_scatter_plot</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html#af4bf530b27b7de99c8878ad0f4613d04" title="Return a shared_ptr to a new instance of radar::qtgui_scatter_plot. ">radar::qtgui_scatter_plot::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html" title="This block displays a scatter plot of two data sets. The identifiers (symbols) are given with label_x...">radar::qtgui_scatter_plot</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html" title="This block displays a scatter plot of two data sets. The identifiers (symbols) are given with label_x...">radar::qtgui_scatter_plot</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html#af4bf530b27b7de99c8878ad0f4613d04" title="Return a shared_ptr to a new instance of radar::qtgui_scatter_plot. ">radar::qtgui_scatter_plot::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -207,7 +218,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1qtgui__scatter__plot.html">qtgui_scatter_plot</a></li>
-    <li class="footer">Generated on Sat Jul 12 2014 20:23:41 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

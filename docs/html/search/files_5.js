@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['print_5fresults_2eh',['print_results.h',['../print__results_8h.html',1,'']]],
-  ['print_5fresults_5fimpl_2eh',['print_results_impl.h',['../print__results__impl_8h.html',1,'']]]
+  ['ofdm_5fcyclic_5fprefix_5fremover_5fcvc_2eh',['ofdm_cyclic_prefix_remover_cvc.h',['../ofdm__cyclic__prefix__remover__cvc_8h.html',1,'']]],
+  ['ofdm_5fcyclic_5fprefix_5fremover_5fcvc_5fimpl_2eh',['ofdm_cyclic_prefix_remover_cvc_impl.h',['../ofdm__cyclic__prefix__remover__cvc__impl_8h.html',1,'']]],
+  ['os_5fcfar_5fc_2eh',['os_cfar_c.h',['../os__cfar__c_8h.html',1,'']]],
+  ['os_5fcfar_5fc_5fimpl_2eh',['os_cfar_c_impl.h',['../os__cfar__c__impl_8h.html',1,'']]]
 ];

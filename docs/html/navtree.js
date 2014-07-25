@@ -28,8 +28,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classgr_1_1radar_1_1scatter__plot.html#a8ff20fecfe164697cf4252ba37a780d9",
-"estimator__cw__impl_8h.html"
+"classgr_1_1radar_1_1qtgui__spectrogram__plot.html#a31bfc321a94a971abd38b99071f89319",
+"classgr_1_1radar_1_1ts__fft__cc__impl.html#ab55700e63bf1d796698479539a6de38a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

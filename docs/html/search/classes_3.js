@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['os_5fcfar_5fc',['os_cfar_c',['../classgr_1_1radar_1_1os__cfar__c.html',1,'gr::radar']]],
-  ['os_5fcfar_5fc_5fimpl',['os_cfar_c_impl',['../classgr_1_1radar_1_1os__cfar__c__impl.html',1,'gr::radar']]]
+  ['msg_5fgate',['msg_gate',['../classgr_1_1radar_1_1msg__gate.html',1,'gr::radar']]],
+  ['msg_5fgate_5fimpl',['msg_gate_impl',['../classgr_1_1radar_1_1msg__gate__impl.html',1,'gr::radar']]],
+  ['msg_5fmanipulator',['msg_manipulator',['../classgr_1_1radar_1_1msg__manipulator.html',1,'gr::radar']]],
+  ['msg_5fmanipulator_5fimpl',['msg_manipulator_impl',['../classgr_1_1radar_1_1msg__manipulator__impl.html',1,'gr::radar']]]
 ];

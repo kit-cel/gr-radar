@@ -29,7 +29,14 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block displays a plot of a value with a given interval in milliseconds. label_y represents the identifier (symbol) of the data. The y axis is scaled with axis_y. range_time gives the shown range of the x axis in seconds. label is an additional label for the title.
+     * 
+     * \param interval Update interval in milliseconds
+     * \param label_y Lable for y axis and identifier (symbol) for data
+     * \param axis_y Display range y axis
+     * \param range_time Display range for x axis in seconds
+     * \param label Additional label for the title
+     * 
      * \ingroup radar
      *
      */

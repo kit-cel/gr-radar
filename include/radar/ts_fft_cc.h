@@ -1,4 +1,4 @@
-/* -*- c++ -*- */
+e/* -*- c++ -*- */
 /* 
  * Copyright 2014 <+YOU OR YOUR COMPANY+>.
  * 
@@ -28,7 +28,11 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This blocks takes a tagged stream and returns a FFT of the length of the input stream. The output is NOT normalized on the number of input items and no window is used.
+     * 
+     * \param packet_len Packet length of tagged stream
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

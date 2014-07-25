@@ -28,7 +28,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block splits a FSK signal consisting of two separate signals. samp_per_freq items are taken and pushed alternating to the outputs. Discarded samples are thrown away at the beginning of samp_per_freq samples and only samp_per_freq-samp_discard are pushed to output.
+     * 
+     * \param samp_per_freq Samples per frequency
+     * \param samp_discard Discarded samples
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

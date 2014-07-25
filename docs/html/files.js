@@ -1,6 +1,12 @@
 var files =
 [
     [ "api.h", "api_8h.html", "api_8h" ],
+    [ "crop_matrix_vcvc.h", "crop__matrix__vcvc_8h.html", [
+      [ "crop_matrix_vcvc", "classgr_1_1radar_1_1crop__matrix__vcvc.html", "classgr_1_1radar_1_1crop__matrix__vcvc" ]
+    ] ],
+    [ "crop_matrix_vcvc_impl.h", "crop__matrix__vcvc__impl_8h.html", [
+      [ "crop_matrix_vcvc_impl", "classgr_1_1radar_1_1crop__matrix__vcvc__impl.html", "classgr_1_1radar_1_1crop__matrix__vcvc__impl" ]
+    ] ],
     [ "estimator_cw.h", "estimator__cw_8h.html", [
       [ "estimator_cw", "classgr_1_1radar_1_1estimator__cw.html", "classgr_1_1radar_1_1estimator__cw" ]
     ] ],
@@ -43,6 +49,12 @@ var files =
     [ "msg_manipulator_impl.h", "msg__manipulator__impl_8h.html", [
       [ "msg_manipulator_impl", "classgr_1_1radar_1_1msg__manipulator__impl.html", "classgr_1_1radar_1_1msg__manipulator__impl" ]
     ] ],
+    [ "ofdm_cyclic_prefix_remover_cvc.h", "ofdm__cyclic__prefix__remover__cvc_8h.html", [
+      [ "ofdm_cyclic_prefix_remover_cvc", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc.html", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc" ]
+    ] ],
+    [ "ofdm_cyclic_prefix_remover_cvc_impl.h", "ofdm__cyclic__prefix__remover__cvc__impl_8h.html", [
+      [ "ofdm_cyclic_prefix_remover_cvc_impl", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc__impl.html", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc__impl" ]
+    ] ],
     [ "os_cfar_c.h", "os__cfar__c_8h.html", [
       [ "os_cfar_c", "classgr_1_1radar_1_1os__cfar__c.html", "classgr_1_1radar_1_1os__cfar__c" ]
     ] ],
@@ -60,6 +72,12 @@ var files =
     ] ],
     [ "qtgui_scatter_plot_impl.h", "qtgui__scatter__plot__impl_8h.html", [
       [ "qtgui_scatter_plot_impl", "classgr_1_1radar_1_1qtgui__scatter__plot__impl.html", "classgr_1_1radar_1_1qtgui__scatter__plot__impl" ]
+    ] ],
+    [ "qtgui_spectrogram_plot.h", "qtgui__spectrogram__plot_8h.html", [
+      [ "qtgui_spectrogram_plot", "classgr_1_1radar_1_1qtgui__spectrogram__plot.html", "classgr_1_1radar_1_1qtgui__spectrogram__plot" ]
+    ] ],
+    [ "qtgui_spectrogram_plot_impl.h", "qtgui__spectrogram__plot__impl_8h.html", [
+      [ "qtgui_spectrogram_plot_impl", "classgr_1_1radar_1_1qtgui__spectrogram__plot__impl.html", "classgr_1_1radar_1_1qtgui__spectrogram__plot__impl" ]
     ] ],
     [ "qtgui_time_plot.h", "qtgui__time__plot_8h.html", [
       [ "qtgui_time_plot", "classgr_1_1radar_1_1qtgui__time__plot.html", "classgr_1_1radar_1_1qtgui__time__plot" ]
@@ -94,6 +112,9 @@ var files =
     [ "signal_generator_sync_pulse_c_impl.h", "signal__generator__sync__pulse__c__impl_8h.html", [
       [ "signal_generator_sync_pulse_c_impl", "classgr_1_1radar_1_1signal__generator__sync__pulse__c__impl.html", "classgr_1_1radar_1_1signal__generator__sync__pulse__c__impl" ]
     ] ],
+    [ "spectrogram_plot.h", "spectrogram__plot_8h.html", [
+      [ "spectrogram_plot", "classgr_1_1radar_1_1spectrogram__plot.html", "classgr_1_1radar_1_1spectrogram__plot" ]
+    ] ],
     [ "split_cc.h", "split__cc_8h.html", [
       [ "split_cc", "classgr_1_1radar_1_1split__cc.html", "classgr_1_1radar_1_1split__cc" ]
     ] ],
@@ -120,6 +141,12 @@ var files =
     ] ],
     [ "tracking_singletarget_impl.h", "tracking__singletarget__impl_8h.html", [
       [ "tracking_singletarget_impl", "classgr_1_1radar_1_1tracking__singletarget__impl.html", "classgr_1_1radar_1_1tracking__singletarget__impl" ]
+    ] ],
+    [ "transpose_matrix_vcvc.h", "transpose__matrix__vcvc_8h.html", [
+      [ "transpose_matrix_vcvc", "classgr_1_1radar_1_1transpose__matrix__vcvc.html", "classgr_1_1radar_1_1transpose__matrix__vcvc" ]
+    ] ],
+    [ "transpose_matrix_vcvc_impl.h", "transpose__matrix__vcvc__impl_8h.html", [
+      [ "transpose_matrix_vcvc_impl", "classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html", "classgr_1_1radar_1_1transpose__matrix__vcvc__impl" ]
     ] ],
     [ "ts_fft_cc.h", "ts__fft__cc_8h.html", [
       [ "ts_fft_cc", "classgr_1_1radar_1_1ts__fft__cc.html", "classgr_1_1radar_1_1ts__fft__cc" ]

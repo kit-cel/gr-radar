@@ -29,7 +29,15 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block displays a scatter plot of two data sets. The identifiers (symbols) are given with label_x and label_y. The display range is given with axis_x and axis_y. Points that are not in range are simply not displayed (there are no errors or warnings). label gives an additional lable to differ multiple scatter plots on the screen by the titles. The update interval is given in milliseconds.
+     * 
+     * \param interval Update interval in milliseconds
+     * \param label_x Identifier (symbol) of first data set
+     * \param label_y Identifier (symbol) of second data set
+     * \param axis_x Display range on x axis
+     * \param axis_y Display range on y axis
+     * \param label Optional label for the title
+     * 
      * \ingroup radar
      *
      */

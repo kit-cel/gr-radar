@@ -19,6 +19,7 @@ var searchData=
   ['signal_5fgenerator_5ffmcw_5fc_5fimpl',['signal_generator_fmcw_c_impl',['../classgr_1_1radar_1_1signal__generator__fmcw__c__impl.html#a4c716b4d3347c23be26e183663b39fa6',1,'gr::radar::signal_generator_fmcw_c_impl']]],
   ['signal_5fgenerator_5ffsk_5fc_5fimpl',['signal_generator_fsk_c_impl',['../classgr_1_1radar_1_1signal__generator__fsk__c__impl.html#ad95d4522b34c770a07d5b25645a107f5',1,'gr::radar::signal_generator_fsk_c_impl']]],
   ['signal_5fgenerator_5fsync_5fpulse_5fc_5fimpl',['signal_generator_sync_pulse_c_impl',['../classgr_1_1radar_1_1signal__generator__sync__pulse__c__impl.html#ad0e3cc8d5fdd0f0aaa38b111ca3d9f94',1,'gr::radar::signal_generator_sync_pulse_c_impl']]],
+  ['spectrogram_5fplot',['spectrogram_plot',['../classgr_1_1radar_1_1spectrogram__plot.html#a1fef909b829e923b9d87b585d840e6f3',1,'gr::radar::spectrogram_plot']]],
   ['split_5fcc_5fimpl',['split_cc_impl',['../classgr_1_1radar_1_1split__cc__impl.html#a4d5dd28cbcea93feba0effdd9e4eed26',1,'gr::radar::split_cc_impl']]],
   ['split_5ffsk_5fcc_5fimpl',['split_fsk_cc_impl',['../classgr_1_1radar_1_1split__fsk__cc__impl.html#ae6144373d653364d24f82efaa05782ad',1,'gr::radar::split_fsk_cc_impl']]],
   ['static_5ftarget_5fsimulator_5fcc_5fimpl',['static_target_simulator_cc_impl',['../classgr_1_1radar_1_1static__target__simulator__cc__impl.html#aff305e85d96376b752f2de3bd3956294',1,'gr::radar::static_target_simulator_cc_impl']]]

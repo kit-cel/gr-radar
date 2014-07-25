@@ -28,7 +28,11 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block prints data of messages filled with data of the structure [ [[symbol_0],[data_0]], [[symbol_1],[data_1]], ...] on the command line. Only data of the datatypes f32vector and long, and rx_time tuples are displayed. The output can also be stored in a text file.
+     * 
+     * \param store_msg Toggle save output to file
+     * \param filename Filename of the output file
+     * 
      * \ingroup radar
      *
      */

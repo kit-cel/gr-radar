@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1tracking__singleta
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block tracks a singletarget detection with a particle or kalman filter. As input values with identifiers 'range' and 'velocity' are needed and should hold a f32vector with only one element. All input variables tagged with std gives the standard deviation of the parameter. The threshold_track is a value which decides with the likelihood of the data if the new data is accepted as a track. A good starting value is threshold_track = 0.001. threshold_lost is the number of false tracks unitel the track is lost and the tracker begins with a new one. The string filter decides which tracking kernel should be used. 'kalman' or 'particle' are valid. If 'particle' is chosen num_particle gives the number of particles for the particle filter. If 'kalman' is chosen there is no effect on the tracker.  
  <a href="classgr_1_1radar_1_1tracking__singletarget.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tracking__singletarget_8h_source.html">tracking_singletarget.h</a>&gt;</code></p>
@@ -118,11 +118,23 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ed299c6ac39346a6366610339771e62"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html#a2c7519146ed63bff2b19fe66fd239f15">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html#a3ed299c6ac39346a6366610339771e62">make</a> (int num_particle, float std_range_meas, float std_velocity_meas, float std_accel_sys, float threshold_track, int threshold_lost, std::string filter)</td></tr>
-<tr class="memdesc:a3ed299c6ac39346a6366610339771e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html" title="&lt;+description of block+&gt; ">radar::tracking_singletarget</a>.  <a href="#a3ed299c6ac39346a6366610339771e62">More...</a><br/></td></tr>
+<tr class="memdesc:a3ed299c6ac39346a6366610339771e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html" title="This block tracks a singletarget detection with a particle or kalman filter. As input values with ide...">radar::tracking_singletarget</a>.  <a href="#a3ed299c6ac39346a6366610339771e62">More...</a><br/></td></tr>
 <tr class="separator:a3ed299c6ac39346a6366610339771e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block tracks a singletarget detection with a particle or kalman filter. As input values with identifiers 'range' and 'velocity' are needed and should hold a f32vector with only one element. All input variables tagged with std gives the standard deviation of the parameter. The threshold_track is a value which decides with the likelihood of the data if the new data is accepted as a track. A good starting value is threshold_track = 0.001. threshold_lost is the number of false tracks unitel the track is lost and the tracker begins with a new one. The string filter decides which tracking kernel should be used. 'kalman' or 'particle' are valid. If 'particle' is chosen num_particle gives the number of particles for the particle filter. If 'kalman' is chosen there is no effect on the tracker. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_particle</td><td>Number of particles for particle filter. There is no effect if the kalman filter is chosen. </td></tr>
+    <tr><td class="paramname">std_range_meas</td><td>Standard deviation of the range measurement </td></tr>
+    <tr><td class="paramname">std_velocity_meas</td><td>Standard deviation of the velocity measurement </td></tr>
+    <tr><td class="paramname">std_accel_sys</td><td>Standard deviation of the system acceleration </td></tr>
+    <tr><td class="paramname">threshold_track</td><td>Value to decide if data is valid for the track </td></tr>
+    <tr><td class="paramname">theshold_lost</td><td>Number of false tracks until the current track is lost </td></tr>
+    <tr><td class="paramname">filter</td><td>Filter kernel to be used. 'kalman' or 'particle' are valid. </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a2c7519146ed63bff2b19fe66fd239f15"></a>
 <div class="memitem">
@@ -199,8 +211,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html" title="&lt;+description of block+&gt; ">radar::tracking_singletarget</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html" title="&lt;+description of block+&gt; ">radar::tracking_singletarget</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html#a3ed299c6ac39346a6366610339771e62" title="Return a shared_ptr to a new instance of radar::tracking_singletarget. ">radar::tracking_singletarget::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html" title="This block tracks a singletarget detection with a particle or kalman filter. As input values with ide...">radar::tracking_singletarget</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html" title="This block tracks a singletarget detection with a particle or kalman filter. As input values with ide...">radar::tracking_singletarget</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html#a3ed299c6ac39346a6366610339771e62" title="Return a shared_ptr to a new instance of radar::tracking_singletarget. ">radar::tracking_singletarget::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -213,7 +225,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1tracking__singletarget.html">tracking_singletarget</a></li>
-    <li class="footer">Generated on Sat Jul 12 2014 20:23:42 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Fri Jul 25 2014 17:37:47 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

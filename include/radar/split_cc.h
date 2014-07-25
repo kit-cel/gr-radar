@@ -28,7 +28,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block splits a tagged stream into segments. As packet_parts you give the structure of the packet, e.g. (10, 20, 5). With the packet number you can choose which packet shall be pushed to output. Counting begins on zero. E.g. packet_num=1 returns 20 items.
+     * 
+     * \param packet_num Number of packet to push to output
+     * \param packet_parts Packet structure as vector of packet length
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

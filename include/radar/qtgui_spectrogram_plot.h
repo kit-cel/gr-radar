@@ -29,7 +29,18 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block displays a spectrogram plot of a tagged stream with vectors. Tagged streams combined with vectors represent a matrix. The value of the matrix elements are displayed within a color plot. The colorbar can be scaled automatically or with a manual scale with axis_z. The axis of x and y are set with axis_x and axis_y. The update rate interval is given in milliseconds.
+     * 
+     * \param vlen Vector length
+     * \param xlabel Label for x axis
+     * \param ylabel Label for y axis
+     * \param label Addition label for title
+     * \param axis_x Display range for x axis
+     * \param axis_y Display range for y axis
+     * \param axis_z Display range for z axis. This defines the colorbar if autoscale_z is disabled.
+     * \param autoscale_z Toggle automatic scale of the colorbar
+     * \param packet_len Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */
