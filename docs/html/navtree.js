@@ -1,8 +1,12 @@
 var NAVTREE =
 [
   [ "GNU Radio Radar Toolbox", "index.html", [
-    [ "Install guide", "index.html#install", null ],
-    [ "Basics", "index.html#basic", null ],
+    [ "Install guide", "index.html#install", [
+      [ "Buffer size issues", "index.html#buffer", null ]
+    ] ],
+    [ "Basic ideas of the toolbox", "index.html#basic", [
+      [ "Message structure and identifiers (symbols)", "index.html#msg", null ]
+    ] ],
     [ "USRP Echotimer", "index.html#echotimer", null ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],

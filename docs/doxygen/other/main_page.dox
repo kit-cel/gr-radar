@@ -2,20 +2,26 @@
 
 \section install Install guide
 
-For the actual install guide read the README at the main folder.
+For the actual install guide read the README at the main folder. Please take care of the dependencies. In particular there can be some issues if Qwt is below version 6. Furthermore python-matplotlib is used in some testcases.
 
-If you want to set the parameters in gr-radar/examples/setup/setup_core on every system start, edit /etc/sysctl.conf with following lines.
+\subsection buffer Buffer size issues
 
-# Updates for GNU Radio
-net.core.rmem_max=50000000
-net.core.wmem_max=1048576
-kernel.shmmax=2147483648
+Radar applications often need huge buffer sizes. Therefore you have to do two things to push the maximum buffer size to the maximum. First you have to set the maximum output buffer of all blocks in the flowgraph on two times of the value that you need. With this you can use buffer of about 2^17 float complex items. This number depends on your system. In GNU Radio Companion you can set this value in the properties of the blocks or you use the call <+block+>.set_min_output_buffer(<+value+>) in a python flowgraph.
 
-\section basic Basics
+If you need greater buffer sizes you have to increase the limit of a single shared memory segment. The commands are given in a bash script in gr-radar/examples/setup/setup_core. If you want to set the parameters in gr-radar/examples/setup/setup_core on every system start, edit /etc/sysctl.conf with following lines.
+
+\# Updates for GNU Radio\n
+net.core.rmem_max=50000000\n
+net.core.wmem_max=1048576\n
+kernel.shmmax=2147483648\n
+
+\section basic Basic ideas of the toolbox
 
 Basic idea of the toolbox. Signal generator -> Split Echotimer/Simulator -> connect sig_gen and echotimer/simulator -> estimator -> some kind of output
 
 \image html basic_flowgraph.svg
+
+\subsection msg Message structure and identifiers (symbols)
 
 \section echotimer USRP Echotimer
 
