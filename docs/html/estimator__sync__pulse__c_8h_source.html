@@ -121,44 +121,48 @@ $(document).ready(function(){initNavTree('estimator__sync__pulse__c_8h_source.ht
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">namespace </span>radar {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    /*!</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \brief &lt;+description of block+&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * \ingroup radar</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">   36</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">estimator_sync_pulse_c</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::tagged_stream_block</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">   39</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_sync_pulse_c&gt; <a class="code" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">sptr</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">      /*!</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_sync_pulse_c.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">       *</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_sync_pulse_c&#39;s</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">       * class. radar::estimator_sync_pulse_c::make is the public interface for</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">       * creating new instances.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">       */</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">sptr</a> make(<span class="keywordtype">int</span> num_xcorr, <span class="keyword">const</span> std::string len_key=<span class="stringliteral">&quot;packet_len&quot;</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_num_xcorr(<span class="keywordtype">int</span> num) = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  } <span class="comment">// namespace radar</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace gr</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_SYNC_PULSE_C_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \brief This block can be used to estimate the shift of a signal on input 1 in relation to an other on input 2. For example the constant number of delay samples due to hardware effect from a signal source can be estimated. The calculation of the shift is done by a cross correlation of the input signals. The number of correlations in samples is given with num_xcorr. The output message is the number of delay samples with the identifier (symbol) &#39;sync_pulse&#39;. This can be displayed with the &#39;Print Results&#39; block.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * \param num_xcorr Number of cross correlations</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * \param len_key Packet length key for tagged stream</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * \ingroup radar</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">   40</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">estimator_sync_pulse_c</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::tagged_stream_block</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">   43</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_sync_pulse_c&gt; <a class="code" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">sptr</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">      /*!</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_sync_pulse_c.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">       *</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_sync_pulse_c&#39;s</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">       * class. radar::estimator_sync_pulse_c::make is the public interface for</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">       * creating new instances.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">       */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">sptr</a> make(<span class="keywordtype">int</span> num_xcorr, <span class="keyword">const</span> std::string len_key=<span class="stringliteral">&quot;packet_len&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_num_xcorr(<span class="keywordtype">int</span> num) = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    };</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  } <span class="comment">// namespace radar</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace gr</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_SYNC_PULSE_C_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="api_8h_html"><div class="ttname"><a href="api_8h.html">api.h</a></div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__sync__pulse__c_html_a0f1e035b97983084d83a74ac1ae2423f"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">gr::radar::estimator_sync_pulse_c::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_sync_pulse_c &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_sync_pulse_c.h:39</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__sync__pulse__c_html_a0f1e035b97983084d83a74ac1ae2423f"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">gr::radar::estimator_sync_pulse_c::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_sync_pulse_c &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_sync_pulse_c.h:43</div></div>
 <div class="ttc" id="api_8h_html_a087f3342c4b5ef356c6a607f77df0ea4"><div class="ttname"><a href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a></div><div class="ttdeci">#define RADAR_API</div><div class="ttdef"><b>Definition:</b> api.h:30</div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__sync__pulse__c_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">gr::radar::estimator_sync_pulse_c</a></div><div class="ttdoc">&lt;+description of block+&gt; </div><div class="ttdef"><b>Definition:</b> estimator_sync_pulse_c.h:36</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__sync__pulse__c_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">gr::radar::estimator_sync_pulse_c</a></div><div class="ttdoc">This block can be used to estimate the shift of a signal on input 1 in relation to an other on input ...</div><div class="ttdef"><b>Definition:</b> estimator_sync_pulse_c.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="estimator__sync__pulse__c_8h.html">estimator_sync_pulse_c.h</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 26 2014 22:12:04 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

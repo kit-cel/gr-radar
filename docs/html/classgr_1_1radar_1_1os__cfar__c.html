@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1os__cfar__c.html',
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block estimates peaks of a given FFT spectrum as tagged stream. Multi peak detection is implemented with the OS-CFAR algorithm. The algorithm uses around the cell under test (CUT) on each side samp_compare samples to estimate the noise floor. This relative threshold is defined by the bin of the vector within the sorted samp_compare samples. A standard value is rel_threshold = 0.78. The value of this bin is multiplied by mult_threshold and compared with the CUT. If consecutive bins are detected as valid peaks it is possible to merge these detections with merge_consecutive = true. Output data are f32vectors with the information of frequency, power and phase. The identifiers (symbols) are 'frequency', 'power' and 'phase'.  
  <a href="classgr_1_1radar_1_1os__cfar__c.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="os__cfar__c_8h_source.html">os_cfar_c.h</a>&gt;</code></p>
@@ -130,11 +130,23 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8a625bb9b96efa87a72ab79edc1204b4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html#a97b7a4703ccd900a4759e48c53be47ed">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1os__cfar__c.html#a8a625bb9b96efa87a72ab79edc1204b4">make</a> (int samp_rate, int samp_compare, int samp_protect, float rel_threshold, float mult_threshold, bool merge_consecutive=true, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a8a625bb9b96efa87a72ab79edc1204b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html" title="&lt;+description of block+&gt; ">radar::os_cfar_c</a>.  <a href="#a8a625bb9b96efa87a72ab79edc1204b4">More...</a><br/></td></tr>
+<tr class="memdesc:a8a625bb9b96efa87a72ab79edc1204b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html" title="This block estimates peaks of a given FFT spectrum as tagged stream. Multi peak detection is implemen...">radar::os_cfar_c</a>.  <a href="#a8a625bb9b96efa87a72ab79edc1204b4">More...</a><br/></td></tr>
 <tr class="separator:a8a625bb9b96efa87a72ab79edc1204b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block estimates peaks of a given FFT spectrum as tagged stream. Multi peak detection is implemented with the OS-CFAR algorithm. The algorithm uses around the cell under test (CUT) on each side samp_compare samples to estimate the noise floor. This relative threshold is defined by the bin of the vector within the sorted samp_compare samples. A standard value is rel_threshold = 0.78. The value of this bin is multiplied by mult_threshold and compared with the CUT. If consecutive bins are detected as valid peaks it is possible to merge these detections with merge_consecutive = true. Output data are f32vectors with the information of frequency, power and phase. The identifiers (symbols) are 'frequency', 'power' and 'phase'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">samp_rate</td><td>Sample rate </td></tr>
+    <tr><td class="paramname">samp_compare</td><td>Sample to be compared with each other </td></tr>
+    <tr><td class="paramname">samp_protect</td><td>Samples which are protected and not used for peak detection </td></tr>
+    <tr><td class="paramname">rel_threshold</td><td>Relative threshold </td></tr>
+    <tr><td class="paramname">mult_threshold</td><td>Multiplier threshold </td></tr>
+    <tr><td class="paramname">merge_consectuive</td><td>Toggle merging consecutive detected peaks </td></tr>
+    <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a97b7a4703ccd900a4759e48c53be47ed"></a>
 <div class="memitem">
@@ -211,8 +223,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html" title="&lt;+description of block+&gt; ">radar::os_cfar_c</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html" title="&lt;+description of block+&gt; ">radar::os_cfar_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html#a8a625bb9b96efa87a72ab79edc1204b4" title="Return a shared_ptr to a new instance of radar::os_cfar_c. ">radar::os_cfar_c::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html" title="This block estimates peaks of a given FFT spectrum as tagged stream. Multi peak detection is implemen...">radar::os_cfar_c</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html" title="This block estimates peaks of a given FFT spectrum as tagged stream. Multi peak detection is implemen...">radar::os_cfar_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1os__cfar__c.html#a8a625bb9b96efa87a72ab79edc1204b4" title="Return a shared_ptr to a new instance of radar::os_cfar_c. ">radar::os_cfar_c::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -329,7 +341,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1os__cfar__c.html">os_cfar_c</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 26 2014 22:12:04 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

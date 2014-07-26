@@ -29,7 +29,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block removes the cyclic prefix of a OFDM signal by cut away the cyclic prefix data. cp_len gives the length of the cyclic prefix. fft_len represents the length of the data before the cyclic prefix.
+     * 
+     * \param fft_len Length of FFT
+     * \param cp_len Length of cyclic prefix
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

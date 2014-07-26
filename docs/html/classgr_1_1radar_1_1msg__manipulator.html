@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1msg__manipulator.h
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block manipulates data in a msg with given identifier (symbol). All data are given as vectors and each index represents a dataset with identifier which should be processed. All other data is pushed through. The addition is performed before the multiplication.  
  <a href="classgr_1_1radar_1_1msg__manipulator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="msg__manipulator_8h_source.html">msg_manipulator.h</a>&gt;</code></p>
@@ -126,11 +126,19 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a10571a59783a2d90e78dfa128b6619c1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html#a603dbaa8e569cc37952d313dd70cefa8">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1msg__manipulator.html#a10571a59783a2d90e78dfa128b6619c1">make</a> (std::vector&lt; std::string &gt; symbols, std::vector&lt; float &gt; const_add, std::vector&lt; float &gt; const_mult)</td></tr>
-<tr class="memdesc:a10571a59783a2d90e78dfa128b6619c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html" title="&lt;+description of block+&gt; ">radar::msg_manipulator</a>.  <a href="#a10571a59783a2d90e78dfa128b6619c1">More...</a><br/></td></tr>
+<tr class="memdesc:a10571a59783a2d90e78dfa128b6619c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html" title="This block manipulates data in a msg with given identifier (symbol). All data are given as vectors an...">radar::msg_manipulator</a>.  <a href="#a10571a59783a2d90e78dfa128b6619c1">More...</a><br/></td></tr>
 <tr class="separator:a10571a59783a2d90e78dfa128b6619c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block manipulates data in a msg with given identifier (symbol). All data are given as vectors and each index represents a dataset with identifier which should be processed. All other data is pushed through. The addition is performed before the multiplication. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">symbols</td><td>Identifier (symbols) of data as vector </td></tr>
+    <tr><td class="paramname">const_add</td><td>Value to add on the data </td></tr>
+    <tr><td class="paramname">const_mult</td><td>Value to multiply on the data </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a603dbaa8e569cc37952d313dd70cefa8"></a>
 <div class="memitem">
@@ -183,8 +191,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html" title="&lt;+description of block+&gt; ">radar::msg_manipulator</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html" title="&lt;+description of block+&gt; ">radar::msg_manipulator</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html#a10571a59783a2d90e78dfa128b6619c1" title="Return a shared_ptr to a new instance of radar::msg_manipulator. ">radar::msg_manipulator::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html" title="This block manipulates data in a msg with given identifier (symbol). All data are given as vectors an...">radar::msg_manipulator</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html" title="This block manipulates data in a msg with given identifier (symbol). All data are given as vectors an...">radar::msg_manipulator</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1msg__manipulator.html#a10571a59783a2d90e78dfa128b6619c1" title="Return a shared_ptr to a new instance of radar::msg_manipulator. ">radar::msg_manipulator::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -249,7 +257,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1msg__manipulator.html">msg_manipulator</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 26 2014 22:12:04 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

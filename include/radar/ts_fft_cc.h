@@ -1,4 +1,4 @@
-e/* -*- c++ -*- */
+/* -*- c++ -*- */
 /* 
  * Copyright 2014 <+YOU OR YOUR COMPANY+>.
  * 

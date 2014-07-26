@@ -29,7 +29,15 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block estimates a single peak of a given FFT spectrum as tagged stream. Output is a message with the information of frequency, phase and power of the peak as a f32vector with a single item. All data is tagged with the identifiers (symbols) 'frequency', 'phase' and 'power'. The peak is estimated on the whole spectrum or on the range max_freq if cut_max_freq is true. Furthermore a threshold of the spectrum amplitude can be given with threshold. The DC peak can be cut out with the protected samples samp_protect. This value do not evaluate samp_protect samples around the DC peak. If no suitable peak is found the block returns empty vectors with the identifiers.
+     * 
+     * \param samp_rate Sample rate
+     * \param threshold Threshold for detection of the spectrum amplitude
+     * \param samp_protect Protected samples for cutting DC peak
+     * \param max_freq Frequency range for cutting spectrum
+     * \param cut_max_freq Toggle cutting the spectrum for peak estimation
+     * \param len_key Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

@@ -29,7 +29,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block blocks messages whose data is not in range of val_min to val_max. All parameters are given as vectors. Each index represents a dataset with given identifier (symbol) which should be tested on valid data in given range. All other data is pushed through.
+     * 
+     * \param keys Identifiers (symbols) of the data as vector
+     * \param val_min Lower limit of the gate as vector
+     * \param val_max Higher limit of the gate as vector
+     * 
      * \ingroup radar
      *
      */

@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1estimator__sync__p
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block can be used to estimate the shift of a signal on input 1 in relation to an other on input 2. For example the constant number of delay samples due to hardware effect from a signal source can be estimated. The calculation of the shift is done by a cross correlation of the input signals. The number of correlations in samples is given with num_xcorr. The output message is the number of delay samples with the identifier (symbol) 'sync_pulse'. This can be displayed with the 'Print Results' block.  
  <a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="estimator__sync__pulse__c_8h_source.html">estimator_sync_pulse_c.h</a>&gt;</code></p>
@@ -124,11 +124,18 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f20918ac31c299e3ed4dce76d540530"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f1e035b97983084d83a74ac1ae2423f">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f20918ac31c299e3ed4dce76d540530">make</a> (int num_xcorr, const std::string len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a0f20918ac31c299e3ed4dce76d540530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html" title="&lt;+description of block+&gt; ">radar::estimator_sync_pulse_c</a>.  <a href="#a0f20918ac31c299e3ed4dce76d540530">More...</a><br/></td></tr>
+<tr class="memdesc:a0f20918ac31c299e3ed4dce76d540530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html" title="This block can be used to estimate the shift of a signal on input 1 in relation to an other on input ...">radar::estimator_sync_pulse_c</a>.  <a href="#a0f20918ac31c299e3ed4dce76d540530">More...</a><br/></td></tr>
 <tr class="separator:a0f20918ac31c299e3ed4dce76d540530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block can be used to estimate the shift of a signal on input 1 in relation to an other on input 2. For example the constant number of delay samples due to hardware effect from a signal source can be estimated. The calculation of the shift is done by a cross correlation of the input signals. The number of correlations in samples is given with num_xcorr. The output message is the number of delay samples with the identifier (symbol) 'sync_pulse'. This can be displayed with the 'Print Results' block. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_xcorr</td><td>Number of cross correlations </td></tr>
+    <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a0f1e035b97983084d83a74ac1ae2423f"></a>
 <div class="memitem">
@@ -175,8 +182,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html" title="&lt;+description of block+&gt; ">radar::estimator_sync_pulse_c</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html" title="&lt;+description of block+&gt; ">radar::estimator_sync_pulse_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f20918ac31c299e3ed4dce76d540530" title="Return a shared_ptr to a new instance of radar::estimator_sync_pulse_c. ">radar::estimator_sync_pulse_c::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html" title="This block can be used to estimate the shift of a signal on input 1 in relation to an other on input ...">radar::estimator_sync_pulse_c</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html" title="This block can be used to estimate the shift of a signal on input 1 in relation to an other on input ...">radar::estimator_sync_pulse_c</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#a0f20918ac31c299e3ed4dce76d540530" title="Return a shared_ptr to a new instance of radar::estimator_sync_pulse_c. ">radar::estimator_sync_pulse_c::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -215,7 +222,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">estimator_sync_pulse_c</a></li>
-    <li class="footer">Generated on Fri Jul 25 2014 18:44:08 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sat Jul 26 2014 22:12:04 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

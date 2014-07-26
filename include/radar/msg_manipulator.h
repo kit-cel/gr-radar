@@ -29,7 +29,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block manipulates data in a msg with given identifier (symbol). All data are given as vectors and each index represents a dataset with identifier which should be processed. All other data is pushed through. The addition is performed before the multiplication.
+     * 
+     * \param symbols Identifier (symbols) of data as vector
+     * \param const_add Value to add on the data
+     * \param const_mult Value to multiply on the data
+     * 
      * \ingroup radar
      *
      */
