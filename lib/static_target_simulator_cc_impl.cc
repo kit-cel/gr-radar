@@ -170,8 +170,10 @@ namespace gr {
 		
 		// Setup random phase shift
 		if(d_rndm_phaseshift){
+			gr_complex phase_random_hold;
 			for(int k=0; k<d_num_targets; k++){
-				d_phase_random = 1j*2*M_PI*float((std::rand()%1000+1)/1000.0);
+				phase_random_hold = 1j*2*M_PI*float((std::rand()%1000+1)/1000.0);
+				d_phase_random = std::exp(phase_random_hold);
 				std::fill_n(&d_filt_phase[k][0],noutput_items,d_phase_random);
 			}
 		}
