@@ -17,7 +17,7 @@ kernel.shmmax=2147483648\n</code>
 
 \subsection rebuild_doc Rebuild documentation
 
-If there is any need to rebuild the documentation with doxygen go to gr-radar/docs/doxygen and run <code>doxygen Doxyfile.in</code>. The documentation is not rebuild with every build of the toolbox (unlike the default out of tree behaviour). The actual documentation shall be included in the repository.
+If there is any need to rebuild the documentation with doxygen go to gr-radar/docs/doxygen and run <code>doxygen Doxyfile.in</code>. The documentation is not rebuild with every build of the toolbox (unlike the default out-of-tree module behaviour). The actual documentation shall be included in the repository.
 
 \section basic Basic ideas of the toolbox
 
