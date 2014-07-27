@@ -29,22 +29,23 @@ namespace gr {
   namespace radar {
 
     estimator_fsk::sptr
-    estimator_fsk::make(float center_freq, float delta_freq)
+    estimator_fsk::make(float center_freq, float delta_freq, bool push_power)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_fsk_impl(center_freq, delta_freq));
+        (new estimator_fsk_impl(center_freq, delta_freq, push_power));
     }
 
     /*
      * The private constructor
      */
-    estimator_fsk_impl::estimator_fsk_impl(float center_freq, float delta_freq)
+    estimator_fsk_impl::estimator_fsk_impl(float center_freq, float delta_freq, bool push_power)
       : gr::block("estimator_fsk",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
     {
 		d_center_freq = center_freq;
 		d_delta_freq = delta_freq;
+		d_push_power = push_power;
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -76,8 +77,11 @@ namespace gr {
 			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="phase"){
 				d_pphase = pmt::nth(1,msg_part);
 			}
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="power"){
+				d_ppower = msg_part;
+			}
 			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="rx_time"){
-				d_ptimestamp = pmt::nth(1,msg_part);
+				d_ptimestamp = msg_part;
 			}
 		}
 		
@@ -109,10 +113,13 @@ namespace gr {
 		d_range_value = pmt::init_f32vector(d_range.size(), d_range); // vector to pmt
 		d_range_pack = pmt::list2(d_range_key, d_range_value); // make list for range information
 		
-		d_time_key = pmt::string_to_symbol("rx_time"); // identifier timestamp
-		d_time_pack = pmt::list2(d_time_key, d_ptimestamp); // make list for timestamp information
+		if(d_push_power){ // if power of peaks shall be pushed through
+			d_value = pmt::list4(d_ptimestamp, d_vel_pack, d_range_pack, d_ppower); // all information to one pmt list
+		}
+		else{
+			d_value = pmt::list3(d_ptimestamp, d_vel_pack, d_range_pack);
+		}
 		
-		d_value = pmt::list3(d_time_pack, d_vel_pack, d_range_pack); // all information to one pmt list
 		message_port_pub(d_port_id_out,d_value); // publish message
 	}
 

@@ -120,38 +120,39 @@ $(document).ready(function(){initNavTree('estimator__fsk_8h_source.html','');});
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">namespace </span>radar {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    /*!</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * \brief This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are &#39;frequency&#39; and &#39;phase&#39;. The velocity is calculated with the &#39;frequency&#39; information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are &#39;range&#39; and &#39;velocity&#39;.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * \brief This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are &#39;frequency&#39; and &#39;phase&#39;. The velocity is calculated with the &#39;frequency&#39; information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are &#39;range&#39; and &#39;velocity&#39;. If push_power is true the information about the power of the peaks is pushed through (if available). This can be used for estimating the RCS of an object.</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * </span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * \param center_freq Center frequency</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * \param delta_freq Frequency difference of high and low frequency</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * </span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * \ingroup radar</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fsk.html">   39</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__fsk.html">estimator_fsk</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">   42</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_fsk&gt; <a class="code" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">      /*!</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_fsk.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">       *</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_fsk&#39;s</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">       * class. radar::estimator_fsk::make is the public interface for</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">       * creating new instances.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">       */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a> make(<span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> delta_freq);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    };</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  } <span class="comment">// namespace radar</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace gr</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_FSK_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * \param push_power Toggle pushing through information about power of peaks</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * \ingroup radar</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fsk.html">   40</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__fsk.html">estimator_fsk</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">   43</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_fsk&gt; <a class="code" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">      /*!</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_fsk.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">       *</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_fsk&#39;s</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">       * class. radar::estimator_fsk::make is the public interface for</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">       * creating new instances.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">       */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a> make(<span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> delta_freq, <span class="keywordtype">bool</span> push_power=<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  } <span class="comment">// namespace radar</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;} <span class="comment">// namespace gr</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_FSK_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="api_8h_html"><div class="ttname"><a href="api_8h.html">api.h</a></div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__fsk_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fsk.html">gr::radar::estimator_fsk</a></div><div class="ttdoc">This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...</div><div class="ttdef"><b>Definition:</b> estimator_fsk.h:39</div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__fsk_html_ab62b0104534777d08f40690db82a94bd"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">gr::radar::estimator_fsk::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_fsk &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_fsk.h:42</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__fsk_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fsk.html">gr::radar::estimator_fsk</a></div><div class="ttdoc">This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...</div><div class="ttdef"><b>Definition:</b> estimator_fsk.h:40</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__fsk_html_ab62b0104534777d08f40690db82a94bd"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">gr::radar::estimator_fsk::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_fsk &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_fsk.h:43</div></div>
 <div class="ttc" id="api_8h_html_a087f3342c4b5ef356c6a607f77df0ea4"><div class="ttname"><a href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a></div><div class="ttdeci">#define RADAR_API</div><div class="ttdef"><b>Definition:</b> api.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -159,7 +160,7 @@ $(document).ready(function(){initNavTree('estimator__fsk_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="estimator__fsk_8h.html">estimator_fsk.h</a></li>
-    <li class="footer">Generated on Sun Jul 27 2014 09:22:45 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sun Jul 27 2014 11:55:31 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

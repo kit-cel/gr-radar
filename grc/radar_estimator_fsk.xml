@@ -3,7 +3,7 @@
   <key>radar_estimator_fsk</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.estimator_fsk($center_freq, $delta_freq)</make>
+  <make>radar.estimator_fsk($center_freq, $delta_freq, $push_power)</make>
   <param>
     <name>Center frequency</name>
     <key>center_freq</key>
@@ -13,6 +13,20 @@
     <name>Delta frequency</name>
     <key>delta_freq</key>
     <type>float</type>
+  </param>
+  <param>
+    <name>Push through power of peaks</name>
+    <key>push_power</key>
+    <value>False</value>
+    <type>bool</type>
+      <option>
+		<name>True</name>
+		<key>True</key>
+	  </option>
+	  <option>
+		<name>False</name>
+		<key>False</key>
+	  </option>
   </param>
   <sink>
     <name>Msg in</name>

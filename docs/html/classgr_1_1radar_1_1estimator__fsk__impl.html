@@ -109,8 +109,8 @@ Inheritance diagram for gr::radar::estimator_fsk_impl:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa039ac1c83afc3df3a9acc1ecdf579c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#aa039ac1c83afc3df3a9acc1ecdf579c2">estimator_fsk_impl</a> (float center_freq, float delta_freq)</td></tr>
-<tr class="separator:aa039ac1c83afc3df3a9acc1ecdf579c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18cd8713128644a9198a43edce9637ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a18cd8713128644a9198a43edce9637ab">estimator_fsk_impl</a> (float center_freq, float delta_freq, bool push_power)</td></tr>
+<tr class="separator:a18cd8713128644a9198a43edce9637ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a506a3dc39cb004ddaf2c158fc120d20d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a506a3dc39cb004ddaf2c158fc120d20d">~estimator_fsk_impl</a> ()</td></tr>
 <tr class="separator:a506a3dc39cb004ddaf2c158fc120d20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99af7b27832b3d75854fc2680734b7f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a99af7b27832b3d75854fc2680734b7f3">handle_msg</a> (pmt::pmt_t msg)</td></tr>
@@ -122,6 +122,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8ea4ec9c1f0eae795c73fc4a067bfe11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ffe1187745411015b8bb2a5121fae5b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a1ffe1187745411015b8bb2a5121fae5b">d_delta_freq</a></td></tr>
 <tr class="separator:a1ffe1187745411015b8bb2a5121fae5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ebe8e5e7c5c7f7c26ff3cb3490ef4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a79ebe8e5e7c5c7f7c26ff3cb3490ef4c">d_push_power</a></td></tr>
+<tr class="separator:a79ebe8e5e7c5c7f7c26ff3cb3490ef4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22d7926b2e33105b98d64b722da26b40"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a22d7926b2e33105b98d64b722da26b40">d_port_id_in</a></td></tr>
 <tr class="separator:a22d7926b2e33105b98d64b722da26b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01d4e807c0dacc8d0662b90935c0c9fc"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a01d4e807c0dacc8d0662b90935c0c9fc">d_port_id_out</a></td></tr>
@@ -136,6 +138,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aecf49492caf4b497f4c6a7587864dd0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8418dc7b645bfe0062af36a49bfbbe46"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a8418dc7b645bfe0062af36a49bfbbe46">d_pphase</a></td></tr>
 <tr class="separator:a8418dc7b645bfe0062af36a49bfbbe46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbaf8932c5aad2c3e3a2a4dd656783e6"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#adbaf8932c5aad2c3e3a2a4dd656783e6">d_ppower</a></td></tr>
+<tr class="separator:adbaf8932c5aad2c3e3a2a4dd656783e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88877355a3439e0c552f24033c079159"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a88877355a3439e0c552f24033c079159">d_vel</a></td></tr>
 <tr class="separator:a88877355a3439e0c552f24033c079159"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a768c0da3bc7c3c0b8cd6e3d1c2d15429"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#a768c0da3bc7c3c0b8cd6e3d1c2d15429">d_value</a></td></tr>
@@ -154,10 +158,6 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ab6a6a058b2c92e0274ec977e45b77c71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac471c8fcccd2795903ec4167a4db334a"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#ac471c8fcccd2795903ec4167a4db334a">d_range_pack</a></td></tr>
 <tr class="separator:ac471c8fcccd2795903ec4167a4db334a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af000570dfa2e754fe494cc9728d09a84"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#af000570dfa2e754fe494cc9728d09a84">d_time_key</a></td></tr>
-<tr class="separator:af000570dfa2e754fe494cc9728d09a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaca1130580c49638c6099dea4ffc0f9d"><td class="memItemLeft" align="right" valign="top">pmt::pmt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html#aaca1130580c49638c6099dea4ffc0f9d">d_time_pack</a></td></tr>
-<tr class="separator:aaca1130580c49638c6099dea4ffc0f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -171,12 +171,12 @@ Additional Inherited Members</h2></td></tr>
 &lt; <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html">estimator_fsk</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a></td></tr>
 <tr class="separator:ab62b0104534777d08f40690db82a94bd inherit pub_types_classgr_1_1radar_1_1estimator__fsk"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classgr_1_1radar_1_1estimator__fsk')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html">gr::radar::estimator_fsk</a></td></tr>
-<tr class="memitem:a244bb956b39175caa9d4981cf33cd6fd inherit pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#a244bb956b39175caa9d4981cf33cd6fd">make</a> (float center_freq, float delta_freq)</td></tr>
-<tr class="memdesc:a244bb956b39175caa9d4981cf33cd6fd inherit pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...">radar::estimator_fsk</a>.  <a href="#a244bb956b39175caa9d4981cf33cd6fd">More...</a><br/></td></tr>
-<tr class="separator:a244bb956b39175caa9d4981cf33cd6fd inherit pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3fa5b2fb6bc9f361c344fb4e02c2f50 inherit pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#ab62b0104534777d08f40690db82a94bd">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk.html#aa3fa5b2fb6bc9f361c344fb4e02c2f50">make</a> (float center_freq, float delta_freq, bool push_power=false)</td></tr>
+<tr class="memdesc:aa3fa5b2fb6bc9f361c344fb4e02c2f50 inherit pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fsk.html" title="This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are...">radar::estimator_fsk</a>.  <a href="#aa3fa5b2fb6bc9f361c344fb4e02c2f50">More...</a><br/></td></tr>
+<tr class="separator:aa3fa5b2fb6bc9f361c344fb4e02c2f50 inherit pub_static_methods_classgr_1_1radar_1_1estimator__fsk"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa039ac1c83afc3df3a9acc1ecdf579c2"></a>
+<a class="anchor" id="a18cd8713128644a9198a43edce9637ab"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -190,7 +190,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>delta_freq</em>&#160;</td>
+          <td class="paramname"><em>delta_freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>push_power</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -351,12 +357,36 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="adbaf8932c5aad2c3e3a2a4dd656783e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pmt::pmt_t gr::radar::estimator_fsk_impl::d_ppower</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a952bb1bdf20432aa2e4a76541a5fbcba"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">pmt::pmt_t gr::radar::estimator_fsk_impl::d_ptimestamp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a79ebe8e5e7c5c7f7c26ff3cb3490ef4c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gr::radar::estimator_fsk_impl::d_push_power</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -405,30 +435,6 @@ Additional Inherited Members</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">pmt::pmt_t gr::radar::estimator_fsk_impl::d_range_value</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af000570dfa2e754fe494cc9728d09a84"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pmt::pmt_t gr::radar::estimator_fsk_impl::d_time_key</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaca1130580c49638c6099dea4ffc0f9d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pmt::pmt_t gr::radar::estimator_fsk_impl::d_time_pack</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -504,7 +510,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html">estimator_fsk_impl</a></li>
-    <li class="footer">Generated on Sun Jul 27 2014 09:22:45 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sun Jul 27 2014 11:55:32 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

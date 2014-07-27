@@ -28,10 +28,11 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are 'frequency' and 'phase'. The velocity is calculated with the 'frequency' information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are 'range' and 'velocity'.
+     * \brief This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are 'frequency' and 'phase'. The velocity is calculated with the 'frequency' information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are 'range' and 'velocity'. If push_power is true the information about the power of the peaks is pushed through (if available). This can be used for estimating the RCS of an object.
      * 
      * \param center_freq Center frequency
      * \param delta_freq Frequency difference of high and low frequency
+     * \param push_power Toggle pushing through information about power of peaks
      * 
      * \ingroup radar
      *
@@ -49,7 +50,7 @@ namespace gr {
        * class. radar::estimator_fsk::make is the public interface for
        * creating new instances.
        */
-      static sptr make(float center_freq, float delta_freq);
+      static sptr make(float center_freq, float delta_freq, bool push_power=false);
     };
 
   } // namespace radar

@@ -1,6 +1,6 @@
 var classgr_1_1radar_1_1estimator__fsk__impl =
 [
-    [ "estimator_fsk_impl", "classgr_1_1radar_1_1estimator__fsk__impl.html#aa039ac1c83afc3df3a9acc1ecdf579c2", null ],
+    [ "estimator_fsk_impl", "classgr_1_1radar_1_1estimator__fsk__impl.html#a18cd8713128644a9198a43edce9637ab", null ],
     [ "~estimator_fsk_impl", "classgr_1_1radar_1_1estimator__fsk__impl.html#a506a3dc39cb004ddaf2c158fc120d20d", null ],
     [ "handle_msg", "classgr_1_1radar_1_1estimator__fsk__impl.html#a99af7b27832b3d75854fc2680734b7f3", null ],
     [ "c_light", "classgr_1_1radar_1_1estimator__fsk__impl.html#a32f1b08b588ecd5b04e6086ac0bc0749", null ],
@@ -12,13 +12,13 @@ var classgr_1_1radar_1_1estimator__fsk__impl =
     [ "d_port_id_in", "classgr_1_1radar_1_1estimator__fsk__impl.html#a22d7926b2e33105b98d64b722da26b40", null ],
     [ "d_port_id_out", "classgr_1_1radar_1_1estimator__fsk__impl.html#a01d4e807c0dacc8d0662b90935c0c9fc", null ],
     [ "d_pphase", "classgr_1_1radar_1_1estimator__fsk__impl.html#a8418dc7b645bfe0062af36a49bfbbe46", null ],
+    [ "d_ppower", "classgr_1_1radar_1_1estimator__fsk__impl.html#adbaf8932c5aad2c3e3a2a4dd656783e6", null ],
     [ "d_ptimestamp", "classgr_1_1radar_1_1estimator__fsk__impl.html#a952bb1bdf20432aa2e4a76541a5fbcba", null ],
+    [ "d_push_power", "classgr_1_1radar_1_1estimator__fsk__impl.html#a79ebe8e5e7c5c7f7c26ff3cb3490ef4c", null ],
     [ "d_range", "classgr_1_1radar_1_1estimator__fsk__impl.html#a5915e3a62cafd4f73697e4afb213a721", null ],
     [ "d_range_key", "classgr_1_1radar_1_1estimator__fsk__impl.html#a6d1681d0fab8bf03696e4635c4c4feaf", null ],
     [ "d_range_pack", "classgr_1_1radar_1_1estimator__fsk__impl.html#ac471c8fcccd2795903ec4167a4db334a", null ],
     [ "d_range_value", "classgr_1_1radar_1_1estimator__fsk__impl.html#ab6a6a058b2c92e0274ec977e45b77c71", null ],
-    [ "d_time_key", "classgr_1_1radar_1_1estimator__fsk__impl.html#af000570dfa2e754fe494cc9728d09a84", null ],
-    [ "d_time_pack", "classgr_1_1radar_1_1estimator__fsk__impl.html#aaca1130580c49638c6099dea4ffc0f9d", null ],
     [ "d_value", "classgr_1_1radar_1_1estimator__fsk__impl.html#a768c0da3bc7c3c0b8cd6e3d1c2d15429", null ],
     [ "d_vel", "classgr_1_1radar_1_1estimator__fsk__impl.html#a88877355a3439e0c552f24033c079159", null ],
     [ "d_vel_key", "classgr_1_1radar_1_1estimator__fsk__impl.html#a681d6ef0e9525537dced1b507fe336b2", null ],

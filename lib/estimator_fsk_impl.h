@@ -32,22 +32,22 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      estimator_fsk_impl(float center_freq, float delta_freq);
+      estimator_fsk_impl(float center_freq, float delta_freq, bool push_power);
       ~estimator_fsk_impl();
       void handle_msg(pmt::pmt_t msg);
       
       float d_center_freq, d_delta_freq;
+      bool d_push_power;
       pmt::pmt_t d_port_id_in, d_port_id_out;
       
       std::vector<float> d_freq, d_phase;
-	  pmt::pmt_t d_ptimestamp, d_pfreq, d_pphase;
+	  pmt::pmt_t d_ptimestamp, d_pfreq, d_pphase, d_ppower;
 	  
 	  std::vector<float> d_vel;
 	  pmt::pmt_t d_value;
 	  pmt::pmt_t d_vel_key, d_vel_value, d_vel_pack;
 	  std::vector<float> d_range;
 	  pmt::pmt_t d_range_key, d_range_value, d_range_pack;
-	  pmt::pmt_t d_time_key, d_time_pack;
       
       const static float c_light = 3e8;
       
