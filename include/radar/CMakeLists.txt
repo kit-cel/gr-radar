@@ -46,5 +46,6 @@ install(FILES
     ofdm_cyclic_prefix_remover_cvc.h
     transpose_matrix_vcvc.h
     qtgui_spectrogram_plot.h
-    crop_matrix_vcvc.h DESTINATION include/radar
+    crop_matrix_vcvc.h
+    ofdm_divide_vcvc.h DESTINATION include/radar
 )

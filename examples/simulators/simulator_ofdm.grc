@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Thu Jul 17 12:01:32 2014</timestamp>
+  <timestamp>Sun Jul 27 20:28:07 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -52,6 +52,10 @@
       <value></value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(10, 10)</value>
     </param>
@@ -64,7 +68,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>transpose_len</value>
+      <value>zeropadding_fac</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -72,11 +76,15 @@
     </param>
     <param>
       <key>value</key>
-      <value>20</value>
+      <value>2</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(865, 15)</value>
+      <value>(979, 10)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -95,7 +103,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**8</value>
+      <value>2**9</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -110,7 +122,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>fft_len</value>
+      <value>transpose_len</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -118,11 +130,42 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**7</value>
+      <value>int(np.ceil(packet_len*4.0/len(occupied_carriers_all[0])))</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(178, 11)</value>
+      <value>(864, 15)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>occupied_carriers_all</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>(range(-26,27),)</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(776, 78)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -142,6 +185,10 @@
     <param>
       <key>value</key>
       <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -167,6 +214,10 @@
       <value>2.45e9</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(104, 75)</value>
     </param>
@@ -188,6 +239,10 @@
     <param>
       <key>value</key>
       <value>digital.constellation_qpsk()</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -213,6 +268,10 @@
       <value>((1, 1, 1, -1,),)</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(368, 76)</value>
     </param>
@@ -234,6 +293,10 @@
     <param>
       <key>value</key>
       <value>[0., 0., 0., 0., 0., 0., 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 0., 0., 0., 0., 0.]</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -259,6 +322,10 @@
       <value>[0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, 0, 0, 0, 0, 0] </value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(625, 76)</value>
     </param>
@@ -280,6 +347,10 @@
     <param>
       <key>value</key>
       <value>((-21, -7, 7, 21,),)</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -305,6 +376,10 @@
       <value>(range(-26, -21) + range(-20, -7) + range(-6, 0) + range(1, 7) + range(8, 21) + range(22, 27),)</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(568, 12)</value>
     </param>
@@ -328,6 +403,10 @@
       <value>5000000</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(253, 9)</value>
     </param>
@@ -340,112 +419,27 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>occupied_carriers_all</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>(range(-26,27),)</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(776, 78)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(978, 16)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>vlen_decim</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 615)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_transpose_matrix_vcvc</key>
-    <param>
-      <key>id</key>
-      <value>radar_transpose_matrix_vcvc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen_in</key>
       <value>fft_len</value>
     </param>
     <param>
-      <key>vlen_out</key>
-      <value>transpose_len</value>
+      <key>_enabled</key>
+      <value>True</value>
     </param>
     <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
+      <key>value</key>
+      <value>2**6</value>
     </param>
     <param>
-      <key>affinity</key>
+      <key>alias</key>
       <value></value>
     </param>
     <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(251, 462)</value>
+      <value>(178, 11)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>180</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -477,6 +471,10 @@
     <param>
       <key>repeat</key>
       <value>True</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -526,6 +524,10 @@
       <value>True</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -544,143 +546,6 @@
     <param>
       <key>_rotation</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_tagged_stream</key>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>length_tag_key</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(255, 293)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_ofdm_cyclic_prefixer</key>
-    <param>
-      <key>id</key>
-      <value>digital_ofdm_cyclic_prefixer_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>input_size</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>cp_len</key>
-      <value>fft_len/4</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>tagname</key>
-      <value>length_tag_key</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1393, 179)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_divide_xx</key>
-    <param>
-      <key>id</key>
-      <value>blocks_divide_xx_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(884, 465)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
     </param>
   </block>
   <block>
@@ -718,118 +583,16 @@
       <value>True</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
     <param>
       <key>_coordinate</key>
       <value>(740, 324)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_ofdm_carrier_allocator_cvc</key>
-    <param>
-      <key>id</key>
-      <value>digital_ofdm_carrier_allocator_cvc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>fft_len</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>occupied_carriers</key>
-      <value>occupied_carriers_all</value>
-    </param>
-    <param>
-      <key>pilot_carriers</key>
-      <value>((),)</value>
-    </param>
-    <param>
-      <key>pilot_symbols</key>
-      <value>((),)</value>
-    </param>
-    <param>
-      <key>sync_words</key>
-      <value>()</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>length_tag_key</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(896, 155)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_chunks_to_symbols_xx</key>
-    <param>
-      <key>id</key>
-      <value>digital_chunks_to_symbols_xx_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>in_type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>out_type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>symbol_table</key>
-      <value>payload_mod.points()</value>
-    </param>
-    <param>
-      <key>dimension</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>num_ports</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(640, 187)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -871,6 +634,10 @@
       <value>True</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -881,49 +648,6 @@
     <param>
       <key>_rotation</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_ofdm_cyclic_prefix_remover_cvc</key>
-    <param>
-      <key>id</key>
-      <value>radar_ofdm_cyclic_prefix_remover_cvc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>fft_len</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>cp_len</key>
-      <value>fft_len/4</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1545, 478)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
     </param>
   </block>
   <block>
@@ -949,6 +673,10 @@
       <value>1</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -967,316 +695,6 @@
     <param>
       <key>_rotation</key>
       <value>270</value>
-    </param>
-  </block>
-  <block>
-    <key>fft_vxx</key>
-    <param>
-      <key>id</key>
-      <value>fft_vxx_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>fft_size</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>forward</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>window</key>
-      <value>()</value>
-    </param>
-    <param>
-      <key>shift</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>nthreads</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1150, 163)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>fft_vxx</key>
-    <param>
-      <key>id</key>
-      <value>fft_vxx_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>fft_size</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>forward</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>window</key>
-      <value>()</value>
-    </param>
-    <param>
-      <key>shift</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>nthreads</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1263, 463)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
-    <key>fft_vxx</key>
-    <param>
-      <key>id</key>
-      <value>fft_vxx_0_1_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>fft_size</key>
-      <value>transpose_len</value>
-    </param>
-    <param>
-      <key>forward</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>window</key>
-      <value>()</value>
-    </param>
-    <param>
-      <key>shift</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>nthreads</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(100, 688)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>fft_vxx</key>
-    <param>
-      <key>id</key>
-      <value>fft_vxx_0_1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>fft_size</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>forward</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>window</key>
-      <value>()</value>
-    </param>
-    <param>
-      <key>shift</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>nthreads</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(538, 446)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_repack_bits_bb</key>
-    <param>
-      <key>id</key>
-      <value>blocks_repack_bits_bb_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>l</key>
-      <value>payload_mod.bits_per_symbol()</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>length_tag_key</value>
-    </param>
-    <param>
-      <key>align_output</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(283, 171)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_transpose_matrix_vcvc</key>
-    <param>
-      <key>id</key>
-      <value>radar_transpose_matrix_vcvc_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen_in</key>
-      <value>transpose_len</value>
-    </param>
-    <param>
-      <key>vlen_out</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(341, 704)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
     </param>
   </block>
   <block>
@@ -1306,39 +724,8 @@
       <value>0</value>
     </param>
     <param>
-      <key>affinity</key>
+      <key>alias</key>
       <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1672, 27)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_complex_to_mag_squared</key>
-    <param>
-      <key>id</key>
-      <value>blocks_complex_to_mag_squared_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>fft_len/vlen_decim</value>
     </param>
     <param>
       <key>affinity</key>
@@ -1354,191 +741,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(908, 720)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_nlog10_ff</key>
-    <param>
-      <key>id</key>
-      <value>blocks_nlog10_ff_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>fft_len/vlen_decim</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1139, 712)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_null_sink</key>
-    <param>
-      <key>id</key>
-      <value>blocks_null_sink_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>fft_len/vlen_decim</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>bus_conns</key>
-      <value>[[0,],]</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1471, 858)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_crop_matrix_vcvc</key>
-    <param>
-      <key>id</key>
-      <value>radar_crop_matrix_vcvc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>crop_x</key>
-      <value>fft_len/2,fft_len</value>
-    </param>
-    <param>
-      <key>crop_y</key>
-      <value>0,transpose_len</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(617, 696)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_qtgui_range</key>
-    <param>
-      <key>id</key>
-      <value>velocity</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Velocity</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>500</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>-1000</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value>0,1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1242, 11)</value>
+      <value>(1672, 27)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1592,8 +795,200 @@
       <value>0,0</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(1125, 14)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>velocity</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Velocity</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>500</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>-2000</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>2000</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>0,1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1242, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_stream_to_tagged_stream</key>
+    <param>
+      <key>id</key>
+      <value>blocks_stream_to_tagged_stream_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>packet_len</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value>length_tag_key</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(255, 293)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>import</key>
+    <param>
+      <key>id</key>
+      <value>import_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>import</key>
+      <value>import numpy as np</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(940, 88)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_ofdm_cyclic_prefixer</key>
+    <param>
+      <key>id</key>
+      <value>digital_ofdm_cyclic_prefixer_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>input_size</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>cp_len</key>
+      <value>fft_len/4</value>
+    </param>
+    <param>
+      <key>rolloff</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>tagname</key>
+      <value>length_tag_key</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len*(fft_len+fft_len/4)</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1393, 179)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1651,6 +1046,116 @@
       <value>"packet_len"</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len*(fft_len+fft_len/4)</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1649, 122)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_ofdm_cyclic_prefix_remover_cvc</key>
+    <param>
+      <key>id</key>
+      <value>radar_ofdm_cyclic_prefix_remover_cvc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fft_len</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>cp_len</key>
+      <value>fft_len/4</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1545, 478)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_vxx</key>
+    <param>
+      <key>id</key>
+      <value>fft_vxx_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>forward</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>window</key>
+      <value>()</value>
+    </param>
+    <param>
+      <key>shift</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>nthreads</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -1664,7 +1169,352 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1649, 122)</value>
+      <value>(1148, 163)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_chunks_to_symbols_xx</key>
+    <param>
+      <key>id</key>
+      <value>digital_chunks_to_symbols_xx_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>in_type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>out_type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>symbol_table</key>
+      <value>payload_mod.points()</value>
+    </param>
+    <param>
+      <key>dimension</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>num_ports</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*packet_len*4</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(640, 187)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_repack_bits_bb</key>
+    <param>
+      <key>id</key>
+      <value>blocks_repack_bits_bb_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>l</key>
+      <value>payload_mod.bits_per_symbol()</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value>length_tag_key</value>
+    </param>
+    <param>
+      <key>align_output</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(283, 171)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_transpose_matrix_vcvc</key>
+    <param>
+      <key>id</key>
+      <value>radar_transpose_matrix_vcvc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen_in</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>vlen_out</key>
+      <value>transpose_len</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(251, 462)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_vxx</key>
+    <param>
+      <key>id</key>
+      <value>fft_vxx_0_1_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>transpose_len</value>
+    </param>
+    <param>
+      <key>forward</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>window</key>
+      <value>window.blackmanharris(transpose_len)</value>
+    </param>
+    <param>
+      <key>shift</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>nthreads</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(99, 688)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_transpose_matrix_vcvc</key>
+    <param>
+      <key>id</key>
+      <value>radar_transpose_matrix_vcvc_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen_in</key>
+      <value>transpose_len</value>
+    </param>
+    <param>
+      <key>vlen_out</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(341, 704)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_complex_to_mag_squared</key>
+    <param>
+      <key>id</key>
+      <value>blocks_complex_to_mag_squared_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(907, 720)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_nlog10_ff</key>
+    <param>
+      <key>id</key>
+      <value>blocks_nlog10_ff_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>n</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1139, 712)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1683,7 +1533,7 @@
     </param>
     <param>
       <key>vlen</key>
-      <value>fft_len/vlen_decim</value>
+      <value>fft_len*zeropadding_fac</value>
     </param>
     <param>
       <key>interval</key>
@@ -1722,12 +1572,244 @@
       <value>"packet_len"</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
     <param>
       <key>_coordinate</key>
       <value>(1434, 648)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_vxx</key>
+    <param>
+      <key>id</key>
+      <value>fft_vxx_0_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>forward</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>window</key>
+      <value>window.blackmanharris(fft_len*zeropadding_fac)</value>
+    </param>
+    <param>
+      <key>shift</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>nthreads</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(538, 446)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_vxx</key>
+    <param>
+      <key>id</key>
+      <value>fft_vxx_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>forward</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>window</key>
+      <value>()</value>
+    </param>
+    <param>
+      <key>shift</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>nthreads</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1263, 463)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_ofdm_divide_vcvc</key>
+    <param>
+      <key>id</key>
+      <value>radar_ofdm_divide_vcvc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen_in</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>vlen_out</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>discarded_carriers</key>
+      <value></value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(852, 454)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_ofdm_carrier_allocator_cvc</key>
+    <param>
+      <key>id</key>
+      <value>digital_ofdm_carrier_allocator_cvc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fft_len</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>occupied_carriers</key>
+      <value>occupied_carriers_all</value>
+    </param>
+    <param>
+      <key>pilot_carriers</key>
+      <value>((),)</value>
+    </param>
+    <param>
+      <key>pilot_symbols</key>
+      <value>((),)</value>
+    </param>
+    <param>
+      <key>sync_words</key>
+      <value>()</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value>length_tag_key</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(896, 155)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1741,12 +1823,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_ofdm_carrier_allocator_cvc_0</source_block_id>
-    <sink_block_id>fft_vxx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>digital_chunks_to_symbols_xx_0_0</source_block_id>
     <sink_block_id>digital_ofdm_carrier_allocator_cvc_0</sink_block_id>
     <source_key>0</source_key>
@@ -1755,12 +1831,6 @@
   <connection>
     <source_block_id>radar_ofdm_cyclic_prefix_remover_cvc_0</source_block_id>
     <sink_block_id>fft_vxx_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_divide_xx_0</source_block_id>
-    <sink_block_id>fft_vxx_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1825,18 +1895,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fft_vxx_0_0</source_block_id>
-    <sink_block_id>blocks_divide_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_ofdm_carrier_allocator_cvc_0</source_block_id>
-    <sink_block_id>blocks_divide_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_add_xx_0</source_block_id>
     <sink_block_id>radar_ofdm_cyclic_prefix_remover_cvc_0</sink_block_id>
     <source_key>0</source_key>
@@ -1855,12 +1913,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>radar_transpose_matrix_vcvc_0_0</source_block_id>
-    <sink_block_id>radar_crop_matrix_vcvc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_complex_to_mag_squared_0</source_block_id>
     <sink_block_id>blocks_nlog10_ff_0</sink_block_id>
     <source_key>0</source_key>
@@ -1873,14 +1925,32 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_nlog10_ff_0</source_block_id>
-    <sink_block_id>blocks_null_sink_0</sink_block_id>
+    <source_block_id>radar_transpose_matrix_vcvc_0_0</source_block_id>
+    <sink_block_id>blocks_complex_to_mag_squared_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>radar_crop_matrix_vcvc_0</source_block_id>
-    <sink_block_id>blocks_complex_to_mag_squared_0</sink_block_id>
+    <source_block_id>digital_ofdm_carrier_allocator_cvc_0</source_block_id>
+    <sink_block_id>fft_vxx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>radar_ofdm_divide_vcvc_0</source_block_id>
+    <sink_block_id>fft_vxx_0_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>fft_vxx_0_0</source_block_id>
+    <sink_block_id>radar_ofdm_divide_vcvc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_ofdm_carrier_allocator_cvc_0</source_block_id>
+    <sink_block_id>radar_ofdm_divide_vcvc_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

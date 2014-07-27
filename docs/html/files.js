@@ -55,6 +55,12 @@ var files =
     [ "ofdm_cyclic_prefix_remover_cvc_impl.h", "ofdm__cyclic__prefix__remover__cvc__impl_8h.html", [
       [ "ofdm_cyclic_prefix_remover_cvc_impl", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc__impl.html", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc__impl" ]
     ] ],
+    [ "ofdm_divide_vcvc.h", "ofdm__divide__vcvc_8h.html", [
+      [ "ofdm_divide_vcvc", "classgr_1_1radar_1_1ofdm__divide__vcvc.html", "classgr_1_1radar_1_1ofdm__divide__vcvc" ]
+    ] ],
+    [ "ofdm_divide_vcvc_impl.h", "ofdm__divide__vcvc__impl_8h.html", [
+      [ "ofdm_divide_vcvc_impl", "classgr_1_1radar_1_1ofdm__divide__vcvc__impl.html", "classgr_1_1radar_1_1ofdm__divide__vcvc__impl" ]
+    ] ],
     [ "os_cfar_c.h", "os__cfar__c_8h.html", [
       [ "os_cfar_c", "classgr_1_1radar_1_1os__cfar__c.html", "classgr_1_1radar_1_1os__cfar__c" ]
     ] ],

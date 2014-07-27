@@ -41,5 +41,6 @@ install(FILES
     radar_ofdm_cyclic_prefix_remover_cvc.xml
     radar_transpose_matrix_vcvc.xml
     radar_qtgui_spectrogram_plot.xml
-    radar_crop_matrix_vcvc.xml DESTINATION share/gnuradio/grc/blocks
+    radar_crop_matrix_vcvc.xml
+    radar_ofdm_divide_vcvc.xml DESTINATION share/gnuradio/grc/blocks
 )

@@ -62,7 +62,8 @@ list(APPEND radar_sources
     ofdm_cyclic_prefix_remover_cvc_impl.cc
     transpose_matrix_vcvc_impl.cc
     qtgui_spectrogram_plot_impl.cc
-    crop_matrix_vcvc_impl.cc )
+    crop_matrix_vcvc_impl.cc
+    ofdm_divide_vcvc_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

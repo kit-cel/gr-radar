@@ -61,6 +61,9 @@ var hierarchy =
       [ "gr::radar::ofdm_cyclic_prefix_remover_cvc", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc.html", [
         [ "gr::radar::ofdm_cyclic_prefix_remover_cvc_impl", "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc__impl.html", null ]
       ] ],
+      [ "gr::radar::ofdm_divide_vcvc", "classgr_1_1radar_1_1ofdm__divide__vcvc.html", [
+        [ "gr::radar::ofdm_divide_vcvc_impl", "classgr_1_1radar_1_1ofdm__divide__vcvc__impl.html", null ]
+      ] ],
       [ "gr::radar::os_cfar_c", "classgr_1_1radar_1_1os__cfar__c.html", [
         [ "gr::radar::os_cfar_c_impl", "classgr_1_1radar_1_1os__cfar__c__impl.html", null ]
       ] ],
