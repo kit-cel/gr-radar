@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jul 28 12:19:58 2014
+# Generated: Mon Jul 28 18:16:33 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -134,6 +134,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_ofdm_divide_vcvc_0).set_min_output_buffer(78)
         self.radar_ofdm_cyclic_prefix_remover_cvc_0 = radar.ofdm_cyclic_prefix_remover_cvc(fft_len, fft_len/4, "packet_len")
         (self.radar_ofdm_cyclic_prefix_remover_cvc_0).set_min_output_buffer(78)
+        self.radar_estimator_ofdm_0 = radar.estimator_ofdm('range', fft_len*zeropadding_fac, (0,R_max), 'velocity', transpose_len, (0,v_max,-v_max,0), True)
         self.fft_vxx_0_1_0 = fft.fft_vcc(transpose_len, False, (window.blackmanharris(transpose_len)), False, 1)
         self.fft_vxx_0_1 = fft.fft_vcc(fft_len*zeropadding_fac, True, (window.blackmanharris(fft_len*zeropadding_fac)), False, 1)
         self.fft_vxx_0_0 = fft.fft_vcc(fft_len, True, (()), True, 1)
@@ -148,6 +149,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, packet_len, length_tag_key)
         self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, payload_mod.bits_per_symbol(), length_tag_key, False)
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_float*fft_len*zeropadding_fac)
         self.blocks_nlog10_ff_0 = blocks.nlog10_ff(1, fft_len*zeropadding_fac, 0)
         self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(fft_len*zeropadding_fac)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
@@ -179,11 +181,13 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.fft_vxx_0_0, 0), (self.radar_ofdm_divide_vcvc_0, 1))
         self.connect((self.digital_ofdm_carrier_allocator_cvc_0, 0), (self.radar_ofdm_divide_vcvc_0, 0))
         self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.radar_os_cfar_2d_vc_0, 0))
+        self.connect((self.blocks_nlog10_ff_0, 0), (self.blocks_null_sink_0, 0))
 
         ##################################################
         # Asynch Message Connections
         ##################################################
-        self.msg_connect(self.radar_os_cfar_2d_vc_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_ofdm_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_os_cfar_2d_vc_0, "Msg out", self.radar_estimator_ofdm_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")

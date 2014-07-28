@@ -35,6 +35,7 @@
 #include "radar/crop_matrix_vcvc.h"
 #include "radar/ofdm_divide_vcvc.h"
 #include "radar/os_cfar_2d_vc.h"
+#include "radar/estimator_ofdm.h"
 %}
 
 
@@ -98,3 +99,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, crop_matrix_vcvc);
 GR_SWIG_BLOCK_MAGIC2(radar, ofdm_divide_vcvc);
 %include "radar/os_cfar_2d_vc.h"
 GR_SWIG_BLOCK_MAGIC2(radar, os_cfar_2d_vc);
+%include "radar/estimator_ofdm.h"
+GR_SWIG_BLOCK_MAGIC2(radar, estimator_ofdm);

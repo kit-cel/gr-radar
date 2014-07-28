@@ -64,7 +64,8 @@ list(APPEND radar_sources
     qtgui_spectrogram_plot_impl.cc
     crop_matrix_vcvc_impl.cc
     ofdm_divide_vcvc_impl.cc
-    os_cfar_2d_vc_impl.cc )
+    os_cfar_2d_vc_impl.cc
+    estimator_ofdm_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)

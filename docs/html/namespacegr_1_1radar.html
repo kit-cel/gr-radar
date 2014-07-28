@@ -107,6 +107,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk.html">estimator_fsk</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This block estimates the range with peaks given from a FSK spectrum. Needed identifiers (symbols) are 'frequency' and 'phase'. The velocity is calculated with the 'frequency' information and the doppler formula. The phase of the doppler peaks are used to estimate the range. Output identifier are 'range' and 'velocity'. If push_power is true the information about the power of the peaks is pushed through. This can be used for estimating the RCS of an object.  <a href="classgr_1_1radar_1_1estimator__fsk.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__ofdm.html">estimator_ofdm</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This block evaluates the peaks given from a OFDM matrix. Input are the bins of the peaks with the identifiers 'axis_x' and 'axis_y'. The parameters of the block axis_x and axis_y are vectors which define the mapping of the axis. If two values are given it is assumed a linear progression in between. If four values are given the middle values are set on half of the axis and it is interpolated linear in between. len_x and len_y gives the length of the axis in number of bins. symbol_x and symbol_y defines the identifier (symbols) for the output data. merge_consecutive toggles merging consecutive peaks. Each peak is compared with peaks in a range of one bin. If there is a peak with a higher power the actual bin is not used for evaluations. If merge_consecutive is true data with identifier 'power' is needed.  <a href="classgr_1_1radar_1_1estimator__ofdm.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">estimator_sync_pulse_c</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This block can be used to estimate the shift of a signal on input 1 in relation to an other on input 2. For example the constant number of delay samples due to hardware effect from a signal source can be estimated. The calculation of the shift is done by a cross correlation of the input signals. The number of correlations in samples is given with num_xcorr. The output message is the number of delay samples with the identifier (symbol) 'sync_pulse'. This can be displayed with the 'Print Results' block.  <a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +187,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fsk__impl.html">estimator_fsk_impl</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__ofdm__impl.html">estimator_ofdm_impl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c__impl.html">estimator_sync_pulse_c_impl</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html">find_max_peak_c_impl</a></td></tr>
@@ -243,7 +248,7 @@ Classes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li>
-    <li class="footer">Generated on Mon Jul 28 2014 13:54:08 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Mon Jul 28 2014 18:17:09 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
