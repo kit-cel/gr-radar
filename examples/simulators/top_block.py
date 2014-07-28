@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Sun Jul 27 20:28:01 2014
+# Generated: Mon Jul 28 12:19:58 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -53,22 +53,24 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self.samp_rate = samp_rate = 5000000
         self.packet_len = packet_len = 2**9
         self.occupied_carriers_all = occupied_carriers_all = (range(-26,27),)
+        self.fft_len = fft_len = 2**6
         self.zeropadding_fac = zeropadding_fac = 2
         self.velocity = velocity = 500
+        self.v_max = v_max = 2000
         self.transpose_len = transpose_len = int(np.ceil(packet_len*4.0/len(occupied_carriers_all[0])))
         self.sync_word2 = sync_word2 = [0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, 0, 0, 0, 0, 0] 
         self.sync_word1 = sync_word1 = [0., 0., 0., 0., 0., 0., 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 0., 0., 0., 0., 0.]
-        self.samp_rate = samp_rate = 5000000
         self.pilot_symbols = pilot_symbols = ((1, 1, 1, -1,),)
         self.pilot_carriers = pilot_carriers = ((-21, -7, 7, 21,),)
         self.payload_mod = payload_mod = digital.constellation_qpsk()
         self.occupied_carriers = occupied_carriers = (range(-26, -21) + range(-20, -7) + range(-6, 0) + range(1, 7) + range(8, 21) + range(22, 27),)
         self.length_tag_key = length_tag_key = "packet_len"
-        self.fft_len = fft_len = 2**6
         self.center_freq = center_freq = 2.45e9
         self.Range = Range = 100
+        self.R_max = R_max = 3e8/2/samp_rate*fft_len
 
         ##################################################
         # Blocks
@@ -84,13 +86,13 @@ class top_block(gr.top_block, Qt.QWidget):
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
         self._velocity_counter = qwt_counter_pyslot()
-        self._velocity_counter.setRange(-2000, 2000, 1)
+        self._velocity_counter.setRange(-v_max, v_max, 1)
         self._velocity_counter.setNumButtons(2)
         self._velocity_counter.setValue(self.velocity)
         self._velocity_tool_bar.addWidget(self._velocity_counter)
         self._velocity_counter.valueChanged.connect(self.set_velocity)
         self._velocity_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._velocity_slider.setRange(-2000, 2000, 1)
+        self._velocity_slider.setRange(-v_max, v_max, 1)
         self._velocity_slider.setValue(self.velocity)
         self._velocity_slider.setMinimumWidth(200)
         self._velocity_slider.valueChanged.connect(self.set_velocity)
@@ -107,13 +109,13 @@ class top_block(gr.top_block, Qt.QWidget):
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
         self._Range_counter = qwt_counter_pyslot()
-        self._Range_counter.setRange(0.1, 2000, 1)
+        self._Range_counter.setRange(0.1, R_max, 1)
         self._Range_counter.setNumButtons(2)
         self._Range_counter.setValue(self.Range)
         self._Range_tool_bar.addWidget(self._Range_counter)
         self._Range_counter.valueChanged.connect(self.set_Range)
         self._Range_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._Range_slider.setRange(0.1, 2000, 1)
+        self._Range_slider.setRange(0.1, R_max, 1)
         self._Range_slider.setValue(self.Range)
         self._Range_slider.setMinimumWidth(200)
         self._Range_slider.valueChanged.connect(self.set_Range)
@@ -125,7 +127,9 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_transpose_matrix_vcvc_0).set_min_output_buffer(256)
         self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range, ), (velocity, ), (1e25, ), (0, ), samp_rate, center_freq, -10, True, True, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(6240)
-        self.radar_qtgui_spectrogram_plot_0 = radar.qtgui_spectrogram_plot(fft_len*zeropadding_fac, 500, 'Range', 'Velocity', 'OFDM Radar', (0,10), (0,10), (-15,-5), True, "packet_len")
+        self.radar_qtgui_spectrogram_plot_0 = radar.qtgui_spectrogram_plot(fft_len*zeropadding_fac, 500, 'Range', 'Velocity', 'OFDM Radar', (0,R_max), (0,v_max), (-15,-12), True, "packet_len")
+        self.radar_print_results_0 = radar.print_results(False, "")
+        self.radar_os_cfar_2d_vc_0 = radar.os_cfar_2d_vc(fft_len*zeropadding_fac, (10,10), (0,0), 0.78, 30, "packet_len")
         self.radar_ofdm_divide_vcvc_0 = radar.ofdm_divide_vcvc(fft_len, fft_len*zeropadding_fac, (), "packet_len")
         (self.radar_ofdm_divide_vcvc_0).set_min_output_buffer(78)
         self.radar_ofdm_cyclic_prefix_remover_cvc_0 = radar.ofdm_cyclic_prefix_remover_cvc(fft_len, fft_len/4, "packet_len")
@@ -174,12 +178,26 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.radar_ofdm_divide_vcvc_0, 0), (self.fft_vxx_0_1, 0))
         self.connect((self.fft_vxx_0_0, 0), (self.radar_ofdm_divide_vcvc_0, 1))
         self.connect((self.digital_ofdm_carrier_allocator_cvc_0, 0), (self.radar_ofdm_divide_vcvc_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.radar_os_cfar_2d_vc_0, 0))
 
+        ##################################################
+        # Asynch Message Connections
+        ##################################################
+        self.msg_connect(self.radar_os_cfar_2d_vc_0, "Msg out", self.radar_print_results_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
+
+    def get_samp_rate(self):
+        return self.samp_rate
+
+    def set_samp_rate(self, samp_rate):
+        self.samp_rate = samp_rate
+        self.set_R_max(3e8/2/self.samp_rate*self.fft_len)
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_packet_len(self):
         return self.packet_len
@@ -195,6 +213,13 @@ class top_block(gr.top_block, Qt.QWidget):
         self.occupied_carriers_all = occupied_carriers_all
         self.set_transpose_len(int(np.ceil(self.packet_len*4.0/len(self.occupied_carriers_all[0]))))
 
+    def get_fft_len(self):
+        return self.fft_len
+
+    def set_fft_len(self, fft_len):
+        self.fft_len = fft_len
+        self.set_R_max(3e8/2/self.samp_rate*self.fft_len)
+
     def get_zeropadding_fac(self):
         return self.zeropadding_fac
 
@@ -209,6 +234,12 @@ class top_block(gr.top_block, Qt.QWidget):
         Qt.QMetaObject.invokeMethod(self._velocity_counter, "setValue", Qt.Q_ARG("double", self.velocity))
         Qt.QMetaObject.invokeMethod(self._velocity_slider, "setValue", Qt.Q_ARG("double", self.velocity))
         self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
+
+    def get_v_max(self):
+        return self.v_max
+
+    def set_v_max(self, v_max):
+        self.v_max = v_max
 
     def get_transpose_len(self):
         return self.transpose_len
@@ -227,14 +258,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_sync_word1(self, sync_word1):
         self.sync_word1 = sync_word1
-
-    def get_samp_rate(self):
-        return self.samp_rate
-
-    def set_samp_rate(self, samp_rate):
-        self.samp_rate = samp_rate
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_pilot_symbols(self):
         return self.pilot_symbols
@@ -266,12 +289,6 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_length_tag_key(self, length_tag_key):
         self.length_tag_key = length_tag_key
 
-    def get_fft_len(self):
-        return self.fft_len
-
-    def set_fft_len(self, fft_len):
-        self.fft_len = fft_len
-
     def get_center_freq(self):
         return self.center_freq
 
@@ -287,6 +304,12 @@ class top_block(gr.top_block, Qt.QWidget):
         Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
         Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
         self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), self.samp_rate, self.center_freq, -10, True, True)
+
+    def get_R_max(self):
+        return self.R_max
+
+    def set_R_max(self, R_max):
+        self.R_max = R_max
 
 if __name__ == '__main__':
     import ctypes

@@ -43,8 +43,10 @@ Used identifiers (symbols) should be predefined to keep the handling simple. Cur
 <b>Signal information:</b>\n
 <code>rx_time</code> : Timestamp of the RX signal\n
 <code>frequency</code> : Frequency information of peaks in a FFT spectrum\n
-<code>power</code> : Amplitude (magnitude square) of peaks in a FFT spectrum\n
+<code>power</code> : Amplitude (magnitude square) of peaks, e. g. in a FFT spectrum or within matrix processing\n
 <code>phase</code> : Phase of the complex value of peaks in a FFT spectrum\n
+<code>axis_x</code> : Number of bin on x axis for matrix processing\n
+<code>axis_y</code> : Number of bin on y axis for matrix processing\n
 
 
 

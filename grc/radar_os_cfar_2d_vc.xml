@@ -1,0 +1,52 @@
+<block>
+  <name>OS-CFAR 2D</name>
+  <key>radar_os_cfar_2d_vc</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.os_cfar_2d_vc($vlen, $samp_compare, $samp_protect, $rel_threshold, $mult_threshold, $len_key)</make>
+  <callback>set_rel_threshold($rel_threshold)</callback>
+  <callback>set_mult_threshold($mult_threshold)</callback>
+  <callback>set_samp_compare($samp_compare)</callback>
+  <callback>set_samp_protect($samp_protect)</callback>
+  <param>
+    <name>Input vector length</name>
+    <key>vlen</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Compare samples</name>
+    <key>samp_compare</key>
+    <type>int_vector</type>
+  </param>
+  <param>
+    <name>Protected samples</name>
+    <key>samp_protect</key>
+    <type>int_vector</type>
+  </param>
+  <param>
+    <name>Relative threshold</name>
+    <key>rel_threshold</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Multiplier threshold</name>
+    <key>mult_threshold</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Packet length key</name>
+    <key>len_key</key>
+    <value>"packet_len"</value>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>IQ in</name>
+    <type>complex</type>
+    <vlen>$vlen</vlen>
+  </sink>
+  <source>
+    <name>Msg out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

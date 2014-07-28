@@ -47,5 +47,6 @@ install(FILES
     transpose_matrix_vcvc.h
     qtgui_spectrogram_plot.h
     crop_matrix_vcvc.h
-    ofdm_divide_vcvc.h DESTINATION include/radar
+    ofdm_divide_vcvc.h
+    os_cfar_2d_vc.h DESTINATION include/radar
 )

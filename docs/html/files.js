@@ -61,6 +61,12 @@ var files =
     [ "ofdm_divide_vcvc_impl.h", "ofdm__divide__vcvc__impl_8h.html", [
       [ "ofdm_divide_vcvc_impl", "classgr_1_1radar_1_1ofdm__divide__vcvc__impl.html", "classgr_1_1radar_1_1ofdm__divide__vcvc__impl" ]
     ] ],
+    [ "os_cfar_2d_vc.h", "os__cfar__2d__vc_8h.html", [
+      [ "os_cfar_2d_vc", "classgr_1_1radar_1_1os__cfar__2d__vc.html", "classgr_1_1radar_1_1os__cfar__2d__vc" ]
+    ] ],
+    [ "os_cfar_2d_vc_impl.h", "os__cfar__2d__vc__impl_8h.html", [
+      [ "os_cfar_2d_vc_impl", "classgr_1_1radar_1_1os__cfar__2d__vc__impl.html", "classgr_1_1radar_1_1os__cfar__2d__vc__impl" ]
+    ] ],
     [ "os_cfar_c.h", "os__cfar__c_8h.html", [
       [ "os_cfar_c", "classgr_1_1radar_1_1os__cfar__c.html", "classgr_1_1radar_1_1os__cfar__c" ]
     ] ],

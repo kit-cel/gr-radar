@@ -63,3 +63,4 @@ GR_ADD_TEST(qa_ofdm_cyclic_prefix_remover_cvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRE
 GR_ADD_TEST(qa_transpose_matrix_vcvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_transpose_matrix_vcvc.py)
 GR_ADD_TEST(qa_crop_matrix_vcvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_crop_matrix_vcvc.py)
 GR_ADD_TEST(qa_ofdm_divide_vcvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ofdm_divide_vcvc.py)
+GR_ADD_TEST(qa_os_cfar_2d_vc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_os_cfar_2d_vc.py)

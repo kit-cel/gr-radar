@@ -42,5 +42,6 @@ install(FILES
     radar_transpose_matrix_vcvc.xml
     radar_qtgui_spectrogram_plot.xml
     radar_crop_matrix_vcvc.xml
-    radar_ofdm_divide_vcvc.xml DESTINATION share/gnuradio/grc/blocks
+    radar_ofdm_divide_vcvc.xml
+    radar_os_cfar_2d_vc.xml DESTINATION share/gnuradio/grc/blocks
 )
