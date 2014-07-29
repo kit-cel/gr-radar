@@ -45,10 +45,10 @@ namespace gr {
        * class. radar::static_target_simulator_cc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+      static sptr make(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 						int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift=true, bool self_coupling=true, const std::string& len_key="packet_len");
 						
-	  virtual void setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+	  virtual void setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 													int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling) = 0;
     };
 

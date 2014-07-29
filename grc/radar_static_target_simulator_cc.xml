@@ -3,8 +3,8 @@
   <key>radar_static_target_simulator_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.static_target_simulator_cc($range, $velocity, $rcs, $azimuth, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling, $len_key)</make>
-  <callback>setup_targets($range, $velocity, $rcs, $azimuth, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling)</callback>
+  <make>radar.static_target_simulator_cc($range, $velocity, $rcs, $azimuth, $position_rx, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling, $len_key)</make>
+  <callback>setup_targets($range, $velocity, $rcs, $azimuth, $position_rx, $samp_rate, $center_freq, $self_coupling_db, $rndm_phaseshift, $self_coupling)</callback>
   <param>
     <name>Range [m]</name>
     <key>range</key>
@@ -23,6 +23,11 @@
   <param>
     <name>Azimuth</name>
     <key>azimuth</key>
+    <type>real_vector</type>
+  </param>
+  <param>
+    <name>Position RX antennas</name>
+    <key>position_rx</key>
     <type>real_vector</type>
   </param>
   <param>
@@ -81,5 +86,6 @@
   <source>
     <name>IQ out</name>
     <type>complex</type>
+    <nports>len($position_rx)</nports>
   </source>
 </block>

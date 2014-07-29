@@ -30,23 +30,23 @@ namespace gr {
   namespace radar {
 
     static_target_simulator_cc::sptr
-    static_target_simulator_cc::make(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+    static_target_simulator_cc::make(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 										int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling, const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
-        (new static_target_simulator_cc_impl(range, velocity, rcs, azimuth, samp_rate, center_freq, self_coupling_db, rndm_phaseshift, self_coupling, len_key));
+        (new static_target_simulator_cc_impl(range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, self_coupling_db, rndm_phaseshift, self_coupling, len_key));
     }
 
     /*
      * The private constructor
      */
-    static_target_simulator_cc_impl::static_target_simulator_cc_impl(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+    static_target_simulator_cc_impl::static_target_simulator_cc_impl(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 																	int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling, const std::string& len_key)
       : gr::tagged_stream_block("static_target_simulator_cc",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
-              gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
+              gr::io_signature::make(position_rx.size(), position_rx.size(), sizeof(gr_complex)), len_key)
     {
-		setup_targets(range, velocity, rcs, azimuth, samp_rate, center_freq, self_coupling_db, rndm_phaseshift, self_coupling);
+		setup_targets(range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, self_coupling_db, rndm_phaseshift, self_coupling);
 	}
 
     /*
@@ -57,13 +57,14 @@ namespace gr {
     }
     
     void
-    static_target_simulator_cc_impl::setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+    static_target_simulator_cc_impl::setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 				int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling){
 		
 		d_range = range;
 		d_velocity = velocity;
 		d_rcs = rcs;
 		d_azimuth = azimuth;
+		d_position_rx = position_rx;
 		d_center_freq = center_freq; // center frequency of simulated hardware for doppler estimation
 		d_samp_rate = samp_rate;
 		d_hold_noutput = -1;
@@ -85,7 +86,8 @@ namespace gr {
 		
 		// Get timeshifts
 		d_timeshift.resize(d_num_targets);
-		d_filt_time.resize(d_num_targets);
+		d_filt_time.resize(d_position_rx.size());
+		for(int k=0; k<d_position_rx.size(); k++) d_filt_time[k].resize(d_num_targets);
 		for(int k=0; k<d_num_targets; k++) d_timeshift[k] = 2*d_range[k]/c_light;
 		
 		// Get signal amplitude of reflection with free space path loss and rcs (radar equation)
@@ -101,7 +103,7 @@ namespace gr {
 			// Setup random numbers
 			std::srand(std::time(NULL)); // initial with time
 		}
-													}
+	}
 
     int
     static_target_simulator_cc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
@@ -117,23 +119,10 @@ namespace gr {
                        gr_vector_void_star &output_items)
     {
         const gr_complex *in = (const gr_complex *) input_items[0];
-        gr_complex *out = (gr_complex *) output_items[0];
+        gr_complex *out;
         
         // Set output items to tagged stream length
         noutput_items = ninput_items[0];
-
-        // Do <+signal processing+>
-        
-        // Set rx_time tag
-        d_time_sec = nitems_written(0)/d_samp_rate;
-        d_time_frac_sec = nitems_written(0)/(float)d_samp_rate-d_time_sec;
-        d_val = pmt::make_tuple
-            (pmt::from_uint64(d_time_sec),
-             pmt::from_double(d_time_frac_sec)); // FIXME: correct implementation?
-        add_item_tag(0, nitems_written(0), d_key, d_val, d_srcid);
-        
-        // Set output to zero
-        std::memset(out, 0, noutput_items*sizeof(gr_complex));
         
         // Check if new filter, buffer or fft plan is necessary
         if(d_hold_noutput!=noutput_items){
@@ -150,17 +139,21 @@ namespace gr {
 			// Setup freq and time shift filter, resize phase shift filter
 			for(int k=0; k<d_num_targets; k++){
 				d_filt_doppler[k].resize(noutput_items);
-				d_filt_time[k].resize(noutput_items);
 				if(d_rndm_phaseshift) d_filt_phase[k].resize(noutput_items);
 				d_phase_doppler = 0;
-				d_phase_time = 0;
 				for(int i=0; i<noutput_items; i++){
 					// Doppler shift filter and rescaling amplitude with rcs
 					d_filt_doppler[k][i] = std::exp(d_phase_doppler)*d_scale_ampl[k];
 					d_phase_doppler = 1j*std::fmod(std::imag(d_phase_doppler)+2*M_PI*d_doppler[k]/(float)d_samp_rate,2*M_PI); // integrate phase (with plus!)
-					// Time shift filter
-					d_filt_time[k][i] = std::exp(-d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
-					d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*d_timeshift[k]*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with minus!)
+				}
+				for(int l=0; l<d_position_rx.size(); l++){ // Do time shift filter with azimuth and position
+					d_filt_time[l][k].resize(noutput_items);
+					d_phase_time = 0;
+					for(int i=0; i<noutput_items; i++){
+						// Time shift filter, uses target range, azimuth and RX position
+						d_filt_time[l][k][i] = std::exp(-d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
+						d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*(d_timeshift[k]+2.0/c_light*d_position_rx[l]*std::sin(d_azimuth[k])/360.0*2.0*M_PI)*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with minus!)
+					}
 				}
 			}
 			
@@ -178,31 +171,46 @@ namespace gr {
 			}
 		}
         
-        // Go through targets and apply filters
-        for(int k=0; k<d_num_targets; k++){
-			// Add doppler shift
-			volk_32fc_x2_multiply_32fc(&d_hold_in[0], in, &d_filt_doppler[k][0], noutput_items); // add doppler shift with rescaled amplitude
-			// FIXME: used volk correctly?
+        // Go through RXs
+        for(int l=0; l<d_position_rx.size(); l++){
+			// Setup pointer on output buffer
+			out = (gr_complex *) output_items[l];
 			
-			// Add time shift
-			fftwf_execute(d_fft_plan); // go to freq domain
-			volk_32fc_x2_multiply_32fc(&d_in_fft[0], &d_in_fft[0], &d_filt_time[k][0], noutput_items); // add timeshift with multiply exp-func in freq domain
-			fftwf_execute(d_ifft_plan); // back in time domain
+			// Set rx_time tag
+			d_time_sec = nitems_written(l)/d_samp_rate;
+			d_time_frac_sec = nitems_written(l)/(float)d_samp_rate-d_time_sec;
+			d_val = pmt::make_tuple
+				(pmt::from_uint64(d_time_sec),
+				 pmt::from_double(d_time_frac_sec)); // FIXME: correct implementation?
+			add_item_tag(l, nitems_written(l), d_key, d_val, d_srcid);
 			
-			if(d_rndm_phaseshift){
-				// Add random phase shift
-				volk_32fc_x2_multiply_32fc(&d_hold_in[0], &d_hold_in[0], &d_filt_phase[k][0], noutput_items); // add random phase shift
+			// Set output to zero
+			std::memset(out, 0, noutput_items*sizeof(gr_complex));
+        
+			// Go through targets and apply filters
+			for(int k=0; k<d_num_targets; k++){
+				// Add doppler shift
+				volk_32fc_x2_multiply_32fc(&d_hold_in[0], in, &d_filt_doppler[k][0], noutput_items); // add doppler shift with rescaled amplitude
+				// FIXME: used volk correctly?
+				
+				// Add time shift
+				fftwf_execute(d_fft_plan); // go to freq domain
+				volk_32fc_x2_multiply_32fc(&d_in_fft[0], &d_in_fft[0], &d_filt_time[l][k][0], noutput_items); // add timeshift with multiply exp-func in freq domain
+				fftwf_execute(d_ifft_plan); // back in time domain
+				
+				if(d_rndm_phaseshift){
+					// Add random phase shift
+					volk_32fc_x2_multiply_32fc(&d_hold_in[0], &d_hold_in[0], &d_filt_phase[k][0], noutput_items); // add random phase shift
+				}
+				
+				// Add to output
+				for(int i=0; i<noutput_items; i++) out[i] += d_hold_in[i];
 			}
 			
-			// FIXME: Add azimuth
-			
-			// Add to output
-			for(int i=0; i<noutput_items; i++) out[i] += d_hold_in[i];
-		}
-		
-		// Add self coupling
-		if(d_self_coupling){
-			for(int i=0; i<noutput_items; i++) out[i] += (gr_complex)pow(10,d_self_coupling_db/20.0)*in[i]; // d_self_coupling_db gives scaling of power
+			// Add self coupling
+			if(d_self_coupling){
+				for(int i=0; i<noutput_items; i++) out[i] += (gr_complex)pow(10,d_self_coupling_db/20.0)*in[i]; // d_self_coupling_db gives scaling of power
+			}
 		}
 
         // Tell runtime system how many output items we produced.

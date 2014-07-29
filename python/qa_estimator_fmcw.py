@@ -60,7 +60,7 @@ class qa_estimator_fmcw (gr_unittest.TestCase):
 		head = blocks.head(8,test_len)
 		head.set_min_output_buffer(min_output_buffer)
 		
-		sim = radar.static_target_simulator_cc((Range,),(velocity,),(1e16,),(0,),samp_rate,center_freq,1,False,False)
+		sim = radar.static_target_simulator_cc((Range,),(velocity,),(1e16,),(0,),(0,),samp_rate,center_freq,1,False,False)
 		sim.set_min_output_buffer(min_output_buffer)
 		
 		mult = blocks.multiply_conjugate_cc()

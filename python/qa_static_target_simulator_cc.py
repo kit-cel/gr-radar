@@ -39,21 +39,22 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		
 		packet_len = test_len
 		samp_rate = 2000
-		frequency = (0,0)
+		frequency = (0,)
 		amplitude = 1
 		
-		Range = (10, 10)
-		velocity = (15, 15)
-		rcs = (1e9, 1e9)
-		azimuth = (0, 0)
+		Range = (10,)
+		velocity = (15,)
+		rcs = (1e9,)
+		azimuth = (0,)
+		position_rx = (0,)
 		center_freq = 1e9
 		rndm_phase = True
 		self_coupling = False
-		self_coupling_db = 10;
+		self_coupling_db = -10;
 		
 		src = radar.signal_generator_cw_c(packet_len,samp_rate,frequency,amplitude)
 		head = blocks.head(8,test_len)
-		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, samp_rate, center_freq, self_coupling_db, rndm_phase, self_coupling)
+		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, self_coupling_db, rndm_phase, self_coupling)
 		mult = blocks.multiply_cc()
 		snk = blocks.vector_sink_c()
 		
@@ -85,10 +86,11 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		
 		R = c_light/2/samp_rate # shift of 1 sample
 		rcs = 1e12
-		Range = (R, R)
-		velocity = (0, 0) # no freq shift
-		rcs = (rcs, rcs)
-		azimuth = (0, 0)
+		Range = (R,)
+		velocity = (0,) # no freq shift
+		rcs = (rcs,)
+		azimuth = (0,)
+		position_rx = (0,)
 		center_freq = 1e9
 		rndm_phase = False
 		self_coupling = False
@@ -97,7 +99,7 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		src = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq, ampl)
 		head = blocks.head(8,test_len)
 		s2ts = blocks.stream_to_tagged_stream(8,1,packet_len,"packet_len")
-		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, samp_rate, center_freq, self_coupling_db, rndm_phase, self_coupling)
+		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, self_coupling_db, rndm_phase, self_coupling)
 		snk0 = blocks.vector_sink_c()
 		snk1 = blocks.vector_sink_c()
 		

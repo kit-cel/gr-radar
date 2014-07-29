@@ -36,13 +36,13 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      static_target_simulator_cc_impl(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+      static_target_simulator_cc_impl(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 													int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling, const std::string& len_key);
       ~static_target_simulator_cc_impl();
-      void setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, 
+      void setup_targets(std::vector<float> range, std::vector<float> velocity, std::vector<float> rcs, std::vector<float> azimuth, std::vector<float> position_rx,
 													int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling);
       
-      std::vector<float> d_range, d_velocity, d_rcs, d_azimuth;
+      std::vector<float> d_range, d_velocity, d_rcs, d_azimuth, d_position_rx;
       int d_samp_rate;
       float d_center_freq;
       int d_hold_noutput;
@@ -58,7 +58,8 @@ namespace gr {
       
       fftwf_plan d_fft_plan, d_ifft_plan;
       std::vector<gr_complex> d_in_fft;
-      std::vector<std::vector<gr_complex> > d_filt_doppler, d_filt_time, d_filt_phase, d_filt_self_coupling;
+      std::vector<std::vector<gr_complex> > d_filt_doppler, d_filt_phase, d_filt_self_coupling;
+      std::vector<std::vector<std::vector<gr_complex> > > d_filt_time;
       
       pmt::pmt_t d_key, d_val, d_srcid;
       uint64_t d_time_sec;
