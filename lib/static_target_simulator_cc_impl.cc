@@ -152,7 +152,9 @@ namespace gr {
 					for(int i=0; i<noutput_items; i++){
 						// Time shift filter, uses target range, azimuth and RX position
 						d_filt_time[l][k][i] = std::exp(-d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
-						d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*(d_timeshift[k]+2.0/c_light*d_position_rx[l]*std::sin(d_azimuth[k])/360.0*2.0*M_PI)*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with minus!)
+						d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*(d_timeshift[k] // range time shift
+							+(std::sqrt(d_range[k]*d_range[k]+d_position_rx[l]*d_position_rx[l]-2*d_range[k]*d_position_rx[l]*std::cos(d_azimuth[k]/360.0*2.0*M_PI))-d_range[k])/c_light) // azimuth time shift // FIXME: no effect on testcase, wrong implementation?
+							*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with minus!)
 					}
 				}
 			}

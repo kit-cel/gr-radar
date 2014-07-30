@@ -26,8 +26,9 @@
     <type>real_vector</type>
   </param>
   <param>
-    <name>Position RX antennas</name>
+    <name>Position RX antennas [m] (relative to TX)</name>
     <key>position_rx</key>
+    <value>0,</value>
     <type>real_vector</type>
   </param>
   <param>
