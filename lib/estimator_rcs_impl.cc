@@ -23,6 +23,7 @@
 #endif
 
 #include <gnuradio/io_signature.h>
+#include <numeric>
 #include "estimator_rcs_impl.h"
 
 namespace gr {
@@ -59,6 +60,8 @@ namespace gr {
         // Register output message port
         d_port_id_out = pmt::mp("Msg out");
         message_port_register_out(d_port_id_out);
+
+        d_loop_counter = 0;
     }
 
     /*
@@ -66,6 +69,29 @@ namespace gr {
      */
     estimator_rcs_impl::~estimator_rcs_impl()
     {
+    }
+
+    float
+    estimator_rcs_impl::calculate_vector_mean(std::vector<float>* rcs_vals) {
+      int sum_of_elems = std::accumulate((*rcs_vals).begin(),(*rcs_vals).end(),0);      
+      return sum_of_elems/(*rcs_vals).size();
+    }
+
+    float
+    estimator_rcs_impl::calculate_rcs() {
+        float power_tx = 100E-3 + pow(10, d_usrp_gain_tx/10);
+        float power_rx = d_power.at(0)/100000 - pow(10, d_usrp_gain_rx/10);
+        float lambda = 3E+8/d_center_freq;
+
+        // convert db to power
+        float antenna_gain_rx = pow(10, d_antenna_gain_rx/10);
+        float antenna_gain_tx = pow(10, d_antenna_gain_tx/10);
+
+        float fak = pow(4*M_PI, 3);
+        fak = fak * pow(d_range.at(0), 4);
+        fak = fak / (antenna_gain_rx * antenna_gain_tx * pow(lambda, 2));
+
+        return power_rx/power_tx * fak;
     }
 
     void
@@ -101,8 +127,18 @@ namespace gr {
         if(d_range.size()!=d_power.size()) throw std::runtime_error("range and power vectors do not have same size");
 
         // Calculate RCS
+        std::vector<float> rcs_vals;
+        float rcs_mean = 0;
+        rcs_vals.push_back(estimator_rcs_impl::calculate_rcs());
+
+        if(d_loop_counter > d_num_mean) {
+          rcs_vals.erase(rcs_vals.begin());
+          //rcs_mean = estimator_rcs_impl::calculate_vector_mean(&rcs_vals);
+        }
+        d_loop_counter++;
+
         for(int k=0; k<d_range.size(); k++){
-            d_rcs.push_back(1);
+            d_rcs.push_back(rcs_mean);
         }
         
         // Push pmt to output msg port

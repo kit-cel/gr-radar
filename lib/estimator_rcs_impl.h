@@ -35,8 +35,11 @@ namespace gr {
       estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float amplitude);
       ~estimator_rcs_impl();
       void handle_msg(pmt::pmt_t msg);
+      float calculate_rcs();
+      float calculate_vector_mean(std::vector<float>*);
 
-      int d_num_mean;
+      int d_num_mean, d_loop_counter;
+
       float d_center_freq, d_antenna_gain_tx, d_antenna_gain_rx, d_usrp_gain_tx, d_usrp_gain_rx, d_amplitude;
 
       pmt::pmt_t d_port_id_in, d_port_id_out;
