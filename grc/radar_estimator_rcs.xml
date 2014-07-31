@@ -1,0 +1,52 @@
+<block>
+  <name>Estimator RCS</name>
+  <key>radar_estimator_rcs</key>
+  <category>RADAR</category>
+  <import>import radar</import>
+  <make>radar.estimator_rcs($num_mean, $center_freq, $antenna_gain_tx, $antenna_gain_rx, $usrp_gain_tx, $usrp_gain_rx, $amplitude)</make>
+  <param>
+    <name>Num_mean</name>
+    <key>num_mean</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Center frequency</name>
+    <key>center_freq</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Antenna_gain_tx</name>
+    <key>antenna_gain_tx</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Antenna_gain_rx</name>
+    <key>antenna_gain_rx</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Usrp_gain_tx</name>
+    <key>usrp_gain_tx</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Usrp_gain_rx</name>
+    <key>usrp_gain_rx</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Amplitude</name>
+    <key>amplitude</key>
+    <type>float</type>
+  </param>
+  <sink>
+    <name>Msg in</name>
+    <type>message</type>
+    <optional>1</optional>
+  </sink>
+  <source>
+    <name>Msg out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

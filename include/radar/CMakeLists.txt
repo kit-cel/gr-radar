@@ -49,5 +49,6 @@ install(FILES
     crop_matrix_vcvc.h
     ofdm_divide_vcvc.h
     os_cfar_2d_vc.h
-    estimator_ofdm.h DESTINATION include/radar
+    estimator_ofdm.h
+    estimator_rcs.h DESTINATION include/radar
 )
