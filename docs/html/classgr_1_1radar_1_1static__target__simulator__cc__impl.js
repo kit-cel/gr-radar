@@ -1,9 +1,9 @@
 var classgr_1_1radar_1_1static__target__simulator__cc__impl =
 [
-    [ "static_target_simulator_cc_impl", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#aff305e85d96376b752f2de3bd3956294", null ],
+    [ "static_target_simulator_cc_impl", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ab6d2e6e2f8bf8a2cea7a9120bd72fd06", null ],
     [ "~static_target_simulator_cc_impl", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a5366a22d9ce1ce6c9de43c7eb1d735c3", null ],
     [ "calculate_output_stream_length", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#abb202c1a50b2298e21332df4f7031705", null ],
-    [ "setup_targets", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a1cb774466305b118dd5380b0a7269e20", null ],
+    [ "setup_targets", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a0ca3096458f3a8acdfc6370c3c64f535", null ],
     [ "work", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#af25083458398ed50afc98186a66025d3", null ],
     [ "c_light", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ac25cfc506d7aa4d9fb1ecf964a17b556", null ],
     [ "d_azimuth", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a5e8e44dcaf31e0eff1743c6017d05100", null ],
@@ -14,6 +14,8 @@ var classgr_1_1radar_1_1static__target__simulator__cc__impl =
     [ "d_filt_phase", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a4f01af7353b0ba5d7a87b9dca50ba20b", null ],
     [ "d_filt_self_coupling", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#abdc87fd2c58bca37df5f97e9445760e4", null ],
     [ "d_filt_time", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a87bbae766caef82e0777df63a97ac71e", null ],
+    [ "d_filt_time_azimuth", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ae1164e2271485b9d1cf467cdfa749d37", null ],
+    [ "d_freq", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a6dd624501cbb193073715a3caa647955", null ],
     [ "d_hold_in", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#abfe628bdc5177c9443de0e7f55f72f93", null ],
     [ "d_hold_noutput", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#aa925af3026d476d334721e066aad1e66", null ],
     [ "d_ifft_plan", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a03add2ea744ef4a57cee93c780ccd380", null ],
@@ -23,6 +25,7 @@ var classgr_1_1radar_1_1static__target__simulator__cc__impl =
     [ "d_phase_doppler", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#adec7c9dcec95035aa1ae2c0b1a4f6406", null ],
     [ "d_phase_random", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a0378b0e77006707f38496e2f2d5f3b81", null ],
     [ "d_phase_time", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#afa775e79eac5559fb38d05fc948847f3", null ],
+    [ "d_position_rx", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a52c4a459f0dba2a8e90a9cb8926a62c1", null ],
     [ "d_range", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#aa3e0742cc104115dd9b98e0534afdb47", null ],
     [ "d_rcs", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ae3409a607471b9cb18184a9eb3c2736d", null ],
     [ "d_rndm_phaseshift", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#aac47f02138b62f45a715ca36168d8ec4", null ],
@@ -34,6 +37,7 @@ var classgr_1_1radar_1_1static__target__simulator__cc__impl =
     [ "d_time_frac_sec", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ac843647e4fb41ae23c14fb21c1bca6b8", null ],
     [ "d_time_sec", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ad782f605d93b6288b2121ad97d9e388d", null ],
     [ "d_timeshift", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a4fe9867e43c96fe55512cb7a924bd8db", null ],
+    [ "d_timeshift_azimuth", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a71ba5eda7898aa2dfcd299b0f9c94e2f", null ],
     [ "d_val", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#af67b2d98ff43452d703a6a8c1a579907", null ],
     [ "d_velocity", "classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a451d4670d93cacac3677fe01552fbf49", null ]
 ];

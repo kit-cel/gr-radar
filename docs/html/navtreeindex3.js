@@ -1,5 +1,9 @@
 var NAVTREEINDEX3 =
 {
+"signal__generator__cw__c_8h_source.html":[4,0,36],
+"signal__generator__cw__c__impl_8h.html":[4,0,37],
+"signal__generator__cw__c__impl_8h_source.html":[4,0,37],
+"signal__generator__fmcw__c_8h.html":[4,0,38],
 "signal__generator__fmcw__c_8h_source.html":[4,0,38],
 "signal__generator__fmcw__c__impl_8h.html":[4,0,39],
 "signal__generator__fmcw__c__impl_8h_source.html":[4,0,39],

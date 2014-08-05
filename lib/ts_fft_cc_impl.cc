@@ -79,8 +79,6 @@ namespace gr {
     {
         gr_complex *in = (gr_complex *) input_items[0];
         gr_complex *out = (gr_complex *) output_items[0];
-
-        // Do <+signal processing+>
         
         // Set output to one packet (defined with tagged stream)
 		noutput_items = ninput_items[0];

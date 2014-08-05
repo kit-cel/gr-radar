@@ -123,8 +123,6 @@ namespace gr {
 		// Publish message
 		message_port_pub(d_port_id,msg_out);
 
-        // Do <+signal processing+>
-
         // Tell runtime system how many output items we produced.
         return 0;
     }

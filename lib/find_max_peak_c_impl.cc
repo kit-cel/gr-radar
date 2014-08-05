@@ -92,8 +92,6 @@ namespace gr {
                        gr_vector_void_star &output_items)
     {
         const gr_complex *in = (const gr_complex *) input_items[0];
-
-        // Do <+signal processing+>
         
         // Find max peak detection
         d_freq.clear();

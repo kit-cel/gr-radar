@@ -34,6 +34,7 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		self.tb = None
 
 	def test_001_t (self):
+		# check doppler freq (frequency shifting)
 		# set up fg
 		test_len = 1000
 		

@@ -68,8 +68,6 @@ namespace gr {
 			  gr_vector_void_star &output_items)
     {
         gr_complex *out = (gr_complex *) output_items[0];
-
-        // Do <+signal processing+>
         
         // Set output to zero
         std::memset(out, 0, noutput_items*sizeof(gr_complex));

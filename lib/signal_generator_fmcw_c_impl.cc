@@ -80,8 +80,6 @@ namespace gr {
 			  gr_vector_void_star &output_items)
     {
         gr_complex *out = (gr_complex *) output_items[0];
-
-        // Do <+signal processing+>
         
         // Integrate phase for iq signal
         for(int i=0; i<noutput_items; i++){

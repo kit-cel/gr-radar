@@ -72,8 +72,6 @@ namespace gr {
     {
         const gr_complex *in = (const gr_complex *) input_items[0];
         gr_complex *out = (gr_complex *) output_items[0];
-
-        // Do <+signal processing+>
         
         // Get all tags, reset offset and push to output
 		get_tags_in_range(d_tags,0,nitems_read(0),nitems_read(0)+1);

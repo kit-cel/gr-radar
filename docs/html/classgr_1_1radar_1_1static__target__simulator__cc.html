@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1static__target__si
 </div><!--header-->
 <div class="contents">
 
-<p>&lt;+description of block+&gt;  
+<p>This block simulates the backscattering of a given signal on point targets. TX signal is given on the input and is tuned in the simulation on the given center frequency. Target parameters are given as f32vectors and each index refers to a target. The vectors range, velocity, rcs, and azimuth must have the same length. Velocity adds the doppler shift on the input signal and range adds a timeshift. Azimuth adds a second timeshift which refers to the distance between TX and RX antenna. All antennas are set on a straight line. The TX antenna takes place on the zero point as reference. The RX antennas are set on the straight line in a distance of position_rx to the TX antenna. The azimuth is measured from the vertical of this line. rndm_phaseshift adds on every target RX signal a random phase. self_coupling toggles the self coupling of the TX signal on the RX signal with self_coupling_db power.  
  <a href="classgr_1_1radar_1_1static__target__simulator__cc.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="static__target__simulator__cc_8h_source.html">static_target_simulator_cc.h</a>&gt;</code></p>
@@ -118,17 +118,33 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aeb483c555d0b1b55065aa861bb64c723"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#aeb483c555d0b1b55065aa861bb64c723">setup_targets</a> (std::vector&lt; float &gt; range, std::vector&lt; float &gt; velocity, std::vector&lt; float &gt; rcs, std::vector&lt; float &gt; azimuth, int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling)=0</td></tr>
-<tr class="separator:aeb483c555d0b1b55065aa861bb64c723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf281db8c56797d1f150aeae6106ac32"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#adf281db8c56797d1f150aeae6106ac32">setup_targets</a> (std::vector&lt; float &gt; range, std::vector&lt; float &gt; velocity, std::vector&lt; float &gt; rcs, std::vector&lt; float &gt; azimuth, std::vector&lt; float &gt; position_rx, int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift, bool self_coupling)=0</td></tr>
+<tr class="separator:adf281db8c56797d1f150aeae6106ac32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a09ea84fc4bd102eaa921fc11541c7984"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a09ea84fc4bd102eaa921fc11541c7984">make</a> (std::vector&lt; float &gt; range, std::vector&lt; float &gt; velocity, std::vector&lt; float &gt; rcs, std::vector&lt; float &gt; azimuth, int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift=true, bool self_coupling=true, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a09ea84fc4bd102eaa921fc11541c7984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html" title="&lt;+description of block+&gt; ">radar::static_target_simulator_cc</a>.  <a href="#a09ea84fc4bd102eaa921fc11541c7984">More...</a><br/></td></tr>
-<tr class="separator:a09ea84fc4bd102eaa921fc11541c7984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade321d995448fd9607296d7281935e15"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#ade321d995448fd9607296d7281935e15">make</a> (std::vector&lt; float &gt; range, std::vector&lt; float &gt; velocity, std::vector&lt; float &gt; rcs, std::vector&lt; float &gt; azimuth, std::vector&lt; float &gt; position_rx, int samp_rate, float center_freq, float self_coupling_db, bool rndm_phaseshift=true, bool self_coupling=true, const std::string &amp;len_key=&quot;packet_len&quot;)</td></tr>
+<tr class="memdesc:ade321d995448fd9607296d7281935e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html" title="This block simulates the backscattering of a given signal on point targets. TX signal is given on the...">radar::static_target_simulator_cc</a>.  <a href="#ade321d995448fd9607296d7281935e15">More...</a><br/></td></tr>
+<tr class="separator:ade321d995448fd9607296d7281935e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt;+description of block+&gt; </p>
+<div class="textblock"><p>This block simulates the backscattering of a given signal on point targets. TX signal is given on the input and is tuned in the simulation on the given center frequency. Target parameters are given as f32vectors and each index refers to a target. The vectors range, velocity, rcs, and azimuth must have the same length. Velocity adds the doppler shift on the input signal and range adds a timeshift. Azimuth adds a second timeshift which refers to the distance between TX and RX antenna. All antennas are set on a straight line. The TX antenna takes place on the zero point as reference. The RX antennas are set on the straight line in a distance of position_rx to the TX antenna. The azimuth is measured from the vertical of this line. rndm_phaseshift adds on every target RX signal a random phase. self_coupling toggles the self coupling of the TX signal on the RX signal with self_coupling_db power. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">range</td><td>Target ranges as vector </td></tr>
+    <tr><td class="paramname">velocity</td><td>Target velocities as vector </td></tr>
+    <tr><td class="paramname">rcs</td><td>Target RCS as vector </td></tr>
+    <tr><td class="paramname">azimuth</td><td>Target azimuth as vector </td></tr>
+    <tr><td class="paramname">position_rx</td><td>Position RX antennas </td></tr>
+    <tr><td class="paramname">samp_rate</td><td>Sample rate </td></tr>
+    <tr><td class="paramname">center_freq</td><td>Center frequency </td></tr>
+    <tr><td class="paramname">self_coupling_db</td><td>Self coupling in dB </td></tr>
+    <tr><td class="paramname">rndm_phaseshift</td><td>Toggle random phaseshift on targets </td></tr>
+    <tr><td class="paramname">self_coupling</td><td>Toggle self coupling </td></tr>
+    <tr><td class="paramname">packet_len</td><td>Packet length key for tagged stream </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a90305dccf3c7ff91d34b0ece826bb6bd"></a>
 <div class="memitem">
@@ -143,7 +159,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a09ea84fc4bd102eaa921fc11541c7984"></a>
+<a class="anchor" id="ade321d995448fd9607296d7281935e15"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -173,6 +189,12 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
           <td class="paramname"><em>azimuth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>position_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -223,12 +245,12 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html" title="&lt;+description of block+&gt; ">radar::static_target_simulator_cc</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html" title="&lt;+description of block+&gt; ">radar::static_target_simulator_cc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a09ea84fc4bd102eaa921fc11541c7984" title="Return a shared_ptr to a new instance of radar::static_target_simulator_cc. ">radar::static_target_simulator_cc::make</a> is the public interface for creating new instances. </p>
+<p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html" title="This block simulates the backscattering of a given signal on point targets. TX signal is given on the...">radar::static_target_simulator_cc</a>. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html" title="This block simulates the backscattering of a given signal on point targets. TX signal is given on the...">radar::static_target_simulator_cc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html#ade321d995448fd9607296d7281935e15" title="Return a shared_ptr to a new instance of radar::static_target_simulator_cc. ">radar::static_target_simulator_cc::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
-<a class="anchor" id="aeb483c555d0b1b55065aa861bb64c723"></a>
+<a class="anchor" id="adf281db8c56797d1f150aeae6106ac32"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -258,6 +280,12 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
           <td class="paramname"><em>azimuth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>position_rx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -302,7 +330,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a1cb774466305b118dd5380b0a7269e20">gr::radar::static_target_simulator_cc_impl</a>.</p>
+<p>Implemented in <a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a0ca3096458f3a8acdfc6370c3c64f535">gr::radar::static_target_simulator_cc_impl</a>.</p>
 
 </div>
 </div>
@@ -315,7 +343,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1static__target__simulator__cc.html">static_target_simulator_cc</a></li>
-    <li class="footer">Generated on Mon Jul 28 2014 18:17:09 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Tue Aug 5 2014 16:38:31 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
