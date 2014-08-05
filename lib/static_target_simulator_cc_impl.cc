@@ -86,15 +86,23 @@ namespace gr {
 		
 		// Get timeshifts
 		d_timeshift.resize(d_num_targets);
-		d_filt_time.resize(d_position_rx.size());
-		for(int k=0; k<d_position_rx.size(); k++) d_filt_time[k].resize(d_num_targets);
-		for(int k=0; k<d_num_targets; k++) d_timeshift[k] = 2*d_range[k]/c_light;
+		d_timeshift_azimuth.resize(d_position_rx.size());
+		d_filt_time.resize(d_num_targets);
+		d_filt_time_azimuth.resize(d_position_rx.size());
+		for(int l=0; l<d_position_rx.size(); l++){
+			d_filt_time_azimuth[l].resize(d_num_targets);
+			d_timeshift_azimuth[l].resize(d_num_targets);
+			for(int k=0; k<d_num_targets; k++){
+				d_timeshift_azimuth[l][k] = d_position_rx[l]/c_light;
+			}
+		}
+		for(int k=0; k<d_num_targets; k++) d_timeshift[k] = 2.0*d_range[k]/c_light;
 		
 		// Get signal amplitude of reflection with free space path loss and rcs (radar equation)
 		d_scale_ampl.resize(d_num_targets);
 		for(int k=0; k<d_num_targets; k++){
 			d_scale_ampl[k] = c_light/d_center_freq*std::sqrt(d_rcs[k])/std::pow(d_range[k],2)/std::pow(4*M_PI,3.0/2.0); // sqrt of radar equation as amplitude estimation
-		} // FIXME: is this correct? remove amplitude (look at implementation in work)
+		}
 		
 		if(d_rndm_phaseshift){
 			// Resize phase shift filter
@@ -135,26 +143,43 @@ namespace gr {
 				reinterpret_cast<fftwf_complex *>(&d_in_fft[0]), FFTW_FORWARD, FFTW_ESTIMATE);
 			d_ifft_plan = fftwf_plan_dft_1d(noutput_items, reinterpret_cast<fftwf_complex *>(&d_in_fft[0]),
 				reinterpret_cast<fftwf_complex *>(&d_hold_in[0]), FFTW_BACKWARD, FFTW_ESTIMATE);
+				
+			// Setup frequency vector for shift in frequency domain
+			d_freq.resize(noutput_items);
+			for(int i=0; i<noutput_items; i++){
+				if(i<noutput_items/2) d_freq[i] = i*(float)d_samp_rate/(float)noutput_items; // zero to samp_rate/2
+				else d_freq[i] = i*(float)d_samp_rate/(float)noutput_items - (float)d_samp_rate; // -samp_rate/2 to zero
+			}
 			
 			// Setup freq and time shift filter, resize phase shift filter
 			for(int k=0; k<d_num_targets; k++){
 				d_filt_doppler[k].resize(noutput_items);
 				if(d_rndm_phaseshift) d_filt_phase[k].resize(noutput_items);
+				
 				d_phase_doppler = 0;
 				for(int i=0; i<noutput_items; i++){
 					// Doppler shift filter and rescaling amplitude with rcs
 					d_filt_doppler[k][i] = std::exp(d_phase_doppler)*d_scale_ampl[k];
 					d_phase_doppler = 1j*std::fmod(std::imag(d_phase_doppler)+2*M_PI*d_doppler[k]/(float)d_samp_rate,2*M_PI); // integrate phase (with plus!)
 				}
-				for(int l=0; l<d_position_rx.size(); l++){ // Do time shift filter with azimuth and position
-					d_filt_time[l][k].resize(noutput_items);
+				
+				d_filt_time[k].resize(noutput_items);
+				d_phase_time = 0;
+				for(int i=0; i<noutput_items; i++){
+					// Time shift filter, uses target range
+					d_phase_time = 1j*std::fmod(2*M_PI*(d_timeshift[k]) // range time shift
+						*d_freq[i],2*M_PI); // integrate phase (with minus!)
+					d_filt_time[k][i] = std::exp(-d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
+				}
+				
+				for(int l=0; l<d_position_rx.size(); l++){ // Do time shift filter with azimuth and position, there are two time shift filters to avoid problems with significant digits of float
+					d_filt_time_azimuth[l][k].resize(noutput_items);
 					d_phase_time = 0;
 					for(int i=0; i<noutput_items; i++){
-						// Time shift filter, uses target range, azimuth and RX position
-						d_filt_time[l][k][i] = std::exp(-d_phase_time)/(float)noutput_items; // div with noutput_item to correct amplitude after fft->ifft
-						d_phase_time = 1j*std::fmod(std::imag(d_phase_time)+2*M_PI*(d_timeshift[k] // range time shift
-							+(std::sqrt(d_range[k]*d_range[k]+d_position_rx[l]*d_position_rx[l]-2*d_range[k]*d_position_rx[l]*std::cos(d_azimuth[k]/360.0*2.0*M_PI))-d_range[k])/c_light) // azimuth time shift // FIXME: no effect on testcase, wrong implementation?
-							*(float)d_samp_rate/(float)noutput_items,2*M_PI); // integrate phase (with minus!)
+						// Time shift filter, uses azimuth and RX position
+						d_phase_time = 1j*std::fmod(2*M_PI*(d_timeshift_azimuth[l][k]) // azimuth time shift
+							*d_freq[i],2*M_PI); // integrate phase (with minus!)
+						d_filt_time_azimuth[l][k][i] = std::exp(-d_phase_time); // do not div with noutput_items, is done with range timeshift filter
 					}
 				}
 			}
@@ -197,7 +222,8 @@ namespace gr {
 				
 				// Add time shift
 				fftwf_execute(d_fft_plan); // go to freq domain
-				volk_32fc_x2_multiply_32fc(&d_in_fft[0], &d_in_fft[0], &d_filt_time[l][k][0], noutput_items); // add timeshift with multiply exp-func in freq domain
+				volk_32fc_x2_multiply_32fc(&d_in_fft[0], &d_in_fft[0], &d_filt_time[k][0], noutput_items); // add timeshift with multiply exp-func in freq domain (range)
+				volk_32fc_x2_multiply_32fc(&d_in_fft[0], &d_in_fft[0], &d_filt_time_azimuth[l][k][0], noutput_items); // add timeshift with multiply exp-func in freq domain (rx position with azimuth and range)
 				fftwf_execute(d_ifft_plan); // back in time domain
 				
 				if(d_rndm_phaseshift){

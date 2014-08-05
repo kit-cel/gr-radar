@@ -52,14 +52,17 @@ namespace gr {
       float d_self_coupling_db;
       
       int d_num_targets;
+      std::vector<float> d_freq;
       std::vector<float> d_doppler, d_scale_ampl, d_timeshift;
+      std::vector<std::vector<float> > d_timeshift_azimuth;
       gr_complex d_phase_doppler, d_phase_time, d_phase_random;
       std::vector<gr_complex> d_hold_in;
       
       fftwf_plan d_fft_plan, d_ifft_plan;
       std::vector<gr_complex> d_in_fft;
       std::vector<std::vector<gr_complex> > d_filt_doppler, d_filt_phase, d_filt_self_coupling;
-      std::vector<std::vector<std::vector<gr_complex> > > d_filt_time;
+      std::vector<std::vector<gr_complex> > d_filt_time;
+      std::vector<std::vector<std::vector<gr_complex> > > d_filt_time_azimuth;
       
       pmt::pmt_t d_key, d_val, d_srcid;
       uint64_t d_time_sec;
