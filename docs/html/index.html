@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="install"></a>
 Install guide</h1>
-<p>For the actual install guide read the <code>README</code> at the main folder. Please take care of the dependencies. In particular there can be some issues if Qwt is below version 6. Furthermore python-matplotlib is used in some testcases.</p>
+<p>For the actual install guide read the <code>README</code> at the main folder. Please take care of the dependencies. In particular there can be some issues if Qwt is below version 6. Furthermore python-matplotlib is used in some testcases. UHD must be installed because of the USRP interface. This should be done with the GNU Radio installation.</p>
 <h2><a class="anchor" id="buffer"></a>
 Buffer size issues</h2>
 <p>Radar applications often need huge buffer sizes. Therefore you have to do two things to push the maximum buffer size to the maximum. First you have to set the maximum output buffer of all blocks in the flowgraph on two times of the value that you need. With this you can use buffer of about 2^17 float complex items. This number depends on your system. In GNU Radio Companion you can set this value in the properties of the blocks or you use the call <code>&lt;+block+&gt;.set_min_output_buffer(&lt;+value+&gt;)</code> in a python flowgraph.</p>
@@ -140,7 +140,7 @@ USRP Echotimer</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 5 2014 16:38:31 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Tue Aug 5 2014 16:48:39 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

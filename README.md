@@ -28,6 +28,7 @@ For full documentation open `docs/html/index.html` in any web browser.
 
 **Development platform**  
 GNU Radio 3.7.4  
+UHD 3.7.2  
 Ubuntu 14.04
 
 **Dependencies**  
