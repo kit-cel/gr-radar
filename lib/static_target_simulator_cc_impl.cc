@@ -93,7 +93,7 @@ namespace gr {
 			d_filt_time_azimuth[l].resize(d_num_targets);
 			d_timeshift_azimuth[l].resize(d_num_targets);
 			for(int k=0; k<d_num_targets; k++){
-				d_timeshift_azimuth[l][k] = d_position_rx[l]/c_light;
+				d_timeshift_azimuth[l][k] = d_position_rx[l]*std::sin(d_azimuth[k]*M_PI/180.0);
 			}
 		}
 		for(int k=0; k<d_num_targets; k++) d_timeshift[k] = 2.0*d_range[k]/c_light;
@@ -218,7 +218,6 @@ namespace gr {
 			for(int k=0; k<d_num_targets; k++){
 				// Add doppler shift
 				volk_32fc_x2_multiply_32fc(&d_hold_in[0], in, &d_filt_doppler[k][0], noutput_items); // add doppler shift with rescaled amplitude
-				// FIXME: used volk correctly?
 				
 				// Add time shift
 				fftwf_execute(d_fft_plan); // go to freq domain
