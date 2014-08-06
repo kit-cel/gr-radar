@@ -23,8 +23,9 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include <numeric>
+#include <boost/circular_buffer.hpp>
 #include "estimator_rcs_impl.h"
+#include <numeric>
 
 namespace gr {
   namespace radar {
@@ -52,6 +53,8 @@ namespace gr {
         d_usrp_gain_rx = usrp_gain_rx;
         d_amplitude = amplitude;
 
+        d_rcs_vals.resize(d_num_mean);
+
         // Register input message port
         d_port_id_in = pmt::mp("Msg in");
         message_port_register_in(d_port_id_in);
@@ -72,24 +75,32 @@ namespace gr {
     }
 
     float
-    estimator_rcs_impl::calculate_vector_mean(std::vector<float>* rcs_vals) {
-      int sum_of_elems = std::accumulate((*rcs_vals).begin(),(*rcs_vals).end(),0);      
-      return sum_of_elems/(*rcs_vals).size();
+    estimator_rcs_impl::calculate_vector_mean(boost::circular_buffer<float>* rcs_vals) {
+      float sum_of_elems = 0;
+      for(int k=0; k<rcs_vals->size(); k++){
+        sum_of_elems += (*rcs_vals)[k];
+      }
+      return sum_of_elems/rcs_vals->size();
     }
 
     float
     estimator_rcs_impl::calculate_rcs() {
-        float power_tx = 100E-3 + pow(10, d_usrp_gain_tx/10);
-        float power_rx = d_power.at(0)/100000 - pow(10, d_usrp_gain_rx/10);
-        float lambda = 3E+8/d_center_freq;
+        float power_tx = pow(d_amplitude, 2.0); // 100E-3 * pow(10, d_usrp_gain_tx/10);
+        //std::cout << "PowerTx: " << power_tx << std::endl;
+        float power_rx = std::sqrt(d_power[0]); // / pow(10, d_usrp_gain_rx/10);
+        //std::cout << "PowerRx: " << power_rx << std::endl;
+        float lambda = c_light/d_center_freq;
+        //std::cout << "Lambda: " << lambda << std::endl;
 
         // convert db to power
         float antenna_gain_rx = pow(10, d_antenna_gain_rx/10);
+        //std::cout << "GainRx: " << antenna_gain_rx << std::endl;
         float antenna_gain_tx = pow(10, d_antenna_gain_tx/10);
+        //std::cout << "GainTx: " << antenna_gain_tx << std::endl;
 
-        float fak = pow(4*M_PI, 3);
-        fak = fak * pow(d_range.at(0), 4);
+        float fak = pow(4.0*M_PI, 3)*pow(d_range[0], 4);
         fak = fak / (antenna_gain_rx * antenna_gain_tx * pow(lambda, 2));
+        //std::cout << "fak: " << fak << std::endl;
 
         return power_rx/power_tx * fak;
     }
@@ -127,15 +138,16 @@ namespace gr {
         if(d_range.size()!=d_power.size()) throw std::runtime_error("range and power vectors do not have same size");
 
         // Calculate RCS
-        std::vector<float> rcs_vals;
-        float rcs_mean = 0;
-        rcs_vals.push_back(estimator_rcs_impl::calculate_rcs());
+        float rcs_mean = 0.0;
+        d_rcs_vals.push_back(calculate_rcs());
+        std::cout << "RCS_TEMP: " << calculate_rcs() << std::endl;
 
-        if(d_loop_counter > d_num_mean) {
-          rcs_vals.erase(rcs_vals.begin());
-          //rcs_mean = estimator_rcs_impl::calculate_vector_mean(&rcs_vals);
+        if(d_loop_counter+1 >= d_num_mean) {
+            rcs_mean = calculate_vector_mean(&d_rcs_vals);
         }
-        d_loop_counter++;
+        else {
+            d_loop_counter++;
+        }
 
         for(int k=0; k<d_range.size(); k++){
             d_rcs.push_back(rcs_mean);

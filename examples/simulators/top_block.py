@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Jul 31 17:30:19 2014
+# Generated: Wed Aug  6 14:06:00 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -59,10 +59,11 @@ class top_block(gr.top_block, Qt.QWidget):
         self.vel = vel = 50
         self.v_res = v_res = freq_res*3e8/2/center_freq
         self.time_res = time_res = packet_len/float(samp_rate)
+        self.rcs = rcs = 5
         self.range_res = range_res = 3e8/2/float((freq[1]-freq[0]))
         self.min_output_buffer = min_output_buffer = int(packet_len*2)
         self.max_output_buffer = max_output_buffer = 0
-        self.decim_fac = decim_fac = 2**10
+        self.decim_fac = decim_fac = 2**7
         self.Range = Range = 30
 
         ##################################################
@@ -91,6 +92,29 @@ class top_block(gr.top_block, Qt.QWidget):
         self._vel_slider.valueChanged.connect(self.set_vel)
         self._vel_layout.addWidget(self._vel_slider)
         self.top_layout.addLayout(self._vel_layout)
+        self._rcs_layout = Qt.QVBoxLayout()
+        self._rcs_tool_bar = Qt.QToolBar(self)
+        self._rcs_layout.addWidget(self._rcs_tool_bar)
+        self._rcs_tool_bar.addWidget(Qt.QLabel("rcs"+": "))
+        class qwt_counter_pyslot(Qwt.QwtCounter):
+            def __init__(self, parent=None):
+                Qwt.QwtCounter.__init__(self, parent)
+            @pyqtSlot('double')
+            def setValue(self, value):
+                super(Qwt.QwtCounter, self).setValue(value)
+        self._rcs_counter = qwt_counter_pyslot()
+        self._rcs_counter.setRange(0, 100, 1)
+        self._rcs_counter.setNumButtons(2)
+        self._rcs_counter.setValue(self.rcs)
+        self._rcs_tool_bar.addWidget(self._rcs_counter)
+        self._rcs_counter.valueChanged.connect(self.set_rcs)
+        self._rcs_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
+        self._rcs_slider.setRange(0, 100, 1)
+        self._rcs_slider.setValue(self.rcs)
+        self._rcs_slider.setMinimumWidth(200)
+        self._rcs_slider.valueChanged.connect(self.set_rcs)
+        self._rcs_layout.addWidget(self._rcs_slider)
+        self.top_layout.addLayout(self._rcs_layout)
         self._Range_layout = Qt.QVBoxLayout()
         self._Range_tool_bar = Qt.QToolBar(self)
         self._Range_layout.addWidget(self._Range_tool_bar)
@@ -130,15 +154,15 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_ts_fft_cc_0_0).set_min_output_buffer(1048576)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(packet_len/decim_fac,  "packet_len")
         (self.radar_ts_fft_cc_0).set_min_output_buffer(1048576)
-        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (vel, ), (1e14, ), (0,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
+        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (vel, ), (rcs, ), (0,), (0,), samp_rate, center_freq, -10, True, False, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(1048576)
-        self.radar_signal_generator_cw_c_0_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[1], ), 1, "packet_len")
+        self.radar_signal_generator_cw_c_0_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[1], ), .5, "packet_len")
         (self.radar_signal_generator_cw_c_0_0).set_min_output_buffer(1048576)
-        self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[0], ), 1, "packet_len")
+        self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[0], ), .5, "packet_len")
         (self.radar_signal_generator_cw_c_0).set_min_output_buffer(1048576)
         self.radar_print_results_0 = radar.print_results(False, "")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decim_fac, -200, 0, (-1000,1000), True, "packet_len")
-        self.radar_estimator_rcs_0 = radar.estimator_rcs(1, 1, 1, 1, 1, 1, 1)
+        self.radar_estimator_rcs_0 = radar.estimator_rcs(1, center_freq, 0, 0, 0, 0, 1)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, (freq[1]-freq[0])*3/2, True)
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
         	packet_len/decim_fac, #size
@@ -191,7 +215,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.blocks_add_xx_1).set_min_output_buffer(1048576)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
         (self.blocks_add_xx_0).set_min_output_buffer(1048576)
-        self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 0.5, 0)
+        self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 1e-6, 0)
         (self.analog_noise_source_x_0).set_min_output_buffer(1048576)
 
         ##################################################
@@ -242,7 +266,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (1e14, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (self.rcs, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, False)
 
     def get_packet_len(self):
         return self.packet_len
@@ -273,7 +297,7 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
         self.set_v_res(self.freq_res*3e8/2/self.center_freq)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (1e14, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (self.rcs, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, False)
 
     def get_vel(self):
         return self.vel
@@ -282,7 +306,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.vel = vel
         Qt.QMetaObject.invokeMethod(self._vel_counter, "setValue", Qt.Q_ARG("double", self.vel))
         Qt.QMetaObject.invokeMethod(self._vel_slider, "setValue", Qt.Q_ARG("double", self.vel))
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (1e14, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (self.rcs, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, False)
 
     def get_v_res(self):
         return self.v_res
@@ -295,6 +319,15 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_time_res(self, time_res):
         self.time_res = time_res
+
+    def get_rcs(self):
+        return self.rcs
+
+    def set_rcs(self, rcs):
+        self.rcs = rcs
+        Qt.QMetaObject.invokeMethod(self._rcs_counter, "setValue", Qt.Q_ARG("double", self.rcs))
+        Qt.QMetaObject.invokeMethod(self._rcs_slider, "setValue", Qt.Q_ARG("double", self.rcs))
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (self.rcs, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, False)
 
     def get_range_res(self):
         return self.range_res
@@ -330,7 +363,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.Range = Range
         Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
         Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (1e14, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (self.rcs, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, False)
 
 if __name__ == '__main__':
     import ctypes

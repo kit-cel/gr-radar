@@ -36,8 +36,8 @@ namespace gr {
       ~estimator_rcs_impl();
       void handle_msg(pmt::pmt_t msg);
       float calculate_rcs();
-      float calculate_vector_mean(std::vector<float>*);
-
+      float calculate_vector_mean(boost::circular_buffer<float>*);
+      boost::circular_buffer<float> d_rcs_vals;
       int d_num_mean, d_loop_counter;
 
       float d_center_freq, d_antenna_gain_tx, d_antenna_gain_rx, d_usrp_gain_tx, d_usrp_gain_rx, d_amplitude;
@@ -47,6 +47,8 @@ namespace gr {
       pmt::pmt_t d_rcs_value, d_rcs_key, d_rcs_pack;
       std::vector<float> d_range, d_power, d_rcs;
       std::vector<pmt::pmt_t> d_msg_hold;
+
+      const static float c_light = 3e8;
 
     };
 
