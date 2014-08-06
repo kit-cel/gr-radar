@@ -112,8 +112,8 @@ target_link_libraries(
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
   ${FFTW3F_LIBRARY_DIRS}
-  ${QWT_LIBRARIES} # FIXME: correct dirs for qwt?
-  ${QT_LIBRARIES} # FIXME: correct dirs for qt?
+  ${QWT_LIBRARIES}
+  ${QT_LIBRARIES}
   ${UHD_LIBRARY_DIRS}
   gnuradio-radar
 )

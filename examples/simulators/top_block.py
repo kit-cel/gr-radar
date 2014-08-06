@@ -2,23 +2,25 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Aug  5 16:04:32 2014
+# Generated: Tue Aug  5 17:55:39 2014
 ##################################################
 
 from PyQt4 import Qt
 from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import analog
 from gnuradio import blocks
+from gnuradio import digital
 from gnuradio import eng_notation
-from gnuradio import filter
+from gnuradio import fft
 from gnuradio import gr
-from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
+from gnuradio.fft import window
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import PyQt4.Qwt5 as Qwt
+import numpy
+import numpy as np
 import radar
-import sip
 import sys
 
 from distutils.version import StrictVersion
@@ -52,18 +54,24 @@ class top_block(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 5000000
-        self.blocks_per_tag = blocks_per_tag = 2**17
-        self.samp_per_freq = samp_per_freq = 1
-        self.freq_res = freq_res = samp_rate/2/blocks_per_tag
-        self.delta_freq = delta_freq = samp_rate/4
-        self.center_freq = center_freq = 2.4e9
-        self.velocity = velocity = 20
-        self.v_res = v_res = freq_res*3e8/2/center_freq
-        self.samp_discard = samp_discard = 0
-        self.min_output_buffer = min_output_buffer = 2*(blocks_per_tag*samp_per_freq*2)
-        self.decimator_fac = decimator_fac = 2**7
-        self.Range = Range = 10
-        self.R_max = R_max = 3e8/2/delta_freq
+        self.packet_len = packet_len = 2**9
+        self.occupied_carriers_all = occupied_carriers_all = (range(-26,27),)
+        self.fft_len = fft_len = 2**6
+        self.zeropadding_fac = zeropadding_fac = 2
+        self.velocity = velocity = 500
+        self.v_max = v_max = 2000
+        self.transpose_len = transpose_len = int(np.ceil(packet_len*4.0/len(occupied_carriers_all[0])))
+        self.sync_word2 = sync_word2 = [0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, -1, -1, 0, 0, 0, 0, 0] 
+        self.sync_word1 = sync_word1 = [0., 0., 0., 0., 0., 0., 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., -1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., -1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 1.41421356, 0., 0., 0., 0., 0., 0.]
+        self.pilot_symbols = pilot_symbols = ((1, 1, 1, -1,),)
+        self.pilot_carriers = pilot_carriers = ((-21, -7, 7, 21,),)
+        self.payload_mod = payload_mod = digital.constellation_qpsk()
+        self.occupied_carriers = occupied_carriers = (range(-26, -21) + range(-20, -7) + range(-6, 0) + range(1, 7) + range(8, 21) + range(22, 27),)
+        self.length_tag_key = length_tag_key = "packet_len"
+        self.discarded_carriers = discarded_carriers = []
+        self.center_freq = center_freq = 2.45e9
+        self.Range = Range = 100
+        self.R_max = R_max = 3e8/2/samp_rate*fft_len
 
         ##################################################
         # Blocks
@@ -71,7 +79,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._velocity_layout = Qt.QVBoxLayout()
         self._velocity_tool_bar = Qt.QToolBar(self)
         self._velocity_layout.addWidget(self._velocity_tool_bar)
-        self._velocity_tool_bar.addWidget(Qt.QLabel("velocity"+": "))
+        self._velocity_tool_bar.addWidget(Qt.QLabel("Velocity"+": "))
         class qwt_counter_pyslot(Qwt.QwtCounter):
             def __init__(self, parent=None):
                 Qwt.QwtCounter.__init__(self, parent)
@@ -79,18 +87,18 @@ class top_block(gr.top_block, Qt.QWidget):
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
         self._velocity_counter = qwt_counter_pyslot()
-        self._velocity_counter.setRange(-30, 30, 1)
+        self._velocity_counter.setRange(-v_max, v_max, 1)
         self._velocity_counter.setNumButtons(2)
         self._velocity_counter.setValue(self.velocity)
         self._velocity_tool_bar.addWidget(self._velocity_counter)
         self._velocity_counter.valueChanged.connect(self.set_velocity)
         self._velocity_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._velocity_slider.setRange(-30, 30, 1)
+        self._velocity_slider.setRange(-v_max, v_max, 1)
         self._velocity_slider.setValue(self.velocity)
         self._velocity_slider.setMinimumWidth(200)
         self._velocity_slider.valueChanged.connect(self.set_velocity)
         self._velocity_layout.addWidget(self._velocity_slider)
-        self.top_layout.addLayout(self._velocity_layout)
+        self.top_grid_layout.addLayout(self._velocity_layout, 0,1)
         self._Range_layout = Qt.QVBoxLayout()
         self._Range_tool_bar = Qt.QToolBar(self)
         self._Range_layout.addWidget(self._Range_tool_bar)
@@ -102,102 +110,85 @@ class top_block(gr.top_block, Qt.QWidget):
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
         self._Range_counter = qwt_counter_pyslot()
-        self._Range_counter.setRange(0, R_max+R_max/2, 1)
+        self._Range_counter.setRange(0.1, R_max, 1)
         self._Range_counter.setNumButtons(2)
         self._Range_counter.setValue(self.Range)
         self._Range_tool_bar.addWidget(self._Range_counter)
         self._Range_counter.valueChanged.connect(self.set_Range)
         self._Range_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._Range_slider.setRange(0, R_max+R_max/2, 1)
+        self._Range_slider.setRange(0.1, R_max, 1)
         self._Range_slider.setValue(self.Range)
         self._Range_slider.setMinimumWidth(200)
         self._Range_slider.valueChanged.connect(self.set_Range)
         self._Range_layout.addWidget(self._Range_slider)
-        self.top_layout.addLayout(self._Range_layout)
-        self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
-                interpolation=1,
-                decimation=decimator_fac,
-                taps=None,
-                fractional_bw=None,
-        )
-        self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
-                interpolation=1,
-                decimation=decimator_fac,
-                taps=None,
-                fractional_bw=None,
-        )
-        self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
-        self.radar_ts_fft_cc_0 = radar.ts_fft_cc(blocks_per_tag/decimator_fac,  "packet_len")
-        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (velocity,), (1e16,), (0,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
-        (self.radar_static_target_simulator_cc_0).set_min_output_buffer(524288)
-        self.radar_split_fsk_cc_0 = radar.split_fsk_cc(samp_per_freq, samp_discard, "packet_len")
-        (self.radar_split_fsk_cc_0).set_min_output_buffer(524288)
-        self.radar_signal_generator_fsk_c_0 = radar.signal_generator_fsk_c(samp_rate, samp_per_freq, blocks_per_tag, -delta_freq/2, delta_freq/2, 1, "packet_len")
-        (self.radar_signal_generator_fsk_c_0).set_min_output_buffer(524288)
-        self.radar_print_results_0 = radar.print_results(False, "test.txt")
-        self.radar_os_cfar_c_0 = radar.os_cfar_c(samp_rate/2/decimator_fac, 15, 0, 0.78, 30, True, "packet_len")
-        (self.radar_os_cfar_c_0).set_min_output_buffer(524288)
-        self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, delta_freq, False)
-        self.qtgui_sink_x_0 = qtgui.sink_c(
-        	blocks_per_tag/decimator_fac, #fftsize
-        	firdes.WIN_BLACKMAN_hARRIS, #wintype
-        	0, #fc
-        	samp_rate/decimator_fac/2, #bw
-        	"QT GUI Plot", #name
-        	True, #plotfreq
-        	True, #plotwaterfall
-        	True, #plottime
-        	True, #plotconst
-        )
-        self.qtgui_sink_x_0.set_update_time(1.0/10)
-        self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_sink_x_0_win)
-        
-        self.qtgui_sink_x_0.enable_rf_freq(False)
-        
-        
-          
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        (self.blocks_throttle_0).set_min_output_buffer(524288)
-        self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/decimator_fac)
-        (self.blocks_tagged_stream_multiply_length_0_0).set_min_output_buffer(524288)
-        self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/decimator_fac)
-        (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(524288)
-        self.blocks_multiply_conjugate_cc_1 = blocks.multiply_conjugate_cc(1)
-        (self.blocks_multiply_conjugate_cc_1).set_min_output_buffer(524288)
-        self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(1)
-        (self.blocks_multiply_conjugate_cc_0).set_min_output_buffer(524288)
+        self.top_grid_layout.addLayout(self._Range_layout, 0,0)
+        self.radar_transpose_matrix_vcvc_0_0 = radar.transpose_matrix_vcvc(transpose_len, (fft_len-len(discarded_carriers))*zeropadding_fac, "packet_len")
+        (self.radar_transpose_matrix_vcvc_0_0).set_min_output_buffer(78)
+        self.radar_transpose_matrix_vcvc_0 = radar.transpose_matrix_vcvc((fft_len-len(discarded_carriers))*zeropadding_fac, transpose_len, "packet_len")
+        (self.radar_transpose_matrix_vcvc_0).set_min_output_buffer(256)
+        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range, ), (velocity, ), (1e25, ), (0, ), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
+        (self.radar_static_target_simulator_cc_0).set_min_output_buffer(6240)
+        self.radar_qtgui_spectrogram_plot_0 = radar.qtgui_spectrogram_plot((fft_len-len(discarded_carriers))*zeropadding_fac, 500, 'Range', 'Velocity', 'OFDM Radar', (0,R_max), (0,v_max), (-15,-12), True, "packet_len")
+        self.radar_print_results_0 = radar.print_results(False, "")
+        self.radar_os_cfar_2d_vc_0 = radar.os_cfar_2d_vc((fft_len-len(discarded_carriers))*zeropadding_fac, (10,10), (0,0), 0.78, 30, "packet_len")
+        self.radar_ofdm_divide_vcvc_0 = radar.ofdm_divide_vcvc(fft_len, (fft_len-len(discarded_carriers))*zeropadding_fac, (discarded_carriers), "packet_len")
+        (self.radar_ofdm_divide_vcvc_0).set_min_output_buffer(78)
+        self.radar_ofdm_cyclic_prefix_remover_cvc_0 = radar.ofdm_cyclic_prefix_remover_cvc(fft_len, fft_len/4, "packet_len")
+        (self.radar_ofdm_cyclic_prefix_remover_cvc_0).set_min_output_buffer(78)
+        self.radar_estimator_ofdm_0 = radar.estimator_ofdm('range', fft_len*zeropadding_fac, (0,R_max), 'velocity', transpose_len, (0,v_max,-v_max,0), True)
+        self.fft_vxx_0_1_0 = fft.fft_vcc(transpose_len, False, (window.blackmanharris(transpose_len)), False, 1)
+        self.fft_vxx_0_1 = fft.fft_vcc((fft_len-len(discarded_carriers))*zeropadding_fac, True, (window.blackmanharris(fft_len*zeropadding_fac)), False, 1)
+        self.fft_vxx_0_0 = fft.fft_vcc(fft_len, True, (()), True, 1)
+        (self.fft_vxx_0_0).set_min_output_buffer(78)
+        self.fft_vxx_0 = fft.fft_vcc(fft_len, False, (()), True, 1)
+        self.digital_ofdm_cyclic_prefixer_0 = digital.ofdm_cyclic_prefixer(fft_len, fft_len+fft_len/4, 0, length_tag_key)
+        (self.digital_ofdm_cyclic_prefixer_0).set_min_output_buffer(6240)
+        self.digital_ofdm_carrier_allocator_cvc_0 = digital.ofdm_carrier_allocator_cvc(fft_len, occupied_carriers_all, ((),), ((),), (), length_tag_key)
+        (self.digital_ofdm_carrier_allocator_cvc_0).set_min_output_buffer(78)
+        self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc((payload_mod.points()), 1)
+        (self.digital_chunks_to_symbols_xx_0_0).set_min_output_buffer(4096)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, packet_len, length_tag_key)
+        self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, payload_mod.bits_per_symbol(), length_tag_key, False)
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_float*(fft_len-len(discarded_carriers))*zeropadding_fac)
+        self.blocks_nlog10_ff_0 = blocks.nlog10_ff(1, (fft_len-len(discarded_carriers))*zeropadding_fac, 0)
+        self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared((fft_len-len(discarded_carriers))*zeropadding_fac)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
-        (self.blocks_add_xx_0).set_min_output_buffer(524288)
-        self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 0.5, 0)
-        (self.analog_noise_source_x_0).set_min_output_buffer(524288)
+        self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0, 255, 1000)), True)
+        self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 0.1, 0)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.radar_static_target_simulator_cc_0, 0))
+        self.connect((self.digital_ofdm_cyclic_prefixer_0, 0), (self.radar_static_target_simulator_cc_0, 0))
+        self.connect((self.digital_chunks_to_symbols_xx_0_0, 0), (self.digital_ofdm_carrier_allocator_cvc_0, 0))
+        self.connect((self.radar_ofdm_cyclic_prefix_remover_cvc_0, 0), (self.fft_vxx_0_0, 0))
+        self.connect((self.fft_vxx_0_1, 0), (self.radar_transpose_matrix_vcvc_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0, 0), (self.fft_vxx_0_1_0, 0))
+        self.connect((self.fft_vxx_0_1_0, 0), (self.radar_transpose_matrix_vcvc_0_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0, 0), (self.digital_chunks_to_symbols_xx_0_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0, 0))
+        self.connect((self.analog_random_source_x_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
+        self.connect((self.fft_vxx_0, 0), (self.digital_ofdm_cyclic_prefixer_0, 0))
+        self.connect((self.blocks_add_xx_0, 0), (self.radar_ofdm_cyclic_prefix_remover_cvc_0, 0))
         self.connect((self.radar_static_target_simulator_cc_0, 0), (self.blocks_add_xx_0, 1))
-        self.connect((self.radar_signal_generator_fsk_c_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_multiply_conjugate_cc_0, 0), (self.radar_os_cfar_c_0, 0))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
-        self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0, 0))
-        self.connect((self.radar_split_fsk_cc_0, 1), (self.rational_resampler_xxx_0_0, 0))
-        self.connect((self.radar_split_fsk_cc_0, 0), (self.rational_resampler_xxx_0, 0))
-        self.connect((self.blocks_multiply_conjugate_cc_1, 0), (self.radar_split_fsk_cc_0, 0))
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.qtgui_sink_x_0, 0))
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.radar_ts_fft_cc_0, 0))
-        self.connect((self.blocks_tagged_stream_multiply_length_0_0, 0), (self.radar_ts_fft_cc_0_0, 0))
-        self.connect((self.radar_ts_fft_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
-        self.connect((self.radar_ts_fft_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
-        self.connect((self.blocks_throttle_0, 0), (self.blocks_multiply_conjugate_cc_1, 1))
-        self.connect((self.blocks_add_xx_0, 0), (self.blocks_multiply_conjugate_cc_1, 0))
+        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))
+        self.connect((self.blocks_complex_to_mag_squared_0, 0), (self.blocks_nlog10_ff_0, 0))
+        self.connect((self.blocks_nlog10_ff_0, 0), (self.radar_qtgui_spectrogram_plot_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.blocks_complex_to_mag_squared_0, 0))
+        self.connect((self.digital_ofdm_carrier_allocator_cvc_0, 0), (self.fft_vxx_0, 0))
+        self.connect((self.radar_ofdm_divide_vcvc_0, 0), (self.fft_vxx_0_1, 0))
+        self.connect((self.fft_vxx_0_0, 0), (self.radar_ofdm_divide_vcvc_0, 1))
+        self.connect((self.digital_ofdm_carrier_allocator_cvc_0, 0), (self.radar_ofdm_divide_vcvc_0, 0))
+        self.connect((self.radar_transpose_matrix_vcvc_0_0, 0), (self.radar_os_cfar_2d_vc_0, 0))
+        self.connect((self.blocks_nlog10_ff_0, 0), (self.blocks_null_sink_0, 0))
 
         ##################################################
         # Asynch Message Connections
         ##################################################
-        self.msg_connect(self.radar_os_cfar_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_ofdm_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_os_cfar_2d_vc_0, "Msg out", self.radar_estimator_ofdm_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -209,48 +200,36 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
-        self.set_delta_freq(self.samp_rate/4)
+        self.set_R_max(3e8/2/self.samp_rate*self.fft_len)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac/2)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
-    def get_blocks_per_tag(self):
-        return self.blocks_per_tag
+    def get_packet_len(self):
+        return self.packet_len
 
-    def set_blocks_per_tag(self, blocks_per_tag):
-        self.blocks_per_tag = blocks_per_tag
-        self.set_freq_res(self.samp_rate/2/self.blocks_per_tag)
-        self.set_min_output_buffer(2*(self.blocks_per_tag*self.samp_per_freq*2))
+    def set_packet_len(self, packet_len):
+        self.packet_len = packet_len
+        self.set_transpose_len(int(np.ceil(self.packet_len*4.0/len(self.occupied_carriers_all[0]))))
 
-    def get_samp_per_freq(self):
-        return self.samp_per_freq
+    def get_occupied_carriers_all(self):
+        return self.occupied_carriers_all
 
-    def set_samp_per_freq(self, samp_per_freq):
-        self.samp_per_freq = samp_per_freq
-        self.set_min_output_buffer(2*(self.blocks_per_tag*self.samp_per_freq*2))
+    def set_occupied_carriers_all(self, occupied_carriers_all):
+        self.occupied_carriers_all = occupied_carriers_all
+        self.set_transpose_len(int(np.ceil(self.packet_len*4.0/len(self.occupied_carriers_all[0]))))
 
-    def get_freq_res(self):
-        return self.freq_res
+    def get_fft_len(self):
+        return self.fft_len
 
-    def set_freq_res(self, freq_res):
-        self.freq_res = freq_res
-        self.set_v_res(self.freq_res*3e8/2/self.center_freq)
+    def set_fft_len(self, fft_len):
+        self.fft_len = fft_len
+        self.set_R_max(3e8/2/self.samp_rate*self.fft_len)
 
-    def get_delta_freq(self):
-        return self.delta_freq
+    def get_zeropadding_fac(self):
+        return self.zeropadding_fac
 
-    def set_delta_freq(self, delta_freq):
-        self.delta_freq = delta_freq
-        self.set_R_max(3e8/2/self.delta_freq)
-
-    def get_center_freq(self):
-        return self.center_freq
-
-    def set_center_freq(self, center_freq):
-        self.center_freq = center_freq
-        self.set_v_res(self.freq_res*3e8/2/self.center_freq)
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+    def set_zeropadding_fac(self, zeropadding_fac):
+        self.zeropadding_fac = zeropadding_fac
 
     def get_velocity(self):
         return self.velocity
@@ -259,34 +238,74 @@ class top_block(gr.top_block, Qt.QWidget):
         self.velocity = velocity
         Qt.QMetaObject.invokeMethod(self._velocity_counter, "setValue", Qt.Q_ARG("double", self.velocity))
         Qt.QMetaObject.invokeMethod(self._velocity_slider, "setValue", Qt.Q_ARG("double", self.velocity))
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
-    def get_v_res(self):
-        return self.v_res
+    def get_v_max(self):
+        return self.v_max
 
-    def set_v_res(self, v_res):
-        self.v_res = v_res
+    def set_v_max(self, v_max):
+        self.v_max = v_max
 
-    def get_samp_discard(self):
-        return self.samp_discard
+    def get_transpose_len(self):
+        return self.transpose_len
 
-    def set_samp_discard(self, samp_discard):
-        self.samp_discard = samp_discard
+    def set_transpose_len(self, transpose_len):
+        self.transpose_len = transpose_len
 
-    def get_min_output_buffer(self):
-        return self.min_output_buffer
+    def get_sync_word2(self):
+        return self.sync_word2
 
-    def set_min_output_buffer(self, min_output_buffer):
-        self.min_output_buffer = min_output_buffer
+    def set_sync_word2(self, sync_word2):
+        self.sync_word2 = sync_word2
 
-    def get_decimator_fac(self):
-        return self.decimator_fac
+    def get_sync_word1(self):
+        return self.sync_word1
 
-    def set_decimator_fac(self, decimator_fac):
-        self.decimator_fac = decimator_fac
-        self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/self.decimator_fac)
-        self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1.0/self.decimator_fac)
-        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate/self.decimator_fac/2)
+    def set_sync_word1(self, sync_word1):
+        self.sync_word1 = sync_word1
+
+    def get_pilot_symbols(self):
+        return self.pilot_symbols
+
+    def set_pilot_symbols(self, pilot_symbols):
+        self.pilot_symbols = pilot_symbols
+
+    def get_pilot_carriers(self):
+        return self.pilot_carriers
+
+    def set_pilot_carriers(self, pilot_carriers):
+        self.pilot_carriers = pilot_carriers
+
+    def get_payload_mod(self):
+        return self.payload_mod
+
+    def set_payload_mod(self, payload_mod):
+        self.payload_mod = payload_mod
+
+    def get_occupied_carriers(self):
+        return self.occupied_carriers
+
+    def set_occupied_carriers(self, occupied_carriers):
+        self.occupied_carriers = occupied_carriers
+
+    def get_length_tag_key(self):
+        return self.length_tag_key
+
+    def set_length_tag_key(self, length_tag_key):
+        self.length_tag_key = length_tag_key
+
+    def get_discarded_carriers(self):
+        return self.discarded_carriers
+
+    def set_discarded_carriers(self, discarded_carriers):
+        self.discarded_carriers = discarded_carriers
+
+    def get_center_freq(self):
+        return self.center_freq
+
+    def set_center_freq(self, center_freq):
+        self.center_freq = center_freq
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_Range(self):
         return self.Range
@@ -295,7 +314,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.Range = Range
         Qt.QMetaObject.invokeMethod(self._Range_counter, "setValue", Qt.Q_ARG("double", self.Range))
         Qt.QMetaObject.invokeMethod(self._Range_slider, "setValue", Qt.Q_ARG("double", self.Range))
-        self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.velocity,), (1e16,), (0,), (0,), self.samp_rate, self.center_freq, -10, True, True)
+        self.radar_static_target_simulator_cc_0.setup_targets((self.Range, ), (self.velocity, ), (1e25, ), (0, ), (0,), self.samp_rate, self.center_freq, -10, True, True)
 
     def get_R_max(self):
         return self.R_max

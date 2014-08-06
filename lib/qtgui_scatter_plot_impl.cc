@@ -80,7 +80,7 @@ namespace gr {
 		// Go through msg and search for key symbols "range" and "velocity" (or other keys!) and get data
 		item_found_x = false;
 		item_found_y = false;
-		for(int k=0; k<size_msg; k++){ // FIXME: errorhandling for wrong input?
+		for(int k=0; k<size_msg; k++){
 			msg_part = pmt::nth(k,msg);
 			if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_x.c_str()){
 				d_x = pmt::f32vector_elements(pmt::nth(1,msg_part));
@@ -101,7 +101,7 @@ namespace gr {
 			d_y.resize(d_x.size());
 		}
 		if(not(item_found_x)&&not(item_found_y)){
-			// FIXME: throw exception, no label found
+			throw std::runtime_error("All identifiers (symbols) not found"); // throw exception if no label found
 		}
     }
     
