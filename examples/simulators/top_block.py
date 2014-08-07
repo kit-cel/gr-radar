@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Aug  6 15:20:23 2014
+# Generated: Thu Aug  7 14:31:15 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -267,8 +267,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_time_res(self.packet_len/float(self.samp_rate))
+        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
         self.radar_static_target_simulator_cc_0.setup_targets((self.Range,), (self.vel, ), (self.rcs, ), (0,), (0,), self.samp_rate, self.center_freq, -10, True, False)
@@ -279,9 +279,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_min_output_buffer(int(self.packet_len*2))
-        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_time_res(self.packet_len/float(self.samp_rate))
+        self.set_freq_res(self.samp_rate/float(self.packet_len))
+        self.set_min_output_buffer(int(self.packet_len*2))
         self.blocks_multiply_const_vxx_0.set_k((1.0/(self.packet_len/self.decim_fac), ))
         self.blocks_multiply_const_vxx_1.set_k((1.0/(self.packet_len/self.decim_fac), ))
 

@@ -49,6 +49,8 @@ namespace gr {
       std::vector<pmt::pmt_t> d_msg_hold;
 
       const static float c_light = 3e8;
+      //const static float d_corr_factor = 2.78; // real
+      const static float d_corr_factor = 0.514; // simulation
 
     };
 

@@ -85,33 +85,34 @@ namespace gr {
 
     float
     estimator_rcs_impl::calculate_rcs() {
-		if(d_range.size() == 0 && d_power.size() == 0){
-			std::cout << "ERROR: RETURN ZERO RCS" << std::endl;
-			return 0;
-		}
-		else{
-			if(d_range.size() == 0) throw std::runtime_error("range vector has size zero");
-			if(d_power.size() == 0) throw std::runtime_error("power vector has size zero");
+  		if(d_range.size() == 0 && d_power.size() == 0){
+  			std::cout << "ERROR: No target detected for RCS calculation" << std::endl;
+  			return 0;
+  		}
+  		else{
+  			if(d_range.size() == 0) throw std::runtime_error("range vector has size zero");
+  			if(d_power.size() == 0) throw std::runtime_error("power vector has size zero");
 
-			float power_tx = 0.02;//pow(d_amplitude, 2.0) * pow(10, d_usrp_gain_tx/10);
-			std::cout << "PowerTx: " << power_tx << std::endl;
-			float power_rx = std::sqrt(d_power[0])/pow(10, d_usrp_gain_rx/10);
-			std::cout << "PowerRx: " << power_rx << std::endl;
-			float lambda = c_light/d_center_freq;
-			std::cout << "Lambda: " << lambda << std::endl;
+  			float power_tx = 0.02 * pow(10, d_usrp_gain_tx/10); // needs to be calibrated for every usage
+  			float power_rx = std::sqrt(d_power[0]) / pow(10, d_usrp_gain_rx/10);
+  			float lambda = c_light/d_center_freq;
+  		
+  			// convert gain db to power
+  			float antenna_gain_rx = pow(10, d_antenna_gain_rx/10);
+  			float antenna_gain_tx = pow(10, d_antenna_gain_tx/10);
+  			
+  			float fak = pow(4.0*M_PI, 3)*pow(d_range[0], 4) / (antenna_gain_rx * antenna_gain_tx * pow(lambda, 2));
 
-			// convert db to power
-			float antenna_gain_rx = pow(10, d_antenna_gain_rx/10);
-			std::cout << "GainRx: " << antenna_gain_rx << std::endl;
-			float antenna_gain_tx = pow(10, d_antenna_gain_tx/10);
-			std::cout << "GainTx: " << antenna_gain_tx << std::endl;
+        // debug output
+        // std::cout << "PowerTx: " << power_tx << std::endl;
+        // std::cout << "PowerRx: " << power_rx << std::endl;
+        // std::cout << "Lambda: " << lambda << std::endl;
+        // std::cout << "GainRx: " << antenna_gain_rx << std::endl;
+        // std::cout << "GainTx: " << antenna_gain_tx << std::endl;
+        // std::cout << "fak: " << fak << std::endl;
 
-			float fak = pow(4.0*M_PI, 3)*pow(d_range[0], 4) / (antenna_gain_rx * antenna_gain_tx * pow(lambda, 2));
-			std::cout << "fak: " << fak << std::endl;
-
-			//return power_rx/power_tx * fak;
-			return std::sqrt(d_power[0])*pow(d_range[0],4)*1e6;
-		}
+  			return power_rx/power_tx * fak * d_corr_factor;
+  		}
     }
 
     void
