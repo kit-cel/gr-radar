@@ -3,9 +3,9 @@
   <key>radar_estimator_rcs</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.estimator_rcs($num_mean, $center_freq, $antenna_gain_tx, $antenna_gain_rx, $usrp_gain_tx, $usrp_gain_rx, $amplitude)</make>
+  <make>radar.estimator_rcs($num_mean, $center_freq, $antenna_gain_tx, $antenna_gain_rx, $usrp_gain_tx, $usrp_gain_rx, $power_tx)</make>
   <param>
-    <name>Num_mean</name>
+    <name>Mean Samples</name>
     <key>num_mean</key>
     <type>int</type>
   </param>
@@ -15,28 +15,28 @@
     <type>float</type>
   </param>
   <param>
-    <name>Antenna_gain_tx</name>
+    <name>Antenna Gain Tx [dBi]</name>
     <key>antenna_gain_tx</key>
     <type>float</type>
   </param>
   <param>
-    <name>Antenna_gain_rx</name>
+    <name>Antenna Gain Rx [dBi]</name>
     <key>antenna_gain_rx</key>
     <type>float</type>
   </param>
   <param>
-    <name>Usrp_gain_tx</name>
+    <name>Usrp Gain Tx [dB]</name>
     <key>usrp_gain_tx</key>
     <type>float</type>
   </param>
   <param>
-    <name>Usrp_gain_rx</name>
+    <name>Usrp Gain Rx [dB]</name>
     <key>usrp_gain_rx</key>
     <type>float</type>
   </param>
   <param>
-    <name>Amplitude</name>
-    <key>amplitude</key>
+    <name>Power Tx [W]</name>
+    <key>power_tx</key>
     <type>float</type>
   </param>
   <sink>

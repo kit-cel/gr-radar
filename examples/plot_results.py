@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from matplotlib import pyplot as plt
 
-filename = "rcs_messung_person.txt"
+filename = "rcs_test.txt"
 args = ["range","velocity","rcs"]
 element = 0
 data = [[],[],[]]

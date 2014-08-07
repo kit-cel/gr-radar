@@ -29,10 +29,10 @@ namespace gr {
     class estimator_rcs_impl : public estimator_rcs
     {
      private:
-      // Nothing to declare in this block.
+      // Nothing to declare in this block
 
      public:
-      estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float amplitude);
+      estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx);
       ~estimator_rcs_impl();
       void handle_msg(pmt::pmt_t msg);
       float calculate_rcs();
@@ -40,7 +40,8 @@ namespace gr {
       boost::circular_buffer<float> d_rcs_vals;
       int d_num_mean, d_loop_counter;
 
-      float d_center_freq, d_antenna_gain_tx, d_antenna_gain_rx, d_usrp_gain_tx, d_usrp_gain_rx, d_amplitude;
+      float d_center_freq, d_antenna_gain_tx, d_antenna_gain_rx, d_usrp_gain_tx, d_usrp_gain_rx, d_power_tx, d_fak, d_lambda, d_antenna_gain_abs_rx,
+        d_antenna_gain_abs_tx;
 
       pmt::pmt_t d_port_id_in, d_port_id_out;
       pmt::pmt_t d_prange, d_ppower, d_value;
@@ -49,8 +50,8 @@ namespace gr {
       std::vector<pmt::pmt_t> d_msg_hold;
 
       const static float c_light = 3e8;
-      //const static float d_corr_factor = 2.78; // real
-      const static float d_corr_factor = 0.514; // simulation
+      //const static float d_corr_factor = 43; // real
+      const static float d_corr_factor = 1.0; // simulation
 
     };
 

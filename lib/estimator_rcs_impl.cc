@@ -31,16 +31,16 @@ namespace gr {
   namespace radar {
 
     estimator_rcs::sptr
-    estimator_rcs::make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float amplitude)
+    estimator_rcs::make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_rcs_impl(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, amplitude));
+        (new estimator_rcs_impl(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, power_tx));
     }
 
     /*
      * The private constructor
      */
-    estimator_rcs_impl::estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float amplitude)
+    estimator_rcs_impl::estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx)
       : gr::block("estimator_rcs",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -51,7 +51,7 @@ namespace gr {
         d_antenna_gain_rx = antenna_gain_rx;
         d_usrp_gain_tx = usrp_gain_tx;
         d_usrp_gain_rx = usrp_gain_rx;
-        d_amplitude = amplitude;
+        d_power_tx = power_tx; // needs to be calibrated for every usage
 
         d_rcs_vals.resize(d_num_mean);
 
@@ -65,6 +65,13 @@ namespace gr {
         message_port_register_out(d_port_id_out);
 
         d_loop_counter = 0;
+
+        // constant factors in radar equation
+        d_antenna_gain_abs_rx = pow(10, d_antenna_gain_rx/10);
+        d_antenna_gain_abs_tx = pow(10, d_antenna_gain_tx/10);
+        d_lambda = c_light/d_center_freq;
+        d_fak = pow(4.0*M_PI, 3) / (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2)) * 4 / power_tx;
+
     }
 
     /*
@@ -93,22 +100,18 @@ namespace gr {
   			if(d_range.size() == 0) throw std::runtime_error("range vector has size zero");
   			if(d_power.size() == 0) throw std::runtime_error("power vector has size zero");
 
-  			float power_tx = 0.02 * pow(10, d_usrp_gain_tx/10); // needs to be calibrated for every usage
+        // regard usrp gains
+  			float power_tx = d_power_tx * pow(10, d_usrp_gain_tx/10); 
   			float power_rx = std::sqrt(d_power[0]) / pow(10, d_usrp_gain_rx/10);
-  			float lambda = c_light/d_center_freq;
-  		
-  			// convert gain db to power
-  			float antenna_gain_rx = pow(10, d_antenna_gain_rx/10);
-  			float antenna_gain_tx = pow(10, d_antenna_gain_tx/10);
   			
-  			float fak = pow(4.0*M_PI, 3)*pow(d_range[0], 4) / (antenna_gain_rx * antenna_gain_tx * pow(lambda, 2));
+  			float fak = d_fak * pow(d_range[0], 4);
 
         // debug output
         // std::cout << "PowerTx: " << power_tx << std::endl;
         // std::cout << "PowerRx: " << power_rx << std::endl;
-        // std::cout << "Lambda: " << lambda << std::endl;
-        // std::cout << "GainRx: " << antenna_gain_rx << std::endl;
-        // std::cout << "GainTx: " << antenna_gain_tx << std::endl;
+        // std::cout << "Lambda: " << d_lambda << std::endl;
+        // std::cout << "GainRx: " << d_antenna_gain_rx << std::endl;
+        // std::cout << "GainTx: " << d_antenna_gain_tx << std::endl;
         // std::cout << "fak: " << fak << std::endl;
 
   			return power_rx/power_tx * fak * d_corr_factor;
