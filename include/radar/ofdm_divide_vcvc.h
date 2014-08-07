@@ -29,11 +29,12 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief This block performs a complex complex division with in0/in1. If vlen_out > vlen_in the additional space is filled with zeros. This can be used for zeropadding. discarded_carriers is a vector of the carriers which should be not used and cut out. FIXME: discarded_carriers is not implemented
+     * \brief This block performs a complex complex division with in0/in1. If vlen_out > vlen_in the additional space is filled with zeros. This can be used for zeropadding. discarded_carriers is a vector of the carriers which should be not used and set zero as division result. num_sync_words gives the number of sync words on which the discarded_carriers rule is not applied.
      * 
      * \param vlen_in Input vector length
      * \param vlen_out Output vector length
      * \param discarded_carriers Discarded carriers
+     * \param num_sync_words Number of sync words
      * \param len_key Packet length key for tagged stream
      * 
      * \ingroup radar
@@ -52,7 +53,7 @@ namespace gr {
        * class. radar::ofdm_divide_vcvc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int vlen_in, int vlen_out, std::vector<int> discarded_carriers, std::string len_key="packet_len");
+      static sptr make(int vlen_in, int vlen_out, std::vector<int> discarded_carriers, int num_sync_words, std::string len_key="packet_len");
     };
 
   } // namespace radar

@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classgr_1_1radar_1_1ofdm__divide__vcvc
 </div><!--header-->
 <div class="contents">
 
-<p>This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional space is filled with zeros. This can be used for zeropadding. discarded_carriers is a vector of the carriers which should be not used and cut out. FIXME: discarded_carriers is not implemented.  
+<p>This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional space is filled with zeros. This can be used for zeropadding. discarded_carriers is a vector of the carriers which should be not used and set zero as division result. num_sync_words gives the number of sync words on which the discarded_carriers rule is not applied.  
  <a href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ofdm__divide__vcvc_8h_source.html">ofdm_divide_vcvc.h</a>&gt;</code></p>
@@ -117,17 +117,18 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a5d8ed4d11ab89057d4db498f8489b3d9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#ac1a5992530314a45ae7007e28c5a7912">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#a5d8ed4d11ab89057d4db498f8489b3d9">make</a> (int vlen_in, int vlen_out, std::vector&lt; int &gt; discarded_carriers, std::string len_key=&quot;packet_len&quot;)</td></tr>
-<tr class="memdesc:a5d8ed4d11ab89057d4db498f8489b3d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html" title="This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional spa...">radar::ofdm_divide_vcvc</a>.  <a href="#a5d8ed4d11ab89057d4db498f8489b3d9">More...</a><br/></td></tr>
-<tr class="separator:a5d8ed4d11ab89057d4db498f8489b3d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551167162c2c54954c8ad9e8576d64b4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#ac1a5992530314a45ae7007e28c5a7912">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#a551167162c2c54954c8ad9e8576d64b4">make</a> (int vlen_in, int vlen_out, std::vector&lt; int &gt; discarded_carriers, int num_sync_words, std::string len_key=&quot;packet_len&quot;)</td></tr>
+<tr class="memdesc:a551167162c2c54954c8ad9e8576d64b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html" title="This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional spa...">radar::ofdm_divide_vcvc</a>.  <a href="#a551167162c2c54954c8ad9e8576d64b4">More...</a><br/></td></tr>
+<tr class="separator:a551167162c2c54954c8ad9e8576d64b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional space is filled with zeros. This can be used for zeropadding. discarded_carriers is a vector of the carriers which should be not used and cut out. FIXME: discarded_carriers is not implemented. </p>
+<div class="textblock"><p>This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional space is filled with zeros. This can be used for zeropadding. discarded_carriers is a vector of the carriers which should be not used and set zero as division result. num_sync_words gives the number of sync words on which the discarded_carriers rule is not applied. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">vlen_in</td><td>Input vector length </td></tr>
     <tr><td class="paramname">vlen_out</td><td>Output vector length </td></tr>
     <tr><td class="paramname">discarded_carriers</td><td>Discarded carriers </td></tr>
+    <tr><td class="paramname">num_sync_words</td><td>Number of sync words </td></tr>
     <tr><td class="paramname">len_key</td><td>Packet length key for tagged stream </td></tr>
   </table>
   </dd>
@@ -146,7 +147,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a5d8ed4d11ab89057d4db498f8489b3d9"></a>
+<a class="anchor" id="a551167162c2c54954c8ad9e8576d64b4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -174,6 +175,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_sync_words</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>len_key</em> = <code>&quot;packet_len&quot;</code>&#160;</td>
         </tr>
@@ -191,7 +198,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html" title="This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional spa...">radar::ofdm_divide_vcvc</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html" title="This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional spa...">radar::ofdm_divide_vcvc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#a5d8ed4d11ab89057d4db498f8489b3d9" title="Return a shared_ptr to a new instance of radar::ofdm_divide_vcvc. ">radar::ofdm_divide_vcvc::make</a> is the public interface for creating new instances. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html" title="This block performs a complex complex division with in0/in1. If vlen_out &gt; vlen_in the additional spa...">radar::ofdm_divide_vcvc</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html#a551167162c2c54954c8ad9e8576d64b4" title="Return a shared_ptr to a new instance of radar::ofdm_divide_vcvc. ">radar::ofdm_divide_vcvc::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -204,7 +211,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1ofdm__divide__vcvc.html">ofdm_divide_vcvc</a></li>
-    <li class="footer">Generated on Tue Aug 5 2014 16:48:38 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Thu Aug 7 2014 18:23:58 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -3,7 +3,7 @@
   <key>radar_ofdm_divide_vcvc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.ofdm_divide_vcvc($vlen_in, $vlen_out, $discarded_carriers, $len_key)</make>
+  <make>radar.ofdm_divide_vcvc($vlen_in, $vlen_out, $discarded_carriers, $num_sync_words, $len_key)</make>
   <param>
     <name>Vector length input</name>
     <key>vlen_in</key>
@@ -18,6 +18,11 @@
     <name>Discarded carriers</name>
     <key>discarded_carriers</key>
     <type>int_vector</type>
+  </param>
+  <param>
+    <name>Number of sync words</name>
+    <key>num_sync_words</key>
+    <type>int</type>
   </param>
   <param>
     <name>Packet length key</name>

@@ -96,6 +96,7 @@ var searchData=
   ['d_5fnum_5fdelay_5fsamps',['d_num_delay_samps',['../classgr_1_1radar_1_1usrp__echotimer__cc__impl.html#acaa421d469d7e737b8e8a54c851f7d6c',1,'gr::radar::usrp_echotimer_cc_impl']]],
   ['d_5fnum_5ffreq',['d_num_freq',['../classgr_1_1radar_1_1signal__generator__cw__c__impl.html#a0de78a8c7bdd7a57760ff5a7afc0daef',1,'gr::radar::signal_generator_cw_c_impl']]],
   ['d_5fnum_5fparticle',['d_num_particle',['../classgr_1_1radar_1_1tracking__singletarget__impl.html#a9ae3aed3ca714c787253291162fb21f4',1,'gr::radar::tracking_singletarget_impl']]],
+  ['d_5fnum_5fsync_5fwords',['d_num_sync_words',['../classgr_1_1radar_1_1ofdm__divide__vcvc__impl.html#a6944990ce6dd60f4f00e87ad90011c75',1,'gr::radar::ofdm_divide_vcvc_impl']]],
   ['d_5fnum_5ftargets',['d_num_targets',['../classgr_1_1radar_1_1static__target__simulator__cc__impl.html#a05ce4dde7c713826d28b749a0d371eac',1,'gr::radar::static_target_simulator_cc_impl']]],
   ['d_5fnum_5fxcorr',['d_num_xcorr',['../classgr_1_1radar_1_1estimator__sync__pulse__c__impl.html#a800d9fee8703b90e2972fb4843910393',1,'gr::radar::estimator_sync_pulse_c_impl']]],
   ['d_5foffset',['d_offset',['../classgr_1_1radar_1_1split__cc__impl.html#aea86d8f0e94e834da73aafbd9f7ba9f3',1,'gr::radar::split_cc_impl']]],
