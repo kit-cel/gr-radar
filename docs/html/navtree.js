@@ -34,8 +34,8 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "classgr_1_1radar_1_1os__cfar__2d__vc__impl.html#ae79502c7c177ef395011d5eb3b62a2c4",
-"classgr_1_1radar_1_1static__target__simulator__cc__impl.html#ac843647e4fb41ae23c14fb21c1bca6b8",
-"signal__generator__fmcw__c_8h_source.html"
+"classgr_1_1radar_1_1static__target__simulator__cc__impl.html#abb202c1a50b2298e21332df4f7031705",
+"signal__generator__cw__c_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

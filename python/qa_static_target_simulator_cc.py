@@ -20,7 +20,7 @@
 # 
 
 from gnuradio import gr, gr_unittest
-from gnuradio import blocks, analog
+from gnuradio import blocks, analog, fft
 import radar_swig as radar
 import numpy as np
 import numpy.fft
@@ -34,6 +34,7 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		self.tb = None
 
 	def test_001_t (self):
+		# check doppler freq (frequency shifting)
 		# set up fg
 		test_len = 1000
 		
@@ -75,6 +76,7 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		
 		
 	def test_002_t (self):
+		#print "TEST2: SHIFT OF 1 SAMPLE"
 		# set up fg
 		test_len = 1000
 		packet_len = 1000
@@ -85,7 +87,7 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		ampl = 1
 		
 		R = c_light/2/samp_rate # shift of 1 sample
-		rcs = 1e12
+		rcs = 1e9
 		Range = (R,)
 		velocity = (0,) # no freq shift
 		rcs = (rcs,)
@@ -114,54 +116,79 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		self.assertComplexTuplesAlmostEqual(data_out[1:len(data_out)-1],data_in[0:len(data_in)-2],4)
 		
 	def test_003_t (self):
-		print "TEST3: DONT WORK (AZIMUTH ESTIMATION)"
+		#print "TEST3: AZIMUTH ESTIMATION"
 		# set up fg
-		test_len = 2**12
-		
-		packet_len = test_len
+		packet_len = 2**12
 		samp_rate = 32000
-		frequency = (0,)
-		amplitude = 1
+		center_freq = 2.45e9
+		freq = 0
+		ampl = 1
 		
-		Range = (30,)
-		velocity = (60,)
-		rcs = (1e9,)
-		azimuth = (5,)
-		position_rx = (1,-1)
-		center_freq = 2.4e9
-		rndm_phase = False
-		self_coupling = False
-		self_coupling_db = -10;
+		Range = (20,)
+		velocity = (10,)
+		rcs = (1e9,0)
+		azimuth = (10,)
+		position_rx = (0,0.2)
 		
-		src = radar.signal_generator_cw_c(packet_len,samp_rate,frequency,amplitude)
-		head = blocks.head(8,test_len)
-		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, self_coupling_db, rndm_phase, self_coupling)
-		mult1 = blocks.multiply_conjugate_cc()
-		mult2 = blocks.multiply_conjugate_cc()
+		src = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq, ampl)
+		head = blocks.head(8,packet_len)
+		s2ts = blocks.stream_to_tagged_stream(8,1,packet_len,'packet_len')
+		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, -10, False, False)
+		s2v0 = blocks.stream_to_vector(8,packet_len)
+		fft0 = fft.fft_vcc(packet_len,1,())
+		v2s0 = blocks.vector_to_stream(8,packet_len)
+		snk0 = blocks.vector_sink_c()
+		s2v1 = blocks.stream_to_vector(8,packet_len)
+		fft1 = fft.fft_vcc(packet_len,1,())
+		v2s1 = blocks.vector_to_stream(8,packet_len)
 		snk1 = blocks.vector_sink_c()
+		
+		mult = blocks.multiply_conjugate_cc(packet_len)
+		v2s2 = blocks.vector_to_stream(8,packet_len)
 		snk2 = blocks.vector_sink_c()
 		
-		self.tb.connect(src,head,sim)
-		self.tb.connect((sim,0),(mult1,0))
-		self.tb.connect((head,0),(mult1,1))
-		self.tb.connect((sim,1),(mult2,0))
-		self.tb.connect((head,0),(mult2,1))
-		self.tb.connect(mult1,snk1)
-		self.tb.connect(mult2,snk2)
-		self.tb.run ()
 		
-		# check data
+		self.tb.connect(src,head,s2ts,sim)
+		self.tb.connect((sim,0),(s2v0,0))
+		self.tb.connect(s2v0,fft0,v2s0,snk0)
+		self.tb.connect((sim,1),(s2v1,0))
+		self.tb.connect(s2v1,fft1,v2s1,snk1)
+		
+		self.tb.connect((fft0,0),(mult,1))
+		self.tb.connect((fft1,0),(mult,0))
+		self.tb.connect(mult,v2s2,snk2)
+		
+		self.tb.run()
+		
+		# check ffts data0 und data1 on peak
+		data0 = snk0.data()
 		data1 = snk1.data()
-		fft1 = numpy.fft.fft(data1) # get fft1
-		num1 = np.argmax(abs(fft1)) # index of max sample (data1)
-		data2 = snk2.data()
-		fft2 = numpy.fft.fft(data2) # get fft2
-		num2 = np.argmax(abs(fft2)) # index of max sample (data2)
-		print "PHIS:", np.angle(fft1[num1])/2.0/np.pi/center_freq, np.angle(fft2[num2])/2.0/np.pi/center_freq
-		delta_phi = np.angle(fft1[num1])/2.0/np.pi/center_freq - np.angle(fft2[num2])/2.0/np.pi/center_freq
-		print "DELTA_PHI:", delta_phi
-		print "DELTA_R:", 1/2.0/np.pi*3e8/center_freq*delta_phi
 		
+		data0_abs = [0]*len(data0)
+		data1_abs = [0]*len(data1)
+		for k in range(len(data0)):
+			data0_abs[k] = abs(data0[k])
+			data1_abs[k] = abs(data1[k])
+		
+		num0 = np.argmax(data0_abs) # index of max sample (data)
+		num1 = np.argmax(data1_abs) # index of max sample (data)
+		#print "NUM0:", num0, "FREQ:", num0*samp_rate/packet_len, "VELOCITY:", num0*samp_rate/packet_len*3e8/2/center_freq, "PHI:", np.angle(data0[num0])
+		#print "NUM1:", num1, "FREQ:", num1*samp_rate/packet_len, "VELOCITY:", num1*samp_rate/packet_len*3e8/2/center_freq, "PHI:", np.angle(data1[num1])
+		
+		# check fft data2 on peak
+		data2 = snk2.data()
+		data2_abs = [0]*len(data2)
+		for k in range(len(data0)):
+			data2_abs[k] = abs(data2[k])
+		num2 = np.argmax(data2_abs) # index of max sample (data)
+		#print "NUM2:", num2, "FREQ:", num2*samp_rate/packet_len, "VELOCITY:", num2*samp_rate/packet_len*3e8/2/center_freq, "PHI:", np.angle(data2[num2])
+		
+		# assert phases of rx streams of angle(data1)-angle(data0) and angle(data2)
+		self.assertAlmostEqual(np.angle(data1[num1])-np.angle(data0[num0]),np.angle(data2[num2]),4)
+		
+		# assert azimuth
+		angle = np.arcsin(np.angle(data2[num2])*3e8/center_freq/2/np.pi/0.2)/2/np.pi*360;
+		self.assertAlmostEqual(angle/azimuth[0],1,0)
 
 if __name__ == '__main__':
 	gr_unittest.run(qa_static_target_simulator_cc)#, "qa_static_target_simulator_cc.xml")

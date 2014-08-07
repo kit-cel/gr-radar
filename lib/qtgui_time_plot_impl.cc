@@ -77,7 +77,7 @@ namespace gr {
 		bool item_found_y;
 		// Go through msg and search for key symbol
 		item_found_y = false;
-		for(int k=0; k<size_msg; k++){ // FIXME: errorhandling for wrong input?
+		for(int k=0; k<size_msg; k++){
 			msg_part = pmt::nth(k,msg);
 			if(pmt::symbol_to_string(pmt::nth(0,msg_part))==d_label_y.c_str()){
 				d_y = pmt::f32vector_elements(pmt::nth(1,msg_part));
@@ -87,7 +87,7 @@ namespace gr {
 		}
 		// Error handling
 		if(not(item_found_y)){
-			// FIXME: error handling
+			throw std::runtime_error("Identifier (symbol) not found");
 		}
     }
     

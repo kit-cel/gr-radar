@@ -172,7 +172,7 @@ namespace gr {
 		
 		// Minimize velocity from CW with all possible velocities from up-/down-chirp
 		std::vector<float> velocity, range;
-		int min_vel_index; // FIXME: need errorhandler!
+		int min_vel_index;
 		float min_vel;
 		for(int k=0; k<velocity_cw.size(); k++){
 			min_vel = 1e20;

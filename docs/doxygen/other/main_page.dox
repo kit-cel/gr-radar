@@ -2,7 +2,7 @@
 
 \section install Install guide
 
-For the actual install guide read the <code>README</code> at the main folder. Please take care of the dependencies. In particular there can be some issues if Qwt is below version 6. Furthermore python-matplotlib is used in some testcases.
+For the actual install guide read the <code>README</code> at the main folder. Please take care of the dependencies. In particular there can be some issues if Qwt is below version 6. Furthermore python-matplotlib is used in some testcases. UHD must be installed because of the USRP interface. This should be done with the GNU Radio installation.
 
 \subsection buffer Buffer size issues
 

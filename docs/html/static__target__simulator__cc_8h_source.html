@@ -120,38 +120,52 @@ $(document).ready(function(){initNavTree('static__target__simulator__cc_8h_sourc
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">namespace </span>radar {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    /*!</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * \brief &lt;+description of block+&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \ingroup radar</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1static__target__simulator__cc.html">   35</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1static__target__simulator__cc.html">static_target_simulator_cc</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::tagged_stream_block</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">   38</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;static_target_simulator_cc&gt; <a class="code" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">sptr</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">      /*!</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::static_target_simulator_cc.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">       *</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::static_target_simulator_cc&#39;s</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">       * class. radar::static_target_simulator_cc::make is the public interface for</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">       * creating new instances.</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">       */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">sptr</a> make(std::vector&lt;float&gt; range, std::vector&lt;float&gt; velocity, std::vector&lt;float&gt; rcs, std::vector&lt;float&gt; azimuth, </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                                <span class="keywordtype">int</span> samp_rate, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> self_coupling_db, <span class="keywordtype">bool</span> rndm_phaseshift=<span class="keyword">true</span>, <span class="keywordtype">bool</span> self_coupling=<span class="keyword">true</span>, <span class="keyword">const</span> std::string&amp; len_key=<span class="stringliteral">&quot;packet_len&quot;</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                                </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">void</span> setup_targets(std::vector&lt;float&gt; range, std::vector&lt;float&gt; velocity, std::vector&lt;float&gt; rcs, std::vector&lt;float&gt; azimuth, </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                                                                                        <span class="keywordtype">int</span> samp_rate, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> self_coupling_db, <span class="keywordtype">bool</span> rndm_phaseshift, <span class="keywordtype">bool</span> self_coupling) = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    };</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  } <span class="comment">// namespace radar</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace gr</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_STATIC_TARGET_SIMULATOR_CC_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * \brief This block simulates the backscattering of a given signal on point targets. TX signal is given on the input and is tuned in the simulation on the given center frequency. Target parameters are given as f32vectors and each index refers to a target. The vectors range, velocity, rcs, and azimuth must have the same length. Velocity adds the doppler shift on the input signal and range adds a timeshift. Azimuth adds a second timeshift which refers to the distance between TX and RX antenna. All antennas are set on a straight line. The TX antenna takes place on the zero point as reference. The RX antennas are set on the straight line in a distance of position_rx to the TX antenna. The azimuth is measured from the vertical of this line. rndm_phaseshift adds on every target RX signal a random phase. self_coupling toggles the self coupling of the TX signal on the RX signal with self_coupling_db power.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * \param range Target ranges as vector</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * \param velocity Target velocities as vector</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * \param rcs Target RCS as vector</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * \param azimuth Target azimuth as vector</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * \param position_rx Position RX antennas</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * \param samp_rate Sample rate</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * \param center_freq Center frequency</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * \param self_coupling_db Self coupling in dB</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     * \param rndm_phaseshift Toggle random phaseshift on targets</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * \param self_coupling Toggle self coupling</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * \param packet_len Packet length key for tagged stream</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * \ingroup radar</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1static__target__simulator__cc.html">   49</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1static__target__simulator__cc.html">static_target_simulator_cc</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::tagged_stream_block</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;     <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">   52</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;static_target_simulator_cc&gt; <a class="code" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">sptr</a>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">      /*!</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::static_target_simulator_cc.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">       *</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::static_target_simulator_cc&#39;s</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">       * class. radar::static_target_simulator_cc::make is the public interface for</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">       * creating new instances.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">       */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">sptr</a> make(std::vector&lt;float&gt; range, std::vector&lt;float&gt; velocity, std::vector&lt;float&gt; rcs, std::vector&lt;float&gt; azimuth, std::vector&lt;float&gt; position_rx,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                                <span class="keywordtype">int</span> samp_rate, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> self_coupling_db, <span class="keywordtype">bool</span> rndm_phaseshift=<span class="keyword">true</span>, <span class="keywordtype">bool</span> self_coupling=<span class="keyword">true</span>, <span class="keyword">const</span> std::string&amp; len_key=<span class="stringliteral">&quot;packet_len&quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                                </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">void</span> setup_targets(std::vector&lt;float&gt; range, std::vector&lt;float&gt; velocity, std::vector&lt;float&gt; rcs, std::vector&lt;float&gt; azimuth, std::vector&lt;float&gt; position_rx,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                                                                                        <span class="keywordtype">int</span> samp_rate, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> self_coupling_db, <span class="keywordtype">bool</span> rndm_phaseshift, <span class="keywordtype">bool</span> self_coupling) = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    };</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  } <span class="comment">// namespace radar</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;} <span class="comment">// namespace gr</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_STATIC_TARGET_SIMULATOR_CC_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="api_8h_html"><div class="ttname"><a href="api_8h.html">api.h</a></div></div>
-<div class="ttc" id="classgr_1_1radar_1_1static__target__simulator__cc_html"><div class="ttname"><a href="classgr_1_1radar_1_1static__target__simulator__cc.html">gr::radar::static_target_simulator_cc</a></div><div class="ttdoc">&lt;+description of block+&gt; </div><div class="ttdef"><b>Definition:</b> static_target_simulator_cc.h:35</div></div>
-<div class="ttc" id="classgr_1_1radar_1_1static__target__simulator__cc_html_a90305dccf3c7ff91d34b0ece826bb6bd"><div class="ttname"><a href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">gr::radar::static_target_simulator_cc::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; static_target_simulator_cc &gt; sptr</div><div class="ttdef"><b>Definition:</b> static_target_simulator_cc.h:38</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1static__target__simulator__cc_html"><div class="ttname"><a href="classgr_1_1radar_1_1static__target__simulator__cc.html">gr::radar::static_target_simulator_cc</a></div><div class="ttdoc">This block simulates the backscattering of a given signal on point targets. TX signal is given on the...</div><div class="ttdef"><b>Definition:</b> static_target_simulator_cc.h:49</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1static__target__simulator__cc_html_a90305dccf3c7ff91d34b0ece826bb6bd"><div class="ttname"><a href="classgr_1_1radar_1_1static__target__simulator__cc.html#a90305dccf3c7ff91d34b0ece826bb6bd">gr::radar::static_target_simulator_cc::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; static_target_simulator_cc &gt; sptr</div><div class="ttdef"><b>Definition:</b> static_target_simulator_cc.h:52</div></div>
 <div class="ttc" id="api_8h_html_a087f3342c4b5ef356c6a607f77df0ea4"><div class="ttname"><a href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a></div><div class="ttdeci">#define RADAR_API</div><div class="ttdef"><b>Definition:</b> api.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -159,7 +173,7 @@ $(document).ready(function(){initNavTree('static__target__simulator__cc_8h_sourc
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="static__target__simulator__cc_8h.html">static_target_simulator_cc.h</a></li>
-    <li class="footer">Generated on Mon Jul 28 2014 18:17:09 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Tue Aug 5 2014 16:48:38 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

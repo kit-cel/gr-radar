@@ -21,7 +21,7 @@
     <type>real_vector</type>
   </param>
   <param>
-    <name>Azimuth</name>
+    <name>Azimuth [Degrees]</name>
     <key>azimuth</key>
     <type>real_vector</type>
   </param>

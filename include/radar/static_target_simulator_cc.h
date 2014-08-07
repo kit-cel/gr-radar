@@ -28,7 +28,21 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief <+description of block+>
+     * \brief This block simulates the backscattering of a given signal on point targets. TX signal is given on the input and is tuned in the simulation on the given center frequency. Target parameters are given as f32vectors and each index refers to a target. The vectors range, velocity, rcs, and azimuth must have the same length. Velocity adds the doppler shift on the input signal and range adds a timeshift. Azimuth adds a second timeshift which refers to the distance between TX and RX antenna. All antennas are set on a straight line. The TX antenna takes place on the zero point as reference. The RX antennas are set on the straight line in a distance of position_rx to the TX antenna. The azimuth is measured from the vertical of this line. rndm_phaseshift adds on every target RX signal a random phase. self_coupling toggles the self coupling of the TX signal on the RX signal with self_coupling_db power.
+     * 
+     * 
+     * \param range Target ranges as vector
+     * \param velocity Target velocities as vector
+     * \param rcs Target RCS as vector
+     * \param azimuth Target azimuth as vector
+     * \param position_rx Position RX antennas
+     * \param samp_rate Sample rate
+     * \param center_freq Center frequency
+     * \param self_coupling_db Self coupling in dB
+     * \param rndm_phaseshift Toggle random phaseshift on targets
+     * \param self_coupling Toggle self coupling
+     * \param packet_len Packet length key for tagged stream
+     * 
      * \ingroup radar
      *
      */

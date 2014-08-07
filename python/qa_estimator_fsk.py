@@ -37,14 +37,14 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		# run full fsk setup on high sample rates
 		test_len = 2**19
 
-		packet_len = 2**17
+		packet_len = 2**19
 		min_output_buffer = packet_len*2
 		samp_rate = 5000000
 		
-		center_freq = 5.7e9
+		center_freq = 2.45e9
 		
-		Range = 90
-		velocity = 10
+		Range = 50
+		velocity = 5
 				
 		samp_per_freq = 1
 		blocks_per_tag = packet_len/2
@@ -59,7 +59,7 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		head = blocks.head(8,test_len)
 		head.set_min_output_buffer(min_output_buffer)
 		
-		sim = radar.static_target_simulator_cc((Range,Range),(velocity,velocity),(1e12,1e12),(0,0),(0,),samp_rate,center_freq,1,False,False)
+		sim = radar.static_target_simulator_cc((Range,),(velocity,),(1e20,),(0,),(0,),samp_rate,center_freq,1,False,False)
 		sim.set_min_output_buffer(min_output_buffer)
 		
 		mult = blocks.multiply_conjugate_cc()
@@ -76,7 +76,7 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		mult_conj = blocks.multiply_conjugate_cc()
 		mult_conj.set_min_output_buffer(min_output_buffer)
 		
-		cfar = radar.os_cfar_c(samp_rate/2, 5, 0, 0.78, 10, True)
+		cfar = radar.find_max_peak_c(samp_rate/2,-120,0,(),False)
 		cfar.set_min_output_buffer(min_output_buffer)
 		
 		est = radar.estimator_fsk(center_freq,freq_high-freq_low)
@@ -102,8 +102,10 @@ class qa_estimator_fsk (gr_unittest.TestCase):
 		
 		# check data
 		msg = debug.get_message(0)
-		self.assertAlmostEqual( 1, velocity/pmt.f32vector_ref(pmt.nth(1,(pmt.nth(1,msg))),0), 2 ) # check velocity value
-		self.assertAlmostEqual( 1, Range/pmt.f32vector_ref(pmt.nth(1,(pmt.nth(2,msg))),0), 2 ) # check range value
+		#print "VELOCITY:", pmt.f32vector_ref(pmt.nth(1,(pmt.nth(1,msg))),0), velocity
+		#print "RANGE:", pmt.f32vector_ref(pmt.nth(1,(pmt.nth(2,msg))),0), Range
+		self.assertAlmostEqual( 1, velocity/pmt.f32vector_ref(pmt.nth(1,(pmt.nth(1,msg))),0), 1 ) # check velocity value
+		self.assertAlmostEqual( 1, Range/pmt.f32vector_ref(pmt.nth(1,(pmt.nth(2,msg))),0), 1 ) # check range value
 
 
 if __name__ == '__main__':
