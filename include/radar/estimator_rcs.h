@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::estimator_rcs::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx);
+      static sptr make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor);
     };
 
   } // namespace radar
