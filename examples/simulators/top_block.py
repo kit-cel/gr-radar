@@ -2,7 +2,11 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
+<<<<<<< HEAD
 # Generated: Tue Aug 12 17:03:53 2014
+=======
+# Generated: Thu Aug  7 18:21:34 2014
+>>>>>>> stfo/master
 ##################################################
 
 from PyQt4 import Qt
@@ -137,6 +141,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._Range_slider.setMinimumWidth(200)
         self._Range_slider.valueChanged.connect(self.set_Range)
         self._Range_layout.addWidget(self._Range_slider)
+<<<<<<< HEAD
         self.top_layout.addLayout(self._Range_layout)
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
                 interpolation=1,
@@ -217,6 +222,40 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.blocks_multiply_conjugate_cc_0).set_min_output_buffer(1048576)
         self.blocks_add_xx_1 = blocks.add_vcc(1)
         (self.blocks_add_xx_1).set_min_output_buffer(1048576)
+=======
+        self.top_grid_layout.addLayout(self._Range_layout, 0,0)
+        self.radar_transpose_matrix_vcvc_0_0 = radar.transpose_matrix_vcvc(transpose_len, fft_len*zeropadding_fac, "packet_len")
+        (self.radar_transpose_matrix_vcvc_0_0).set_min_output_buffer(78)
+        self.radar_transpose_matrix_vcvc_0 = radar.transpose_matrix_vcvc(fft_len*zeropadding_fac, transpose_len, "packet_len")
+        (self.radar_transpose_matrix_vcvc_0).set_min_output_buffer(256)
+        self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range, ), (velocity, ), (1e25, ), (0, ), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
+        (self.radar_static_target_simulator_cc_0).set_min_output_buffer(6240)
+        self.radar_qtgui_spectrogram_plot_0 = radar.qtgui_spectrogram_plot(fft_len*zeropadding_fac, 500, 'Range', 'Velocity', 'OFDM Radar', (0,R_max), (0,v_max), (-15,-12), True, "packet_len")
+        self.radar_print_results_0 = radar.print_results(False, "")
+        self.radar_os_cfar_2d_vc_0 = radar.os_cfar_2d_vc(fft_len*zeropadding_fac, (10,10), (0,0), 0.78, 30, "packet_len")
+        self.radar_ofdm_divide_vcvc_0 = radar.ofdm_divide_vcvc(fft_len, (fft_len-len(discarded_carriers))*zeropadding_fac, (()), 0, "packet_len")
+        (self.radar_ofdm_divide_vcvc_0).set_min_output_buffer(78)
+        self.radar_ofdm_cyclic_prefix_remover_cvc_0 = radar.ofdm_cyclic_prefix_remover_cvc(fft_len, fft_len/4, "packet_len")
+        (self.radar_ofdm_cyclic_prefix_remover_cvc_0).set_min_output_buffer(78)
+        self.radar_estimator_ofdm_0 = radar.estimator_ofdm('range', fft_len*zeropadding_fac, (0,R_max), 'velocity', transpose_len, (0,v_max,-v_max,0), True)
+        self.fft_vxx_0_1_0 = fft.fft_vcc(transpose_len, False, (window.blackmanharris(transpose_len)), False, 1)
+        self.fft_vxx_0_1 = fft.fft_vcc(fft_len*zeropadding_fac, True, (window.blackmanharris(fft_len*zeropadding_fac)), False, 1)
+        self.fft_vxx_0_0 = fft.fft_vcc(fft_len, True, (()), True, 1)
+        (self.fft_vxx_0_0).set_min_output_buffer(78)
+        self.fft_vxx_0 = fft.fft_vcc(fft_len, False, (()), True, 1)
+        self.digital_ofdm_cyclic_prefixer_0 = digital.ofdm_cyclic_prefixer(fft_len, fft_len+fft_len/4, 0, length_tag_key)
+        (self.digital_ofdm_cyclic_prefixer_0).set_min_output_buffer(6240)
+        self.digital_ofdm_carrier_allocator_cvc_0 = digital.ofdm_carrier_allocator_cvc(fft_len, occupied_carriers_all, ((),), ((),), (), length_tag_key)
+        (self.digital_ofdm_carrier_allocator_cvc_0).set_min_output_buffer(78)
+        self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc((payload_mod.points()), 1)
+        (self.digital_chunks_to_symbols_xx_0_0).set_min_output_buffer(4096)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, packet_len, length_tag_key)
+        self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, payload_mod.bits_per_symbol(), length_tag_key, False)
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_float*fft_len*zeropadding_fac)
+        self.blocks_nlog10_ff_0 = blocks.nlog10_ff(1, fft_len*zeropadding_fac, 0)
+        self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(fft_len*zeropadding_fac)
+>>>>>>> stfo/master
         self.blocks_add_xx_0 = blocks.add_vcc(1)
         (self.blocks_add_xx_0).set_min_output_buffer(1048576)
         self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 1e-6, 0)

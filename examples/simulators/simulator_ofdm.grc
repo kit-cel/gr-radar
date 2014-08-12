@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Tue Aug  5 17:55:38 2014</timestamp>
+  <timestamp>Thu Aug  7 18:21:38 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -58,6 +58,33 @@
     <param>
       <key>_coordinate</key>
       <value>(10, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>occupied_carriers_all</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>(range(-26,27),)</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(776, 78)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -490,33 +517,6 @@
     <param>
       <key>_coordinate</key>
       <value>(979, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>occupied_carriers_all</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>(range(-26,27),)</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(776, 78)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1121,57 +1121,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_tag_debug</key>
-    <param>
-      <key>id</key>
-      <value>blocks_tag_debug_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>name</key>
-      <value></value>
-    </param>
-    <param>
-      <key>filter</key>
-      <value>""</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>fft_len*2</value>
-    </param>
-    <param>
-      <key>display</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(900, 318)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
@@ -1478,69 +1427,6 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_ofdm</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_ofdm_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>symbol_x</key>
-      <value>'range'</value>
-    </param>
-    <param>
-      <key>len_x</key>
-      <value>fft_len*zeropadding_fac</value>
-    </param>
-    <param>
-      <key>axis_x</key>
-      <value>0,R_max</value>
-    </param>
-    <param>
-      <key>symbol_y</key>
-      <value>'velocity'</value>
-    </param>
-    <param>
-      <key>len_y</key>
-      <value>transpose_len</value>
-    </param>
-    <param>
-      <key>axis_y</key>
-      <value>0,v_max,-v_max,0</value>
-    </param>
-    <param>
-      <key>merge_consecutive</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(995, 883)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>import</key>
     <param>
       <key>id</key>
@@ -1568,30 +1454,38 @@
     </param>
   </block>
   <block>
-    <key>radar_ofdm_divide_vcvc</key>
+    <key>blocks_tag_debug</key>
     <param>
       <key>id</key>
-      <value>radar_ofdm_divide_vcvc_0</value>
+      <value>blocks_tag_debug_0</value>
     </param>
     <param>
       <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value></value>
+    </param>
+    <param>
+      <key>filter</key>
+      <value>""</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>fft_len*2</value>
+    </param>
+    <param>
+      <key>display</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>vlen_in</key>
-      <value>fft_len</value>
-    </param>
-    <param>
-      <key>vlen_out</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
-    </param>
-    <param>
-      <key>discarded_carriers</key>
-      <value>discarded_carriers</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
     </param>
     <param>
       <key>alias</key>
@@ -1602,67 +1496,12 @@
       <value></value>
     </param>
     <param>
-      <key>minoutbuf</key>
-      <value>2*transpose_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(852, 454)</value>
+      <value>(900, 318)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_transpose_matrix_vcvc</key>
-    <param>
-      <key>id</key>
-      <value>radar_transpose_matrix_vcvc_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen_in</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
-    </param>
-    <param>
-      <key>vlen_out</key>
-      <value>transpose_len</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>2*fft_len*zeropadding_fac</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
       <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(251, 462)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
     </param>
   </block>
   <block>
@@ -1681,7 +1520,7 @@
     </param>
     <param>
       <key>fft_size</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
+      <value>fft_len*zeropadding_fac</value>
     </param>
     <param>
       <key>forward</key>
@@ -1718,6 +1557,53 @@
     <param>
       <key>_coordinate</key>
       <value>(538, 446)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_transpose_matrix_vcvc</key>
+    <param>
+      <key>id</key>
+      <value>radar_transpose_matrix_vcvc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen_in</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>vlen_out</key>
+      <value>transpose_len</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(251, 462)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1799,7 +1685,7 @@
     </param>
     <param>
       <key>vlen_out</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
+      <value>fft_len*zeropadding_fac</value>
     </param>
     <param>
       <key>len_key</key>
@@ -1831,92 +1717,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_complex_to_mag_squared</key>
-    <param>
-      <key>id</key>
-      <value>blocks_complex_to_mag_squared_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(907, 720)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_nlog10_ff</key>
-    <param>
-      <key>id</key>
-      <value>blocks_nlog10_ff_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1139, 712)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>radar_os_cfar_2d_vc</key>
     <param>
       <key>id</key>
@@ -1928,7 +1728,7 @@
     </param>
     <param>
       <key>vlen</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
+      <value>fft_len*zeropadding_fac</value>
     </param>
     <param>
       <key>samp_compare</key>
@@ -1976,6 +1776,155 @@
     </param>
   </block>
   <block>
+    <key>radar_estimator_ofdm</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_ofdm_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>symbol_x</key>
+      <value>'range'</value>
+    </param>
+    <param>
+      <key>len_x</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>axis_x</key>
+      <value>0,R_max</value>
+    </param>
+    <param>
+      <key>symbol_y</key>
+      <value>'velocity'</value>
+    </param>
+    <param>
+      <key>len_y</key>
+      <value>transpose_len</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>0,v_max,-v_max,0</value>
+    </param>
+    <param>
+      <key>merge_consecutive</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(995, 883)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_complex_to_mag_squared</key>
+    <param>
+      <key>id</key>
+      <value>blocks_complex_to_mag_squared_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(907, 720)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_nlog10_ff</key>
+    <param>
+      <key>id</key>
+      <value>blocks_nlog10_ff_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>n</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>fft_len*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1139, 712)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>radar_qtgui_spectrogram_plot</key>
     <param>
       <key>id</key>
@@ -1987,7 +1936,7 @@
     </param>
     <param>
       <key>vlen</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
+      <value>fft_len*zeropadding_fac</value>
     </param>
     <param>
       <key>interval</key>
@@ -2058,7 +2007,7 @@
     </param>
     <param>
       <key>vlen</key>
-      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
+      <value>fft_len*zeropadding_fac</value>
     </param>
     <param>
       <key>num_inputs</key>
@@ -2083,6 +2032,61 @@
     <param>
       <key>_rotation</key>
       <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_ofdm_divide_vcvc</key>
+    <param>
+      <key>id</key>
+      <value>radar_ofdm_divide_vcvc_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen_in</key>
+      <value>fft_len</value>
+    </param>
+    <param>
+      <key>vlen_out</key>
+      <value>(fft_len-len(discarded_carriers))*zeropadding_fac</value>
+    </param>
+    <param>
+      <key>discarded_carriers</key>
+      <value>()</value>
+    </param>
+    <param>
+      <key>num_sync_words</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>2*transpose_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(851, 454)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
     </param>
   </block>
   <connection>

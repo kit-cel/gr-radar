@@ -35,10 +35,10 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      ofdm_divide_vcvc_impl(int vlen_in, int vlen_out, std::vector<int> discarded_carriers, std::string len_key);
+      ofdm_divide_vcvc_impl(int vlen_in, int vlen_out, std::vector<int> discarded_carriers, int num_sync_words, std::string len_key);
       ~ofdm_divide_vcvc_impl();
       
-      int d_vlen_in, d_vlen_out;
+      int d_vlen_in, d_vlen_out, d_num_sync_words;
       std::vector<int> d_discarded_carriers;
       std::string d_len_key;
 
