@@ -15,7 +15,7 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Typedefs", "functions_type.html", null ]
       ] ]
@@ -33,9 +33,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classgr_1_1radar_1_1os__cfar__2d__vc__impl.html#ae79502c7c177ef395011d5eb3b62a2c4",
-"classgr_1_1radar_1_1static__target__simulator__cc__impl.html#abb202c1a50b2298e21332df4f7031705",
-"signal__generator__cw__c_8h_source.html"
+"classgr_1_1radar_1_1msg__manipulator__impl.html#acbd385fba4653d40bb986d4ac4a82639",
+"classgr_1_1radar_1_1split__cc.html",
+"functions_q.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

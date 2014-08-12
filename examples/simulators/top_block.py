@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Aug 11 17:05:50 2014
+# Generated: Tue Aug 12 17:03:53 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -162,7 +162,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_signal_generator_cw_c_0).set_min_output_buffer(1048576)
         self.radar_print_results_0 = radar.print_results(False, "rcs_test.txt")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decim_fac, -2000, 0, (-1000,1000), True, "packet_len")
-        self.radar_estimator_rcs_0 = radar.estimator_rcs(10, center_freq, 0, 0, 0, 0, 0.5, 1)
+        self.radar_estimator_rcs_0 = radar.estimator_rcs(1, 2.45e9, 0, 0, 0, 0, 0.5, 4, 0.5)
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, (freq[1]-freq[0]), True)
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
         	packet_len/decim_fac, #size

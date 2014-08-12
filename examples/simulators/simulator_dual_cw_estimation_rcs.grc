@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Mon Aug 11 17:05:50 2014</timestamp>
+  <timestamp>Tue Aug 12 17:03:52 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -1668,73 +1668,6 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_rcs</key>
-    <param>
-      <key>id</key>
-      <value>radar_estimator_rcs_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>num_mean</key>
-      <value>10</value>
-    </param>
-    <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
-    </param>
-    <param>
-      <key>antenna_gain_tx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>antenna_gain_rx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>usrp_gain_tx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>usrp_gain_rx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>power_tx</key>
-      <value>0.5</value>
-    </param>
-    <param>
-      <key>corr_factor</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(626, 827)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
@@ -1940,6 +1873,77 @@
     <param>
       <key>_coordinate</key>
       <value>(830, 1081)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_estimator_rcs</key>
+    <param>
+      <key>id</key>
+      <value>radar_estimator_rcs_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>num_mean</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>center_freq</key>
+      <value>2.45e9</value>
+    </param>
+    <param>
+      <key>antenna_gain_tx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>antenna_gain_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>usrp_gain_tx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>usrp_gain_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>power_tx</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>corr_factor</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>exponent</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(581, 920)</value>
     </param>
     <param>
       <key>_rotation</key>

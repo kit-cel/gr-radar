@@ -43,6 +43,7 @@ class qa_estimator_rcs (gr_unittest.TestCase):
 		usrp_gain_rx = 1
 		amplitude = 1
 		corr_factor = 1
+		exponent = 1
 
 		Range = (10, 20, 30)
 		power = (15, 30, 45)
@@ -53,7 +54,7 @@ class qa_estimator_rcs (gr_unittest.TestCase):
 		pmt_in = pmt.list3(pmt_misc,pmt_range,pmt_power)
 
 		src = blocks.message_strobe(pmt_in, 300)
-		est = radar.estimator_rcs(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, amplitude, corr_factor)
+		est = radar.estimator_rcs(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, amplitude, corr_factor, exponent)
 		snk = blocks.message_debug()
 		self.tb.msg_connect(src,"strobe",est,"Msg in")
 		self.tb.msg_connect(est,"Msg out",snk,"store")

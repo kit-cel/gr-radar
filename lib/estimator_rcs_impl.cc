@@ -31,16 +31,16 @@ namespace gr {
   namespace radar {
 
     estimator_rcs::sptr
-    estimator_rcs::make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor)
+    estimator_rcs::make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_rcs_impl(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, power_tx, corr_factor));
+        (new estimator_rcs_impl(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, power_tx, corr_factor, exponent));
     }
 
     /*
      * The private constructor
      */
-    estimator_rcs_impl::estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor)
+    estimator_rcs_impl::estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent)
       : gr::block("estimator_rcs",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -53,6 +53,7 @@ namespace gr {
         d_usrp_gain_rx = usrp_gain_rx;
         d_power_tx = power_tx; // needs to be calibrated for every usage
         d_corr_factor = corr_factor;
+        d_exponent = exponent;
 
         d_rcs_vals.resize(d_num_mean);
 
@@ -82,6 +83,55 @@ namespace gr {
     {
     }
 
+    void
+    estimator_rcs_impl::set_num_mean(int val){
+      d_num_mean = val;
+      d_rcs_vals.clear();
+      d_rcs_vals.resize(d_num_mean);
+      d_loop_counter = 0;
+    }
+
+    void
+    estimator_rcs_impl::set_center_freq(float val){
+      d_center_freq = val;
+      d_lambda = c_light/d_center_freq;
+      d_fak = pow(4.0*M_PI, 3) / (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
+    }
+
+    void
+    estimator_rcs_impl::set_antenna_gain_tx(float val){
+      d_antenna_gain_tx = val;
+      d_antenna_gain_abs_tx = pow(10, d_antenna_gain_tx/10);
+      d_fak = pow(4.0*M_PI, 3) / (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
+    }
+
+    void
+    estimator_rcs_impl::set_antenna_gain_rx(float val){
+      d_antenna_gain_rx = val;
+      d_antenna_gain_abs_rx = pow(10, d_antenna_gain_rx/10);
+      d_fak = pow(4.0*M_PI, 3) / (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
+    }
+
+    void
+    estimator_rcs_impl::set_usrp_gain_tx(float val){
+      d_usrp_gain_tx = val;
+    }
+
+    void
+    estimator_rcs_impl::set_usrp_gain_rx(float val){
+      d_usrp_gain_rx = val;
+    }
+
+    void
+    estimator_rcs_impl::set_power_tx(float val){
+      d_power_tx = val;
+    }
+
+    void
+    estimator_rcs_impl::set_corr_factor(float val){
+      d_corr_factor = val;
+    }
+
     float
     estimator_rcs_impl::calculate_vector_mean(boost::circular_buffer<float>* rcs_vals) {
       float sum_of_elems = 0;
@@ -99,7 +149,7 @@ namespace gr {
 
       // regard usrp gains
 			float power_tx = d_power_tx * pow(10, d_usrp_gain_tx/10); 
-			float power_rx = std::sqrt(d_power[0]) *4 / d_power_tx / pow(10, d_usrp_gain_rx/10);
+			float power_rx = pow(d_power[0], d_exponent) / d_power_tx / pow(10, d_usrp_gain_rx/10);
 			
 			float fak = d_fak * pow(d_range[0], 4);
 

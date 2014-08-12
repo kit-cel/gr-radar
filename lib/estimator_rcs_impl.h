@@ -32,16 +32,26 @@ namespace gr {
       // Nothing to declare in this block
 
      public:
-      estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor);
+      estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent);
       ~estimator_rcs_impl();
       void handle_msg(pmt::pmt_t msg);
       float calculate_rcs();
       float calculate_vector_mean(boost::circular_buffer<float>*);
+      void set_num_mean(int val);
+      void set_center_freq(float val);
+      void set_antenna_gain_tx(float val);
+      void set_antenna_gain_rx(float val);
+      void set_usrp_gain_tx(float val);
+      void set_usrp_gain_rx(float val);
+      void set_power_tx(float val);
+      void set_corr_factor(float val);
+
+
       boost::circular_buffer<float> d_rcs_vals;
       int d_num_mean, d_loop_counter;
 
       float d_center_freq, d_antenna_gain_tx, d_antenna_gain_rx, d_usrp_gain_tx, d_usrp_gain_rx, d_power_tx, d_fak, d_lambda, d_antenna_gain_abs_rx,
-        d_antenna_gain_abs_tx, d_corr_factor;
+        d_antenna_gain_abs_tx, d_corr_factor, d_exponent;
 
       pmt::pmt_t d_port_id_in, d_port_id_out;
       pmt::pmt_t d_prange, d_ppower, d_value;

@@ -5,6 +5,7 @@ var searchData=
   ['_7eestimator_5ffmcw_5fimpl',['~estimator_fmcw_impl',['../classgr_1_1radar_1_1estimator__fmcw__impl.html#a298e17a81fb82bb68027cbb1a947557e',1,'gr::radar::estimator_fmcw_impl']]],
   ['_7eestimator_5ffsk_5fimpl',['~estimator_fsk_impl',['../classgr_1_1radar_1_1estimator__fsk__impl.html#a506a3dc39cb004ddaf2c158fc120d20d',1,'gr::radar::estimator_fsk_impl']]],
   ['_7eestimator_5fofdm_5fimpl',['~estimator_ofdm_impl',['../classgr_1_1radar_1_1estimator__ofdm__impl.html#af86f7285f74ad59f1614e3d6e8d6833d',1,'gr::radar::estimator_ofdm_impl']]],
+  ['_7eestimator_5frcs_5fimpl',['~estimator_rcs_impl',['../classgr_1_1radar_1_1estimator__rcs__impl.html#a852e7a69a8871d5d749d956a87177b54',1,'gr::radar::estimator_rcs_impl']]],
   ['_7eestimator_5fsync_5fpulse_5fc_5fimpl',['~estimator_sync_pulse_c_impl',['../classgr_1_1radar_1_1estimator__sync__pulse__c__impl.html#a4daef6c56d268c2a3bdc8e19a0a9dc42',1,'gr::radar::estimator_sync_pulse_c_impl']]],
   ['_7efind_5fmax_5fpeak_5fc_5fimpl',['~find_max_peak_c_impl',['../classgr_1_1radar_1_1find__max__peak__c__impl.html#afeef41ce9727b5536344189f34ad4409',1,'gr::radar::find_max_peak_c_impl']]],
   ['_7emsg_5fgate_5fimpl',['~msg_gate_impl',['../classgr_1_1radar_1_1msg__gate__impl.html#ac027fd1b283de510b788945521cb34c5',1,'gr::radar::msg_gate_impl']]],
