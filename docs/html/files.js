@@ -31,12 +31,6 @@ var files =
     [ "estimator_ofdm_impl.h", "estimator__ofdm__impl_8h.html", [
       [ "estimator_ofdm_impl", "classgr_1_1radar_1_1estimator__ofdm__impl.html", "classgr_1_1radar_1_1estimator__ofdm__impl" ]
     ] ],
-    [ "estimator_rcs.h", "estimator__rcs_8h.html", [
-      [ "estimator_rcs", "classgr_1_1radar_1_1estimator__rcs.html", "classgr_1_1radar_1_1estimator__rcs" ]
-    ] ],
-    [ "estimator_rcs_impl.h", "estimator__rcs__impl_8h.html", [
-      [ "estimator_rcs_impl", "classgr_1_1radar_1_1estimator__rcs__impl.html", "classgr_1_1radar_1_1estimator__rcs__impl" ]
-    ] ],
     [ "estimator_sync_pulse_c.h", "estimator__sync__pulse__c_8h.html", [
       [ "estimator_sync_pulse_c", "classgr_1_1radar_1_1estimator__sync__pulse__c.html", "classgr_1_1radar_1_1estimator__sync__pulse__c" ]
     ] ],

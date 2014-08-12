@@ -110,9 +110,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__ofdm.html">estimator_ofdm</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This block evaluates the peaks given from a OFDM matrix. Input are the bins of the peaks with the identifiers 'axis_x' and 'axis_y'. The parameters of the block axis_x and axis_y are vectors which define the mapping of the axis. If two values are given it is assumed a linear progression in between. If four values are given the middle values are set on half of the axis and it is interpolated linear in between. len_x and len_y gives the length of the axis in number of bins. symbol_x and symbol_y defines the identifier (symbols) for the output data. merge_consecutive toggles merging consecutive peaks. Each peak is compared with peaks in a range of one bin. If there is a peak with a higher power the actual bin is not used for evaluations. If merge_consecutive is true data with identifier 'power' is needed.  <a href="classgr_1_1radar_1_1estimator__ofdm.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html">estimator_rcs</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for calculating RCS values, see parameters for details. The radar equation is used to calculate the RCS: RCS = Pr*(4pi)^3*R^4/(Pt*Gt*Gr*lamda^2). The Rx power (Pr) and the distance (R) are being estimated, while the other parameters are given in the flowgraph. It is possible to average a number of samples by setting the num_mean value &gt; 1. The RCS will be 0 until enough samples are collected to calculate the mean value (be patient). The Tx power (Pt) needs to be calibrated with external hardware. I recommend to calibrate for the wanted power and not to change the parameters in the flowgraph on the Tx side after that. The RCS block needs the Rx power, to estimate the RCS. For that, the input power of the block needs to be determined analytically and altered via the corr_factor and exponent values, to fit the following equation: Pr = P_input ^ (exponent) * corr_factor / Pt. In addition, the FFTs need to be normalized for correct power calculation.  <a href="classgr_1_1radar_1_1estimator__rcs.html#details">More...</a><br/></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c.html">estimator_sync_pulse_c</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This block can be used to estimate the shift of a signal on input 1 in relation to an other on input 2. For example the constant number of delay samples due to hardware effect from a signal source can be estimated. The calculation of the shift is done by a cross correlation of the input signals. The number of correlations in samples is given with num_xcorr. The output message is the number of delay samples with the identifier (symbol) 'sync_pulse'. This can be displayed with the 'Print Results' block.  <a href="classgr_1_1radar_1_1estimator__sync__pulse__c.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,8 +189,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__ofdm__impl.html">estimator_ofdm_impl</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs__impl.html">estimator_rcs_impl</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__sync__pulse__c__impl.html">estimator_sync_pulse_c_impl</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1find__max__peak__c__impl.html">find_max_peak_c_impl</a></td></tr>
@@ -253,11 +248,7 @@ Classes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li>
-<<<<<<< HEAD
-    <li class="footer">Generated on Tue Aug 12 2014 17:21:24 for GNU Radio Radar Toolbox by
-=======
     <li class="footer">Generated on Thu Aug 7 2014 18:23:58 for GNU Radio Radar Toolbox by
->>>>>>> stfo/master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
