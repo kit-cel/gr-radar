@@ -13,6 +13,9 @@ var hierarchy =
       [ "gr::radar::estimator_ofdm", "classgr_1_1radar_1_1estimator__ofdm.html", [
         [ "gr::radar::estimator_ofdm_impl", "classgr_1_1radar_1_1estimator__ofdm__impl.html", null ]
       ] ],
+      [ "gr::radar::estimator_rcs", "classgr_1_1radar_1_1estimator__rcs.html", [
+        [ "gr::radar::estimator_rcs_impl", "classgr_1_1radar_1_1estimator__rcs__impl.html", null ]
+      ] ],
       [ "gr::radar::msg_gate", "classgr_1_1radar_1_1msg__gate.html", [
         [ "gr::radar::msg_gate_impl", "classgr_1_1radar_1_1msg__gate__impl.html", null ]
       ] ],

@@ -1,6 +1,6 @@
 var classgr_1_1radar_1_1estimator__fmcw__impl =
 [
-    [ "estimator_fmcw_impl", "classgr_1_1radar_1_1estimator__fmcw__impl.html#ad288d10615689be440780cb9b1d75e67", null ],
+    [ "estimator_fmcw_impl", "classgr_1_1radar_1_1estimator__fmcw__impl.html#ad494cc7d33a3f00ef5ccab280a2819c3", null ],
     [ "~estimator_fmcw_impl", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a298e17a81fb82bb68027cbb1a947557e", null ],
     [ "estimate", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a022f38530853dbe670a98d49e75f4bc1", null ],
     [ "handle_msg_cw", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a69b8976b6ef8b8d197e7eaaf2e798ec2", null ],
@@ -21,6 +21,7 @@ var classgr_1_1radar_1_1estimator__fmcw__impl =
     [ "d_port_id_in_down", "classgr_1_1radar_1_1estimator__fmcw__impl.html#ac0a7645a299846ca350db8a114e79544", null ],
     [ "d_port_id_in_up", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a1de4e0ca6e2267e1fb92da0cc06f9bab", null ],
     [ "d_port_id_out", "classgr_1_1radar_1_1estimator__fmcw__impl.html#acb2c78805f434d3528cc7e6867b38d20", null ],
+    [ "d_push_power", "classgr_1_1radar_1_1estimator__fmcw__impl.html#add4a453b9e8469b98d6d04dba5eda36c", null ],
     [ "d_samp_down", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a8af82310271b4ad1f4ab87bf5b13cc79", null ],
     [ "d_samp_rate", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a2a9698989905bf4ea283ef9816015515", null ],
     [ "d_samp_up", "classgr_1_1radar_1_1estimator__fmcw__impl.html#a4627b04c8f72ae560c9fd6616078ead2", null ],

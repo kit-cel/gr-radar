@@ -117,9 +117,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#ac5467d0b59c7d8e82b53ea28c3a37efd">make</a> (int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down)</td></tr>
-<tr class="memdesc:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>.  <a href="#ac5467d0b59c7d8e82b53ea28c3a37efd">More...</a><br/></td></tr>
-<tr class="separator:ac5467d0b59c7d8e82b53ea28c3a37efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23be76bf0eb5e5f959ac18822bfc355e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#aa4a6342d83696ecd7413331d62b3fd4e">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#a23be76bf0eb5e5f959ac18822bfc355e">make</a> (int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down, bool push_power)</td></tr>
+<tr class="memdesc:a23be76bf0eb5e5f959ac18822bfc355e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>.  <a href="#a23be76bf0eb5e5f959ac18822bfc355e">More...</a><br/></td></tr>
+<tr class="separator:a23be76bf0eb5e5f959ac18822bfc355e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with the identifier 'frequency' of the up-chirp, down-chirp and CW part. If data is available on all three message ports the estimation starts. The velocity is estimated with the frequency information of the CW block and the range is estimated with the up and down chirp. If multiple frequencies are given, the velocity is estimated first and associated with the most likely range from the up- and down-chirp. The output identifiers are 'range' and 'velocity'. </p>
@@ -130,6 +130,7 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">sweep_freq</td><td>Sweep frequency </td></tr>
     <tr><td class="paramname">samp_up</td><td>Samples of up-chirp </td></tr>
     <tr><td class="paramname">samp_down</td><td>Samples of down-chirp </td></tr>
+    <tr><td class="paramname">push_power</td><td>Push through power of peak </td></tr>
   </table>
   </dd>
 </dl>
@@ -147,7 +148,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac5467d0b59c7d8e82b53ea28c3a37efd"></a>
+<a class="anchor" id="a23be76bf0eb5e5f959ac18822bfc355e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -182,7 +183,13 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>samp_down</em>&#160;</td>
+          <td class="paramname"><em>samp_down</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>push_power</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -198,7 +205,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#ac5467d0b59c7d8e82b53ea28c3a37efd" title="Return a shared_ptr to a new instance of radar::estimator_fmcw. ">radar::estimator_fmcw::make</a> is the public interface for creating new instances. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html" title="This block estimates range and veloicty from peaks of a FMCW spectrum. Input messages are data with t...">radar::estimator_fmcw</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html#a23be76bf0eb5e5f959ac18822bfc355e" title="Return a shared_ptr to a new instance of radar::estimator_fmcw. ">radar::estimator_fmcw::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -211,7 +218,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1estimator__fmcw.html">estimator_fmcw</a></li>
-    <li class="footer">Generated on Thu Aug 7 2014 18:23:58 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Wed Aug 13 2014 14:05:24 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
