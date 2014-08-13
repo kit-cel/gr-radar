@@ -24,6 +24,7 @@ from gnuradio import blocks
 import radar_swig as radar
 import pmt
 from time import sleep
+import math
 
 class qa_estimator_rcs (gr_unittest.TestCase):
 
@@ -66,6 +67,18 @@ class qa_estimator_rcs (gr_unittest.TestCase):
 		self.tb.wait()
 
 		# check data
+
+		msg = snk.get_message(0)
+
+		wavel = 3e8/center_freq
+		d_antenna_gain_abs_rx = 10**(antenna_gain_rx/10)
+		d_antenna_gain_abs_tx = 10**(antenna_gain_tx/10)
+		power_rx = power[0]**exponent / 10**(usrp_gain_rx/10);
+		power_tx = amplitude * 10**(usrp_gain_tx/10)
+
+		rcs_ref = (4*math.pi)**(3)/(d_antenna_gain_abs_rx*d_antenna_gain_abs_tx*wavel**2)*Range[0]**4*power_rx/power_tx*corr_factor
+
+		self.assertAlmostEqual( rcs_ref, pmt.f32vector_ref(pmt.nth(1,(pmt.nth(0,msg))),0), 4 ) # check rcs value
 
 if __name__ == '__main__':
 	gr_unittest.run(qa_estimator_rcs)#, "qa_estimator_rcs.xml")
