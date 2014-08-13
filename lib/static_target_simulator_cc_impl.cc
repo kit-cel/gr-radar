@@ -102,6 +102,7 @@ namespace gr {
 		d_scale_ampl.resize(d_num_targets);
 		for(int k=0; k<d_num_targets; k++){
 			d_scale_ampl[k] = c_light/d_center_freq*std::sqrt(d_rcs[k])/std::pow(d_range[k],2)/std::pow(4*M_PI,3.0/2.0); // sqrt of radar equation as amplitude estimation
+			//d_scale_ampl[k] = 1.0;
 		}
 		
 		if(d_rndm_phaseshift){

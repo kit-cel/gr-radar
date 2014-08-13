@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Jul 10 19:46:36 2014
+# Generated: Mon Aug 11 16:51:32 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -11,13 +11,16 @@ from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
 from gnuradio import gr
+from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import PyQt4.Qwt5 as Qwt
 import radar
+import sip
 import sys
 
+from distutils.version import StrictVersion
 class top_block(gr.top_block, Qt.QWidget):
 
     def __init__(self):
@@ -50,20 +53,20 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 14250000
         self.packet_len = packet_len = 2**21
         self.freq_res = freq_res = samp_rate/float(packet_len)
-        self.freq = freq = (-6000000,6000000)
+        self.freq = freq = (-4000000,4000000)
         self.center_freq = center_freq = 2.45e9
         self.v_res = v_res = freq_res*3e8/2/center_freq
         self.time_res = time_res = packet_len/float(samp_rate)
         self.threshold = threshold = -200
         self.samp_protect = samp_protect = 1
-        self.range_time = range_time = 60
+        self.range_time = range_time = 120
         self.range_res = range_res = 3e8/2/float((freq[1]-freq[0]))
         self.min_output_buffer = min_output_buffer = int(packet_len*2)
         self.max_output_buffer = max_output_buffer = 0
         self.gain_tx = gain_tx = 10
         self.gain_rx = gain_rx = 10
-        self.delay_samp = delay_samp = 32
-        self.decim_fac = decim_fac = 2**7
+        self.delay_samp = delay_samp = 30
+        self.decim_fac = decim_fac = 2**10
         self.amplitude = amplitude = 0.5
 
         ##################################################
@@ -80,13 +83,13 @@ class top_block(gr.top_block, Qt.QWidget):
             def setValue(self, value):
                 super(Qwt.QwtCounter, self).setValue(value)
         self._threshold_counter = qwt_counter_pyslot()
-        self._threshold_counter.setRange(-200, 100, 1)
+        self._threshold_counter.setRange(-2000, 100, 1)
         self._threshold_counter.setNumButtons(2)
         self._threshold_counter.setValue(self.threshold)
         self._threshold_tool_bar.addWidget(self._threshold_counter)
         self._threshold_counter.valueChanged.connect(self.set_threshold)
         self._threshold_slider = Qwt.QwtSlider(None, Qt.Qt.Horizontal, Qwt.QwtSlider.BottomScale, Qwt.QwtSlider.BgSlot)
-        self._threshold_slider.setRange(-200, 100, 1)
+        self._threshold_slider.setRange(-2000, 100, 1)
         self._threshold_slider.setValue(self.threshold)
         self._threshold_slider.setMinimumWidth(200)
         self._threshold_slider.valueChanged.connect(self.set_threshold)
@@ -196,7 +199,7 @@ class top_block(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.6', '', 'internal', 'none', 'J1', gain_tx, 0.1, 0.05, 0, 'addr=192.168.10.4', '', 'mimo', 'mimo', 'J1', gain_rx, 0.1, 0.05, 0, "packet_len")
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, int(delay_samp), 'addr=192.168.10.4', '', 'internal', 'none', 'J2', gain_tx, 0.1, 0.05, 0, 'addr=192.168.10.6', '', 'mimo', 'mimo', 'J2', gain_rx, 0.1, 0.05, 0, "packet_len")
         (self.radar_usrp_echotimer_cc_0).set_min_output_buffer(4194304)
         self.radar_ts_fft_cc_0_0 = radar.ts_fft_cc(packet_len/decim_fac,  "packet_len")
         (self.radar_ts_fft_cc_0_0).set_min_output_buffer(4194304)
@@ -206,21 +209,52 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_signal_generator_cw_c_0_0).set_min_output_buffer(4194304)
         self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[0], ), amplitude, "packet_len")
         (self.radar_signal_generator_cw_c_0).set_min_output_buffer(4194304)
+        self.radar_qtgui_time_plot_1_0 = radar.qtgui_time_plot(100, 'rcs', (0,30), range_time, "")
         self.radar_qtgui_time_plot_1 = radar.qtgui_time_plot(100, 'velocity', (-3,3), range_time, "")
         self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'range', (0,range_res), range_time, "")
-        self.radar_print_results_0 = radar.print_results(False, "")
+        self.radar_print_results_0 = radar.print_results(True, "rcs_test.txt")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decim_fac, threshold, int(samp_protect), ((-300,300)), True, "packet_len")
-        self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, (freq[1]-freq[0]))
-        self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        (self.blocks_throttle_0_0).set_min_output_buffer(4194304)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        (self.blocks_throttle_0).set_min_output_buffer(4194304)
+        self.radar_estimator_rcs_0 = radar.estimator_rcs(10, center_freq, 11, 11, gain_tx, gain_rx, 0.02, 10)
+        self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, (freq[1]-freq[0]), True)
+        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
+        	packet_len/decim_fac, #size
+        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	0, #fc
+        	samp_rate/decim_fac, #bw
+        	"QT GUI Plot", #name
+        	2 #number of inputs
+        )
+        self.qtgui_freq_sink_x_0.set_update_time(0.10)
+        self.qtgui_freq_sink_x_0.set_y_axis(-140, 10)
+        self.qtgui_freq_sink_x_0.enable_autoscale(False)
+        self.qtgui_freq_sink_x_0.enable_grid(False)
+        self.qtgui_freq_sink_x_0.set_fft_average(1.0)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "dark blue"]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(2):
+            if len(labels[i]) == 0:
+                self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_freq_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_freq_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_freq_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
+        
+        self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
         self.blocks_tagged_stream_multiply_length_0_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/float(decim_fac))
         (self.blocks_tagged_stream_multiply_length_0_0).set_min_output_buffer(4194304)
         self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_gr_complex*1, "packet_len", 1.0/float(decim_fac))
         (self.blocks_tagged_stream_multiply_length_0).set_min_output_buffer(4194304)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((1+1j*0, ))
-        (self.blocks_multiply_const_vxx_0).set_min_output_buffer(4194304)
+        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vcc((1.0/(packet_len/decim_fac), ))
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((1.0/(packet_len/decim_fac), ))
         self.blocks_multiply_conjugate_cc_1 = blocks.multiply_conjugate_cc(1)
         (self.blocks_multiply_conjugate_cc_1).set_min_output_buffer(4194304)
         self.blocks_multiply_conjugate_cc_0_0 = blocks.multiply_conjugate_cc(1)
@@ -233,25 +267,26 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.radar_signal_generator_cw_c_0_0, 0), (self.blocks_throttle_0_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.blocks_add_xx_1, 0))
-        self.connect((self.blocks_throttle_0_0, 0), (self.blocks_add_xx_1, 1))
-        self.connect((self.blocks_throttle_0_0, 0), (self.blocks_multiply_conjugate_cc_0_0, 1))
         self.connect((self.blocks_multiply_conjugate_cc_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.blocks_multiply_conjugate_cc_0_0, 0), (self.rational_resampler_xxx_0_0, 0))
         self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.radar_ts_fft_cc_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
         self.connect((self.blocks_tagged_stream_multiply_length_0_0, 0), (self.radar_ts_fft_cc_0_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_tagged_stream_multiply_length_0_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
+        self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.connect((self.rational_resampler_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))
         self.connect((self.blocks_multiply_conjugate_cc_1, 0), (self.radar_find_max_peak_c_0, 0))
-        self.connect((self.radar_ts_fft_cc_0_0, 0), (self.blocks_multiply_conjugate_cc_1, 1))
-        self.connect((self.radar_ts_fft_cc_0, 0), (self.blocks_multiply_conjugate_cc_1, 0))
         self.connect((self.blocks_add_xx_1, 0), (self.radar_usrp_echotimer_cc_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0_0, 0))
-        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
+        self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_multiply_conjugate_cc_0_0, 0))
+        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
+        self.connect((self.radar_signal_generator_cw_c_0_0, 0), (self.blocks_multiply_conjugate_cc_0_0, 1))
+        self.connect((self.radar_signal_generator_cw_c_0, 0), (self.blocks_add_xx_1, 0))
+        self.connect((self.radar_signal_generator_cw_c_0_0, 0), (self.blocks_add_xx_1, 1))
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_multiply_conjugate_cc_1, 0))
+        self.connect((self.radar_ts_fft_cc_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.radar_ts_fft_cc_0_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_multiply_conjugate_cc_1, 1))
 
         ##################################################
         # Asynch Message Connections
@@ -259,7 +294,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_1, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_estimator_rcs_0, "Msg in")
+        self.msg_connect(self.radar_estimator_rcs_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_estimator_rcs_0, "Msg out", self.radar_qtgui_time_plot_1_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -273,8 +310,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.set_time_res(self.packet_len/float(self.samp_rate))
         self.set_freq_res(self.samp_rate/float(self.packet_len))
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
+        self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
 
     def get_packet_len(self):
         return self.packet_len
@@ -284,6 +320,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.set_time_res(self.packet_len/float(self.samp_rate))
         self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_min_output_buffer(int(self.packet_len*2))
+        self.blocks_multiply_const_vxx_0_0.set_k((1.0/(self.packet_len/self.decim_fac), ))
+        self.blocks_multiply_const_vxx_0.set_k((1.0/(self.packet_len/self.decim_fac), ))
 
     def get_freq_res(self):
         return self.freq_res
@@ -394,6 +432,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self.decim_fac = decim_fac
         self.blocks_tagged_stream_multiply_length_0.set_scalar(1.0/float(self.decim_fac))
         self.blocks_tagged_stream_multiply_length_0_0.set_scalar(1.0/float(self.decim_fac))
+        self.blocks_multiply_const_vxx_0_0.set_k((1.0/(self.packet_len/self.decim_fac), ))
+        self.blocks_multiply_const_vxx_0.set_k((1.0/(self.packet_len/self.decim_fac), ))
+        self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
 
     def get_amplitude(self):
         return self.amplitude
@@ -412,7 +453,8 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
+    if(StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0")):
+        Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
     qapp = Qt.QApplication(sys.argv)
     tb = top_block()
     tb.start()
@@ -423,4 +465,3 @@ if __name__ == '__main__':
     qapp.connect(qapp, Qt.SIGNAL("aboutToQuit()"), quitting)
     qapp.exec_()
     tb = None #to clean up Qt widgets
-

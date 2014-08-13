@@ -32,7 +32,7 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      estimator_fmcw_impl(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down);
+      estimator_fmcw_impl(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down, bool push_power);
       ~estimator_fmcw_impl();
       
       void handle_msg_cw(pmt::pmt_t msg);
@@ -43,6 +43,7 @@ namespace gr {
       int d_samp_rate;
       float d_center_freq, d_sweep_freq;
       int d_samp_up, d_samp_down;
+      bool d_push_power;
       
       float d_const_up, d_const_down, d_const_doppler;
       
