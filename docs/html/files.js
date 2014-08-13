@@ -172,6 +172,12 @@ var files =
     [ "transpose_matrix_vcvc_impl.h", "transpose__matrix__vcvc__impl_8h.html", [
       [ "transpose_matrix_vcvc_impl", "classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html", "classgr_1_1radar_1_1transpose__matrix__vcvc__impl" ]
     ] ],
+    [ "trigger_command.h", "trigger__command_8h.html", [
+      [ "trigger_command", "classgr_1_1radar_1_1trigger__command.html", "classgr_1_1radar_1_1trigger__command" ]
+    ] ],
+    [ "trigger_command_impl.h", "trigger__command__impl_8h.html", [
+      [ "trigger_command_impl", "classgr_1_1radar_1_1trigger__command__impl.html", "classgr_1_1radar_1_1trigger__command__impl" ]
+    ] ],
     [ "ts_fft_cc.h", "ts__fft__cc_8h.html", [
       [ "ts_fft_cc", "classgr_1_1radar_1_1ts__fft__cc.html", "classgr_1_1radar_1_1ts__fft__cc" ]
     ] ],

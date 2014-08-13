@@ -35,7 +35,7 @@ var NAVTREEINDEX =
 "annotated.html",
 "classgr_1_1radar_1_1msg__manipulator__impl.html#aa75fbe9af8f70b4fe07159b3d6a1e37a",
 "classgr_1_1radar_1_1spectrogram__plot.html#a9d9cadfdccd1ad3037e175307ac2dd16",
-"functions_o.html"
+"functions_func_o.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

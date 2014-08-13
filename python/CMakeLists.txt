@@ -66,3 +66,4 @@ GR_ADD_TEST(qa_ofdm_divide_vcvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}
 GR_ADD_TEST(qa_os_cfar_2d_vc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_os_cfar_2d_vc.py)
 GR_ADD_TEST(qa_estimator_ofdm ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_ofdm.py)
 GR_ADD_TEST(qa_estimator_rcs ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_rcs.py)
+GR_ADD_TEST(qa_trigger_command ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_trigger_command.py)

@@ -37,6 +37,7 @@
 #include "radar/os_cfar_2d_vc.h"
 #include "radar/estimator_ofdm.h"
 #include "radar/estimator_rcs.h"
+#include "radar/trigger_command.h"
 %}
 
 
@@ -104,3 +105,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, os_cfar_2d_vc);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_ofdm);
 %include "radar/estimator_rcs.h"
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_rcs);
+%include "radar/trigger_command.h"
+GR_SWIG_BLOCK_MAGIC2(radar, trigger_command);

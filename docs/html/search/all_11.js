@@ -30,6 +30,7 @@ var searchData=
   ['_7etime_5fplot',['~time_plot',['../classgr_1_1radar_1_1time__plot.html#aa99ed2cc640a60ced4c26c48369fee4d',1,'gr::radar::time_plot']]],
   ['_7etracking_5fsingletarget_5fimpl',['~tracking_singletarget_impl',['../classgr_1_1radar_1_1tracking__singletarget__impl.html#a1a0e2b9f5e38d27e3af6282fd5393e43',1,'gr::radar::tracking_singletarget_impl']]],
   ['_7etranspose_5fmatrix_5fvcvc_5fimpl',['~transpose_matrix_vcvc_impl',['../classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html#aa19d3ad7afc446f7f1bc3d94861b2bbe',1,'gr::radar::transpose_matrix_vcvc_impl']]],
+  ['_7etrigger_5fcommand_5fimpl',['~trigger_command_impl',['../classgr_1_1radar_1_1trigger__command__impl.html#afc33cadaf8594ca27aac78af04656cda',1,'gr::radar::trigger_command_impl']]],
   ['_7ets_5ffft_5fcc_5fimpl',['~ts_fft_cc_impl',['../classgr_1_1radar_1_1ts__fft__cc__impl.html#a254c366ddb920534d33b35fdc58fbcf5',1,'gr::radar::ts_fft_cc_impl']]],
   ['_7eusrp_5fechotimer_5fcc_5fimpl',['~usrp_echotimer_cc_impl',['../classgr_1_1radar_1_1usrp__echotimer__cc__impl.html#a1952594707db38baa60e787851c2ae39',1,'gr::radar::usrp_echotimer_cc_impl']]]
 ];

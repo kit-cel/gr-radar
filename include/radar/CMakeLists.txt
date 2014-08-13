@@ -50,5 +50,6 @@ install(FILES
     ofdm_divide_vcvc.h
     os_cfar_2d_vc.h
     estimator_ofdm.h
-    estimator_rcs.h DESTINATION include/radar
+    estimator_rcs.h
+    trigger_command.h DESTINATION include/radar
 )

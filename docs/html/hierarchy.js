@@ -33,6 +33,9 @@ var hierarchy =
       ] ],
       [ "gr::radar::tracking_singletarget", "classgr_1_1radar_1_1tracking__singletarget.html", [
         [ "gr::radar::tracking_singletarget_impl", "classgr_1_1radar_1_1tracking__singletarget__impl.html", null ]
+      ] ],
+      [ "gr::radar::trigger_command", "classgr_1_1radar_1_1trigger__command.html", [
+        [ "gr::radar::trigger_command_impl", "classgr_1_1radar_1_1trigger__command__impl.html", null ]
       ] ]
     ] ],
     [ "QWidget", null, [

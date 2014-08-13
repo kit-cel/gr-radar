@@ -5,6 +5,8 @@ var searchData=
   ['tracking_5fsingletarget_5fimpl',['tracking_singletarget_impl',['../classgr_1_1radar_1_1tracking__singletarget__impl.html',1,'gr::radar']]],
   ['transpose_5fmatrix_5fvcvc',['transpose_matrix_vcvc',['../classgr_1_1radar_1_1transpose__matrix__vcvc.html',1,'gr::radar']]],
   ['transpose_5fmatrix_5fvcvc_5fimpl',['transpose_matrix_vcvc_impl',['../classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html',1,'gr::radar']]],
+  ['trigger_5fcommand',['trigger_command',['../classgr_1_1radar_1_1trigger__command.html',1,'gr::radar']]],
+  ['trigger_5fcommand_5fimpl',['trigger_command_impl',['../classgr_1_1radar_1_1trigger__command__impl.html',1,'gr::radar']]],
   ['ts_5ffft_5fcc',['ts_fft_cc',['../classgr_1_1radar_1_1ts__fft__cc.html',1,'gr::radar']]],
   ['ts_5ffft_5fcc_5fimpl',['ts_fft_cc_impl',['../classgr_1_1radar_1_1ts__fft__cc__impl.html',1,'gr::radar']]]
 ];

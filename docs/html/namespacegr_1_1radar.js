@@ -27,6 +27,7 @@ var namespacegr_1_1radar =
     [ "static_target_simulator_cc", "classgr_1_1radar_1_1static__target__simulator__cc.html", "classgr_1_1radar_1_1static__target__simulator__cc" ],
     [ "tracking_singletarget", "classgr_1_1radar_1_1tracking__singletarget.html", "classgr_1_1radar_1_1tracking__singletarget" ],
     [ "transpose_matrix_vcvc", "classgr_1_1radar_1_1transpose__matrix__vcvc.html", "classgr_1_1radar_1_1transpose__matrix__vcvc" ],
+    [ "trigger_command", "classgr_1_1radar_1_1trigger__command.html", "classgr_1_1radar_1_1trigger__command" ],
     [ "ts_fft_cc", "classgr_1_1radar_1_1ts__fft__cc.html", "classgr_1_1radar_1_1ts__fft__cc" ],
     [ "usrp_echotimer_cc", "classgr_1_1radar_1_1usrp__echotimer__cc.html", "classgr_1_1radar_1_1usrp__echotimer__cc" ],
     [ "crop_matrix_vcvc_impl", "classgr_1_1radar_1_1crop__matrix__vcvc__impl.html", "classgr_1_1radar_1_1crop__matrix__vcvc__impl" ],
@@ -59,6 +60,7 @@ var namespacegr_1_1radar =
     [ "time_plot", "classgr_1_1radar_1_1time__plot.html", "classgr_1_1radar_1_1time__plot" ],
     [ "tracking_singletarget_impl", "classgr_1_1radar_1_1tracking__singletarget__impl.html", "classgr_1_1radar_1_1tracking__singletarget__impl" ],
     [ "transpose_matrix_vcvc_impl", "classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html", "classgr_1_1radar_1_1transpose__matrix__vcvc__impl" ],
+    [ "trigger_command_impl", "classgr_1_1radar_1_1trigger__command__impl.html", "classgr_1_1radar_1_1trigger__command__impl" ],
     [ "ts_fft_cc_impl", "classgr_1_1radar_1_1ts__fft__cc__impl.html", "classgr_1_1radar_1_1ts__fft__cc__impl" ],
     [ "usrp_echotimer_cc_impl", "classgr_1_1radar_1_1usrp__echotimer__cc__impl.html", "classgr_1_1radar_1_1usrp__echotimer__cc__impl" ]
 ];
