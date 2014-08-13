@@ -44,6 +44,7 @@ class qa_estimator_fmcw (gr_unittest.TestCase):
 		min_output_buffer = packet_len*2
 		test_len = 2*packet_len
 		samp_rate = 10000000
+		push_power = False
 		
 		center_freq = 5.7e9
 		
@@ -93,7 +94,7 @@ class qa_estimator_fmcw (gr_unittest.TestCase):
 		cfar_up = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect, (0,0), False)
 		cfar_down = radar.find_max_peak_c(samp_rate/(decim_fac), threshold, samp_protect, (0,0), False)
 		
-		est = radar.estimator_fmcw(samp_rate/(decim_fac), center_freq, freq_sweep, samp_up/(decim_fac), samp_down/(decim_fac))
+		est = radar.estimator_fmcw(samp_rate/(decim_fac), center_freq, freq_sweep, samp_up/(decim_fac), samp_down/(decim_fac), push_power)
 		
 		res = radar.print_results()
 		debug = blocks.message_debug()

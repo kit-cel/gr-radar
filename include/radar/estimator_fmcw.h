@@ -35,6 +35,7 @@ namespace gr {
      * \param sweep_freq Sweep frequency
      * \param samp_up Samples of up-chirp
      * \param samp_down Samples of down-chirp
+     * \param push_power Push through power of peak
      * 
      * \ingroup radar
      *
@@ -52,7 +53,7 @@ namespace gr {
        * class. radar::estimator_fmcw::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down);
+      static sptr make(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down, bool push_power);
     };
 
   } // namespace radar

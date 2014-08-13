@@ -30,16 +30,16 @@ namespace gr {
   namespace radar {
 
     estimator_fmcw::sptr
-    estimator_fmcw::make(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down)
+    estimator_fmcw::make(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down, bool push_power)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_fmcw_impl(samp_rate, center_freq, sweep_freq, samp_up, samp_down));
+        (new estimator_fmcw_impl(samp_rate, center_freq, sweep_freq, samp_up, samp_down, push_power));
     }
 
     /*
      * The private constructor
      */
-    estimator_fmcw_impl::estimator_fmcw_impl(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down)
+    estimator_fmcw_impl::estimator_fmcw_impl(int samp_rate, float center_freq, float sweep_freq, int samp_up, int samp_down, bool push_power)
       : gr::block("estimator_fmcw",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -49,6 +49,7 @@ namespace gr {
 		d_sweep_freq = sweep_freq;
 		d_samp_up = samp_up;
 		d_samp_down = samp_down;
+		d_push_power = push_power;
 		
 		d_msg_cw_in = false;
 		d_msg_up_in = false;
@@ -126,6 +127,7 @@ namespace gr {
 		std::vector<float> freq_cw, freq_up, freq_down;
 		pmt::pmt_t timestamp;
 		pmt::pmt_t msg_part;
+		pmt::pmt_t power;
 		
 		for(int k=0; k<pmt::length(d_msg_cw); k++){ // search freq CW
 			msg_part = pmt::nth(k,d_msg_cw);
@@ -134,6 +136,9 @@ namespace gr {
 			}
 			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="rx_time"){
 				timestamp = pmt::nth(1,msg_part);
+			}
+			else if(pmt::symbol_to_string(pmt::nth(0,msg_part))=="power"){
+				power = msg_part;
 			}
 		}
 		
@@ -202,7 +207,12 @@ namespace gr {
 		range_pack = pmt::list2(pmt::string_to_symbol("range"), range_value); // make list for range information
 		
 		pmt::pmt_t value;
-		value = pmt::list3(time_pack, vel_pack, range_pack); // all information to one pmt list
+		if(d_push_power){ // if power of peaks shall be pushed through
+			value = pmt::list4(time_pack, vel_pack, range_pack, power); // all information to one pmt list
+		}
+		else{
+			value = pmt::list3(time_pack, vel_pack, range_pack); // all information to one pmt list
+		}
 		message_port_pub(d_port_id_out,value);
 	}
 
