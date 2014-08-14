@@ -3,10 +3,8 @@
   <key>radar_usrp_echotimer_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $args_tx, $wire_tx, $clock_source_tx, $time_source_tx, $antenna_tx, $gain_tx, $timeout_tx, $wait_tx, $lo_offset_tx, $args_rx, $wire_rx, $clock_source_rx, $time_source_rx, $antenna_rx, $gain_rx, $timeout_rx, $wait_rx, $lo_offset_rx, $len_key)</make>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $channel_nums_tx, $channel_nums_rx, $args, $time_source, $clock_source, $wire, $wait, $timeout, $antenna_tx, $antenna_rx, $gain_tx, $gain_rx, $len_key)</make>
   <callback>set_num_delay_samps($num_delay_samps)</callback>
-  <callback>set_tx_gain($gain_tx)</callback>
-  <callback>set_rx_gain($gain_rx)</callback>
   <param>
     <name>Sample rate</name>
     <key>samp_rate</key>
@@ -24,125 +22,82 @@
     <type>int</type>
   </param>
   <param>
-    <name>TX Arguments</name>
-    <key>args_tx</key>
-    <value>'addr=192.168.xx.xx'</value>
-    <type>string</type>
+    <name>TX channel numbers</name>
+    <key>channel_nums_tx</key>
+    <value>0,</value>
+    <type>real_vector</type>
     <hide>part</hide>
   </param>
   <param>
-    <name>TX Wire</name>
-    <key>wire_tx</key>
-    <value>''</value>
-    <type>string</type>
+    <name>RX channel numbers</name>
+    <key>channel_nums_rx</key>
+    <value>0,</value>
+    <type>real_vector</type>
     <hide>part</hide>
   </param>
   <param>
-    <name>TX Clock source</name>
-    <key>clock_source_tx</key>
-    <value>'internal'</value>
+    <name>Arguments</name>
+    <key>args</key>
+    <value>"addr0=192.168.xx.xx, addr1=192.168.xx.xx"</value>
     <type>string</type>
+  </param>
+  <param>
+    <name>Wire</name>
+    <key>wire</key>
+    <value>('','')</value>
+    <type>raw</type>
     <hide>part</hide>
   </param>
   <param>
-    <name>TX Time source</name>
-    <key>time_source_tx</key>
-    <value>'none'</value>
-    <type>string</type>
+    <name>Clock source</name>
+    <key>clock_source</key>
+    <value>('internal','mimo')</value>
+    <type>raw</type>
     <hide>part</hide>
   </param>
   <param>
-    <name>TX Antenna</name>
+    <name>Time source</name>
+    <key>time_source</key>
+    <value>('none','mimo')</value>
+    <type>raw</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>Wait</name>
+    <key>wait</key>
+    <value>0.1, 0.1</value>
+    <type>real_vector</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>Timeout</name>
+    <key>timeout</key>
+    <value>1, 1</value>
+    <type>real_vector</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>Antenna TX</name>
     <key>antenna_tx</key>
-    <type>string</type>
+    <type>raw</type>
     <hide>part</hide>
   </param>
   <param>
-    <name>TX Gain</name>
-    <key>gain_tx</key>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>TX Timeout</name>
-    <key>timeout_tx</key>
-    <value>0.1</value>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>TX Wait to start</name>
-    <key>wait_tx</key>
-    <value>0.05</value>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>TX Lo offset</name>
-    <key>lo_offset_tx</key>
-    <value>0</value>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Arguments</name>
-    <key>args_rx</key>
-    <value>'addr=192.168.xx.xx'</value>
-    <type>string</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Wire</name>
-    <key>wire_rx</key>
-    <value>''</value>
-    <type>string</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Clock source</name>
-    <key>clock_source_rx</key>
-    <value>'mimo'</value>
-    <type>string</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Time Source</name>
-    <key>time_source_rx</key>
-    <value>'mimo'</value>
-    <type>string</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Antenna</name>
+    <name>Antenna RX</name>
     <key>antenna_rx</key>
-    <type>string</type>
+    <type>raw</type>
     <hide>part</hide>
   </param>
   <param>
-    <name>RX Gain</name>
+    <name>Gain TX</name>
+    <key>gain_tx</key>
+    <type>real_vector</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>Gain RX</name>
     <key>gain_rx</key>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Timeout</name>
-    <key>timeout_rx</key>
-    <value>0.1</value>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Wait to start</name>
-    <key>wait_rx</key>
-    <value>0.05</value>
-    <type>float</type>
-    <hide>part</hide>
-  </param>
-  <param>
-    <name>RX Lo offset</name>
-    <key>lo_offset_rx</key>
-    <value>0</value>
-    <type>float</type>
+    <type>real_vector</type>
     <hide>part</hide>
   </param>
   <param>
@@ -159,5 +114,6 @@
   <source>
     <name>IQ out</name>
     <type>complex</type>
+    <nports>len($channel_nums_rx)</nports>
   </source>
 </block>

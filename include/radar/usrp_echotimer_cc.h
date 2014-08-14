@@ -45,16 +45,13 @@ namespace gr {
        * class. radar::usrp_echotimer_cc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int samp_rate, float center_freq, int num_delay_samps,
-		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
-		float timeout_tx, float wait_tx, float lo_offset_tx,
-		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
-		float timeout_rx, float wait_rx, float lo_offset_rx,
+      static sptr make(int samp_rate, float center_freq, int num_delay_samps, std::vector<size_t> channel_nums_tx, std::vector<size_t> channel_nums_rx,
+		std::string args, std::vector<std::string> time_source, std::vector<std::string> clock_source,
+		std::vector<std::string> wire, std::vector<float> wait, std::vector<float> timeout,
+		std::vector<std::string> antenna_tx, std::vector<std::string> antenna_rx, std::vector<float> gain_tx, std::vector<float> gain_rx,
 		const std::string& len_key="packet_len");
 		
 	  virtual void set_num_delay_samps(int num_samps) = 0;
-	  virtual void set_rx_gain(float gain) = 0;
-      virtual void set_tx_gain(float gain) = 0;
     };
 
   } // namespace radar
