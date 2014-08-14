@@ -68,7 +68,6 @@ namespace gr {
 		d_usrp = uhd::usrp::multi_usrp::make(args);
 		std::cout << "Using USRP Device(s): " << std::endl << d_usrp->get_pp_string() << std::endl;
 		int num_mboard = d_usrp->get_num_mboards();
-		std::cout << "Num Mboards: " << num_mboard << std::endl;
 		
 		//*** Set Mboard option ***//
 		
@@ -83,19 +82,8 @@ namespace gr {
 		}
 		
 		// Set time
-		// FIXME: implement set time, with gpsdo
-		
-		//*** Get TX and RX streamer and channels ***//
-		
-		// Get TX streamer and channels
-		uhd::stream_args_t stream_args_tx("fc32", wire[0]);
-		stream_args_tx.channels = channel_nums_tx;
-		d_tx_stream = d_usrp->get_tx_stream(stream_args_tx);
-		
-		// Get RX streamer and channels
-		uhd::stream_args_t stream_args_rx("fc32", wire[1]);
-		stream_args_rx.channels = channel_nums_rx;
-		d_rx_stream = d_usrp->get_rx_stream(stream_args_rx);
+		d_usrp->set_time_now(uhd::time_spec_t(0.0));
+		// FIXME: implement gpsdo
 		
 		//***  Set channel options ***//
 		
@@ -123,6 +111,18 @@ namespace gr {
 		for(int k=0; k<d_num_rx; k++){
 			d_usrp->set_rx_gain(gain_rx[k], channel_nums_rx[k]);
 		}
+		
+		//*** Get TX and RX streamer ***//
+		
+		// Get TX streamer and channels
+		uhd::stream_args_t stream_args_tx("fc32", wire[0]);
+		stream_args_tx.channels = channel_nums_tx;
+		d_tx_stream = d_usrp->get_tx_stream(stream_args_tx);
+		
+		// Get RX streamer and channels
+		uhd::stream_args_t stream_args_rx("fc32", wire[1]);
+		stream_args_rx.channels = channel_nums_rx;
+		d_rx_stream = d_usrp->get_rx_stream(stream_args_rx);
 		
 		//*** Misc ***//
 		
