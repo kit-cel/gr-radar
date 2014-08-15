@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Mon Aug 11 16:51:20 2014</timestamp>
+  <timestamp>Fri Aug 15 13:37:54 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -68,7 +68,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>samp_rate</value>
+      <value>center_freq</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -76,7 +76,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>14250000</value>
+      <value>5.5e9</value>
     </param>
     <param>
       <key>alias</key>
@@ -84,34 +84,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(188, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>range_time</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>120</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(645, 1185)</value>
+      <value>(294, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -149,7 +122,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>amplitude</value>
+      <value>range_time</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -157,7 +130,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0.5</value>
+      <value>30</value>
     </param>
     <param>
       <key>alias</key>
@@ -165,7 +138,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(126, 88)</value>
+      <value>(645, 1185)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -184,7 +157,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>2**21</value>
+      <value>2**20</value>
     </param>
     <param>
       <key>alias</key>
@@ -203,7 +176,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>center_freq</value>
+      <value>freq</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -211,7 +184,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>2.45e9</value>
+      <value>(-4000000,4000000)</value>
     </param>
     <param>
       <key>alias</key>
@@ -219,142 +192,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(291, 12)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>time_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>packet_len/float(samp_rate)</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(878, 6)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>range_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>3e8/2/float((freq[1]-freq[0]))</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(887, 69)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>freq_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>samp_rate/float(packet_len)</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(771, 6)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>v_res</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>freq_res*3e8/2/center_freq</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(767, 73)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>min_output_buffer</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>int(packet_len*2)</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(630, 6)</value>
+      <value>(16, 93)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -392,7 +230,7 @@
     <key>variable</key>
     <param>
       <key>id</key>
-      <value>freq</value>
+      <value>min_output_buffer</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -400,7 +238,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>(-4000000,4000000)</value>
+      <value>int(packet_len*2)</value>
     </param>
     <param>
       <key>alias</key>
@@ -408,7 +246,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(16, 93)</value>
+      <value>(630, 6)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -416,50 +254,18 @@
     </param>
   </block>
   <block>
-    <key>variable_qtgui_range</key>
+    <key>variable</key>
     <param>
       <key>id</key>
-      <value>gain_tx</value>
+      <value>v_res</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>label</key>
-      <value>TX gain</value>
-    </param>
-    <param>
       <key>value</key>
-      <value>10</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value>0,0</value>
+      <value>freq_res*3e8/2/center_freq</value>
     </param>
     <param>
       <key>alias</key>
@@ -467,7 +273,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(60, 1181)</value>
+      <value>(767, 73)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -475,50 +281,18 @@
     </param>
   </block>
   <block>
-    <key>variable_qtgui_range</key>
+    <key>variable</key>
     <param>
       <key>id</key>
-      <value>gain_rx</value>
+      <value>freq_res</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>label</key>
-      <value>RX gain</value>
-    </param>
-    <param>
       <key>value</key>
-      <value>10</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value>0,1</value>
+      <value>samp_rate/float(packet_len)</value>
     </param>
     <param>
       <key>alias</key>
@@ -526,7 +300,115 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(176, 1176)</value>
+      <value>(771, 6)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>range_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>3e8/2/float((freq[1]-freq[0]))</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(887, 69)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>time_res</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>packet_len/float(samp_rate)</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(878, 6)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>amplitude</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(126, 88)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>14250000</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(188, 11)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1040,65 +922,6 @@
     </param>
   </block>
   <block>
-    <key>radar_find_max_peak_c</key>
-    <param>
-      <key>id</key>
-      <value>radar_find_max_peak_c_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate/decim_fac</value>
-    </param>
-    <param>
-      <key>threshold</key>
-      <value>threshold</value>
-    </param>
-    <param>
-      <key>samp_protect</key>
-      <value>int(samp_protect)</value>
-    </param>
-    <param>
-      <key>max_freq</key>
-      <value>(-300,300)</value>
-    </param>
-    <param>
-      <key>cut_max_freq</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(172, 826)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>radar_ts_fft_cc</key>
     <param>
       <key>id</key>
@@ -1318,102 +1141,26 @@
     </param>
   </block>
   <block>
-    <key>radar_usrp_echotimer_cc</key>
+    <key>radar_estimator_fsk</key>
     <param>
       <key>id</key>
-      <value>radar_usrp_echotimer_cc_0</value>
+      <value>radar_estimator_fsk_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
       <key>center_freq</key>
       <value>center_freq</value>
     </param>
     <param>
-      <key>num_delay_samps</key>
-      <value>int(delay_samp)</value>
+      <key>delta_freq</key>
+      <value>(freq[1]-freq[0])</value>
     </param>
     <param>
-      <key>args_tx</key>
-      <value>'addr=192.168.10.4'</value>
-    </param>
-    <param>
-      <key>wire_tx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_tx</key>
-      <value>'internal'</value>
-    </param>
-    <param>
-      <key>time_source_tx</key>
-      <value>'none'</value>
-    </param>
-    <param>
-      <key>antenna_tx</key>
-      <value>'J2'</value>
-    </param>
-    <param>
-      <key>gain_tx</key>
-      <value>gain_tx</value>
-    </param>
-    <param>
-      <key>timeout_tx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_tx</key>
-      <value>0.05</value>
-    </param>
-    <param>
-      <key>lo_offset_tx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>args_rx</key>
-      <value>'addr=192.168.10.6'</value>
-    </param>
-    <param>
-      <key>wire_rx</key>
-      <value>''</value>
-    </param>
-    <param>
-      <key>clock_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>time_source_rx</key>
-      <value>'mimo'</value>
-    </param>
-    <param>
-      <key>antenna_rx</key>
-      <value>'J2'</value>
-    </param>
-    <param>
-      <key>gain_rx</key>
-      <value>gain_rx</value>
-    </param>
-    <param>
-      <key>timeout_rx</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>wait_rx</key>
-      <value>0.05</value>
-    </param>
-    <param>
-      <key>lo_offset_rx</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>len_key</key>
-      <value>"packet_len"</value>
+      <key>push_power</key>
+      <value>True</value>
     </param>
     <param>
       <key>alias</key>
@@ -1425,7 +1172,7 @@
     </param>
     <param>
       <key>minoutbuf</key>
-      <value>min_output_buffer</value>
+      <value>0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1433,7 +1180,195 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(439, 174)</value>
+      <value>(443, 827)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_print_results</key>
+    <param>
+      <key>id</key>
+      <value>radar_print_results_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>store_msg</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>filename</key>
+      <value>"rcs_test.txt"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1221, 835)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_time_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_time_plot_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'velocity'</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>-3,3</value>
+    </param>
+    <param>
+      <key>range_time</key>
+      <value>range_time</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(737, 922)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>delay_samp</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Number delay samples</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>30</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1007, 3)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_qtgui_time_plot</key>
+    <param>
+      <key>id</key>
+      <value>radar_qtgui_time_plot_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>interval</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>label_y</key>
+      <value>'range'</value>
+    </param>
+    <param>
+      <key>axis_y</key>
+      <value>0,range_res</value>
+    </param>
+    <param>
+      <key>range_time</key>
+      <value>range_time</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(729, 735)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1688,7 +1623,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(994, 923)</value>
+      <value>(983, 957)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1696,26 +1631,38 @@
     </param>
   </block>
   <block>
-    <key>radar_estimator_fsk</key>
+    <key>radar_find_max_peak_c</key>
     <param>
       <key>id</key>
-      <value>radar_estimator_fsk_0</value>
+      <value>radar_find_max_peak_c_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>center_freq</key>
-      <value>center_freq</value>
+      <key>samp_rate</key>
+      <value>samp_rate/decim_fac</value>
     </param>
     <param>
-      <key>delta_freq</key>
-      <value>(freq[1]-freq[0])</value>
+      <key>threshold</key>
+      <value>threshold</value>
     </param>
     <param>
-      <key>push_power</key>
+      <key>samp_protect</key>
+      <value>int(samp_protect)</value>
+    </param>
+    <param>
+      <key>max_freq</key>
+      <value>(-500,500)</value>
+    </param>
+    <param>
+      <key>cut_max_freq</key>
       <value>True</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
     </param>
     <param>
       <key>alias</key>
@@ -1735,7 +1682,125 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(443, 827)</value>
+      <value>(170, 827)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>gain_tx</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>TX gain</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>40</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>0,0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(60, 1181)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>id</key>
+      <value>gain_rx</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>RX gain</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>0,1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(176, 1176)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1758,11 +1823,11 @@
     </param>
     <param>
       <key>value</key>
-      <value>-200</value>
+      <value>-160</value>
     </param>
     <param>
       <key>start</key>
-      <value>-2000</value>
+      <value>-500</value>
     </param>
     <param>
       <key>stop</key>
@@ -1802,69 +1867,102 @@
     </param>
   </block>
   <block>
-    <key>radar_print_results</key>
+    <key>radar_usrp_echotimer_cc</key>
     <param>
       <key>id</key>
-      <value>radar_print_results_0</value>
+      <value>radar_usrp_echotimer_cc_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>store_msg</key>
-      <value>True</value>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
     </param>
     <param>
-      <key>filename</key>
-      <value>"rcs_test.txt"</value>
+      <key>center_freq</key>
+      <value>center_freq</value>
     </param>
     <param>
-      <key>alias</key>
-      <value></value>
+      <key>num_delay_samps</key>
+      <value>int(delay_samp)</value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
+      <key>args_tx</key>
+      <value>'addr=192.168.10.6'</value>
     </param>
     <param>
-      <key>_coordinate</key>
-      <value>(1221, 835)</value>
+      <key>wire_tx</key>
+      <value>''</value>
     </param>
     <param>
-      <key>_rotation</key>
+      <key>clock_source_tx</key>
+      <value>'internal'</value>
+    </param>
+    <param>
+      <key>time_source_tx</key>
+      <value>'none'</value>
+    </param>
+    <param>
+      <key>antenna_tx</key>
+      <value>'J1'</value>
+    </param>
+    <param>
+      <key>gain_tx</key>
+      <value>gain_tx</value>
+    </param>
+    <param>
+      <key>timeout_tx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_tx</key>
+      <value>0.02</value>
+    </param>
+    <param>
+      <key>lo_offset_tx</key>
       <value>0</value>
     </param>
-  </block>
-  <block>
-    <key>radar_qtgui_time_plot</key>
     <param>
-      <key>id</key>
-      <value>radar_qtgui_time_plot_1</value>
+      <key>args_rx</key>
+      <value>'addr=192.168.10.4'</value>
     </param>
     <param>
-      <key>_enabled</key>
-      <value>True</value>
+      <key>wire_rx</key>
+      <value>''</value>
     </param>
     <param>
-      <key>interval</key>
-      <value>100</value>
+      <key>clock_source_rx</key>
+      <value>'mimo'</value>
     </param>
     <param>
-      <key>label_y</key>
-      <value>'velocity'</value>
+      <key>time_source_rx</key>
+      <value>'mimo'</value>
     </param>
     <param>
-      <key>axis_y</key>
-      <value>-3,3</value>
+      <key>antenna_rx</key>
+      <value>'J1'</value>
     </param>
     <param>
-      <key>range_time</key>
-      <value>range_time</value>
+      <key>gain_rx</key>
+      <value>gain_rx</value>
     </param>
     <param>
-      <key>label</key>
-      <value></value>
+      <key>timeout_rx</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>wait_rx</key>
+      <value>0.02</value>
+    </param>
+    <param>
+      <key>lo_offset_rx</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>len_key</key>
+      <value>"packet_len"</value>
     </param>
     <param>
       <key>alias</key>
@@ -1875,8 +1973,16 @@
       <value></value>
     </param>
     <param>
+      <key>minoutbuf</key>
+      <value>min_output_buffer</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(737, 922)</value>
+      <value>(439, 174)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1903,7 +2009,7 @@
     </param>
     <param>
       <key>axis_y</key>
-      <value>0,30</value>
+      <value>0,150</value>
     </param>
     <param>
       <key>range_time</key>
@@ -1923,66 +2029,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1221, 919)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_qtgui_range</key>
-    <param>
-      <key>id</key>
-      <value>delay_samp</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Number delay samples</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>30</value>
-    </param>
-    <param>
-      <key>start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>stop</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>step</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>counter_slider</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.Horizontal</value>
-    </param>
-    <param>
-      <key>min_len</key>
-      <value>200</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value></value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1007, 3)</value>
+      <value>(1220, 919)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2001,7 +2048,7 @@
     </param>
     <param>
       <key>num_mean</key>
-      <value>10</value>
+      <value>20</value>
     </param>
     <param>
       <key>center_freq</key>
@@ -2029,7 +2076,11 @@
     </param>
     <param>
       <key>corr_factor</key>
-      <value>10</value>
+      <value>200</value>
+    </param>
+    <param>
+      <key>exponent</key>
+      <value>0.5</value>
     </param>
     <param>
       <key>alias</key>
@@ -2050,53 +2101,6 @@
     <param>
       <key>_coordinate</key>
       <value>(982, 755)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>radar_qtgui_time_plot</key>
-    <param>
-      <key>id</key>
-      <value>radar_qtgui_time_plot_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>interval</key>
-      <value>100</value>
-    </param>
-    <param>
-      <key>label_y</key>
-      <value>'range'</value>
-    </param>
-    <param>
-      <key>axis_y</key>
-      <value>0,range_res</value>
-    </param>
-    <param>
-      <key>range_time</key>
-      <value>range_time</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(729, 735)</value>
     </param>
     <param>
       <key>_rotation</key>

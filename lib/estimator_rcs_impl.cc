@@ -199,7 +199,7 @@ namespace gr {
         // Calculate RCS
         float rcs_mean = 0.0;
         if(d_range.size() == 0 && d_power.size() == 0){
-          std::cout << "ERROR: No target detected for RCS calculation" << std::endl;
+          //std::cout << "ERROR: No target detected for RCS calculation" << std::endl;
         }
         else {
           d_rcs_vals.push_back(calculate_rcs());
