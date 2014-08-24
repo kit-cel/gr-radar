@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Aug 13 15:51:22 2014
+# Generated: Sun Aug 24 12:09:46 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -137,6 +137,8 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_signal_generator_cw_c_0_0).set_min_output_buffer(1048576)
         self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[0], ), 1, "packet_len")
         (self.radar_signal_generator_cw_c_0).set_min_output_buffer(1048576)
+        self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'range', (0,75), 30, "")
+        self.radar_qtgui_scatter_plot_0 = radar.qtgui_scatter_plot(100, 'range', 'velocity', (0,75), (-5,5), "")
         self.radar_print_results_0 = radar.print_results(False, "")
         self.radar_find_max_peak_c_0 = radar.find_max_peak_c(samp_rate/decim_fac, -200, 0, (-1000,1000), True, "packet_len")
         self.radar_estimator_fsk_0 = radar.estimator_fsk(center_freq, (freq[1]-freq[0]), False)
@@ -226,6 +228,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
         self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
         self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_trigger_command_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_scatter_plot_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -237,8 +241,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_time_res(self.packet_len/float(self.samp_rate))
+        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate/self.decim_fac)
@@ -249,9 +253,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_packet_len(self, packet_len):
         self.packet_len = packet_len
-        self.set_min_output_buffer(int(self.packet_len*2))
-        self.set_freq_res(self.samp_rate/float(self.packet_len))
         self.set_time_res(self.packet_len/float(self.samp_rate))
+        self.set_freq_res(self.samp_rate/float(self.packet_len))
+        self.set_min_output_buffer(int(self.packet_len*2))
 
     def get_freq_res(self):
         return self.freq_res

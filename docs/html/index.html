@@ -133,14 +133,15 @@ Message structure and identifiers (symbols)</h2>
 <code>velocity</code> : Target velocity</p>
 <h1><a class="anchor" id="echotimer"></a>
 USRP Echotimer</h1>
-<p>sync clock and time between USRPs!</p>
-<p>examples/usrp use sync setup </p>
+<p>The USRP Echotimer is a UHD interface for USRPs. Known well working devices are N210, B210 and USRP 2. Check out www.ettus.com for more information about the hardware.</p>
+<p>Basically the Echotimer bursts a data packet defined as tagged stream. Synchronously a packet with the same length is received. The receive time is given with a stream tag on the first item of the tagged stream with the identifier <code>rx_time</code>. This is put into practice with a send and receive command on a shared point of time on all USRPs. Therefore the time has to be synchronized on all used devices. This can be done with a MIMO cable or with a GPS clock. The strings are <code>mimo</code> or <code>gpsdo</code> for the time source. Either you can choose the GPS clock on both devices or set one clock on <code>internal</code> as master and set the clock of the slave device over MIMO cable.</p>
+<p>Look at the GNU Radio Companion flowgraph samples in <code>/examples/usrp</code> for reference. Mostly all values and strings are push through and used without a change within the UHD API. Therefore the UHD API documentation is also a good reference. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 13 2014 15:56:11 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Sun Aug 24 2014 17:59:25 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -56,8 +56,10 @@ Used identifiers (symbols) should be predefined to keep the handling simple. Cur
 
 \section echotimer USRP Echotimer
 
-sync clock and time between USRPs!
+The USRP Echotimer is a UHD interface for USRPs. Known well working devices are N210, B210 and USRP 2. Check out www.ettus.com for more information about the hardware.
 
-examples/usrp use sync setup
+Basically the Echotimer bursts a data packet defined as tagged stream. Synchronously a packet with the same length is received. The receive time is given with a stream tag on the first item of the tagged stream with the identifier <code>rx_time</code>. This is put into practice with a send and receive command on a shared point of time on all USRPs. Therefore the time has to be synchronized on all used devices. This can be done with a MIMO cable or with a GPS clock. The strings are <code>mimo</code> or <code>gpsdo</code> for the time source. Either you can choose the GPS clock on both devices or set one clock on <code>internal</code> as master and set the clock of the slave device over MIMO cable.
+
+Look at the GNU Radio Companion flowgraph samples in <code>/examples/usrp</code> for reference. Mostly all values and strings are push through and used without a change within the UHD API. Therefore the UHD API documentation is also a good reference.
 
 */
