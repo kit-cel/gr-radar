@@ -147,21 +147,20 @@ namespace gr {
 			if(d_range.size() == 0) throw std::runtime_error("range vector has size zero");
 			if(d_power.size() == 0) throw std::runtime_error("power vector has size zero");
 
-      // regard usrp gains
-			float power_tx = d_power_tx * pow(10, d_usrp_gain_tx/10); 
+      // regard usrp gain and signal path
 			float power_rx = pow(d_power[0], d_exponent) / d_power_tx / pow(10, d_usrp_gain_rx/10);
 			
 			float fak = d_fak * pow(d_range[0], 4);
 
       // debug output
-      // std::cout << "PowerTx: " << power_tx << std::endl;
+      // std::cout << "PowerTx: " << d_power_tx << std::endl;
       // std::cout << "PowerRx: " << power_rx << std::endl;
       // std::cout << "Lambda: " << d_lambda << std::endl;
       // std::cout << "GainRx: " << d_antenna_gain_rx << std::endl;
       // std::cout << "GainTx: " << d_antenna_gain_tx << std::endl;
       // std::cout << "fak: " << fak << std::endl;
 
-			return power_rx/power_tx * fak * d_corr_factor;
+			return power_rx/d_power_tx * fak * d_corr_factor;
     }
 
     void
