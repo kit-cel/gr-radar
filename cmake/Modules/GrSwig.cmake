@@ -92,7 +92,7 @@ function(GR_SWIG_MAKE_DOCS output_file)
     endif(DOXYGEN_FOUND)
 endfunction(GR_SWIG_MAKE_DOCS)
 
-endif
+endif()
 
 ########################################################################
 # Build a swig target for the common gnuradio use case. Usage:
