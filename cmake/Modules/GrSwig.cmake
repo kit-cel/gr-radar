@@ -32,6 +32,9 @@ include(GrPython)
 #   - GR_SWIG_DOCS_SOURCE_DEPS
 #   - GR_SWIG_DOCS_TARGET_DEPS
 ########################################################################
+
+if(0) # Outcomment swig documentation for python docs
+
 function(GR_SWIG_MAKE_DOCS output_file)
     find_package(Doxygen)
     if(DOXYGEN_FOUND)
@@ -88,6 +91,8 @@ function(GR_SWIG_MAKE_DOCS output_file)
         file(WRITE ${output_file} "\n") #no doxygen -> empty file
     endif(DOXYGEN_FOUND)
 endfunction(GR_SWIG_MAKE_DOCS)
+
+endif
 
 ########################################################################
 # Build a swig target for the common gnuradio use case. Usage:

@@ -5,7 +5,7 @@
 %include "gnuradio.i"			// the common stuff
 
 //load generated python docstrings
-%include "radar_swig_doc.i"
+// %include "radar_swig_doc.i" 	// Outcomment swig documentation for python docs
 
 %{
 #include "radar/signal_generator_cw_c.h"
