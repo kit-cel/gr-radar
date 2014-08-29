@@ -40,7 +40,6 @@ namespace gr {
      * \param center_freq Center frequency of radar
      * \param antenna_gain_tx Antenna Gain of the Tx antenna
      * \param antenna_gain_rx Antenna Gain of the Rx antenna
-     * \param usrp_gain_tx Tx gain of USRP set in flowgraph
      * \param usrp_gain_rx Rx gain of USRP set in flowgraph
      * \param power_tx Tx power of radar signal. Needs to be measured one time!
      * \param corr_factor Correction factor for the RCS to calibrate system to a known target or special signal paths
@@ -62,13 +61,12 @@ namespace gr {
        * class. radar::estimator_rcs::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent = 1);
+      static sptr make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent = 1);
       // callbacks
       virtual void set_num_mean(int val) = 0;
       virtual void set_center_freq(float val) = 0;
       virtual void set_antenna_gain_tx(float val) = 0;
       virtual void set_antenna_gain_rx(float val) = 0;
-      virtual void set_usrp_gain_tx(float val) = 0;
       virtual void set_usrp_gain_rx(float val) = 0;
       virtual void set_power_tx(float val) = 0;
       virtual void set_corr_factor(float val) = 0;

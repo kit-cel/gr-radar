@@ -40,7 +40,6 @@ class qa_estimator_rcs (gr_unittest.TestCase):
 		center_freq = 1
 		antenna_gain_tx = 1
 		antenna_gain_rx = 1
-		usrp_gain_tx = 1
 		usrp_gain_rx = 1
 		amplitude = 1
 		corr_factor = 1
@@ -55,7 +54,7 @@ class qa_estimator_rcs (gr_unittest.TestCase):
 		pmt_in = pmt.list3(pmt_misc,pmt_range,pmt_power)
 
 		src = blocks.message_strobe(pmt_in, 300)
-		est = radar.estimator_rcs(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, amplitude, corr_factor, exponent)
+		est = radar.estimator_rcs(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_rx, amplitude, corr_factor, exponent)
 		snk = blocks.message_debug()
 		self.tb.msg_connect(src,"strobe",est,"Msg in")
 		self.tb.msg_connect(est,"Msg out",snk,"store")
@@ -74,7 +73,7 @@ class qa_estimator_rcs (gr_unittest.TestCase):
 		d_antenna_gain_abs_rx = 10**(antenna_gain_rx/10)
 		d_antenna_gain_abs_tx = 10**(antenna_gain_tx/10)
 		power_rx = power[0]**exponent / 10**(usrp_gain_rx/10);
-		power_tx = amplitude * 10**(usrp_gain_tx/10)
+		power_tx = amplitude
 
 		rcs_ref = (4*math.pi)**(3)/(d_antenna_gain_abs_rx*d_antenna_gain_abs_tx*wavel**2)*Range[0]**4*power_rx/power_tx*corr_factor
 

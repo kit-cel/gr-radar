@@ -3,12 +3,11 @@
   <key>radar_estimator_rcs</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.estimator_rcs($num_mean, $center_freq, $antenna_gain_tx, $antenna_gain_rx, $usrp_gain_tx, $usrp_gain_rx, $power_tx, $corr_factor, $exponent)</make>
+  <make>radar.estimator_rcs($num_mean, $center_freq, $antenna_gain_tx, $antenna_gain_rx, $usrp_gain_rx, $power_tx, $corr_factor, $exponent)</make>
   <callback>set_num_mean($num_mean)</callback>
   <callback>set_center_freq($center_freq)</callback>
   <callback>set_antenna_gain_tx($antenna_gain_tx)</callback>
   <callback>set_antenna_gain_rx($antenna_gain_rx)</callback>
-  <callback>set_usrp_gain_tx($usrp_gain_tx)</callback>
   <callback>set_usrp_gain_rx($usrp_gain_rx)</callback>
   <callback>set_power_tx($power_tx)</callback>
   <callback>set_corr_factor($corr_factor)</callback>
@@ -30,11 +29,6 @@
   <param>
     <name>Antenna Gain Rx [dBi]</name>
     <key>antenna_gain_rx</key>
-    <type>float</type>
-  </param>
-  <param>
-    <name>Usrp Gain Tx [dB]</name>
-    <key>usrp_gain_tx</key>
     <type>float</type>
   </param>
   <param>
