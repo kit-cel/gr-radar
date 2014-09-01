@@ -31,16 +31,16 @@ namespace gr {
   namespace radar {
 
     estimator_rcs::sptr
-    estimator_rcs::make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent)
+    estimator_rcs::make(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent)
     {
       return gnuradio::get_initial_sptr
-        (new estimator_rcs_impl(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_tx, usrp_gain_rx, power_tx, corr_factor, exponent));
+        (new estimator_rcs_impl(num_mean, center_freq, antenna_gain_tx, antenna_gain_rx, usrp_gain_rx, power_tx, corr_factor, exponent));
     }
 
     /*
      * The private constructor
      */
-    estimator_rcs_impl::estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent)
+    estimator_rcs_impl::estimator_rcs_impl(int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent)
       : gr::block("estimator_rcs",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -49,7 +49,6 @@ namespace gr {
         d_center_freq = center_freq;
         d_antenna_gain_tx = antenna_gain_tx;
         d_antenna_gain_rx = antenna_gain_rx;
-        d_usrp_gain_tx = usrp_gain_tx;
         d_usrp_gain_rx = usrp_gain_rx;
         d_power_tx = power_tx; // needs to be calibrated for every usage
         d_corr_factor = corr_factor;
@@ -110,11 +109,6 @@ namespace gr {
       d_antenna_gain_rx = val;
       d_antenna_gain_abs_rx = pow(10, d_antenna_gain_rx/10);
       d_fak = pow(4.0*M_PI, 3) / (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
-    }
-
-    void
-    estimator_rcs_impl::set_usrp_gain_tx(float val){
-      d_usrp_gain_tx = val;
     }
 
     void
