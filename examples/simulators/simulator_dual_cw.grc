@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='ASCII'?>
+<?grc format='1' created='3.7.6'?>
 <flow_graph>
-  <timestamp>Sun Aug 24 12:10:55 2014</timestamp>
+  <timestamp>Wed Sep 17 15:21:59 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -1680,49 +1681,6 @@
     </param>
   </block>
   <block>
-    <key>radar_trigger_command</key>
-    <param>
-      <key>id</key>
-      <value>radar_trigger_command_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>command</key>
-      <value>"echo bla"</value>
-    </param>
-    <param>
-      <key>identifiers</key>
-      <value>("velocity","range")</value>
-    </param>
-    <param>
-      <key>vals_min</key>
-      <value>(3,10)</value>
-    </param>
-    <param>
-      <key>vals_max</key>
-      <value>(9,50)</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(696, 875)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>radar_qtgui_scatter_plot</key>
     <param>
       <key>id</key>
@@ -1861,6 +1819,53 @@
     <param>
       <key>_coordinate</key>
       <value>(105, 884)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>radar_trigger_command</key>
+    <param>
+      <key>id</key>
+      <value>radar_trigger_command_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>command</key>
+      <value>"python get_pic.py"</value>
+    </param>
+    <param>
+      <key>identifiers</key>
+      <value>("range",)</value>
+    </param>
+    <param>
+      <key>vals_min</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>vals_max</key>
+      <value>20</value>
+    </param>
+    <param>
+      <key>block_time</key>
+      <value>500</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(696, 875)</value>
     </param>
     <param>
       <key>_rotation</key>

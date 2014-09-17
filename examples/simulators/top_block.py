@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Sun Aug 24 12:09:46 2014
+# Generated: Wed Sep 17 15:22:00 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -130,7 +130,7 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_ts_fft_cc_0_0).set_min_output_buffer(1048576)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(packet_len/decim_fac,  "packet_len")
         (self.radar_ts_fft_cc_0).set_min_output_buffer(1048576)
-        self.radar_trigger_command_0 = radar.trigger_command("echo bla", ("velocity","range"), ((3,10)), ((9,50)))
+        self.radar_trigger_command_0 = radar.trigger_command("python get_pic.py", ("range",), (10, ), (20, ), 500)
         self.radar_static_target_simulator_cc_0 = radar.static_target_simulator_cc((Range,), (vel, ), (1e14, ), (0,), (0,), samp_rate, center_freq, -10, True, True, "packet_len")
         (self.radar_static_target_simulator_cc_0).set_min_output_buffer(1048576)
         self.radar_signal_generator_cw_c_0_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[1], ), 1, "packet_len")

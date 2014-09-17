@@ -1,8 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classgr_1_1radar_1_1spectrogram__plot.html#a9d9cadfdccd1ad3037e175307ac2dd16":[3,0,0,0,53,1],
-"classgr_1_1radar_1_1spectrogram__plot.html#a9ffe088b5a049046d693c3ed52bd2fe7":[3,0,0,0,53,3],
-"classgr_1_1radar_1_1split__cc.html":[3,0,0,0,22],
 "classgr_1_1radar_1_1split__cc.html#a2dbdccada2397c19ae4dab2c3d8fa98b":[3,0,0,0,22,1],
 "classgr_1_1radar_1_1split__cc.html#a3fc8e876750f0f4069af1b8d154f21b7":[3,0,0,0,22,0],
 "classgr_1_1radar_1_1split__cc__impl.html":[3,0,0,0,54],
@@ -127,17 +124,18 @@ var NAVTREEINDEX2 =
 "classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html#ab890fee68e19896235b8955d26336eab":[3,0,0,0,59,0],
 "classgr_1_1radar_1_1transpose__matrix__vcvc__impl.html#abff88d3a70e284bfc61d994220d719a4":[3,0,0,0,59,6],
 "classgr_1_1radar_1_1trigger__command.html":[3,0,0,0,27],
-"classgr_1_1radar_1_1trigger__command.html#a141dab2a13ba74fe6ab132f13b01cefc":[3,0,0,0,27,1],
 "classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d":[3,0,0,0,27,0],
+"classgr_1_1radar_1_1trigger__command.html#a73efc939e35272b17be6abdfbc318d58":[3,0,0,0,27,1],
 "classgr_1_1radar_1_1trigger__command__impl.html":[3,0,0,0,60],
-"classgr_1_1radar_1_1trigger__command__impl.html#a15917e29d18cbd9f5bd5ce1cea0b4a73":[3,0,0,0,60,6],
+"classgr_1_1radar_1_1trigger__command__impl.html#a15917e29d18cbd9f5bd5ce1cea0b4a73":[3,0,0,0,60,7],
 "classgr_1_1radar_1_1trigger__command__impl.html#a21d297eb64e978ecada5ecf3fcfc4b4e":[3,0,0,0,60,2],
-"classgr_1_1radar_1_1trigger__command__impl.html#a5ea4ca1e5329cb2ea6bbe004255890ef":[3,0,0,0,60,5],
-"classgr_1_1radar_1_1trigger__command__impl.html#a74cd9caa08b7ca623a02a5b8302bfabf":[3,0,0,0,60,4],
-"classgr_1_1radar_1_1trigger__command__impl.html#a818e8bd561c7de0cb4a6aeabae74dd16":[3,0,0,0,60,3],
-"classgr_1_1radar_1_1trigger__command__impl.html#ac73f6ddca49210e0900468207c328c19":[3,0,0,0,60,7],
-"classgr_1_1radar_1_1trigger__command__impl.html#aecfc6dce51efb5f58da895e7ed01e963":[3,0,0,0,60,0],
+"classgr_1_1radar_1_1trigger__command__impl.html#a56b857d9006d725edd187525ede9080a":[3,0,0,0,60,3],
+"classgr_1_1radar_1_1trigger__command__impl.html#a5ea4ca1e5329cb2ea6bbe004255890ef":[3,0,0,0,60,6],
+"classgr_1_1radar_1_1trigger__command__impl.html#a74cd9caa08b7ca623a02a5b8302bfabf":[3,0,0,0,60,5],
+"classgr_1_1radar_1_1trigger__command__impl.html#a818e8bd561c7de0cb4a6aeabae74dd16":[3,0,0,0,60,4],
+"classgr_1_1radar_1_1trigger__command__impl.html#ac73f6ddca49210e0900468207c328c19":[3,0,0,0,60,8],
 "classgr_1_1radar_1_1trigger__command__impl.html#afc33cadaf8594ca27aac78af04656cda":[3,0,0,0,60,1],
+"classgr_1_1radar_1_1trigger__command__impl.html#afdaceb3578eb4e15ea7af840ec78a534":[3,0,0,0,60,0],
 "classgr_1_1radar_1_1ts__fft__cc.html":[3,0,0,0,28],
 "classgr_1_1radar_1_1ts__fft__cc.html#a23f2fcddadd9a26d698ecb4ed3fa74e8":[3,0,0,0,28,0],
 "classgr_1_1radar_1_1ts__fft__cc.html#a3eec0a171fdde85795ea7e2aa9979902":[3,0,0,0,28,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX2 =
 "functions_func_e.html":[3,3,1,1],
 "functions_func_f.html":[3,3,1,2],
 "functions_func_h.html":[3,3,1,3],
-"functions_func_m.html":[3,3,1,4]
+"functions_func_m.html":[3,3,1,4],
+"functions_func_o.html":[3,3,1,5],
+"functions_func_p.html":[3,3,1,6]
 };

@@ -121,40 +121,41 @@ $(document).ready(function(){initNavTree('trigger__command_8h_source.html','');}
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">namespace </span>radar {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    /*!</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \brief This block executes a command with the std::system() command if a value from a f32vector with a given identifer (symbol) is in a given range. Each index of a vector refers to a identifier.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * \brief This block executes a command with the std::system() command if a value from a f32vector with a given identifer (symbol) is in a given range. Each index of a vector refers to a identifier. The execution of a command can be blocked for block_time milliseconds after the last execution.</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * </span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">         * \param command Command string</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">         * \param identifiers Identifiers (symbols) as vector of strings</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">         * \param vals_min Minimum values as f32vector</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">         * \param vals_max Maximum values as f32vector</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">         * </span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">         * \ingroup radar</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">         *</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1trigger__command.html">   42</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1trigger__command.html">trigger_command</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">   45</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;trigger_command&gt; <a class="code" href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">sptr</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">      /*!</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::trigger_command.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">       *</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::trigger_command&#39;s</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">       * class. radar::trigger_command::make is the public interface for</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">       * creating new instances.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">       */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">sptr</a> make(std::string command, std::vector&lt;std::string&gt; identifiers, std::vector&lt;float&gt; vals_min, std::vector&lt;float&gt; vals_max);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    };</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  } <span class="comment">// namespace radar</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace gr</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_TRIGGER_COMMAND_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">         * \param block_time Block executing commands for block_time milliseconds</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">         * </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">         * \ingroup radar</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">         *</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1trigger__command.html">   43</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1trigger__command.html">trigger_command</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;     <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">   46</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;trigger_command&gt; <a class="code" href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">sptr</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">      /*!</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::trigger_command.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">       *</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::trigger_command&#39;s</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">       * class. radar::trigger_command::make is the public interface for</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">       * creating new instances.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">       */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">sptr</a> make(std::string command, std::vector&lt;std::string&gt; identifiers, std::vector&lt;float&gt; vals_min, std::vector&lt;float&gt; vals_max, <span class="keywordtype">int</span> block_time);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  } <span class="comment">// namespace radar</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace gr</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_TRIGGER_COMMAND_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="api_8h_html"><div class="ttname"><a href="api_8h.html">api.h</a></div></div>
-<div class="ttc" id="classgr_1_1radar_1_1trigger__command_html"><div class="ttname"><a href="classgr_1_1radar_1_1trigger__command.html">gr::radar::trigger_command</a></div><div class="ttdoc">This block executes a command with the std::system() command if a value from a f32vector with a given...</div><div class="ttdef"><b>Definition:</b> trigger_command.h:42</div></div>
-<div class="ttc" id="classgr_1_1radar_1_1trigger__command_html_a1c425e3a5601f14fafabb823167fae0d"><div class="ttname"><a href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">gr::radar::trigger_command::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; trigger_command &gt; sptr</div><div class="ttdef"><b>Definition:</b> trigger_command.h:45</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1trigger__command_html"><div class="ttname"><a href="classgr_1_1radar_1_1trigger__command.html">gr::radar::trigger_command</a></div><div class="ttdoc">This block executes a command with the std::system() command if a value from a f32vector with a given...</div><div class="ttdef"><b>Definition:</b> trigger_command.h:43</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1trigger__command_html_a1c425e3a5601f14fafabb823167fae0d"><div class="ttname"><a href="classgr_1_1radar_1_1trigger__command.html#a1c425e3a5601f14fafabb823167fae0d">gr::radar::trigger_command::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; trigger_command &gt; sptr</div><div class="ttdef"><b>Definition:</b> trigger_command.h:46</div></div>
 <div class="ttc" id="api_8h_html_a087f3342c4b5ef356c6a607f77df0ea4"><div class="ttname"><a href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a></div><div class="ttdeci">#define RADAR_API</div><div class="ttdef"><b>Definition:</b> api.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -162,7 +163,7 @@ $(document).ready(function(){initNavTree('trigger__command_8h_source.html','');}
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="trigger__command_8h.html">trigger_command.h</a></li>
-    <li class="footer">Generated on Sun Aug 24 2014 17:59:25 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Wed Sep 17 2014 14:21:40 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -22,6 +22,7 @@
 #define INCLUDED_RADAR_TRIGGER_COMMAND_IMPL_H
 
 #include <radar/trigger_command.h>
+#include "boost/date_time/posix_time/posix_time.hpp"
 
 namespace gr {
   namespace radar {
@@ -32,13 +33,17 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      trigger_command_impl(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max);
+      trigger_command_impl(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max, int block_time);
       ~trigger_command_impl();
       void handle_msg(pmt::pmt_t msg);
       
       std::string d_command;
       std::vector<std::string> d_identifiers;
       std::vector<float> d_vals_min, d_vals_max;
+      int d_block_time;
+      
+      boost::posix_time::ptime d_last_time, d_actual_time;
+      boost::posix_time::time_duration d_time_duration;
       
       pmt::pmt_t d_port_id_in;
     };

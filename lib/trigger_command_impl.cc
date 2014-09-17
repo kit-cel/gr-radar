@@ -29,16 +29,16 @@ namespace gr {
   namespace radar {
 
     trigger_command::sptr
-    trigger_command::make(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max)
+    trigger_command::make(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max, int block_time)
     {
       return gnuradio::get_initial_sptr
-        (new trigger_command_impl(command, identifiers, vals_min, vals_max));
+        (new trigger_command_impl(command, identifiers, vals_min, vals_max, block_time));
     }
 
     /*
      * The private constructor
      */
-    trigger_command_impl::trigger_command_impl(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max)
+    trigger_command_impl::trigger_command_impl(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max, int block_time)
       : gr::block("trigger_command",
               gr::io_signature::make(0,0,0),
               gr::io_signature::make(0,0,0))
@@ -47,6 +47,9 @@ namespace gr {
 		d_identifiers = identifiers;
 		d_vals_min = vals_min;
 		d_vals_max = vals_max;
+		d_block_time = block_time;
+		
+		d_last_time = boost::posix_time::microsec_clock::local_time();
 		
 		// Register input message port
 		d_port_id_in = pmt::mp("Msg in");
@@ -56,6 +59,16 @@ namespace gr {
 	
 	void
 	trigger_command_impl::handle_msg(pmt::pmt_t msg){
+		// Check if execution has to be blocked
+		d_actual_time = boost::posix_time::microsec_clock::local_time();
+		d_time_duration = d_actual_time-d_last_time;
+		if(d_time_duration.total_milliseconds()>d_block_time){
+			d_last_time = boost::posix_time::microsec_clock::local_time();
+		}
+		else{
+			return;
+		}
+		
 		// Go through msg parts and check symbols
 		pmt::pmt_t msg_part_symbol, msg_part_value;
 		bool execute_command = true;

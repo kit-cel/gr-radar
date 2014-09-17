@@ -3,7 +3,7 @@
   <key>radar_trigger_command</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.trigger_command($command, $identifiers, $vals_min, $vals_max)</make>
+  <make>radar.trigger_command($command, $identifiers, $vals_min, $vals_max, $block_time)</make>
   <param>
     <name>Command</name>
     <key>command</key>
@@ -23,6 +23,12 @@
     <name>Value max</name>
     <key>vals_max</key>
     <type>real_vector</type>
+  </param>
+  <param>
+    <name>Block duration [ms]</name>
+    <key>block_time</key>
+    <value>0</value>
+    <type>int</type>
   </param>
   <sink>
     <name>Msg in</name>

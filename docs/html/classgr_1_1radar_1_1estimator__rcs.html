@@ -126,8 +126,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aecc3880ca248046653fcaf7e777fb218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9ebb848f3469f215f67da4b15987f5b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#ad9ebb848f3469f215f67da4b15987f5b">set_antenna_gain_rx</a> (float val)=0</td></tr>
 <tr class="separator:ad9ebb848f3469f215f67da4b15987f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c1aed4d7390f7fc2aa1a04914686d34"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a4c1aed4d7390f7fc2aa1a04914686d34">set_usrp_gain_tx</a> (float val)=0</td></tr>
-<tr class="separator:a4c1aed4d7390f7fc2aa1a04914686d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdbbb3353c0bd226c3af1c98c1e2f5b2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#abdbbb3353c0bd226c3af1c98c1e2f5b2">set_usrp_gain_rx</a> (float val)=0</td></tr>
 <tr class="separator:abdbbb3353c0bd226c3af1c98c1e2f5b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7da0b25a1868d83de02ea3ceec51d8f8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a7da0b25a1868d83de02ea3ceec51d8f8">set_power_tx</a> (float val)=0</td></tr>
@@ -137,9 +135,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a58ffabc584810a3881e9315bf847e383"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a58ffabc584810a3881e9315bf847e383">make</a> (int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_tx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent=1)</td></tr>
-<tr class="memdesc:a58ffabc584810a3881e9315bf847e383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html" title="Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...">radar::estimator_rcs</a>.  <a href="#a58ffabc584810a3881e9315bf847e383">More...</a><br/></td></tr>
-<tr class="separator:a58ffabc584810a3881e9315bf847e383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c81d6b6b8632178260090776f12dba6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">sptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a6c81d6b6b8632178260090776f12dba6">make</a> (int num_mean, float center_freq, float antenna_gain_tx, float antenna_gain_rx, float usrp_gain_rx, float power_tx, float corr_factor, float exponent=1)</td></tr>
+<tr class="memdesc:a6c81d6b6b8632178260090776f12dba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html" title="Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...">radar::estimator_rcs</a>.  <a href="#a6c81d6b6b8632178260090776f12dba6">More...</a><br/></td></tr>
+<tr class="separator:a6c81d6b6b8632178260090776f12dba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for calculating RCS values, see parameters for details. The radar equation is used to calculate the RCS: RCS = Pr*(4pi)^3*R^4/(Pt*Gt*Gr*lamda^2). The Rx power (Pr) and the distance (R) are being estimated, while the other parameters are given in the flowgraph. It is possible to average a number of samples by setting the num_mean value &gt; 1. The RCS will be 0 until enough samples are collected to calculate the mean value (be patient). The Tx power (Pt) needs to be calibrated with external hardware. I recommend to calibrate for the wanted power and not to change the parameters in the flowgraph on the Tx side after that. The RCS block needs the Rx power, to estimate the RCS. For that, the input power of the block needs to be determined analytically and altered via the corr_factor and exponent values, to fit the following equation: Pr = P_input ^ (exponent) * corr_factor / Pt. In addition, the FFTs need to be normalized for correct power calculation. </p>
@@ -149,7 +147,6 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">center_freq</td><td>Center frequency of radar </td></tr>
     <tr><td class="paramname">antenna_gain_tx</td><td>Antenna Gain of the Tx antenna </td></tr>
     <tr><td class="paramname">antenna_gain_rx</td><td>Antenna Gain of the Rx antenna </td></tr>
-    <tr><td class="paramname">usrp_gain_tx</td><td>Tx gain of USRP set in flowgraph </td></tr>
     <tr><td class="paramname">usrp_gain_rx</td><td>Rx gain of USRP set in flowgraph </td></tr>
     <tr><td class="paramname">power_tx</td><td>Tx power of radar signal. Needs to be measured one time! </td></tr>
     <tr><td class="paramname">corr_factor</td><td>Correction factor for the RCS to calibrate system to a known target or special signal paths </td></tr>
@@ -171,7 +168,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a58ffabc584810a3881e9315bf847e383"></a>
+<a class="anchor" id="a6c81d6b6b8632178260090776f12dba6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -201,12 +198,6 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>antenna_gain_rx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>usrp_gain_tx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -246,7 +237,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return a shared_ptr to a new instance of <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html" title="Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...">radar::estimator_rcs</a>. </p>
-<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html" title="Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...">radar::estimator_rcs</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a58ffabc584810a3881e9315bf847e383" title="Return a shared_ptr to a new instance of radar::estimator_rcs. ">radar::estimator_rcs::make</a> is the public interface for creating new instances. </p>
+<p>To avoid accidental use of raw pointers, <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html" title="Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...">radar::estimator_rcs</a>'s constructor is in a private implementation class. <a class="el" href="classgr_1_1radar_1_1estimator__rcs.html#a6c81d6b6b8632178260090776f12dba6" title="Return a shared_ptr to a new instance of radar::estimator_rcs. ">radar::estimator_rcs::make</a> is the public interface for creating new instances. </p>
 
 </div>
 </div>
@@ -432,32 +423,6 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4c1aed4d7390f7fc2aa1a04914686d34"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void gr::radar::estimator_rcs::set_usrp_gain_tx </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>val</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classgr_1_1radar_1_1estimator__rcs__impl.html#ab7708ead2c3f8f182237590020645ae9">gr::radar::estimator_rcs_impl</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="estimator__rcs_8h_source.html">estimator_rcs.h</a></li>
 </ul>
@@ -467,7 +432,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacegr.html">gr</a></li><li class="navelem"><a class="el" href="namespacegr_1_1radar.html">radar</a></li><li class="navelem"><a class="el" href="classgr_1_1radar_1_1estimator__rcs.html">estimator_rcs</a></li>
-    <li class="footer">Generated on Sun Aug 24 2014 17:59:25 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Wed Sep 17 2014 14:21:40 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

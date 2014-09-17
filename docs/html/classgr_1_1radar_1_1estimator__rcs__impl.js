@@ -1,6 +1,6 @@
 var classgr_1_1radar_1_1estimator__rcs__impl =
 [
-    [ "estimator_rcs_impl", "classgr_1_1radar_1_1estimator__rcs__impl.html#a5a0f0038094a5151e897d2e928d64e45", null ],
+    [ "estimator_rcs_impl", "classgr_1_1radar_1_1estimator__rcs__impl.html#a15e665d35a0004059ac4d2e442ebf0fa", null ],
     [ "~estimator_rcs_impl", "classgr_1_1radar_1_1estimator__rcs__impl.html#a852e7a69a8871d5d749d956a87177b54", null ],
     [ "calculate_rcs", "classgr_1_1radar_1_1estimator__rcs__impl.html#ada881d04e3b9319a5f96c123cc7c0ea6", null ],
     [ "calculate_vector_mean", "classgr_1_1radar_1_1estimator__rcs__impl.html#a96eecb4980e62dfcac9b60b714b17c41", null ],
@@ -12,7 +12,6 @@ var classgr_1_1radar_1_1estimator__rcs__impl =
     [ "set_num_mean", "classgr_1_1radar_1_1estimator__rcs__impl.html#a175908cc93d18e8be95f13b0c6590ac2", null ],
     [ "set_power_tx", "classgr_1_1radar_1_1estimator__rcs__impl.html#ad50b327669b1e1d09ed79d440cbab284", null ],
     [ "set_usrp_gain_rx", "classgr_1_1radar_1_1estimator__rcs__impl.html#a7f53dc08005273787ef0a53e6d70f911", null ],
-    [ "set_usrp_gain_tx", "classgr_1_1radar_1_1estimator__rcs__impl.html#ab7708ead2c3f8f182237590020645ae9", null ],
     [ "c_light", "classgr_1_1radar_1_1estimator__rcs__impl.html#a2f328926b28069a034fcd78ad95c7ff3", null ],
     [ "d_antenna_gain_abs_rx", "classgr_1_1radar_1_1estimator__rcs__impl.html#af2c58007d9a2f4f91d68c541102e2caf", null ],
     [ "d_antenna_gain_abs_tx", "classgr_1_1radar_1_1estimator__rcs__impl.html#a40482ac4785c4c9f5c01fee59a5c05c1", null ],
@@ -39,6 +38,5 @@ var classgr_1_1radar_1_1estimator__rcs__impl =
     [ "d_rcs_vals", "classgr_1_1radar_1_1estimator__rcs__impl.html#a3404bc966929089247ccd21b3b0e472e", null ],
     [ "d_rcs_value", "classgr_1_1radar_1_1estimator__rcs__impl.html#a004c3a902c3f6530ee36ff9659400b25", null ],
     [ "d_usrp_gain_rx", "classgr_1_1radar_1_1estimator__rcs__impl.html#a8edc553407a40d87c682efd451ff8a31", null ],
-    [ "d_usrp_gain_tx", "classgr_1_1radar_1_1estimator__rcs__impl.html#a6a9abd1d7bda04ccf93cfe15265f5c62", null ],
     [ "d_value", "classgr_1_1radar_1_1estimator__rcs__impl.html#adb2b7b59de976c6a2cd3c99359b708f3", null ]
 ];

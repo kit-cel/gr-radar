@@ -132,56 +132,54 @@ $(document).ready(function(){initNavTree('estimator__rcs_8h_source.html','');});
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * \param center_freq Center frequency of radar</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * \param antenna_gain_tx Antenna Gain of the Tx antenna</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     * \param antenna_gain_rx Antenna Gain of the Rx antenna</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * \param usrp_gain_tx Tx gain of USRP set in flowgraph</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * \param usrp_gain_rx Rx gain of USRP set in flowgraph</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * \param power_tx Tx power of radar signal. Needs to be measured one time!</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * \param corr_factor Correction factor for the RCS to calibrate system to a known target or special signal paths</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * \param exponent Exponent of the input power to calculate Rx power, depends on signal path (calculate analytically)</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * \ingroup radar</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__rcs.html">   52</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__rcs.html">estimator_rcs</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;     <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">   55</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_rcs&gt; <a class="code" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">sptr</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">      /*!</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_rcs.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">       *</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_rcs&#39;s</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">       * class. radar::estimator_rcs::make is the public interface for</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">       * creating new instances.</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">       */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">sptr</a> make(<span class="keywordtype">int</span> num_mean, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> antenna_gain_tx, <span class="keywordtype">float</span> antenna_gain_rx, <span class="keywordtype">float</span> usrp_gain_tx, <span class="keywordtype">float</span> usrp_gain_rx, <span class="keywordtype">float</span> power_tx, <span class="keywordtype">float</span> corr_factor, <span class="keywordtype">float</span> exponent = 1);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="comment">// callbacks</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_num_mean(<span class="keywordtype">int</span> val) = 0;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_center_freq(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_antenna_gain_tx(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_antenna_gain_rx(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_usrp_gain_tx(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_usrp_gain_rx(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_power_tx(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_corr_factor(<span class="keywordtype">float</span> val) = 0;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  } <span class="comment">// namespace radar</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace gr</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_RCS_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * \param usrp_gain_rx Rx gain of USRP set in flowgraph</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * \param power_tx Tx power of radar signal. Needs to be measured one time!</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * \param corr_factor Correction factor for the RCS to calibrate system to a known target or special signal paths</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * \param exponent Exponent of the input power to calculate Rx power, depends on signal path (calculate analytically)</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     * \ingroup radar</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__rcs.html">   51</a></span>&#160;    <span class="keyword">class </span><a class="code" href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a> <a class="code" href="classgr_1_1radar_1_1estimator__rcs.html">estimator_rcs</a> : <span class="keyword">virtual</span> <span class="keyword">public</span> gr::block</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;     <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">   54</a></span>&#160;      <span class="keyword">typedef</span> boost::shared_ptr&lt;estimator_rcs&gt; <a class="code" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">sptr</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">      /*!</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">       * \brief Return a shared_ptr to a new instance of radar::estimator_rcs.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">       *</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">       * To avoid accidental use of raw pointers, radar::estimator_rcs&#39;s</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">       * constructor is in a private implementation</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">       * class. radar::estimator_rcs::make is the public interface for</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">       * creating new instances.</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">       */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keyword">static</span> <a class="code" href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">sptr</a> make(<span class="keywordtype">int</span> num_mean, <span class="keywordtype">float</span> center_freq, <span class="keywordtype">float</span> antenna_gain_tx, <span class="keywordtype">float</span> antenna_gain_rx, <span class="keywordtype">float</span> usrp_gain_rx, <span class="keywordtype">float</span> power_tx, <span class="keywordtype">float</span> corr_factor, <span class="keywordtype">float</span> exponent = 1);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="comment">// callbacks</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_num_mean(<span class="keywordtype">int</span> val) = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_center_freq(<span class="keywordtype">float</span> val) = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_antenna_gain_tx(<span class="keywordtype">float</span> val) = 0;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_antenna_gain_rx(<span class="keywordtype">float</span> val) = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_usrp_gain_rx(<span class="keywordtype">float</span> val) = 0;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_power_tx(<span class="keywordtype">float</span> val) = 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_corr_factor(<span class="keywordtype">float</span> val) = 0;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    };</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  } <span class="comment">// namespace radar</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace gr</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCLUDED_RADAR_ESTIMATOR_RCS_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="api_8h_html"><div class="ttname"><a href="api_8h.html">api.h</a></div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__rcs_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__rcs.html">gr::radar::estimator_rcs</a></div><div class="ttdoc">Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...</div><div class="ttdef"><b>Definition:</b> estimator_rcs.h:52</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__rcs_html"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__rcs.html">gr::radar::estimator_rcs</a></div><div class="ttdoc">Basic RCS block for estimating the RCS of a single target. Some hardware specs need to be known for c...</div><div class="ttdef"><b>Definition:</b> estimator_rcs.h:51</div></div>
 <div class="ttc" id="api_8h_html_a087f3342c4b5ef356c6a607f77df0ea4"><div class="ttname"><a href="api_8h.html#a087f3342c4b5ef356c6a607f77df0ea4">RADAR_API</a></div><div class="ttdeci">#define RADAR_API</div><div class="ttdef"><b>Definition:</b> api.h:30</div></div>
-<div class="ttc" id="classgr_1_1radar_1_1estimator__rcs_html_a9ad3e6aca43f27ebb0319f89cebe8837"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">gr::radar::estimator_rcs::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_rcs &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_rcs.h:55</div></div>
+<div class="ttc" id="classgr_1_1radar_1_1estimator__rcs_html_a9ad3e6aca43f27ebb0319f89cebe8837"><div class="ttname"><a href="classgr_1_1radar_1_1estimator__rcs.html#a9ad3e6aca43f27ebb0319f89cebe8837">gr::radar::estimator_rcs::sptr</a></div><div class="ttdeci">boost::shared_ptr&lt; estimator_rcs &gt; sptr</div><div class="ttdef"><b>Definition:</b> estimator_rcs.h:54</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_53f46d18077ce6af91c5b562062dcdc8.html">radar</a></li><li class="navelem"><a class="el" href="estimator__rcs_8h.html">estimator_rcs.h</a></li>
-    <li class="footer">Generated on Sun Aug 24 2014 17:59:25 for GNU Radio Radar Toolbox by
+    <li class="footer">Generated on Wed Sep 17 2014 14:21:40 for GNU Radio Radar Toolbox by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

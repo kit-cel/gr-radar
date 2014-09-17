@@ -1,8 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classgr_1_1radar_1_1msg__manipulator__impl.html#aa75fbe9af8f70b4fe07159b3d6a1e37a":[3,0,0,0,39,9],
-"classgr_1_1radar_1_1msg__manipulator__impl.html#acbd385fba4653d40bb986d4ac4a82639":[3,0,0,0,39,5],
-"classgr_1_1radar_1_1msg__manipulator__impl.html#ad5a18157f4477d05884d1bf2ca403dfe":[3,0,0,0,39,4],
 "classgr_1_1radar_1_1msg__manipulator__impl.html#adb25fa0f06f2a83464226a013980cb39":[3,0,0,0,39,3],
 "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc.html":[3,0,0,0,10],
 "classgr_1_1radar_1_1ofdm__cyclic__prefix__remover__cvc.html#a35960de993dd9f2bc6c03b8a9b317cd1":[3,0,0,0,10,0],
@@ -249,5 +246,8 @@ var NAVTREEINDEX1 =
 "classgr_1_1radar_1_1signal__generator__sync__pulse__c__impl.html#afe57fa0a58ca71ff6cb378a7c0aa109b":[3,0,0,0,52,8],
 "classgr_1_1radar_1_1spectrogram__plot.html":[3,0,0,0,53],
 "classgr_1_1radar_1_1spectrogram__plot.html#a1fef909b829e923b9d87b585d840e6f3":[3,0,0,0,53,0],
-"classgr_1_1radar_1_1spectrogram__plot.html#a5dc40b00fa58ef9f05164663e0dd92a5":[3,0,0,0,53,2]
+"classgr_1_1radar_1_1spectrogram__plot.html#a5dc40b00fa58ef9f05164663e0dd92a5":[3,0,0,0,53,2],
+"classgr_1_1radar_1_1spectrogram__plot.html#a9d9cadfdccd1ad3037e175307ac2dd16":[3,0,0,0,53,1],
+"classgr_1_1radar_1_1spectrogram__plot.html#a9ffe088b5a049046d693c3ed52bd2fe7":[3,0,0,0,53,3],
+"classgr_1_1radar_1_1split__cc.html":[3,0,0,0,22]
 };

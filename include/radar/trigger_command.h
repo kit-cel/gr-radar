@@ -29,12 +29,13 @@ namespace gr {
   namespace radar {
 
     /*!
-     * \brief This block executes a command with the std::system() command if a value from a f32vector with a given identifer (symbol) is in a given range. Each index of a vector refers to a identifier.
+     * \brief This block executes a command with the std::system() command if a value from a f32vector with a given identifer (symbol) is in a given range. Each index of a vector refers to a identifier. The execution of a command can be blocked for block_time milliseconds after the last execution.
      * 
 	 * \param command Command string
 	 * \param identifiers Identifiers (symbols) as vector of strings
 	 * \param vals_min Minimum values as f32vector
 	 * \param vals_max Maximum values as f32vector
+	 * \param block_time Block executing commands for block_time milliseconds
 	 * 
 	 * \ingroup radar
 	 *
@@ -52,7 +53,7 @@ namespace gr {
        * class. radar::trigger_command::make is the public interface for
        * creating new instances.
        */
-      static sptr make(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max);
+      static sptr make(std::string command, std::vector<std::string> identifiers, std::vector<float> vals_min, std::vector<float> vals_max, int block_time);
     };
 
   } // namespace radar
