@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Sep 10 12:57:08 2014
+# Generated: Mon Oct 13 13:03:15 2014
 ##################################################
 
 from PyQt4 import Qt
@@ -229,11 +229,14 @@ class top_block(gr.top_block, Qt.QWidget):
         (self.radar_ts_fft_cc_0_0).set_min_output_buffer(4194304)
         self.radar_ts_fft_cc_0 = radar.ts_fft_cc(packet_len/decim_fac,  "packet_len")
         (self.radar_ts_fft_cc_0).set_min_output_buffer(4194304)
+        self.radar_tracking_singletarget_0 = radar.tracking_singletarget(300, 0.5, 0.3, 0.1, 0.001, 1, 'particle')
         self.radar_signal_generator_cw_c_0_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[1], ), amplitude, "packet_len")
         (self.radar_signal_generator_cw_c_0_0).set_min_output_buffer(4194304)
         self.radar_signal_generator_cw_c_0 = radar.signal_generator_cw_c(packet_len, samp_rate, (freq[0], ), amplitude, "packet_len")
         (self.radar_signal_generator_cw_c_0).set_min_output_buffer(4194304)
+        self.radar_qtgui_time_plot_1_0 = radar.qtgui_time_plot(100, 'velocity', (-3,3), range_time, 'TRACKING')
         self.radar_qtgui_time_plot_1 = radar.qtgui_time_plot(100, 'velocity', (-3,3), range_time, "")
+        self.radar_qtgui_time_plot_0_0 = radar.qtgui_time_plot(100, 'range', (0,range_res), range_time, 'TRACKING')
         self.radar_qtgui_time_plot_0 = radar.qtgui_time_plot(100, 'range', (0,range_res), range_time, "")
         self.radar_print_results_0 = radar.print_results(False, "")
         self.radar_msg_manipulator_0 = radar.msg_manipulator(('range',), (range_add, ), (1, ))
@@ -310,11 +313,14 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Asynch Message Connections
         ##################################################
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_qtgui_time_plot_1, "Msg in")
-        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_print_results_0, "Msg in")
-        self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_msg_manipulator_0, "Msg in")
-        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
+        self.msg_connect(self.radar_find_max_peak_c_0, "Msg out", self.radar_estimator_fsk_0, "Msg in")
+        self.msg_connect(self.radar_estimator_fsk_0, "Msg out", self.radar_msg_manipulator_0, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_print_results_0, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_qtgui_time_plot_0, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_qtgui_time_plot_1, "Msg in")
+        self.msg_connect(self.radar_tracking_singletarget_0, "Msg out", self.radar_qtgui_time_plot_0_0, "Msg in")
+        self.msg_connect(self.radar_tracking_singletarget_0, "Msg out", self.radar_qtgui_time_plot_1_0, "Msg in")
+        self.msg_connect(self.radar_msg_manipulator_0, "Msg out", self.radar_tracking_singletarget_0, "Msg in")
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -386,9 +392,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_protect(self, samp_protect):
         self.samp_protect = samp_protect
+        self.radar_find_max_peak_c_0.set_samp_protect(int(self.samp_protect))
         Qt.QMetaObject.invokeMethod(self._samp_protect_counter, "setValue", Qt.Q_ARG("double", self.samp_protect))
         Qt.QMetaObject.invokeMethod(self._samp_protect_slider, "setValue", Qt.Q_ARG("double", self.samp_protect))
-        self.radar_find_max_peak_c_0.set_samp_protect(int(self.samp_protect))
 
     def get_range_time(self):
         return self.range_time
@@ -407,9 +413,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_range_add(self, range_add):
         self.range_add = range_add
-        self.radar_msg_manipulator_0.set_const_add((self.range_add, ))
         Qt.QMetaObject.invokeMethod(self._range_add_counter, "setValue", Qt.Q_ARG("double", self.range_add))
         Qt.QMetaObject.invokeMethod(self._range_add_slider, "setValue", Qt.Q_ARG("double", self.range_add))
+        self.radar_msg_manipulator_0.set_const_add((self.range_add, ))
 
     def get_min_output_buffer(self):
         return self.min_output_buffer
@@ -428,27 +434,27 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_gain_tx(self, gain_tx):
         self.gain_tx = gain_tx
-        self.radar_usrp_echotimer_cc_0.set_tx_gain(self.gain_tx)
         Qt.QMetaObject.invokeMethod(self._gain_tx_counter, "setValue", Qt.Q_ARG("double", self.gain_tx))
         Qt.QMetaObject.invokeMethod(self._gain_tx_slider, "setValue", Qt.Q_ARG("double", self.gain_tx))
+        self.radar_usrp_echotimer_cc_0.set_tx_gain(self.gain_tx)
 
     def get_gain_rx(self):
         return self.gain_rx
 
     def set_gain_rx(self, gain_rx):
         self.gain_rx = gain_rx
-        self.radar_usrp_echotimer_cc_0.set_rx_gain(self.gain_rx)
         Qt.QMetaObject.invokeMethod(self._gain_rx_counter, "setValue", Qt.Q_ARG("double", self.gain_rx))
         Qt.QMetaObject.invokeMethod(self._gain_rx_slider, "setValue", Qt.Q_ARG("double", self.gain_rx))
+        self.radar_usrp_echotimer_cc_0.set_rx_gain(self.gain_rx)
 
     def get_delay_samp(self):
         return self.delay_samp
 
     def set_delay_samp(self, delay_samp):
         self.delay_samp = delay_samp
-        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.delay_samp))
         Qt.QMetaObject.invokeMethod(self._delay_samp_counter, "setValue", Qt.Q_ARG("double", self.delay_samp))
         Qt.QMetaObject.invokeMethod(self._delay_samp_slider, "setValue", Qt.Q_ARG("double", self.delay_samp))
+        self.radar_usrp_echotimer_cc_0.set_num_delay_samps(int(self.delay_samp))
 
     def get_decim_fac(self):
         return self.decim_fac
