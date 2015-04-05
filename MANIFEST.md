@@ -2,16 +2,17 @@ title: gr-radar
 brief: GNU Radio Radar Toolbox
 tags:
   - radar
+  - UHD
 author:
   - Stefan Wunsch <stefan.wunsch@student.kit.edu>
 copyright_owner:
   - Stefan Wunsch
-  - Communications Engineering Lab (CEL), Karlsruhe Institute of Technology (KIT)
+  - Communications Engineering Lab (CEL) at Karlsruhe Institute of Technology (KIT)
 dependencies:
-  - gnuradio (>= 3.7.4)
-  - UHD (>= 3.7.2)
-  - QT (>= 4.8.6)
-  - Qwt (>= 6.0.0)
+  - gnuradio 3.7.4
+  - UHD 3.7.2
+  - QT 4.8.6
+  - Qwt 6.0.0
   - python-matplotlib
 repo: https://github.com/kit-cel/gr-radar
 website: https://grradar.wordpress.com
