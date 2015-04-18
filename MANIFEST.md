@@ -16,6 +16,7 @@ dependencies:
   - python-matplotlib
 repo: https://github.com/kit-cel/gr-radar
 website: https://grradar.wordpress.com
+icon: http://pixabay.com/static/uploads/photo/2013/07/12/18/40/radar-153679_640.png
 ---
 
 The *gr-radar* project provides a toolbox of commonly used radar algorithms. An important part is the *UHD Echotimer*, which enables a synchronized TX and RX stream from USRPs to ensure a constant phase relation in measurements. Example flowgraphs for CW, Dual CW, FSK, FMCW and OFDM radar are given and partly tested on hardware. GUI elements for target representation and further signal processing algorithms such as target tracking are implemented. Check out the project website for example videos and further information.
