@@ -47,25 +47,25 @@ namespace gr {
       void send();
       void receive();
       void set_num_delay_samps(int num_samps);
-      
-      int d_samp_rate, d_num_delay_samps, d_num_tx, d_num_rx;
+
+      int d_samp_rate, d_num_delay_samps, d_num_tx, d_num_rx, d_num_mboard;
       std::vector<float> d_wait, d_timeout;
-      
+
       uhd::usrp::multi_usrp::sptr d_usrp;
       uhd::tx_metadata_t d_metadata_tx;
       uhd::rx_metadata_t d_metadata_rx;
       uhd::tx_streamer::sptr d_tx_stream;
       uhd::rx_streamer::sptr d_rx_stream;
-      
+
       std::vector<std::vector<gr_complex> > d_out_buffer;
       std::vector<gr_complex*> d_out_buffer_ptrs;
       uhd::time_spec_t d_time_now_rx, d_time_now_tx;
-      
+
       gr::thread::thread d_thread_tx, d_thread_rx;
       std::vector<gr_complex*> d_out_rx;
       gr_complex *d_in_tx;
       int d_noutput_items_tx, d_noutput_items_rx;
-      
+
       pmt::pmt_t d_time_key, d_time_val, d_srcid;
 
       // Where all the action really happens

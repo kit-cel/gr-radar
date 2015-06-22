@@ -52,7 +52,7 @@ namespace gr {
 		std::vector<std::string> antenna_tx, std::vector<std::string> antenna_rx, std::vector<float> gain_tx, std::vector<float> gain_rx,
 		const std::string& len_key)
       : gr::tagged_stream_block("usrp_echotimer_cc",
-              gr::io_signature::make(1, 1, sizeof(gr_complex)),
+              gr::io_signature::make(channel_nums_tx.size(), channel_nums_tx.size(), sizeof(gr_complex)),
               gr::io_signature::make(channel_nums_rx.size(), channel_nums_rx.size(), sizeof(gr_complex)), len_key)
     {
 		d_samp_rate = samp_rate;
@@ -61,82 +61,89 @@ namespace gr {
 		d_timeout = timeout;
 		d_num_tx = channel_nums_tx.size();
 		d_num_rx = channel_nums_rx.size();
-		
-		//*** Setup USRPs ***//
-		
+
+        //*** Setup USRPs ***//
+
 		// General setup of multi_usrp object
 		d_usrp = uhd::usrp::multi_usrp::make(args);
 		std::cout << "Using USRP Device(s): " << std::endl << d_usrp->get_pp_string() << std::endl;
-		int num_mboard = d_usrp->get_num_mboards();
-		
-		//*** Set Mboard option ***//
-		
+		d_num_mboard = d_usrp->get_num_mboards();
+        std::cout << "[DEBUG] FOUND MBOARDS: " << d_num_mboard << std::endl;
+
+		//*** Set Mboard options ***//
+
 		// Set time sources
-		for(int k=0; k<num_mboard; k++){
+		for(int k=0; k<d_num_mboard; k++){
 			d_usrp->set_time_source(time_source[k], k);
+            std::cout << "[DEBUG] TIME SOURCE (" << k << "): " << time_source[k] << std::endl;
 		}
-		
-		// Set clock sources
-		for(int k=0; k<num_mboard; k++){
+
+        // Set clock sources
+		for(int k=0; k<d_num_mboard; k++){
 			d_usrp->set_clock_source(clock_source[k], k);
+            std::cout << "[DEBUG] CLOCK SOURCE (" << k << "): " << clock_source[k] << std::endl;
 		}
-		
+
 		// Set time
 		d_usrp->set_time_now(uhd::time_spec_t(0.0));
 		// FIXME: implement gpsdo
-		
+
 		//***  Set channel options ***//
-		
-		// Set sample rate on TX and RX
+
+        // Set sample rate on TX and RX
 		d_usrp->set_tx_rate(samp_rate);
 		d_usrp->set_rx_rate(samp_rate);
-		
+
 		// Set center frequency on TX and RX
 		uhd::tune_request_t tune_request = uhd::tune_request_t(center_freq);
 		d_usrp->set_tx_freq(tune_request);
 		d_usrp->set_rx_freq(tune_request);
-		
+
 		// Set antennas
 		for(int k=0; k<d_num_tx; k++){
 			d_usrp->set_tx_antenna(antenna_tx[k], channel_nums_tx[k]);
+            std::cout << "[DEBUG] TX ANTENNA (CHANNEL " << channel_nums_tx[k] << "): " << antenna_tx[k] << std::endl;
 		}
 		for(int k=0; k<d_num_rx; k++){
 			d_usrp->set_rx_antenna(antenna_rx[k], channel_nums_rx[k]);
+            std::cout << "[DEBUG] RX ANTENNA (CHANNEL " << channel_nums_rx[k] << "): " << antenna_rx[k] << std::endl;
 		}
-		
+
 		// Set gain
 		for(int k=0; k<d_num_tx; k++){
 			d_usrp->set_tx_gain(gain_tx[k], channel_nums_tx[k]);
+            std::cout << "[DEBUG] TX GAIN (CHANNEL " << channel_nums_tx[k] << "): " << gain_tx[k] << std::endl;
 		}
 		for(int k=0; k<d_num_rx; k++){
 			d_usrp->set_rx_gain(gain_rx[k], channel_nums_rx[k]);
+            std::cout << "[DEBUG] RX GAIN (CHANNEL " << channel_nums_rx[k] << "): " << gain_rx[k] << std::endl;
 		}
-		
+
 		//*** Get TX and RX streamer ***//
-		
+
 		// Get TX streamer and channels
 		uhd::stream_args_t stream_args_tx("fc32", wire[0]);
 		stream_args_tx.channels = channel_nums_tx;
 		d_tx_stream = d_usrp->get_tx_stream(stream_args_tx);
-		
+
 		// Get RX streamer and channels
 		uhd::stream_args_t stream_args_rx("fc32", wire[1]);
 		stream_args_rx.channels = channel_nums_rx;
 		d_rx_stream = d_usrp->get_rx_stream(stream_args_rx);
-		
-		//*** Misc ***//
-		
+
+        //*** Misc ***//
+
 		// Resize output buffer
 		d_out_buffer.resize(d_num_rx);
 		d_out_buffer_ptrs.resize(d_num_rx);
-		
+
 		// Setup rx_time pmt
 		d_time_key = pmt::string_to_symbol("rx_time");
 		d_srcid = pmt::string_to_symbol("usrp_echotimer");
-		
+
 		// Setup thread priority
 		//uhd::set_thread_priority_safe(); // necessary? doesnt work...
-		
+
 		// Sleep to get sync done
 		boost::this_thread::sleep(boost::posix_time::milliseconds(1000)); // FIXME: necessary?
 	}
@@ -154,12 +161,12 @@ namespace gr {
       int noutput_items = ninput_items[0];
       return noutput_items ;
     }
-    
+
     void
     usrp_echotimer_cc_impl::set_num_delay_samps(int num_samps){
 		d_num_delay_samps = num_samps;
 	}
-    
+
     void
     usrp_echotimer_cc_impl::send()
     {
@@ -168,7 +175,7 @@ namespace gr {
 		d_metadata_tx.end_of_burst = false;
 		d_metadata_tx.has_time_spec = true;
 		d_metadata_tx.time_spec = d_time_now_tx+uhd::time_spec_t(d_wait[0]); // Timespec needed?
-		
+
 		// Send input buffer
 		size_t num_acc_samps = 0; // Number of accumulated samples
 		size_t num_tx_samps, total_num_samps;
@@ -177,14 +184,14 @@ namespace gr {
 		num_tx_samps = d_tx_stream->send(d_in_tx, total_num_samps, d_metadata_tx, total_num_samps/(float)d_samp_rate+d_timeout[0]);
 		// Get timeout
 		if (num_tx_samps < total_num_samps) std::cerr << "Send timeout..." << std::endl;
-		
+
 		//send a mini EOB packet
 		d_metadata_tx.start_of_burst = false;
 		d_metadata_tx.end_of_burst = true;
 		d_metadata_tx.has_time_spec = false;
 		d_tx_stream->send("", 0, d_metadata_tx);
     }
-    
+
     void
     usrp_echotimer_cc_impl::receive()
     {
@@ -195,11 +202,11 @@ namespace gr {
 		stream_cmd.stream_now = false;
 		stream_cmd.time_spec = d_time_now_rx+uhd::time_spec_t(d_wait[1]);
 		d_rx_stream->issue_stream_cmd(stream_cmd);
-		
+
 		size_t num_rx_samps;
 		// Receive a packet
 		num_rx_samps = d_rx_stream->recv(d_out_rx, total_num_samps, d_metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout[1]);
-		
+
 		// Save timestamp
 		d_time_val = pmt::make_tuple
 			(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
@@ -219,48 +226,52 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-        gr_complex *in = (gr_complex *) input_items[0]; // remove const
-        gr_complex *out;
-        
+        std::cout << "[DEBUG] WORK" << std::endl;
+        std::vector<gr_complex*> in(d_num_tx);
+        for(int k=0; k<d_num_tx; k++) in[k] = (gr_complex *) input_items[k]; // remove const
+        std::vector<gr_complex*> out(d_num_rx);
+        for(int k=0; k<d_num_rx; k++) out[k] = (gr_complex *) output_items[k];
+
         // Set output items on packet length
         noutput_items = ninput_items[0];
-        
+
         // Resize output buffer
         if(d_out_buffer[0].size()!=noutput_items){
 			for(int k=0; k<d_num_rx; k++) d_out_buffer[k].resize(noutput_items);
 			for(int k=0; k<d_num_rx; k++) d_out_buffer_ptrs[k] = &d_out_buffer[k].front();
 		}
-		
+
 		// Get actual time on USRPs
-        uhd::time_spec_t time_now = d_usrp->get_time_now();
+        uhd::time_spec_t time_now = d_usrp->get_time_now(0);
         d_time_now_tx = time_now;
         d_time_now_rx = time_now;
-		
+        for(int k=0; k<d_num_mboard; k++) std::cout << "[DEBUG] TIME (MBOARD " << k << "): " << d_usrp->get_time_now(k).get_real_secs() << std::endl;
+
 		// TX thread
-        d_in_tx = in;
+        d_in_tx = in[0]; // FIXME: WRONG
         d_noutput_items_tx = noutput_items;
         d_thread_tx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::send, this));
-        
+
         // RX thread
         d_out_rx = d_out_buffer_ptrs;
         d_noutput_items_rx = noutput_items;
-        d_thread_rx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this));
-        
+        //d_thread_rx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this));
+
         // Wait for threads to complete
         d_thread_tx.join();
-        d_thread_rx.join();
-        
+        //d_thread_rx.join();
+
         // Shift of number delay samples (fill with zeros)
         for(int k=0; k<d_num_rx; k++){
-			out = (gr_complex *) output_items[k];
-			memcpy(out,d_out_rx[k]+d_num_delay_samps,(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
-			memset(out+(noutput_items-d_num_delay_samps),0,d_num_delay_samps*sizeof(gr_complex)); // set zeros
+			memcpy(out[k],d_out_rx[k]+d_num_delay_samps,(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
+			memset(out[k]+(noutput_items-d_num_delay_samps),0,d_num_delay_samps*sizeof(gr_complex)); // set zeros
 		}
-        
+
         // Setup rx_time tag
         for(int k=0; k<d_num_rx; k++){
 			add_item_tag(k, nitems_written(k), d_time_key, d_time_val, d_srcid);
 		}
+
 
         // Tell runtime system how many output items we produced.
         return noutput_items;
