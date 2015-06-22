@@ -85,7 +85,16 @@ namespace gr {
 		}
 
 		// Set time
-		d_usrp->set_time_now(uhd::time_spec_t(0.0));
+		if(time_source[0]=="external"){ // FIXME: make this nicer, some generic approach
+            std::cout << "[DEBUG] SET TIME VIA NEXT UNKNOWN PPS" << std::endl;
+            d_usrp->set_time_unknown_pps(uhd::time_spec_t(0.0));
+            boost::this_thread::sleep(boost::posix_time::seconds(1)); // wait for pps sync pulse
+        }
+        else{
+            std::cout << "[DEBUG] SET TIME MANUALLY" << std::endl;
+            d_usrp->set_time_now(uhd::time_spec_t(0.0));
+        }
+
 		// FIXME: implement gpsdo
 
 		//***  Set channel options ***//

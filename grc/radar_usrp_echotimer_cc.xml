@@ -110,6 +110,7 @@
   <sink>
     <name>IQ in</name>
     <type>complex</type>
+    <nports>len($channel_nums_tx)</nports>
   </sink>
   <source>
     <name>IQ out</name>

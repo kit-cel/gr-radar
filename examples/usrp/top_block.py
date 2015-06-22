@@ -2,7 +2,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Jun 22 17:53:54 2015
+# Generated: Mon Jun 22 18:43:13 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -20,12 +20,16 @@ from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import gr
+from gnuradio import qtgui
+from gnuradio import uhd
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
 import radar
+import sip
 import sys
+import time
 
 from distutils.version import StrictVersion
 class top_block(gr.top_block, Qt.QWidget):
@@ -59,19 +63,110 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate = samp_rate = 250000
         self.packet_len = packet_len = 1024
-        self.freq = freq = samp_rate/4
+        self.freq_1 = freq_1 = -samp_rate/4
+        self.freq_0 = freq_0 = samp_rate/4
         self.center_freq = center_freq = 2.4e9
 
         ##################################################
         # Blocks
         ##################################################
-        self._freq_range = Range(-samp_rate/2, samp_rate/2, 1, samp_rate/4, 200)
-        self._freq_win = RangeWidget(self._freq_range, self.set_freq, "freq", "counter_slider", float)
-        self.top_layout.addWidget(self._freq_win)
-        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, 0, (0,), (0,), "addr0=192.168.10.6,addr1=192.168.10.4", ('none','mimo'), ('internal','mimo'), ('',''), (0.2, 0.2), (1, 1), ("J1",), ("J1",), (10,), (10,), "packet_len")
+        self._freq_0_range = Range(-samp_rate/2, samp_rate/2, 1, samp_rate/4, 200)
+        self._freq_0_win = RangeWidget(self._freq_0_range, self.set_freq_0, "freq_0", "counter_slider", float)
+        self.top_layout.addWidget(self._freq_0_win)
+        self.uhd_usrp_source_0 = uhd.usrp_source(
+        	",".join(("addr=192.168.10.52", "")),
+        	uhd.stream_args(
+        		cpu_format="fc32",
+        		channels=range(1),
+        	),
+        )
+        self.uhd_usrp_source_0.set_samp_rate(samp_rate)
+        self.uhd_usrp_source_0.set_center_freq(center_freq, 0)
+        self.uhd_usrp_source_0.set_gain(10, 0)
+        self.uhd_usrp_source_0.set_antenna("J1", 0)
+        self.radar_usrp_echotimer_cc_0 = radar.usrp_echotimer_cc(samp_rate, center_freq, 0, (0,), (0,), "addr0=192.168.10.4,addr1=192.168.10.6", ('external','external'), ('internal','internal'), ('',''), (0.2, 0.2), (1, 1), ("J1","J1"), ("J1",), (10,10,), (10,), "packet_len")
+        self.qtgui_waterfall_sink_x_0 = qtgui.waterfall_sink_c(
+        	packet_len, #size
+        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	0, #fc
+        	samp_rate, #bw
+        	"", #name
+                1 #number of inputs
+        )
+        self.qtgui_waterfall_sink_x_0.set_update_time(0.10)
+        self.qtgui_waterfall_sink_x_0.enable_grid(False)
+        
+        if not True:
+          self.qtgui_waterfall_sink_x_0.disable_legend()
+        
+        if complex == type(float()):
+          self.qtgui_waterfall_sink_x_0.set_plot_pos_half(not True)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        colors = [0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_waterfall_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_waterfall_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_waterfall_sink_x_0.set_color_map(i, colors[i])
+            self.qtgui_waterfall_sink_x_0.set_line_alpha(i, alphas[i])
+        
+        self.qtgui_waterfall_sink_x_0.set_intensity_range(-140, 10)
+        
+        self._qtgui_waterfall_sink_x_0_win = sip.wrapinstance(self.qtgui_waterfall_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_waterfall_sink_x_0_win)
+        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
+        	packet_len, #size
+        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	0, #fc
+        	samp_rate, #bw
+        	"", #name
+        	1 #number of inputs
+        )
+        self.qtgui_freq_sink_x_0.set_update_time(0.10)
+        self.qtgui_freq_sink_x_0.set_y_axis(-140, 10)
+        self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
+        self.qtgui_freq_sink_x_0.enable_autoscale(False)
+        self.qtgui_freq_sink_x_0.enable_grid(False)
+        self.qtgui_freq_sink_x_0.set_fft_average(1.0)
+        self.qtgui_freq_sink_x_0.enable_control_panel(False)
+        
+        if not True:
+          self.qtgui_freq_sink_x_0.disable_legend()
+        
+        if complex == type(float()):
+          self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "dark blue"]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_freq_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_freq_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_freq_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
+        
+        self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
+        self._freq_1_range = Range(-samp_rate/2, samp_rate/2, 1, -samp_rate/4, 200)
+        self._freq_1_win = RangeWidget(self._freq_1_range, self.set_freq_1, "freq_1", "counter_slider", float)
+        self.top_layout.addWidget(self._freq_1_win)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_gr_complex, 1, packet_len, "packet_len")
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*1)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq, 0.5, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq_0, 0.5, 0)
 
         ##################################################
         # Connections
@@ -79,6 +174,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))    
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.radar_usrp_echotimer_cc_0, 0))    
         self.connect((self.radar_usrp_echotimer_cc_0, 0), (self.blocks_null_sink_0, 0))    
+        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_freq_sink_x_0, 0))    
+        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_waterfall_sink_x_0, 0))    
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -90,8 +187,12 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_freq(self.samp_rate/4)
+        self.set_freq_0(self.samp_rate/4)
+        self.set_freq_1(-self.samp_rate/4)
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(0, self.samp_rate)
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_packet_len(self):
         return self.packet_len
@@ -101,18 +202,25 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_stream_to_tagged_stream_0.set_packet_len(self.packet_len)
         self.blocks_stream_to_tagged_stream_0.set_packet_len_pmt(self.packet_len)
 
-    def get_freq(self):
-        return self.freq
+    def get_freq_1(self):
+        return self.freq_1
 
-    def set_freq(self, freq):
-        self.freq = freq
-        self.analog_sig_source_x_0.set_frequency(self.freq)
+    def set_freq_1(self, freq_1):
+        self.freq_1 = freq_1
+
+    def get_freq_0(self):
+        return self.freq_0
+
+    def set_freq_0(self, freq_0):
+        self.freq_0 = freq_0
+        self.analog_sig_source_x_0.set_frequency(self.freq_0)
 
     def get_center_freq(self):
         return self.center_freq
 
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
+        self.uhd_usrp_source_0.set_center_freq(self.center_freq, 0)
 
 
 if __name__ == '__main__':
