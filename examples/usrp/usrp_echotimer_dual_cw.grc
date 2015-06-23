@@ -6,7 +6,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>usrp_echotimer_dual_cw</value>
     </param>
     <param>
       <key>_enabled</key>

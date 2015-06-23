@@ -5,7 +5,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>test_find_max_peak_c</value>
     </param>
     <param>
       <key>_enabled</key>

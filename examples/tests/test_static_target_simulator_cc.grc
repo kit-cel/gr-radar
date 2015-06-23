@@ -5,7 +5,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>test_static_target_simulator_cc</value>
     </param>
     <param>
       <key>_enabled</key>
