@@ -1,23 +1,23 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2014 <+YOU OR YOUR COMPANY+>.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
  * Boston, MA 02110-1301, USA.
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -85,7 +85,7 @@ namespace gr {
 		}
 
 		// Set time
-		if(time_source[0]=="external"){ // FIXME: make this nicer, some generic approach
+		if(time_source[0]=="external"){ // FIXME: make this nicer, some generic approach because of possible mimo
             std::cout << "[DEBUG] SET TIME VIA NEXT UNKNOWN PPS" << std::endl;
             d_usrp->set_time_unknown_pps(uhd::time_spec_t(0.0));
             boost::this_thread::sleep(boost::posix_time::seconds(1)); // wait for pps sync pulse
@@ -177,56 +177,68 @@ namespace gr {
 	}
 
     void
-    usrp_echotimer_cc_impl::send()
+    usrp_echotimer_cc_impl::send(std::vector<gr_complex*> in_ptrs, int noutput_items, uhd::time_spec_t time_now)
     {
+        std::cout << "[SEND] NOUTPUT ITEMS: " << noutput_items << std::endl;
+        std::cout << "[SEND] NUM TX: " << in_ptrs.size() << std::endl;
 		// Setup metadata for first package
-        d_metadata_tx.start_of_burst = true;
-		d_metadata_tx.end_of_burst = false;
-		d_metadata_tx.has_time_spec = true;
-		d_metadata_tx.time_spec = d_time_now_tx+uhd::time_spec_t(d_wait[0]); // Timespec needed?
+        uhd::tx_metadata_t metadata_tx;
+        metadata_tx.start_of_burst = true;
+		metadata_tx.end_of_burst = false;
+		metadata_tx.has_time_spec = true;
+		metadata_tx.time_spec = time_now+uhd::time_spec_t(d_wait[0]);
 
 		// Send input buffer
 		size_t num_acc_samps = 0; // Number of accumulated samples
 		size_t num_tx_samps, total_num_samps;
-		total_num_samps = d_noutput_items_tx;
+		total_num_samps = noutput_items;
+
 		// Data to USRP
-		num_tx_samps = d_tx_stream->send(d_in_tx, total_num_samps, d_metadata_tx, total_num_samps/(float)d_samp_rate+d_timeout[0]);
+        std::cout << "[SEND] START SENDING" << std::endl;
+		num_tx_samps = d_tx_stream->send(in_ptrs, total_num_samps, metadata_tx, total_num_samps/(float)d_samp_rate+d_timeout[0]);
+
 		// Get timeout
 		if (num_tx_samps < total_num_samps) std::cerr << "Send timeout..." << std::endl;
 
 		//send a mini EOB packet
-		d_metadata_tx.start_of_burst = false;
-		d_metadata_tx.end_of_burst = true;
-		d_metadata_tx.has_time_spec = false;
-		d_tx_stream->send("", 0, d_metadata_tx);
+        std::cout << "[SEND] SEND EOB" << std::endl;
+		metadata_tx.start_of_burst = false;
+		metadata_tx.end_of_burst = true;
+		metadata_tx.has_time_spec = false;
+		d_tx_stream->send("", 0, metadata_tx);
     }
 
     void
-    usrp_echotimer_cc_impl::receive()
+    usrp_echotimer_cc_impl::receive(std::vector<gr_complex*> out_ptrs, int noutput_items, uhd::time_spec_t time_now)
     {
+        std::cout << "[RECV] NOUTPUT ITEMS: " << noutput_items << std::endl;
+        std::cout << "[RECV] NUM RX: " << out_ptrs.size() << std::endl;
 		// Setup RX streaming
-		size_t total_num_samps = d_noutput_items_rx;
+		size_t total_num_samps = noutput_items;
 		uhd::stream_cmd_t stream_cmd(uhd::stream_cmd_t::STREAM_MODE_NUM_SAMPS_AND_DONE);
 		stream_cmd.num_samps = total_num_samps;
 		stream_cmd.stream_now = false;
-		stream_cmd.time_spec = d_time_now_rx+uhd::time_spec_t(d_wait[1]);
+		stream_cmd.time_spec = time_now+uhd::time_spec_t(d_wait[1]);
 		d_rx_stream->issue_stream_cmd(stream_cmd);
 
-		size_t num_rx_samps;
 		// Receive a packet
-		num_rx_samps = d_rx_stream->recv(d_out_rx, total_num_samps, d_metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout[1]);
+        std::cout << "[RECV] START RECEIVING" << std::endl;
+		size_t num_rx_samps;
+        uhd::rx_metadata_t metadata_rx;
+		num_rx_samps = d_rx_stream->recv(out_ptrs, total_num_samps, metadata_rx, total_num_samps/(float)d_samp_rate+d_timeout[1]);
 
 		// Save timestamp
-		d_time_val = pmt::make_tuple
-			(pmt::from_uint64(d_metadata_rx.time_spec.get_full_secs()),
-			 pmt::from_double(d_metadata_rx.time_spec.get_frac_secs()));
+        d_time_val = pmt::make_tuple
+			(pmt::from_uint64(metadata_rx.time_spec.get_full_secs()),
+			 pmt::from_double(metadata_rx.time_spec.get_frac_secs()));
 
 		// Handle the error code
-		if (d_metadata_rx.error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
-			throw std::runtime_error(str(boost::format("Receiver error %s") % d_metadata_rx.strerror()));
+        if (metadata_rx.error_code != uhd::rx_metadata_t::ERROR_CODE_NONE){
+			throw std::runtime_error(str(boost::format("Receiver error %s") % metadata_rx.strerror()));
 		}
 
 		if (num_rx_samps < total_num_samps) std::cerr << "Receive timeout before all samples received..." << std::endl;
+        std::cout << "[RECV] END RECEIVING" << std::endl;
     }
 
     int
@@ -252,27 +264,21 @@ namespace gr {
 
 		// Get actual time on USRPs
         uhd::time_spec_t time_now = d_usrp->get_time_now(0);
-        d_time_now_tx = time_now;
-        d_time_now_rx = time_now;
         for(int k=0; k<d_num_mboard; k++) std::cout << "[DEBUG] TIME (MBOARD " << k << "): " << d_usrp->get_time_now(k).get_real_secs() << std::endl;
 
 		// TX thread
-        d_in_tx = in[0]; // FIXME: WRONG
-        d_noutput_items_tx = noutput_items;
-        d_thread_tx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::send, this));
+        gr::thread::thread thread_tx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::send, this, in, noutput_items, time_now));
 
         // RX thread
-        d_out_rx = d_out_buffer_ptrs;
-        d_noutput_items_rx = noutput_items;
-        //d_thread_rx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this));
+        gr::thread::thread thread_rx = gr::thread::thread(boost::bind(&usrp_echotimer_cc_impl::receive, this, d_out_buffer_ptrs, noutput_items, time_now));
 
         // Wait for threads to complete
-        d_thread_tx.join();
-        //d_thread_rx.join();
+        thread_tx.join();
+        thread_rx.join();
 
         // Shift of number delay samples (fill with zeros)
         for(int k=0; k<d_num_rx; k++){
-			memcpy(out[k],d_out_rx[k]+d_num_delay_samps,(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
+			memcpy(out[k],d_out_buffer_ptrs[k]+d_num_delay_samps,(noutput_items-d_num_delay_samps)*sizeof(gr_complex)); // push buffer to output
 			memset(out[k]+(noutput_items-d_num_delay_samps),0,d_num_delay_samps*sizeof(gr_complex)); // set zeros
 		}
 
