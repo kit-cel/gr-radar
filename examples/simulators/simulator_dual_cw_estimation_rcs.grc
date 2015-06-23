@@ -5,7 +5,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>simulator_dual_cw_estimation_rcs</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1102,7 +1102,7 @@
     </param>
     <param>
       <key>range</key>
-      <value>Range,</value>
+      <value>value_range,</value>
     </param>
     <param>
       <key>velocity</key>
@@ -1671,7 +1671,7 @@
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
-      <value>Range</value>
+      <value>value_range</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1679,7 +1679,7 @@
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>range</value>
     </param>
     <param>
       <key>value</key>

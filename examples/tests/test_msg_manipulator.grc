@@ -5,7 +5,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>test_msg_manipulator</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -807,7 +807,7 @@
     <key>variable_qtgui_range</key>
     <param>
       <key>id</key>
-      <value>Range</value>
+      <value>value_range</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -815,7 +815,7 @@
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>range</value>
     </param>
     <param>
       <key>value</key>
@@ -870,7 +870,7 @@
     </param>
     <param>
       <key>range</key>
-      <value>Range,</value>
+      <value>value_range,</value>
     </param>
     <param>
       <key>velocity</key>

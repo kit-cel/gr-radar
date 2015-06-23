@@ -5,7 +5,7 @@
     <key>options</key>
     <param>
       <key>id</key>
-      <value>top_block</value>
+      <value>usrp_echotimer_fsk_tracking_singletarget</value>
     </param>
     <param>
       <key>_enabled</key>
