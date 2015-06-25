@@ -3,7 +3,7 @@
   <key>radar_usrp_echotimer_cc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $channel_nums_tx, $channel_nums_rx, $args, $time_source, $clock_source, $wire, $wait, $timeout, $antenna_tx, $antenna_rx, $gain_tx, $gain_rx, $len_key)</make>
+  <make>radar.usrp_echotimer_cc($samp_rate, $center_freq, $num_delay_samps, $channel_nums_tx, $channel_nums_rx, $args, $time_source, $clock_source, $wire, $wait, $timeout, $tx_subdev_spec, $rx_subdev_spec, $antenna_tx, $antenna_rx, $gain_tx, $gain_rx, $len_key)</make>
   <callback>set_num_delay_samps($num_delay_samps)</callback>
   <param>
     <name>Sample rate</name>
@@ -74,6 +74,18 @@
     <key>timeout</key>
     <value>1, 1</value>
     <type>real_vector</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>TX Subdevice Spec</name>
+    <key>tx_subdev_spec</key>
+    <type>raw</type>
+    <hide>part</hide>
+  </param>
+  <param>
+    <name>RX Subdevice Spec</name>
+    <key>rx_subdev_spec</key>
+    <type>raw</type>
     <hide>part</hide>
   </param>
   <param>

@@ -48,6 +48,7 @@ namespace gr {
       static sptr make(int samp_rate, float center_freq, int num_delay_samps, std::vector<size_t> channel_nums_tx, std::vector<size_t> channel_nums_rx,
 		std::string args, std::vector<std::string> time_source, std::vector<std::string> clock_source,
 		std::vector<std::string> wire, std::vector<float> wait, std::vector<float> timeout,
+        std::vector<std::string> tx_subdev_spec, std::vector<std::string> rx_subdev_spec,
 		std::vector<std::string> antenna_tx, std::vector<std::string> antenna_rx, std::vector<float> gain_tx, std::vector<float> gain_rx,
 		const std::string& len_key="packet_len");
 		

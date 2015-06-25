@@ -33,12 +33,14 @@ namespace gr {
     usrp_echotimer_cc::make(int samp_rate, float center_freq, int num_delay_samps, std::vector<size_t> channel_nums_tx, std::vector<size_t> channel_nums_rx,
 		std::string args, std::vector<std::string> time_source, std::vector<std::string> clock_source,
 		std::vector<std::string> wire, std::vector<float> wait, std::vector<float> timeout,
+        std::vector<std::string> tx_subdev_spec, std::vector<std::string> rx_subdev_spec,
 		std::vector<std::string> antenna_tx, std::vector<std::string> antenna_rx, std::vector<float> gain_tx, std::vector<float> gain_rx,
 		const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
         (new usrp_echotimer_cc_impl(samp_rate, center_freq, num_delay_samps, channel_nums_tx, channel_nums_rx,
 			args, time_source, clock_source, wire, wait, timeout,
+            tx_subdev_spec, rx_subdev_spec,
 			antenna_tx, antenna_rx, gain_tx, gain_rx,
 			len_key));
     }
@@ -49,6 +51,7 @@ namespace gr {
     usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate, float center_freq, int num_delay_samps, std::vector<size_t> channel_nums_tx, std::vector<size_t> channel_nums_rx,
 		std::string args, std::vector<std::string> time_source, std::vector<std::string> clock_source,
 		std::vector<std::string> wire, std::vector<float> wait, std::vector<float> timeout,
+        std::vector<std::string> tx_subdev_spec, std::vector<std::string> rx_subdev_spec,
 		std::vector<std::string> antenna_tx, std::vector<std::string> antenna_rx, std::vector<float> gain_tx, std::vector<float> gain_rx,
 		const std::string& len_key)
       : gr::tagged_stream_block("usrp_echotimer_cc",
@@ -71,6 +74,12 @@ namespace gr {
         std::cout << "[DEBUG] FOUND MBOARDS: " << d_num_mboard << std::endl;
 
 		//*** Set Mboard options ***//
+
+        // Set subdev specs
+        for(int k=0; k<d_num_mboard; k++){
+            d_usrp->set_tx_subdev_spec(tx_subdev_spec[k],k);
+            d_usrp->set_rx_subdev_spec(rx_subdev_spec[k],k);
+        }
 
 		// Set time sources
 		for(int k=0; k<d_num_mboard; k++){
