@@ -69,16 +69,26 @@ namespace gr {
 
 		// General setup of multi_usrp object
 		d_usrp = uhd::usrp::multi_usrp::make(args);
-		std::cout << "Using USRP Device(s): " << std::endl << d_usrp->get_pp_string() << std::endl;
+		std::cout << "[INFO] Using USRP device(s): " << std::endl << d_usrp->get_pp_string() << std::endl;
 		d_num_mboard = d_usrp->get_num_mboards();
-        std::cout << "[DEBUG] FOUND MBOARDS: " << d_num_mboard << std::endl;
+        std::cout << "[INFO] Found motherboards: " << d_num_mboard << std::endl;
 
 		//*** Set Mboard options ***//
 
         // Set subdev specs
         for(int k=0; k<d_num_mboard; k++){
-            d_usrp->set_tx_subdev_spec(tx_subdev_spec[k],k);
-            d_usrp->set_rx_subdev_spec(rx_subdev_spec[k],k);
+            if(tx_subdev_spec[k]==""){
+                std::cout << "[WARNING] Omit TX subdevice spec for board " << k << "." << std::endl;
+            }
+            else{
+                d_usrp->set_tx_subdev_spec(tx_subdev_spec[k],k);
+            }
+            if(rx_subdev_spec[k]==""){
+                std::cout << "[WARNING] Omit RX subdevice spec for board " << k << "." << std::endl;
+            }
+            else{
+                d_usrp->set_rx_subdev_spec(rx_subdev_spec[k],k);
+            }
         }
 
 		// Set time sources
