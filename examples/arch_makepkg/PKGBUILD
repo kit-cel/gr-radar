@@ -1,0 +1,28 @@
+pkgname=gr-radar
+_gitname=gr-radar
+pkgver=git
+pkgrel=1
+pkgdesc="GNU Radio Radar Toolbox"
+arch=('x86_64')
+url="https://grradar.wordpress.com"
+license=('GPL')
+depends=('fftw' 'qwt' 'qt4' 'libuhd' 'python2-matplotlib')
+makedepends=('git' 'cmake' 'make')
+optdepends=()
+source=("git://github.com/kit-cel/gr-radar")
+md5sums=('SKIP')
+conflicts=()
+provides=()
+
+build() {
+  mkdir -p $_gitname/build
+  cd $_gitname/build
+  pwd
+  cmake ..
+  make -j4
+}
+
+package() {
+  cd "$srcdir/$_gitname/build"
+  make DESTDIR="$pkgdir" install
+}
