@@ -135,11 +135,11 @@ class qa_static_target_simulator_cc (gr_unittest.TestCase):
 		s2ts = blocks.stream_to_tagged_stream(8,1,packet_len,'packet_len')
 		sim = radar.static_target_simulator_cc(Range, velocity, rcs, azimuth, position_rx, samp_rate, center_freq, -10, False, False)
 		s2v0 = blocks.stream_to_vector(8,packet_len)
-		fft0 = fft.fft_vcc(packet_len,1,())
+		fft0 = fft.fft_vcc(packet_len,True,())
 		v2s0 = blocks.vector_to_stream(8,packet_len)
 		snk0 = blocks.vector_sink_c()
 		s2v1 = blocks.stream_to_vector(8,packet_len)
-		fft1 = fft.fft_vcc(packet_len,1,())
+		fft1 = fft.fft_vcc(packet_len,True,())
 		v2s1 = blocks.vector_to_stream(8,packet_len)
 		snk1 = blocks.vector_sink_c()
 		
