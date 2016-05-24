@@ -67,7 +67,8 @@ list(APPEND radar_sources
     os_cfar_2d_vc_impl.cc
     estimator_ofdm_impl.cc
     estimator_rcs_impl.cc
-    trigger_command_impl.cc )
+    trigger_command_impl.cc
+    cross_correlate_vcvc_impl.cc )
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)
