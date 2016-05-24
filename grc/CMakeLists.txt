@@ -46,5 +46,6 @@ install(FILES
     radar_os_cfar_2d_vc.xml
     radar_estimator_ofdm.xml
     radar_estimator_rcs.xml
-    radar_trigger_command.xml DESTINATION share/gnuradio/grc/blocks
+    radar_trigger_command.xml
+    radar_cross_correlate_vcvc.xml DESTINATION share/gnuradio/grc/blocks
 )
