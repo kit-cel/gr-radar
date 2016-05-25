@@ -22,6 +22,7 @@
 #define INCLUDED_RADAR_CROSS_CORRELATE_VCVC_IMPL_H
 
 #include <radar/cross_correlate_vcvc.h>
+#include <complex>
 #include <fftw3.h>
 
 namespace gr {
@@ -33,9 +34,11 @@ namespace gr {
       int d_vlen;
       fftwf_plan d_fft_plan1;
       fftwf_plan d_fft_plan2;
-      fftwf_complex* d_fft_buffer1;
-      fftwf_complex* d_fft_buffer2;
-      
+      fftwf_plan d_ifft_plan;
+      gr_complex* d_fft_buffer1;
+      gr_complex* d_fft_buffer2;
+      gr_complex* d_out_buffer;
+
      public:
       cross_correlate_vcvc_impl(int vlen);
       ~cross_correlate_vcvc_impl();
