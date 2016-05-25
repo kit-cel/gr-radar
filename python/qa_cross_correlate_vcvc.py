@@ -33,10 +33,9 @@ class qa_cross_correlate_vcvc(gr_unittest.TestCase):
         self.tb = None
 
     def validate_tuples(self, expected, result):
-        # Converts result to real numbers while asserting
         self.assertEqual(len(expected), len(result))
         for i in range(len(expected)):
-            self.assertAlmostEqual(expected[i], abs(result[i]))
+            self.assertAlmostEqual(expected[i], result[i])
 
     def test_001_delay(self):
         vlen = 3
@@ -55,8 +54,6 @@ class qa_cross_correlate_vcvc(gr_unittest.TestCase):
         self.tb.run()
         # check data
         result_data = dst.data()
-        print("delay:")
-        print(result_data)
         self.validate_tuples(exp_data, result_data)
 
     def test_002_equal(self):
@@ -76,8 +73,6 @@ class qa_cross_correlate_vcvc(gr_unittest.TestCase):
         self.tb.run()
         # check data
         result_data = dst.data()
-        print("equal:")
-        print(result_data)
         self.validate_tuples(exp_data, result_data)
 
     def test_003_inverse_delay(self):
@@ -97,8 +92,6 @@ class qa_cross_correlate_vcvc(gr_unittest.TestCase):
         self.tb.run()
         # check data
         result_data = dst.data()
-        print("inverse delay:")
-        print(result_data)
         self.validate_tuples(exp_data, result_data)
 
 

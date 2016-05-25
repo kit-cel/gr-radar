@@ -45,17 +45,21 @@ namespace gr {
                       gr::io_signature::make(2, 2, sizeof(gr_complex) * vlen),
                       gr::io_signature::make(1, 1, sizeof(gr_complex) * vlen))
     {
-      // Verify datatype
+      // Verify datatypes
       if(sizeof(gr_complex) != sizeof(fftwf_complex))
         std::runtime_error("sizeof(gr_complex) != sizeof(fftwf_complex)");
+      if(sizeof(gr_complex) != sizeof(lv_32fc_t))
+        std::runtime_error("sizeof(gr_complex) != sizeof(lv_32fc_t)");
       d_vlen = vlen;
+
+      // Allocate correctly aligned arrays
       d_fft_buffer1 = (gr_complex*) fftwf_malloc(sizeof(gr_complex) * d_vlen);
       d_fft_buffer2 = (gr_complex*) fftwf_malloc(sizeof(gr_complex) * d_vlen);
       d_out_buffer = (gr_complex*) fftwf_malloc(sizeof(gr_complex) * d_vlen);
-      d_fft_plan1 = fftwf_plan_dft_1d(d_vlen, reinterpret_cast<fftwf_complex*>(d_fft_buffer1), reinterpret_cast<fftwf_complex*>(d_fft_buffer1),
-                                      FFTW_FORWARD, FFTW_ESTIMATE);
-      d_fft_plan2 = fftwf_plan_dft_1d(d_vlen, reinterpret_cast<fftwf_complex*>(d_fft_buffer2), reinterpret_cast<fftwf_complex*>(d_fft_buffer2),
-                                      FFTW_FORWARD, FFTW_ESTIMATE);
+      d_fft_plan1 = fftwf_plan_dft_1d(d_vlen, (fftwf_complex*) d_fft_buffer1,
+                      (fftwf_complex*)d_fft_buffer1, FFTW_FORWARD, FFTW_ESTIMATE);
+      d_fft_plan2 = fftwf_plan_dft_1d(d_vlen, (fftwf_complex*) d_fft_buffer2,
+                      (fftwf_complex*)d_fft_buffer2, FFTW_FORWARD, FFTW_ESTIMATE);
       d_ifft_plan = fftwf_plan_dft_1d(d_vlen, (fftwf_complex*) d_out_buffer,
                     (fftwf_complex*) d_out_buffer, FFTW_BACKWARD, FFTW_ESTIMATE);
 
@@ -82,7 +86,9 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      // Cross correlation is defined as ifft(conj(fft(a))*fft(b))
+      // Cross correlation can be calculated as ifft(conj(fft(a))*fft(b))
+      // NOTE: Without zeropadding ffts, this will be a circular cross correlation
+      //       Therefore result might be inaccurate but len(output) == len(input)
       const gr_complex *in1 = (const gr_complex *) input_items[0];
       const gr_complex *in2 = (const gr_complex *) input_items[1];
       gr_complex *out = (gr_complex *) output_items[0];
@@ -95,28 +101,18 @@ namespace gr {
       fftwf_execute(d_fft_plan2);
       int noi = d_vlen*noutput_items;
 
-      // Calculate cross correlation
-      // d_fft_buffer1 is conjugated
-      // NOTE: Without zeropadding ffts, this will be a circular cross correlation
-      for (int i = 0; i < d_vlen; i++) {
-        d_out_buffer[i] = d_fft_buffer2[i] * std::conj(d_fft_buffer1[i]);
-        std::cout << "loop, i: " << i << " result: " << d_out_buffer[i] << std::endl;
-      }
-      //volk_32fc_x2_multiply_conjugate_32fc( (lv_32fc_t*) d_out_buffer, (lv_32fc_t*) d_fft_buffer2,
-      //                    (lv_32fc_t*)   d_fft_buffer1, noi);
+      // Calculate cross correlation in frequency domain
+      // in[0] is conjugated
+
+      volk_32fc_x2_multiply_conjugate_32fc((lv_32fc_t*) d_out_buffer,
+                  (lv_32fc_t*) d_fft_buffer2, (lv_32fc_t*) d_fft_buffer1, noi);
 
       // Move back to time domain
       fftwf_execute(d_ifft_plan);
-      // FFTW iift scales output by vlen
-      // Let's normalize it (otherwise result is multiplied by vlen)
-      volk_32fc_s32fc_multiply_32fc((lv_32fc_t*) d_out_buffer, (lv_32fc_t*) d_out_buffer, (lv_32fc_t) (1/(float)d_vlen), d_vlen);
-      for (int i = 0; i < d_vlen; i++) {
-        std::cout << "d_out_buffer, i: " << i << " result: " << d_out_buffer[i] << std::endl;
-        ///out[i] = d_out_buffer[i] / vlen;
 
-      }
-      memcpy(out, d_out_buffer, d_vlen*sizeof(gr_complex));
-
+      // FFTW iift multiplies output by vlen - let's normalize it
+      volk_32fc_s32fc_multiply_32fc((lv_32fc_t*) out, (lv_32fc_t*) d_out_buffer,
+                                    (lv_32fc_t) (1/(float)d_vlen), noi);
 
       // Tell runtime system how many output items we produced.
       return noutput_items;
