@@ -52,10 +52,15 @@ namespace gr {
         std::runtime_error("sizeof(gr_complex) != sizeof(lv_32fc_t)");
       d_vlen = vlen;
 
+      // Correct volk alignment
+      size_t alignment = volk_get_alignment();
+      const int alignment_multiple = alignment / sizeof(gr_complex);
+      set_alignment(std::max(1, alignment_multiple));
+
       // Allocate correctly aligned arrays
-      d_fft_buffer1 = (gr_complex*) fftwf_malloc(sizeof(gr_complex) * d_vlen);
-      d_fft_buffer2 = (gr_complex*) fftwf_malloc(sizeof(gr_complex) * d_vlen);
-      d_out_buffer = (gr_complex*) fftwf_malloc(sizeof(gr_complex) * d_vlen);
+      d_fft_buffer1 = (gr_complex*) volk_malloc(sizeof(gr_complex) * d_vlen, alignment);
+      d_fft_buffer2 = (gr_complex*) volk_malloc(sizeof(gr_complex) * d_vlen, alignment);
+      d_out_buffer = (gr_complex*) volk_malloc(sizeof(gr_complex) * d_vlen, alignment);
       d_fft_plan1 = fftwf_plan_dft_1d(d_vlen, (fftwf_complex*) d_fft_buffer1,
                       (fftwf_complex*)d_fft_buffer1, FFTW_FORWARD, FFTW_ESTIMATE);
       d_fft_plan2 = fftwf_plan_dft_1d(d_vlen, (fftwf_complex*) d_fft_buffer2,
@@ -63,9 +68,7 @@ namespace gr {
       d_ifft_plan = fftwf_plan_dft_1d(d_vlen, (fftwf_complex*) d_out_buffer,
                     (fftwf_complex*) d_out_buffer, FFTW_BACKWARD, FFTW_ESTIMATE);
 
-      // Correct volk alignment
-      const int alignment_multiple = volk_get_alignment() / sizeof(gr_complex);
-      set_alignment(std::max(1, alignment_multiple));
+
     }
 
     /*
@@ -76,9 +79,9 @@ namespace gr {
       fftwf_destroy_plan(d_fft_plan1);
       fftwf_destroy_plan(d_fft_plan2);
       fftwf_destroy_plan(d_ifft_plan);
-      fftwf_free(d_fft_buffer1);
-      fftwf_free(d_fft_buffer2);
-      fftwf_free(d_out_buffer);
+      volk_free(d_fft_buffer1);
+      volk_free(d_fft_buffer2);
+      volk_free(d_out_buffer);
     }
 
     int
@@ -86,36 +89,43 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
+      std::cout << noutput_items << std::endl;
+      noutput_items = 1; // FIXME this probably isn't the right way
       // Cross correlation can be calculated as ifft(conj(fft(a))*fft(b))
       // NOTE: Without zeropadding ffts, this will be a circular cross correlation
       //       Therefore result might be inaccurate but len(output) == len(input)
-      const gr_complex *in1 = (const gr_complex *) input_items[0];
-      const gr_complex *in2 = (const gr_complex *) input_items[1];
-      gr_complex *out = (gr_complex *) output_items[0];
+      for(int i = 0; i < noutput_items; i++) {
+        const gr_complex *in1 = (const gr_complex *) input_items[0];
+        const gr_complex *in2 = (const gr_complex *) input_items[1];
+        gr_complex *out = (gr_complex *) output_items[0];
+        int pos = i*d_vlen;
+        memcpy(d_fft_buffer1, &in1[pos], d_vlen*sizeof(gr_complex));
+        memcpy(d_fft_buffer2, &in2[pos], d_vlen*sizeof(gr_complex));
 
-      memcpy(d_fft_buffer1, in1, d_vlen*sizeof(gr_complex));
-      memcpy(d_fft_buffer2, in2, d_vlen*sizeof(gr_complex));
+        // Move to frequency domain
+        fftwf_execute(d_fft_plan1);
+        fftwf_execute(d_fft_plan2);
+        int noi = d_vlen*noutput_items;
 
-      // Move to frequency domain
-      fftwf_execute(d_fft_plan1);
-      fftwf_execute(d_fft_plan2);
-      int noi = d_vlen*noutput_items;
+        // Calculate cross correlation in frequency domain
+        // in[0] is conjugated
 
-      // Calculate cross correlation in frequency domain
-      // in[0] is conjugated
+        volk_32fc_x2_multiply_conjugate_32fc((lv_32fc_t*) d_out_buffer,
+                    (lv_32fc_t*) d_fft_buffer2, (lv_32fc_t*) d_fft_buffer1, noi);
 
-      volk_32fc_x2_multiply_conjugate_32fc((lv_32fc_t*) d_out_buffer,
-                  (lv_32fc_t*) d_fft_buffer2, (lv_32fc_t*) d_fft_buffer1, noi);
+        // Move back to time domain
+        fftwf_execute(d_ifft_plan);
 
-      // Move back to time domain
-      fftwf_execute(d_ifft_plan);
+        // FFTW iift multiplies output by vlen - let's normalize it
+        volk_32fc_s32fc_multiply_32fc((lv_32fc_t*) &out[pos], (lv_32fc_t*) d_out_buffer,
+                                      (lv_32fc_t) (1/(float)d_vlen), noi);
 
-      // FFTW iift multiplies output by vlen - let's normalize it
-      volk_32fc_s32fc_multiply_32fc((lv_32fc_t*) out, (lv_32fc_t*) d_out_buffer,
-                                    (lv_32fc_t) (1/(float)d_vlen), noi);
 
-      // Tell runtime system how many output items we produced.
+        // Tell runtime system how many output items we produced.
+
+      }
       return noutput_items;
+
     }
 
   } /* namespace radar */
