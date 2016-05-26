@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <block>
-  <name>cross_correlate_vcvc</name>
+  <name>Cross correlate</name>
   <key>radar_cross_correlate_vcvc</key>
-  <category>radar</category>
+  <category>RADAR</category>
   <import>import radar</import>
   <make>radar.cross_correlate_vcvc($vlen)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
@@ -11,9 +11,10 @@
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
   <param>
-    <name>...</name>
-    <key>...</key>
-    <type>...</type>
+    <name>Vector length</name>
+    <key>vlen</key>
+    <value>1</value>
+    <type>int</type>
   </param>
 
   <!-- Make one 'sink' node per input. Sub-nodes:
@@ -22,8 +23,15 @@
        * vlen
        * optional (set to 1 for optional inputs) -->
   <sink>
-    <name>in</name>
-    <type><!-- e.g. int, float, complex, byte, short, xxx_vector, ...--></type>
+    <name>reference</name>
+    <type>complex</type>
+    <vlen>$vlen</vlen>
+  </sink>
+
+  <sink>
+    <name>echo</name>
+    <type>complex</type>
+    <vlen>$vlen</vlen>
   </sink>
 
   <!-- Make one 'source' node per output. Sub-nodes:
@@ -33,6 +41,7 @@
        * optional (set to 1 for optional inputs) -->
   <source>
     <name>out</name>
-    <type><!-- e.g. int, float, complex, byte, short, xxx_vector, ...--></type>
+    <type>complex</type>
+    <vlen>$vlen</vlen>
   </source>
 </block>
