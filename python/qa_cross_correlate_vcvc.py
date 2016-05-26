@@ -94,6 +94,27 @@ class qa_cross_correlate_vcvc(gr_unittest.TestCase):
         result_data = dst.data()
         self.validate_tuples(exp_data, result_data)
 
+    def test_004_multiple_vectors(self):
+        vlen = 2
+        src1_data = (1, 0, 1, 0, 1, 0)  # reference signal
+        src2_data = (0, 1, 0, 1, 0, 1)  # echo signal
+        src1 = blocks.vector_source_c(src1_data, False, vlen)
+        src2 = blocks.vector_source_c(src2_data, False, vlen)
+        op = radar.cross_correlate_vcvc(vlen)
+        exp_data = (0, 1, 0, 1, 0, 1)  # inverted delay of one for each vector
+        dst = blocks.vector_sink_c(vlen)
+
+        # set up fg
+        self.tb.connect(src1, (op, 0))
+        self.tb.connect(src2, (op, 1))
+        self.tb.connect(op, dst)
+        #raw_input ('Press Enter to continue: ') #for attaching debugger
+        self.tb.run()
+        # check data
+        result_data = dst.data()
+        self.validate_tuples(exp_data, result_data)
+
+
 
 if __name__ == '__main__':
     gr_unittest.run(qa_cross_correlate_vcvc, "qa_cross_correlate_vcvc.xml")
