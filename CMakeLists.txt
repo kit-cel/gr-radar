@@ -34,6 +34,11 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
+# Set C++ standard for all targets
+IF(CMAKE_VERSION VERSION_GREATER 3.1)
+    set(CMAKE_CXX_STANDARD 98)
+ENDIF()
+
 ########################################################################
 # Compiler specific setup
 ########################################################################
@@ -81,12 +86,33 @@ set(GR_PKG_LIBEXEC_DIR  ${GR_LIBEXEC_DIR}/${CMAKE_PROJECT_NAME})
 set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 
 ########################################################################
+# On Apple only, set install name and use rpath correctly, if not already set
+########################################################################
+if(APPLE)
+    if(NOT CMAKE_INSTALL_NAME_DIR)
+        set(CMAKE_INSTALL_NAME_DIR
+            ${CMAKE_INSTALL_PREFIX}/${GR_LIBRARY_DIR} CACHE
+            PATH "Library Install Name Destination Directory" FORCE)
+    endif(NOT CMAKE_INSTALL_NAME_DIR)
+    if(NOT CMAKE_INSTALL_RPATH)
+        set(CMAKE_INSTALL_RPATH
+            ${CMAKE_INSTALL_PREFIX}/${GR_LIBRARY_DIR} CACHE
+            PATH "Library Install RPath" FORCE)
+    endif(NOT CMAKE_INSTALL_RPATH)
+    if(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
+        set(CMAKE_BUILD_WITH_INSTALL_RPATH ON CACHE
+            BOOL "Do Build Using Library Install RPath" FORCE)
+    endif(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
+endif(APPLE)
+
+########################################################################
 # Find gnuradio build dependencies
 ########################################################################
 find_package(CppUnit)
+find_package(Doxygen)
 find_package(FFTW3F)
 find_package(Qt4 4.2.0 COMPONENTS QtCore QtGui)
-find_package(Qwt)
+find_package(Qwt 6.0.0)
 find_package(UHD)
 
 # Search for GNU Radio and its components and versions. Add any
@@ -95,13 +121,23 @@ find_package(UHD)
 # API compatible version required.
 set(GR_REQUIRED_COMPONENTS RUNTIME)
 find_package(Gnuradio "3.7.2" REQUIRED)
+list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 if(NOT CPPUNIT_FOUND)
-    message(FATAL_ERROR "CppUnit required to compile radar")
+    message(FATAL_ERROR "CppUnit required to compile blub")
 endif()
 
 # populate the environment with QT variables
 include(GrSetupQt4)
+
+########################################################################
+# Setup doxygen option
+########################################################################
+if(DOXYGEN_FOUND)
+	option(ENABLE_DOXYGEN "Build docs using Doxygen" ON)
+else(DOXYGEN_FOUND)
+	option(ENABLE_DOXYGEN "Build docs using Doxygen" OFF)
+endif(DOXYGEN_FOUND)
 
 ########################################################################
 # Setup the include and linker paths
@@ -155,11 +191,15 @@ add_subdirectory(swig)
 add_subdirectory(python)
 add_subdirectory(grc)
 add_subdirectory(apps)
-#add_subdirectory(docs)
+add_subdirectory(docs)
 
 ########################################################################
 # Install cmake search helper for this library
 ########################################################################
-install(FILES cmake/Modules/radarConfig.cmake        
-    DESTINATION lib/cmake/radar
+if(NOT CMAKE_MODULES_DIR)
+  set(CMAKE_MODULES_DIR lib${LIB_SUFFIX}/cmake)
+endif(NOT CMAKE_MODULES_DIR)
+
+install(FILES cmake/Modules/radarConfig.cmake
+    DESTINATION ${CMAKE_MODULES_DIR}/radar
 )
