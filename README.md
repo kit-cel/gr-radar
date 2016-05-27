@@ -24,7 +24,7 @@ Now you can run all testcases and install the toolbox. If `ctest` responds with 
 https://grradar.wordpress.com/
 
 **Documentation**  
-For full documentation open `docs/html/index.html` in any web browser.
+For full documentation build the toolbox and open `build/docs/doxygen/html/index.html` in any web browser.
 
 **Development platform**  
 GNU Radio 3.7.4  
