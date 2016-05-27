@@ -89,8 +89,6 @@ namespace gr {
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      std::cout << noutput_items << std::endl;
-      noutput_items = 1; // FIXME this probably isn't the right way
       // Cross correlation can be calculated as ifft(conj(fft(a))*fft(b))
       // NOTE: Without zeropadding ffts, this will be a circular cross correlation
       //       Therefore result might be inaccurate but len(output) == len(input)
@@ -99,31 +97,28 @@ namespace gr {
         const gr_complex *in2 = (const gr_complex *) input_items[1];
         gr_complex *out = (gr_complex *) output_items[0];
         int pos = i*d_vlen;
-        memcpy(d_fft_buffer1, &in1[pos], d_vlen*sizeof(gr_complex));
-        memcpy(d_fft_buffer2, &in2[pos], d_vlen*sizeof(gr_complex));
 
         // Move to frequency domain
+        memcpy(d_fft_buffer1, &in1[pos], d_vlen*sizeof(gr_complex));
+        memcpy(d_fft_buffer2, &in2[pos], d_vlen*sizeof(gr_complex));
         fftwf_execute(d_fft_plan1);
         fftwf_execute(d_fft_plan2);
-        int noi = d_vlen*noutput_items;
 
         // Calculate cross correlation in frequency domain
         // in[0] is conjugated
-
         volk_32fc_x2_multiply_conjugate_32fc((lv_32fc_t*) d_out_buffer,
-                    (lv_32fc_t*) d_fft_buffer2, (lv_32fc_t*) d_fft_buffer1, noi);
+                    (lv_32fc_t*) d_fft_buffer2, (lv_32fc_t*) d_fft_buffer1, d_vlen);
 
         // Move back to time domain
         fftwf_execute(d_ifft_plan);
 
         // FFTW iift multiplies output by vlen - let's normalize it
+        lv_32fc_t multiplier = (1/(float)d_vlen);
         volk_32fc_s32fc_multiply_32fc((lv_32fc_t*) &out[pos], (lv_32fc_t*) d_out_buffer,
-                                      (lv_32fc_t) (1/(float)d_vlen), noi);
-
-
-        // Tell runtime system how many output items we produced.
+                                      multiplier, d_vlen);
 
       }
+      // Tell runtime system how many output items we produced.
       return noutput_items;
 
     }

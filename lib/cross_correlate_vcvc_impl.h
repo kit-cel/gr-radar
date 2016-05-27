@@ -22,7 +22,6 @@
 #define INCLUDED_RADAR_CROSS_CORRELATE_VCVC_IMPL_H
 
 #include <radar/cross_correlate_vcvc.h>
-#include <complex>
 #include <fftw3.h>
 
 namespace gr {
