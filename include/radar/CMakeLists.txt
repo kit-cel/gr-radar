@@ -52,5 +52,6 @@ install(FILES
     estimator_ofdm.h
     estimator_rcs.h
     trigger_command.h
-    cross_correlate_vcvc.h DESTINATION include/radar
+    cross_correlate_vcvc.h
+    ts_cross_correlate_cvc.h DESTINATION include/radar
 )

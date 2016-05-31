@@ -39,6 +39,7 @@
 #include "radar/estimator_rcs.h"
 #include "radar/trigger_command.h"
 #include "radar/cross_correlate_vcvc.h"
+#include "radar/ts_cross_correlate_cvc.h"
 %}
 
 
@@ -110,3 +111,5 @@ GR_SWIG_BLOCK_MAGIC2(radar, estimator_rcs);
 GR_SWIG_BLOCK_MAGIC2(radar, trigger_command);
 %include "radar/cross_correlate_vcvc.h"
 GR_SWIG_BLOCK_MAGIC2(radar, cross_correlate_vcvc);
+%include "radar/ts_cross_correlate_cvc.h"
+GR_SWIG_BLOCK_MAGIC2(radar, ts_cross_correlate_cvc);
