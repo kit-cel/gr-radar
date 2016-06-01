@@ -4,17 +4,22 @@
   <key>radar_cross_correlate_vcvc</key>
   <category>RADAR</category>
   <import>import radar</import>
-  <make>radar.cross_correlate_vcvc($vlen)</make>
+  <make>radar.cross_correlate_vcvc($packet_len, $len_key)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
   <param>
-    <name>Vector length</name>
-    <key>vlen</key>
-    <value>1</value>
-    <type>int</type>
+   <name>Packet length</name>
+   <key>packet_len</key>
+   <type>int</type>
+  </param>
+  <param>
+   <name>Packet length key</name>
+   <key>len_key</key>
+   <value> "packet_len"</value>
+   <type>string</type>
   </param>
 
   <!-- Make one 'sink' node per input. Sub-nodes:
@@ -25,13 +30,11 @@
   <sink>
     <name>reference</name>
     <type>complex</type>
-    <vlen>$vlen</vlen>
   </sink>
 
   <sink>
     <name>echo</name>
     <type>complex</type>
-    <vlen>$vlen</vlen>
   </sink>
 
   <!-- Make one 'source' node per output. Sub-nodes:
@@ -42,6 +45,6 @@
   <source>
     <name>out</name>
     <type>complex</type>
-    <vlen>$vlen</vlen>
+    <vlen>1</vlen>
   </source>
 </block>

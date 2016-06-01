@@ -31,26 +31,26 @@ namespace gr {
   namespace radar {
 
     cross_correlate_vcvc::sptr
-    cross_correlate_vcvc::make(int vlen)
+    cross_correlate_vcvc::make(int packet_len, const std::string& len_key)
     {
       return gnuradio::get_initial_sptr
-        (new cross_correlate_vcvc_impl(vlen));
+        (new cross_correlate_vcvc_impl(packet_len, len_key));
     }
 
     /*
      * The private constructor
      */
-    cross_correlate_vcvc_impl::cross_correlate_vcvc_impl(int vlen)
-      : gr::sync_block("cross_correlate_vcvc",
-                      gr::io_signature::make(2, 2, sizeof(gr_complex) * vlen),
-                      gr::io_signature::make(1, 1, sizeof(gr_complex) * vlen))
+    cross_correlate_vcvc_impl::cross_correlate_vcvc_impl(int packet_len, const std::string& len_key)
+      : gr::tagged_stream_block("cross_correlate_vcvc",
+              gr::io_signature::make(2, 2, sizeof(gr_complex)),
+              gr::io_signature::make(1, 1, sizeof(gr_complex)), len_key)
     {
       // Verify datatypes
       if(sizeof(gr_complex) != sizeof(fftwf_complex))
         std::runtime_error("sizeof(gr_complex) != sizeof(fftwf_complex)");
       if(sizeof(gr_complex) != sizeof(lv_32fc_t))
         std::runtime_error("sizeof(gr_complex) != sizeof(lv_32fc_t)");
-      d_vlen = vlen;
+      d_vlen = packet_len;
 
       // Correct volk alignment
       size_t alignment = volk_get_alignment();
@@ -85,14 +85,23 @@ namespace gr {
     }
 
     int
+    cross_correlate_vcvc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
+    {
+      int noutput_items = ninput_items[0];
+      return noutput_items;
+    }
+
+    int
     cross_correlate_vcvc_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
+                       gr_vector_int &ninput_items,
+                       gr_vector_const_void_star &input_items,
+                       gr_vector_void_star &output_items)
     {
       // Cross correlation can be calculated as ifft(conj(fft(a))*fft(b))
       // NOTE: Without zeropadding ffts, this will be a circular cross correlation
       //       Therefore result might be inaccurate but len(output) == len(input)
-      for(int i = 0; i < noutput_items; i++) {
+      noutput_items = ninput_items[0];
+      for(int i = 0; i < 1; i++) {
         const gr_complex *in1 = (const gr_complex *) input_items[0];
         const gr_complex *in2 = (const gr_complex *) input_items[1];
         gr_complex *out = (gr_complex *) output_items[0];

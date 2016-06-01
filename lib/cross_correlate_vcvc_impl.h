@@ -38,14 +38,18 @@ namespace gr {
       gr_complex* d_fft_buffer2;
       gr_complex* d_out_buffer;
 
+     protected:
+      int calculate_output_stream_length(const gr_vector_int &ninput_items);
+
      public:
-      cross_correlate_vcvc_impl(int vlen);
+      cross_correlate_vcvc_impl(int packet_len, const std::string& len_key);
       ~cross_correlate_vcvc_impl();
 
       // Where all the action really happens
       int work(int noutput_items,
-         gr_vector_const_void_star &input_items,
-         gr_vector_void_star &output_items);
+           gr_vector_int &ninput_items,
+           gr_vector_const_void_star &input_items,
+           gr_vector_void_star &output_items);
     };
 
   } // namespace radar

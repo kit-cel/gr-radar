@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2016 Anton Debner.
+ * Copyright 2016 <+YOU OR YOUR COMPANY+>.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define INCLUDED_RADAR_CROSS_CORRELATE_VCVC_H
 
 #include <radar/api.h>
-#include <gnuradio/sync_block.h>
+#include <gnuradio/tagged_stream_block.h>
 
 namespace gr {
   namespace radar {
@@ -33,7 +33,7 @@ namespace gr {
      * \ingroup radar
      *
      */
-    class RADAR_API cross_correlate_vcvc : virtual public gr::sync_block
+    class RADAR_API cross_correlate_vcvc : virtual public gr::tagged_stream_block
     {
      public:
       typedef boost::shared_ptr<cross_correlate_vcvc> sptr;
@@ -46,7 +46,7 @@ namespace gr {
        * class. radar::cross_correlate_vcvc::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int vlen);
+      static sptr make(int packet_len, const std::string& len_key = "packet_len");
     };
 
   } // namespace radar
