@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2016 <+YOU OR YOUR COMPANY+>.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -22,6 +22,7 @@
 #define INCLUDED_RADAR_TS_CROSS_CORRELATE_CVC_IMPL_H
 
 #include <radar/ts_cross_correlate_cvc.h>
+#include <fftw3.h>
 
 namespace gr {
   namespace radar {
@@ -29,7 +30,13 @@ namespace gr {
     class ts_cross_correlate_cvc_impl : public ts_cross_correlate_cvc
     {
      private:
-      // Nothing to declare in this block.
+       int d_vlen;
+       fftwf_plan d_fft_plan1;
+       fftwf_plan d_fft_plan2;
+       fftwf_plan d_ifft_plan;
+       gr_complex* d_fft_buffer1;
+       gr_complex* d_fft_buffer2;
+       gr_complex* d_out_buffer;
 
      protected:
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
@@ -49,4 +56,3 @@ namespace gr {
 } // namespace gr
 
 #endif /* INCLUDED_RADAR_TS_CROSS_CORRELATE_CVC_IMPL_H */
-
