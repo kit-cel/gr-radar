@@ -88,6 +88,7 @@ namespace gr {
     cross_correlate_vcvc_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
       int noutput_items = ninput_items[0];
+      //std::cout << std::endl << "calculate noutput " << noutput_items << std::endl;
       return noutput_items;
     }
 
@@ -101,6 +102,7 @@ namespace gr {
       // NOTE: Without zeropadding ffts, this will be a circular cross correlation
       //       Therefore result might be inaccurate but len(output) == len(input)
       noutput_items = ninput_items[0];
+      //std::cout << std::endl << "noutput" << noutput_items << std::endl;
       for(int i = 0; i < 1; i++) {
         const gr_complex *in1 = (const gr_complex *) input_items[0];
         const gr_complex *in2 = (const gr_complex *) input_items[1];
