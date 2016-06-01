@@ -48,5 +48,5 @@ install(FILES
     radar_estimator_rcs.xml
     radar_trigger_command.xml
     radar_cross_correlate_vcvc.xml
-    radar_ts_cross_correlate_cvc.xml DESTINATION share/gnuradio/grc/blocks
+    DESTINATION share/gnuradio/grc/blocks
 )

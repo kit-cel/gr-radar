@@ -68,4 +68,3 @@ GR_ADD_TEST(qa_estimator_ofdm ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/q
 GR_ADD_TEST(qa_estimator_rcs ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_rcs.py)
 GR_ADD_TEST(qa_trigger_command ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_trigger_command.py)
 GR_ADD_TEST(qa_cross_correlate_vcvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_cross_correlate_vcvc.py)
-GR_ADD_TEST(qa_ts_cross_correlate_cvc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ts_cross_correlate_cvc.py)
