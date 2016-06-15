@@ -39,6 +39,23 @@ IF(CMAKE_VERSION VERSION_GREATER 3.1)
     set(CMAKE_CXX_STANDARD 98)
 ENDIF()
 
+# Set cmake policies.
+# This will suppress developer warnings during the cmake process that can occur
+# if a newer cmake version than the minimum is used.
+
+if(POLICY CMP0026)
+    cmake_policy(SET CMP0026 OLD)
+endif()
+if(POLICY CMP0043)
+    cmake_policy(SET CMP0043 OLD)
+endif()
+if(POLICY CMP0045)
+    cmake_policy(SET CMP0045 OLD)
+endif()
+if(POLICY CMP0046)
+    cmake_policy(SET CMP0046 OLD)
+endif()
+
 ########################################################################
 # Compiler specific setup
 ########################################################################
