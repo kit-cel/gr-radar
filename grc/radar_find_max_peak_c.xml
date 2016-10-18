@@ -1,7 +1,7 @@
 <block>
   <name>Find Max Peak</name>
   <key>radar_find_max_peak_c</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.find_max_peak_c($samp_rate, $threshold, $samp_protect, $max_freq, $cut_max_freq, $len_key)</make>
   <callback>set_threshold($threshold)</callback>

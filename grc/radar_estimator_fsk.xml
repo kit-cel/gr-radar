@@ -1,7 +1,7 @@
 <block>
   <name>Estimator FSK</name>
   <key>radar_estimator_fsk</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Estimators</category>
   <import>import radar</import>
   <make>radar.estimator_fsk($center_freq, $delta_freq, $push_power)</make>
   <param>

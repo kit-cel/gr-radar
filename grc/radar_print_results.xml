@@ -1,7 +1,7 @@
 <block>
   <name>Print Results</name>
   <key>radar_print_results</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.print_results($store_msg, $filename)</make>
   <param>

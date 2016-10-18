@@ -1,7 +1,7 @@
 <block>
   <name>OFDM Divide</name>
   <key>radar_ofdm_divide_vcvc</key>
-  <category>RADAR</category>
+  <category>[RADAR]/RADAR</category>
   <import>import radar</import>
   <make>radar.ofdm_divide_vcvc($vlen_in, $vlen_out, $discarded_carriers, $num_sync_words, $len_key)</make>
   <param>

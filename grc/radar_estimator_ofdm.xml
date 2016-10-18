@@ -1,7 +1,7 @@
 <block>
   <name>Estimator OFDM</name>
   <key>radar_estimator_ofdm</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Estimators</category>
   <import>import radar</import>
   <make>radar.estimator_ofdm($symbol_x, $len_x, $axis_x, $symbol_y, $len_y, $axis_y, $merge_consecutive)</make>
   <param>
