@@ -1,7 +1,7 @@
 <block>
   <name>Matrix Transpose</name>
   <key>radar_transpose_matrix_vcvc</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.transpose_matrix_vcvc($vlen_in, $vlen_out, $len_key)</make>
   <param>

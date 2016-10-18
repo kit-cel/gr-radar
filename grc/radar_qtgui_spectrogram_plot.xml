@@ -1,7 +1,7 @@
 <block>
   <name>QT GUI Spectrogram Plot</name>
   <key>radar_qtgui_spectrogram_plot</key>
-  <category>RADAR</category>
+  <category>[RADAR]/GUI</category>
   <import>import radar</import>
   <make>radar.qtgui_spectrogram_plot($vlen, $interval, $xlabel, $ylabel, $label, $axis_x, $axis_y, $axis_z, $autoscale_z, $len_key)</make>
   <param>

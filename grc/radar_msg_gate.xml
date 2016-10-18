@@ -1,7 +1,7 @@
 <block>
   <name>Message Gate</name>
   <key>radar_msg_gate</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.msg_gate($msg_keys, $val_min, $val_max)</make>
   <param>

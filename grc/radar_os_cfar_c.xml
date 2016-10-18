@@ -1,7 +1,7 @@
 <block>
   <name>OS-CFAR</name>
   <key>radar_os_cfar_c</key>
-  <category>RADAR</category>
+  <category>[RADAR]/RADAR</category>
   <import>import radar</import>
   <make>radar.os_cfar_c($samp_rate, $samp_compare, $samp_protect, $rel_threshold, $mult_threshold, $merge_consecutive, $len_key)</make>
   <callback>set_rel_threshold($rel_threshold)</callback>

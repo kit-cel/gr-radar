@@ -1,7 +1,7 @@
 <block>
   <name>QT GUI Time Plot</name>
   <key>radar_qtgui_time_plot</key>
-  <category>RADAR</category>
+  <category>[RADAR]/GUI</category>
   <import>import radar</import>
   <make>radar.qtgui_time_plot($interval, $label_y, $axis_y, $range_time, $label)</make>
   <param>

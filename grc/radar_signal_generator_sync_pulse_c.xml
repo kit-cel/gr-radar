@@ -1,7 +1,7 @@
 <block>
   <name>Signal Generator Sync Pulse</name>
   <key>radar_signal_generator_sync_pulse_c</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Generators</category>
   <import>import radar</import>
   <make>radar.signal_generator_sync_pulse_c($packet_len, $pulse_len, $pulse_pause, $pulse_amplitude, $len_key)</make>
   <param>

@@ -1,7 +1,7 @@
 <block>
   <name>Estimator CW</name>
   <key>radar_estimator_cw</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Estimators</category>
   <import>import radar</import>
   <make>radar.estimator_cw($center_freq)</make>
   <param>

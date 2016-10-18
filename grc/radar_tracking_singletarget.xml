@@ -1,7 +1,7 @@
 <block>
   <name>Tracking Single Target</name>
   <key>radar_tracking_singletarget</key>
-  <category>RADAR</category>
+  <category>[RADAR]/RADAR</category>
   <import>import radar</import>
   <make>radar.tracking_singletarget($num_particle, $std_range_meas, $std_velocity_meas, $std_accel_sys, $threshold_track, $threshold_lost, $filter)</make>
   <param>

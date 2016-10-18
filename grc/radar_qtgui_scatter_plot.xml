@@ -1,7 +1,7 @@
 <block>
   <name>QT GUI Scatter Plot</name>
   <key>radar_qtgui_scatter_plot</key>
-  <category>RADAR</category>
+  <category>[RADAR]/GUI</category>
   <import>import radar</import>
   <make>radar.qtgui_scatter_plot($interval, $label_x, $label_y, $axis_x, $axis_y, $label)</make>
   <param>

@@ -1,7 +1,7 @@
 <block>
   <name>Signal Generator FMCW</name>
   <key>radar_signal_generator_fmcw_c</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Generators</category>
   <import>import radar</import>
   <make>radar.signal_generator_fmcw_c($samp_rate, $samp_up, $samp_down, $samp_cw, $freq_cw, $freq_sweep, $amplitude, $len_key)</make>
   <param>

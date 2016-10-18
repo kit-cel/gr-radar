@@ -1,7 +1,7 @@
 <block>
   <name>Trigger Command</name>
   <key>radar_trigger_command</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.trigger_command($command, $identifiers, $vals_min, $vals_max, $block_time)</make>
   <param>

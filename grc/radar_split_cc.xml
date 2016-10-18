@@ -1,7 +1,7 @@
 <block>
   <name>Split</name>
   <key>radar_split_cc</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.split_cc($packet_num, $packet_parts, $len_key)</make>
   <param>

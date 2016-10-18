@@ -1,7 +1,7 @@
 <block>
   <name>Split FSK</name>
   <key>radar_split_fsk_cc</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Tools</category>
   <import>import radar</import>
   <make>radar.split_fsk_cc($samp_per_freq, $samp_discard, $len_key)</make>
   <param>

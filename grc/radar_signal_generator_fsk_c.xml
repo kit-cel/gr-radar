@@ -1,7 +1,7 @@
 <block>
   <name>Signal Generator FSK</name>
   <key>radar_signal_generator_fsk_c</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Generators</category>
   <import>import radar</import>
   <make>radar.signal_generator_fsk_c($samp_rate, $samp_per_freq, $blocks_per_tag, $freq_low, $freq_high, $amplitude, $len_key)</make>
   <param>
