@@ -90,7 +90,7 @@ namespace gr {
       uint64_t d_time_sec;
       double d_time_frac_sec;
 
-      const static float c_light = 3e8;
+      constexpr static float c_light = 3e8;
 
       // Where all the action really happens
       int work(int noutput_items,
