@@ -26,8 +26,11 @@
 #include "static_target_simulator_cc_impl.h"
 #include <volk/volk.h>
 
-namespace gr {
-  namespace radar {
+namespace gr { namespace radar {
+    namespace {
+        //! \f$ \sqrt{(4\pi)^3)}\f$
+        const double FOUR_PI_CUBED_SQRT = 44.54662397465366;
+    }
 
     static_target_simulator_cc::sptr
     static_target_simulator_cc::make(
@@ -127,9 +130,13 @@ namespace gr {
 
         // Get signal amplitude of reflection with free space path loss and rcs (radar equation)
         d_scale_ampl.resize(d_num_targets);
-        for(int k=0; k<d_num_targets; k++){
-            d_scale_ampl[k] = c_light/d_center_freq*std::sqrt(d_rcs[k])/std::pow(d_range[k],2)/std::pow(4*M_PI,3.0/2.0); // sqrt of radar equation as amplitude estimation
-            //d_scale_ampl[k] = 1.0;
+        for (int k = 0; k < d_num_targets; k++) {
+            // Factor out all terms out of the sqrt except the RCS:
+            d_scale_ampl[k] =
+                std::sqrt(c_light * d_rcs[k])
+                / FOUR_PI_CUBED_SQRT
+                / (d_range[k] * d_range[k])
+                / d_center_freq;
         }
 
         if(d_rndm_phaseshift){
