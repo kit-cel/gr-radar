@@ -1,7 +1,7 @@
 <block>
   <name>Estimator RCS</name>
   <key>radar_estimator_rcs</key>
-  <category>RADAR</category>
+  <category>[RADAR]/Estimators</category>
   <import>import radar</import>
   <make>radar.estimator_rcs($num_mean, $center_freq, $antenna_gain_tx, $antenna_gain_rx, $usrp_gain_rx, $power_tx, $corr_factor, $exponent)</make>
   <callback>set_num_mean($num_mean)</callback>
