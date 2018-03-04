@@ -51,7 +51,7 @@ namespace gr {
          * cross section \f$\sigma_{\text{RCS},h}\f$, the distance of the target
          * \f$d_h\f$ and the speed of light \f$c_0\f$:
          * \f[
-         *     b_h = \sqrt{\frac{c_0 \sigma_{\text{RCS},h}}{(4\pi)^3 d_h^4 f_C^2}}
+         *     b_h = \sqrt{\frac{c_0^2 \sigma_{\text{RCS},h}}{(4\pi)^3 d_h^4 f_C^2}}
          * \f]
          *
          * The delay \f$\tau_h\f$ depends on the distance of the target:
