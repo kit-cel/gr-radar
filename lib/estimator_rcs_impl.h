@@ -58,7 +58,7 @@ namespace gr {
       std::vector<float> d_range, d_power, d_rcs;
       std::vector<pmt::pmt_t> d_msg_hold;
 
-      const static float c_light = 3e8;
+      constexpr static float c_light = 3e8;
 
     };
 

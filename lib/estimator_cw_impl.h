@@ -46,7 +46,7 @@ namespace gr {
 	  pmt::pmt_t d_vel_key, d_vel_value, d_vel_pack, d_value;
 	  pmt::pmt_t d_time_key, d_time_value, d_time_pack;
       
-      const static float c_light = 3e8;
+      constexpr static float c_light = 3e8;
     };
 
   } // namespace radar

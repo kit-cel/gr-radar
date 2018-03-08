@@ -49,7 +49,7 @@ namespace gr {
 	  std::vector<float> d_range;
 	  pmt::pmt_t d_range_key, d_range_value, d_range_pack;
       
-      const static float c_light = 3e8;
+      constexpr static float c_light = 3e8;
       
     };
 

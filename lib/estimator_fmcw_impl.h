@@ -52,7 +52,7 @@ namespace gr {
       pmt::pmt_t d_port_id_in_cw, d_port_id_in_up, d_port_id_in_down, d_port_id_out;
       pmt::pmt_t d_msg_cw, d_msg_up, d_msg_down;
       
-      const static float c_light = 3e8;
+      constexpr static float c_light = 3e8;
 
     };
 
