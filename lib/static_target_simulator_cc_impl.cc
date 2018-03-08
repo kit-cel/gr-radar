@@ -132,8 +132,8 @@ namespace gr { namespace radar {
         d_scale_ampl.resize(d_num_targets);
         for (int k = 0; k < d_num_targets; k++) {
             // Factor out all terms out of the sqrt except the RCS:
-            d_scale_ampl[k] =
-                std::sqrt(c_light * d_rcs[k])
+            d_scale_ampl[k] = c_light
+                * std::sqrt(d_rcs[k])
                 / FOUR_PI_CUBED_SQRT
                 / (d_range[k] * d_range[k])
                 / d_center_freq;
