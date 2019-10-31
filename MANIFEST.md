@@ -8,11 +8,11 @@ author:
 copyright_owner:
   - Stefan Wunsch
   - Communications Engineering Lab (CEL) at Karlsruhe Institute of Technology (KIT)
-dependencies:
-  - gnuradio 3.7.4
-  - UHD 3.7.2
-  - QT 4.8.6
-  - Qwt 6.0.0
+dependencies (most of them are needed by GNU Radio 3.8 and are included transitively):
+  - gnuradio maint-3.8
+  - UHD = 3.15
+  - QT 5.10.1
+  - Qwt = 6.1.0
   - python-matplotlib
 repo: https://github.com/kit-cel/gr-radar
 website: https://grradar.wordpress.com
