@@ -25,8 +25,7 @@ set(QTGUI_MOC_HEADERS
 	scatter_plot.h
 	time_plot.h
 	spectrogram_plot.h)
-
-#QT5_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
+QT5_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
 
 ########################################################################
 # Setup library
@@ -34,7 +33,7 @@ set(QTGUI_MOC_HEADERS
 include(GrPlatform) #define LIB_SUFFIX
 
 list(APPEND radar_sources
-#	${QTGUI_MOC_OUTFILES} #TODO
+	${QTGUI_MOC_OUTFILES}
 	scatter_plot.cc
 	time_plot.cc
 	spectrogram_plot.cc
@@ -78,7 +77,7 @@ endif(NOT radar_sources)
 
 add_library(gnuradio-radar SHARED ${radar_sources})
 target_link_libraries(gnuradio-radar PUBLIC
-	gnuradio::gnuradio-runtime ${QT_LIBRARIES} qwt::qwt)
+  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f UHD::UHD qwt::qwt Python::Python)
 target_include_directories(gnuradio-radar
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

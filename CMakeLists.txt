@@ -134,6 +134,8 @@ endif(APPLE)
 # Find gnuradio build dependencies
 ########################################################################
 find_package(Doxygen)
+find_package(UHD)
+find_package(FFTW3f)
 
 ########################################################################
 # Setup doxygen option
