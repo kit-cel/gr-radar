@@ -107,4 +107,3 @@ GR_SWIG_BLOCK_MAGIC2(radar, estimator_ofdm);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_rcs);
 %include "radar/trigger_command.h"
 GR_SWIG_BLOCK_MAGIC2(radar, trigger_command);
-

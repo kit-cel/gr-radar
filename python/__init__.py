@@ -22,7 +22,6 @@
 This is the GNU Radio RADAR module. Place your Python package
 description here (python/__init__.py).
 '''
-from __future__ import unicode_literals
 
 # import swig generated symbols into the radar namespace
 try:
