@@ -8,11 +8,9 @@ parameters:
 -   id: vlen_in
     label: Vector length input
     dtype: int
-    hide: ${ 'part' if vlen == 1 else 'none' }
 -   id: vlen_out
     label: Vector length output
     dtype: int
-    hide: ${ 'part' if vlen == 1 else 'none' }
 -   id: discarded_carriers
     label: Discarded carriers
     dtype: int_vector
