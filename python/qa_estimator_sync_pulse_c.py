@@ -40,7 +40,7 @@ class qa_estimator_sync_pulse_c (gr_unittest.TestCase):
 		pulse_wait = (100,100)
 		amplitude = 0.5
 
-		num_skip = 5 # skip samples with skiphead
+		num_skip = 0 # skip samples with skiphead
 		num_xcorr = 300 # num of xcorrs to determine delay samples
 
 		src = radar.signal_generator_sync_pulse_c(packet_len,pulse_send,pulse_wait,amplitude,"packet_len")

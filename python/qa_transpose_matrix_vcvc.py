@@ -54,7 +54,7 @@ class qa_transpose_matrix_vcvc (gr_unittest.TestCase):
 		ref_data = [0]*len(in_data)
 		counter = 0;
 		for k in range(vlen_in):
-			for l in range(test_len/vlen_in):
+			for l in range(test_len//vlen_in):
 				ref_data[counter] = in_data[l*vlen_in+k]
 				counter = counter+1
 
