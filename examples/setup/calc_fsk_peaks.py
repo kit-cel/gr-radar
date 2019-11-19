@@ -12,10 +12,10 @@ blocks_per_tag = 2**12
 R_max = c_light/8/bandwith
 f_doppler = 2*v*center_freq/c_light
 
-print "// FSK peaks"
-print "doppler:", f_doppler
-print "max R:", R_max
-print
+print("// FSK peaks")
+print("doppler:", f_doppler)
+print("max R:", R_max)
+print()
 
-print "// FSK resolutions"
-print "freq res:", samp_rate/2/blocks_per_tag
+print("// FSK resolutions")
+print("freq res:", samp_rate/2/blocks_per_tag)
