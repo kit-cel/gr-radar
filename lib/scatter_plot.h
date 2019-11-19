@@ -22,42 +22,49 @@
 #include <QTimer>
 
 #include <qwt_plot.h>
-#include <qwt_plot_grid.h>
 #include <qwt_plot_curve.h>
-#include <qwt_symbol.h>
+#include <qwt_plot_grid.h>
 #include <qwt_plot_marker.h>
+#include <qwt_symbol.h>
 
 namespace gr {
-	namespace radar {
+namespace radar {
 
-		class scatter_plot : public QWidget
-		{
-		Q_OBJECT
+class scatter_plot : public QWidget
+{
+    Q_OBJECT
 
-		public:
-			scatter_plot(int interval, std::vector<float> axis_x, std::vector<float> axis_y, std::vector<float>* x, std::vector<float>* y, std::string label_x, std::string label_y, bool* xy_read, std::string label,
-			QWidget* parent = 0);
-			~scatter_plot();
+public:
+    scatter_plot(int interval,
+                 std::vector<float> axis_x,
+                 std::vector<float> axis_y,
+                 std::vector<float>* x,
+                 std::vector<float>* y,
+                 std::string label_x,
+                 std::string label_y,
+                 bool* xy_read,
+                 std::string label,
+                 QWidget* parent = 0);
+    ~scatter_plot();
 
-		private:
-			int d_interval;
-			std::string d_label_x, d_label_y;
-			std::vector<float> d_axis_x, d_axis_y;
-			std::vector<float>* d_x, *d_y;
-			bool* d_xy_read;
-			QwtPlot* d_plot;
-			QwtSymbol* d_symbol;
-			QwtPlotGrid* d_grid;
-			std::vector<QwtPlotMarker*> d_marker;
-			QTimer *d_timer;
+private:
+    int d_interval;
+    std::string d_label_x, d_label_y;
+    std::vector<float> d_axis_x, d_axis_y;
+    std::vector<float>*d_x, *d_y;
+    bool* d_xy_read;
+    QwtPlot* d_plot;
+    QwtSymbol* d_symbol;
+    QwtPlotGrid* d_grid;
+    std::vector<QwtPlotMarker*> d_marker;
+    QTimer* d_timer;
 
-		protected:
-			void resizeEvent(QResizeEvent * event);
+protected:
+    void resizeEvent(QResizeEvent* event);
 
-		public slots:
-			void refresh();
+public slots:
+    void refresh();
+};
 
-		};
-
-	}
-}
+} // namespace radar
+} // namespace gr
