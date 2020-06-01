@@ -91,7 +91,7 @@ void qtgui_time_plot_impl::handle_msg(pmt::pmt_t msg)
         }
     }
     // Error handling
-    if (not(item_found_y)) {
+    if (!(item_found_y)) {
         throw std::runtime_error("Identifier (symbol) not found");
     }
 }
