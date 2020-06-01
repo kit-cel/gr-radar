@@ -101,13 +101,13 @@ void qtgui_scatter_plot_impl::handle_msg(pmt::pmt_t msg)
         }
     }
     // Fill zeros in vector if only one label is found
-    if (not(item_found_x) && item_found_y) {
+    if (!(item_found_x) && item_found_y) {
         d_x.resize(d_y.size());
     }
-    if (item_found_x && not(item_found_y)) {
+    if (item_found_x && !(item_found_y)) {
         d_y.resize(d_x.size());
     }
-    if (not(item_found_x) && not(item_found_y)) {
+    if (!(item_found_x) && !(item_found_y)) {
         throw std::runtime_error(
             "All identifiers (symbols) not found"); // throw exception if no label found
     }

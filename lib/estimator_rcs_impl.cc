@@ -192,7 +192,7 @@ void estimator_rcs_impl::handle_msg(pmt::pmt_t msg)
         }
     }
 
-    if (not(found_range && found_power))
+    if (!(found_range && found_power))
         throw std::runtime_error("range or power identifier (symbol) not found");
 
     d_range = pmt::f32vector_elements(d_prange);
