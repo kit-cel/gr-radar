@@ -24,6 +24,7 @@
 
 #include "static_target_simulator_cc_impl.h"
 #include <gnuradio/io_signature.h>
+#include <gnuradio/math.h>
 #include <volk/volk.h>
 
 namespace gr {
@@ -141,7 +142,7 @@ void static_target_simulator_cc_impl::setup_targets(std::vector<float> range,
         d_timeshift_azimuth[l].resize(d_num_targets);
         for (int k = 0; k < d_num_targets; k++) {
             d_timeshift_azimuth[l][k] =
-                d_position_rx[l] * std::sin(d_azimuth[k] * M_PI / 180.0);
+                d_position_rx[l] * std::sin(d_azimuth[k] * GR_M_PI / 180.0);
         }
     }
     for (int k = 0; k < d_num_targets; k++)
@@ -224,8 +225,8 @@ int static_target_simulator_cc_impl::work(int noutput_items,
                 d_filt_doppler[k][i] = std::exp(d_phase_doppler) * d_scale_ampl[k];
                 d_phase_doppler =
                     1j * std::fmod(std::imag(d_phase_doppler) +
-                                       2 * M_PI * d_doppler[k] / (float)d_samp_rate,
-                                   2 * M_PI); // integrate phase (with plus!)
+                                       2 * GR_M_PI * d_doppler[k] / (float)d_samp_rate,
+                                   2 * GR_M_PI); // integrate phase (with plus!)
             }
 
             d_filt_time[k].resize(noutput_items);
@@ -233,9 +234,9 @@ int static_target_simulator_cc_impl::work(int noutput_items,
             for (int i = 0; i < noutput_items; i++) {
                 // Time shift filter, uses target range
                 d_phase_time =
-                    1j * std::fmod(2 * M_PI * (d_timeshift[k]) // range time shift
+                    1j * std::fmod(2 * GR_M_PI * (d_timeshift[k]) // range time shift
                                        * d_freq[i],
-                                   2 * M_PI); // integrate phase (with minus!)
+                                   2 * GR_M_PI); // integrate phase (with minus!)
                 d_filt_time[k][i] =
                     std::exp(-d_phase_time) /
                     (float)noutput_items; // div with noutput_item to correct amplitude
@@ -252,10 +253,10 @@ int static_target_simulator_cc_impl::work(int noutput_items,
                     // Time shift filter, uses azimuth and RX position
                     d_phase_time =
                         1j *
-                        std::fmod(2 * M_PI *
+                        std::fmod(2 * GR_M_PI *
                                       (d_timeshift_azimuth[l][k]) // azimuth time shift
                                       * d_freq[i],
-                                  2 * M_PI); // integrate phase (with minus!)
+                                  2 * GR_M_PI); // integrate phase (with minus!)
                     d_filt_time_azimuth[l][k][i] =
                         std::exp(-d_phase_time); // do not div with noutput_items, is done
                                                  // with range timeshift filter
@@ -271,7 +272,7 @@ int static_target_simulator_cc_impl::work(int noutput_items,
     if (d_rndm_phaseshift) {
         gr_complex phase_random_hold;
         for (int k = 0; k < d_num_targets; k++) {
-            phase_random_hold = 1j * 2 * M_PI * float((std::rand() % 1000 + 1) / 1000.0);
+            phase_random_hold = 1j * 2 * GR_M_PI * float((std::rand() % 1000 + 1) / 1000.0);
             d_phase_random = std::exp(phase_random_hold);
             std::fill_n(&d_filt_phase[k][0], noutput_items, d_phase_random);
         }

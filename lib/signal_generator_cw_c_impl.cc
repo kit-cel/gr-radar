@@ -24,6 +24,7 @@
 
 #include "signal_generator_cw_c_impl.h"
 #include <gnuradio/io_signature.h>
+#include <gnuradio/math.h>
 
 namespace gr {
 namespace radar {
@@ -86,9 +87,9 @@ int signal_generator_cw_c_impl::work(int noutput_items,
         for (int k = 0; k < d_num_freq; k++) { // Go through frequencies
             out[i] += d_amplitude / (float)d_num_freq *
                       exp(d_phase[k]); // output amplitude is normed on d_amplitude
-            d_phase[k] = 1j * std::fmod(imag(d_phase[k]) + 2 * M_PI * d_frequency[k] /
+            d_phase[k] = 1j * std::fmod(imag(d_phase[k]) + 2 * GR_M_PI * d_frequency[k] /
                                                                (float)d_samp_rate,
-                                        2 * M_PI);
+                                        2 * GR_M_PI);
         }
     }
 
