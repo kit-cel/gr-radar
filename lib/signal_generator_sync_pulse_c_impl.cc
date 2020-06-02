@@ -71,20 +71,20 @@ signal_generator_sync_pulse_c_impl::signal_generator_sync_pulse_c_impl(
     while (pulse_wait < pulse_pause.size() || pulse_send < pulse_len.size()) {
         if (pulse_wait < pulse_pause.size()) { // Setup wait samples
             for (int p = 0; p < pulse_pause[pulse_wait]; p++)
-                d_out_buffer[k + p] = 0 + 1j * 0;
+                d_out_buffer[k + p] = gr_complex(0, 0);
             k += pulse_pause[pulse_wait];
             pulse_wait++;
         }
         if (pulse_send < pulse_len.size()) { // Setup pulse samples
             for (int p = 0; p < pulse_len[pulse_send]; p++)
-                d_out_buffer[k + p] = pulse_amplitude + 1j * 0;
+                d_out_buffer[k + p] = gr_complex(pulse_amplitude, 0);
             k += pulse_len[pulse_send];
             pulse_send++;
         }
     }
     if (k < packet_len) { // fill with zeros
         for (int p = 0; p < packet_len - k; p++) {
-            d_out_buffer[k + p] = 0 + 1j * 0;
+            d_out_buffer[k + p] = gr_complex(0, 0);
         }
     }
 }
