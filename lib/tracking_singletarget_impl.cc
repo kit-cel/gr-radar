@@ -24,6 +24,7 @@
 
 #include "tracking_singletarget_impl.h"
 #include <gnuradio/io_signature.h>
+#include <gnuradio/math.h>
 #include <time.h>
 
 namespace gr {
@@ -202,7 +203,7 @@ float tracking_singletarget_impl::random_normal(float mean, float std)
     int num_range = 1000000;
     float v1 = (rand() % num_range) / (float)num_range;
     float v2 = (rand() % num_range) / (float)num_range;
-    return mean + std * std::sqrt(-2 * std::log(v1)) * std::cos(2 * M_PI * v2);
+    return mean + std * std::sqrt(-2 * std::log(v1)) * std::cos(2 * GR_M_PI * v2);
 }
 
 void // begin kalman-filter
@@ -260,7 +261,7 @@ tracking_singletarget_impl::filter_particle()
         velocity_dif = d_velocity_meas - d_particle_velocity[k];
         lh = std::exp(-0.5 * (range_dif * range_dif * R_inv[0][0] +
                               velocity_dif * velocity_dif * R_inv[1][1])) /
-             2 / M_PI / std::sqrt(R_det); // get likelihood
+             2 / GR_M_PI / std::sqrt(R_det); // get likelihood
         d_particle_weight[k] = d_particle_weight[k] * lh;
         // calc sum of weights and sum of weight square
         sum_weight = sum_weight + d_particle_weight[k];
@@ -336,7 +337,7 @@ bool tracking_singletarget_impl::tracking()
             velocity_dif = d_velocity_meas - d_velocity_est;
             float lh = std::exp(-0.5 * (range_dif * range_dif * R_inv[0][0] +
                                         velocity_dif * velocity_dif * R_inv[1][1])) /
-                       2 / M_PI / std::sqrt(R_det); // calc likelihood
+                       2 / GR_M_PI / std::sqrt(R_det); // calc likelihood
 
             if (d_threshold_track < lh) { // if new sample is accepted as track
                 if (d_filter == "particle")

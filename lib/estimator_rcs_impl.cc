@@ -23,6 +23,7 @@
 #endif
 
 #include <gnuradio/io_signature.h>
+#include <gnuradio/math.h>
 #include <boost/circular_buffer.hpp>
 #include "estimator_rcs_impl.h"
 #include <numeric>
@@ -90,7 +91,7 @@ estimator_rcs_impl::estimator_rcs_impl(int num_mean,
     d_antenna_gain_abs_rx = pow(10, d_antenna_gain_rx / 10);
     d_antenna_gain_abs_tx = pow(10, d_antenna_gain_tx / 10);
     d_lambda = c_light / d_center_freq;
-    d_fak = pow(4.0 * M_PI, 3) /
+    d_fak = pow(4.0 * GR_M_PI, 3) /
             (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
 }
 
@@ -111,7 +112,7 @@ void estimator_rcs_impl::set_center_freq(float val)
 {
     d_center_freq = val;
     d_lambda = c_light / d_center_freq;
-    d_fak = pow(4.0 * M_PI, 3) /
+    d_fak = pow(4.0 * GR_M_PI, 3) /
             (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
 }
 
@@ -119,7 +120,7 @@ void estimator_rcs_impl::set_antenna_gain_tx(float val)
 {
     d_antenna_gain_tx = val;
     d_antenna_gain_abs_tx = pow(10, d_antenna_gain_tx / 10);
-    d_fak = pow(4.0 * M_PI, 3) /
+    d_fak = pow(4.0 * GR_M_PI, 3) /
             (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
 }
 
@@ -127,7 +128,7 @@ void estimator_rcs_impl::set_antenna_gain_rx(float val)
 {
     d_antenna_gain_rx = val;
     d_antenna_gain_abs_rx = pow(10, d_antenna_gain_rx / 10);
-    d_fak = pow(4.0 * M_PI, 3) /
+    d_fak = pow(4.0 * GR_M_PI, 3) /
             (d_antenna_gain_abs_rx * d_antenna_gain_abs_tx * pow(d_lambda, 2));
 }
 

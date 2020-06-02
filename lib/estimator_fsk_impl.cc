@@ -24,6 +24,7 @@
 
 #include "estimator_fsk_impl.h"
 #include <gnuradio/io_signature.h>
+#include <gnuradio/math.h>
 
 namespace gr {
 namespace radar {
@@ -99,10 +100,10 @@ void estimator_fsk_impl::handle_msg(pmt::pmt_t msg)
     d_range.clear();
     for (int k = 0; k < d_phase.size(); k++) {
         if (d_phase[k] >= 0)
-            d_range.push_back((d_phase[k]) * c_light / 4 / M_PI /
+            d_range.push_back((d_phase[k]) * c_light / 4 / GR_M_PI /
                               d_delta_freq); // calc with fsk range formula
         else if (d_phase[k] < 0)
-            d_range.push_back((2 * M_PI + d_phase[k]) * c_light / 4 / M_PI /
+            d_range.push_back((2 * GR_M_PI + d_phase[k]) * c_light / 4 / GR_M_PI /
                               d_delta_freq); // phase jumps from pi to -pi
     }
 

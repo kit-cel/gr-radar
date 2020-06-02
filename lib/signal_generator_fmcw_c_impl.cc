@@ -24,6 +24,7 @@
 
 #include "signal_generator_fmcw_c_impl.h"
 #include <gnuradio/io_signature.h>
+#include <gnuradio/math.h>
 
 namespace gr {
 namespace radar {
@@ -96,9 +97,9 @@ int signal_generator_fmcw_c_impl::work(int noutput_items,
 
         // Write sample
         *out++ = d_amplitude * exp(d_phase);
-        d_phase = 1j * std::fmod(imag(d_phase) + 2 * M_PI * d_waveform[d_wv_counter] /
+        d_phase = 1j * std::fmod(imag(d_phase) + 2 * GR_M_PI * d_waveform[d_wv_counter] /
                                                      (float)d_samp_rate,
-                                 2 * M_PI);
+                                 2 * GR_M_PI);
         d_wv_counter++;
     }
 
