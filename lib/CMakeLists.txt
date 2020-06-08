@@ -77,7 +77,8 @@ endif(NOT radar_sources)
 
 add_library(gnuradio-radar SHARED ${radar_sources})
 target_link_libraries(gnuradio-radar PUBLIC
-  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f UHD::UHD qwt::qwt Python::Python)
+  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f UHD::UHD qwt::qwt
+)
 target_include_directories(gnuradio-radar
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
