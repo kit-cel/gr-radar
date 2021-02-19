@@ -2,7 +2,7 @@
 
 #define RADAR_API
 
-%include "gnuradio.i" // the common stuff
+%include "gnuradio.i"           // the common stuff
 
 //load generated python docstrings
 %include "radar_swig_doc.i"
@@ -107,4 +107,3 @@ GR_SWIG_BLOCK_MAGIC2(radar, estimator_ofdm);
 GR_SWIG_BLOCK_MAGIC2(radar, estimator_rcs);
 %include "radar/trigger_command.h"
 GR_SWIG_BLOCK_MAGIC2(radar, trigger_command);
-

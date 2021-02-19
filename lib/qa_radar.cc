@@ -27,10 +27,9 @@
 
 #include "qa_radar.h"
 
-CppUnit::TestSuite *
-qa_radar::suite()
+CppUnit::TestSuite* qa_radar::suite()
 {
-  CppUnit::TestSuite *s = new CppUnit::TestSuite("radar");
+    CppUnit::TestSuite* s = new CppUnit::TestSuite("radar");
 
-  return s;
+    return s;
 }
