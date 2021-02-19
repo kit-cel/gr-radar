@@ -27,16 +27,16 @@ https://grradar.wordpress.com/
 For full documentation build the toolbox and open `build/docs/doxygen/html/index.html` in any web browser.
 
 **Development platform**  
-GNU Radio 3.7.4  
-UHD 3.7.2  
-Ubuntu 14.04
+GNU Radio 3.8.x
+UHD 3.9.7 or later
+
 
 **Dependencies**  
-Qt 4.8.6  
-Qwt 6.0.0  
+Qt 
+Qwt 6
 python-matplotlib  
 
-Qt and Qwt should be installed with GNU Radio. But there can be issues if Qwt is below version 6. python-matplotlib is included in some testcases.
+Qt and Qwt should be installed with GNU Radio. python-matplotlib is included in some testcases.
 
 **Contact**  
 Stefan Wunsch  
