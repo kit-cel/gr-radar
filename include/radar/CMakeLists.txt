@@ -18,6 +18,10 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
+# Removed until fix is implemented
+# usrp_echotimer_cc.h
+
+
 ########################################################################
 # Install public header files
 ########################################################################
@@ -34,7 +38,6 @@ install(FILES
     signal_generator_fsk_c.h
     split_fsk_cc.h
     estimator_fsk.h
-    usrp_echotimer_cc.h
     estimator_fmcw.h
     signal_generator_sync_pulse_c.h
     estimator_sync_pulse_c.h
