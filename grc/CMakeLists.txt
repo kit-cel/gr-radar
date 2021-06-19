@@ -18,6 +18,10 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
+# Removed from the following list until fix is implemented
+# radar_usrp_echotimer_cc.block.yml
+#---------------------------------------------------------
+
 install(FILES
     radar_signal_generator_cw_c.block.yml
     radar_signal_generator_fmcw_c.block.yml
@@ -30,7 +34,6 @@ install(FILES
     radar_signal_generator_fsk_c.block.yml
     radar_split_fsk_cc.block.yml
     radar_estimator_fsk.block.yml
-    radar_usrp_echotimer_cc.block.yml
     radar_estimator_fmcw.block.yml
     radar_signal_generator_sync_pulse_c.block.yml
     radar_estimator_sync_pulse_c.block.yml

@@ -51,7 +51,7 @@ GR_ADD_TEST(qa_static_target_simulator_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_S
 GR_ADD_TEST(qa_signal_generator_fsk_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_signal_generator_fsk_c.py)
 GR_ADD_TEST(qa_split_fsk_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_split_fsk_cc.py)
 GR_ADD_TEST(qa_estimator_fsk ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_fsk.py)
-GR_ADD_TEST(qa_usrp_echotimer_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_usrp_echotimer_cc.py)
+# GR_ADD_TEST(qa_usrp_echotimer_cc ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_usrp_echotimer_cc.py)
 GR_ADD_TEST(qa_estimator_fmcw ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_fmcw.py)
 GR_ADD_TEST(qa_signal_generator_sync_pulse_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_signal_generator_sync_pulse_c.py)
 GR_ADD_TEST(qa_estimator_sync_pulse_c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_estimator_sync_pulse_c.py)

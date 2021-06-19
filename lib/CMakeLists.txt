@@ -48,7 +48,6 @@ list(APPEND radar_sources
     signal_generator_fsk_c_impl.cc
     split_fsk_cc_impl.cc
     estimator_fsk_impl.cc
-    usrp_echotimer_cc_impl.cc
     estimator_fmcw_impl.cc
     signal_generator_sync_pulse_c_impl.cc
     estimator_sync_pulse_c_impl.cc
@@ -68,6 +67,8 @@ list(APPEND radar_sources
     estimator_rcs_impl.cc
     trigger_command_impl.cc
     )
+		# Removed from above list until fix is implemented
+    # usrp_echotimer_cc_impl.cc
 
 set(radar_sources "${radar_sources}" PARENT_SCOPE)
 if(NOT radar_sources)
@@ -77,7 +78,7 @@ endif(NOT radar_sources)
 
 add_library(gnuradio-radar SHARED ${radar_sources})
 target_link_libraries(gnuradio-radar PUBLIC
-  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f UHD::UHD qwt::qwt
+  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f qwt::qwt
 )
 target_include_directories(gnuradio-radar
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
