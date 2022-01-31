@@ -35,8 +35,8 @@ signal_generator_sync_pulse_c::make(int packet_len,
                                     float pulse_amplitude,
                                     const std::string len_key)
 {
-    return gnuradio::get_initial_sptr(new signal_generator_sync_pulse_c_impl(
-        packet_len, pulse_len, pulse_pause, pulse_amplitude, len_key));
+    return gnuradio::make_block_sptr<signal_generator_sync_pulse_c_impl>(
+        packet_len, pulse_len, pulse_pause, pulse_amplitude, len_key);
 }
 
 /*

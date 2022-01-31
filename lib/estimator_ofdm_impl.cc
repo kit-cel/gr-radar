@@ -36,8 +36,8 @@ estimator_ofdm::sptr estimator_ofdm::make(std::string symbol_x,
                                           std::vector<float> axis_y,
                                           bool merge_consecutive)
 {
-    return gnuradio::get_initial_sptr(new estimator_ofdm_impl(
-        symbol_x, len_x, axis_x, symbol_y, len_y, axis_y, merge_consecutive));
+    return gnuradio::make_block_sptr<estimator_ofdm_impl>(
+        symbol_x, len_x, axis_x, symbol_y, len_y, axis_y, merge_consecutive);
 }
 
 /*

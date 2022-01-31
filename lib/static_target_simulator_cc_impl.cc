@@ -47,8 +47,7 @@ static_target_simulator_cc::make(std::vector<float> range,
                                  bool self_coupling,
                                  const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new static_target_simulator_cc_impl(range,
+    return gnuradio::make_block_sptr<static_target_simulator_cc_impl>(range,
                                             velocity,
                                             rcs,
                                             azimuth,
@@ -58,7 +57,7 @@ static_target_simulator_cc::make(std::vector<float> range,
                                             self_coupling_db,
                                             rndm_phaseshift,
                                             self_coupling,
-                                            len_key));
+                                            len_key);
 }
 
 static_target_simulator_cc_impl::static_target_simulator_cc_impl(

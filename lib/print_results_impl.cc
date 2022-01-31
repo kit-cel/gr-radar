@@ -31,7 +31,7 @@ namespace radar {
 
 print_results::sptr print_results::make(bool store_msg, const std::string filename)
 {
-    return gnuradio::get_initial_sptr(new print_results_impl(store_msg, filename));
+    return gnuradio::make_block_sptr<print_results_impl>(store_msg, filename);
 }
 
 /*

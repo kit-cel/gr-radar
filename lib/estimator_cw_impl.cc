@@ -30,7 +30,7 @@ namespace radar {
 
 estimator_cw::sptr estimator_cw::make(float center_freq)
 {
-    return gnuradio::get_initial_sptr(new estimator_cw_impl(center_freq));
+    return gnuradio::make_block_sptr<estimator_cw_impl>(center_freq);
 }
 
 /*

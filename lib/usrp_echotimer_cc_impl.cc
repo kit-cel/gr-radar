@@ -52,7 +52,7 @@ usrp_echotimer_cc::sptr usrp_echotimer_cc::make(int samp_rate,
                                                 float lo_offset_rx,
                                                 const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new usrp_echotimer_cc_impl(samp_rate,
+    return gnuradio::make_block_sptr<usrp_echotimer_cc_impl>(samp_rate,
                                                                  center_freq,
                                                                  num_delay_samps,
                                                                  args_tx,
@@ -73,7 +73,7 @@ usrp_echotimer_cc::sptr usrp_echotimer_cc::make(int samp_rate,
                                                                  timeout_rx,
                                                                  wait_rx,
                                                                  lo_offset_rx,
-                                                                 len_key));
+                                                                 len_key);
 }
 
 /*

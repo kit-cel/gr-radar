@@ -35,8 +35,8 @@ signal_generator_cw_c::sptr signal_generator_cw_c::make(int packet_len,
                                                         float amplitude,
                                                         const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new signal_generator_cw_c_impl(
-        packet_len, samp_rate, frequency, amplitude, len_key));
+    return gnuradio::make_block_sptr<signal_generator_cw_c_impl>(
+        packet_len, samp_rate, frequency, amplitude, len_key);
 }
 
 /*

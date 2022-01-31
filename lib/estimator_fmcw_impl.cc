@@ -36,8 +36,8 @@ estimator_fmcw::sptr estimator_fmcw::make(int samp_rate,
                                           int samp_down,
                                           bool push_power)
 {
-    return gnuradio::get_initial_sptr(new estimator_fmcw_impl(
-        samp_rate, center_freq, sweep_freq, samp_up, samp_down, push_power));
+    return gnuradio::make_block_sptr<estimator_fmcw_impl>(
+        samp_rate, center_freq, sweep_freq, samp_up, samp_down, push_power);
 }
 
 /*

@@ -37,13 +37,13 @@ signal_generator_fsk_c::sptr signal_generator_fsk_c::make(int samp_rate,
                                                           float amplitude,
                                                           const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new signal_generator_fsk_c_impl(samp_rate,
+    return gnuradio::make_block_sptr<signal_generator_fsk_c_impl>(samp_rate,
                                                                       samp_per_freq,
                                                                       blocks_per_tag,
                                                                       freq_low,
                                                                       freq_high,
                                                                       amplitude,
-                                                                      len_key));
+                                                                      len_key);
 }
 
 /*

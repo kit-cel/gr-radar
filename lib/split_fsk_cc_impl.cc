@@ -31,8 +31,7 @@ namespace radar {
 split_fsk_cc::sptr
 split_fsk_cc::make(int samp_per_freq, int samp_discard, const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new split_fsk_cc_impl(samp_per_freq, samp_discard, len_key));
+    return gnuradio::make_block_sptr<split_fsk_cc_impl>(samp_per_freq, samp_discard, len_key);
 }
 
 /*

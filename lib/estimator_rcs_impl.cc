@@ -40,14 +40,14 @@ estimator_rcs::sptr estimator_rcs::make(int num_mean,
                                         float corr_factor,
                                         float exponent)
 {
-    return gnuradio::get_initial_sptr(new estimator_rcs_impl(num_mean,
+    return gnuradio::make_block_sptr<estimator_rcs_impl>(num_mean,
                                                              center_freq,
                                                              antenna_gain_tx,
                                                              antenna_gain_rx,
                                                              usrp_gain_rx,
                                                              power_tx,
                                                              corr_factor,
-                                                             exponent));
+                                                             exponent);
 }
 
 /*

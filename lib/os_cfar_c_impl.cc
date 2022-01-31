@@ -36,13 +36,13 @@ os_cfar_c::sptr os_cfar_c::make(int samp_rate,
                                 bool merge_consecutive,
                                 const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new os_cfar_c_impl(samp_rate,
+    return gnuradio::make_block_sptr<os_cfar_c_impl>(samp_rate,
                                                          samp_compare,
                                                          samp_protect,
                                                          rel_threshold,
                                                          mult_threshold,
                                                          merge_consecutive,
-                                                         len_key));
+                                                         len_key);
 }
 
 /*

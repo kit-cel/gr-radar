@@ -35,8 +35,8 @@ find_max_peak_c::sptr find_max_peak_c::make(int samp_rate,
                                             bool cut_max_freq,
                                             const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new find_max_peak_c_impl(
-        samp_rate, threshold, samp_protect, max_freq, cut_max_freq, len_key));
+    return gnuradio::make_block_sptr<find_max_peak_c_impl>(
+        samp_rate, threshold, samp_protect, max_freq, cut_max_freq, len_key);
 }
 
 /*

@@ -31,7 +31,7 @@ namespace radar {
 
 ts_fft_cc::sptr ts_fft_cc::make(int packet_len, const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new ts_fft_cc_impl(packet_len, len_key));
+    return gnuradio::make_block_sptr<ts_fft_cc_impl>(packet_len, len_key);
 }
 
 /*

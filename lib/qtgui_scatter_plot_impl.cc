@@ -35,8 +35,7 @@ qtgui_scatter_plot::sptr qtgui_scatter_plot::make(int interval,
                                                   std::vector<float> axis_y,
                                                   std::string label)
 {
-    return gnuradio::get_initial_sptr(
-        new qtgui_scatter_plot_impl(interval, label_x, label_y, axis_x, axis_y, label));
+    return gnuradio::make_block_sptr<qtgui_scatter_plot_impl>(interval, label_x, label_y, axis_x, axis_y, label);
 }
 
 /*

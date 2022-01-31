@@ -34,8 +34,7 @@ qtgui_time_plot::sptr qtgui_time_plot::make(int interval,
                                             float range_time,
                                             std::string label)
 {
-    return gnuradio::get_initial_sptr(
-        new qtgui_time_plot_impl(interval, label_y, axis_y, range_time, label));
+    return gnuradio::make_block_sptr<qtgui_time_plot_impl>(interval, label_y, axis_y, range_time, label);
 }
 
 /*

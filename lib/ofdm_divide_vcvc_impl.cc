@@ -34,8 +34,8 @@ ofdm_divide_vcvc::sptr ofdm_divide_vcvc::make(int vlen_in,
                                               int num_sync_words,
                                               std::string len_key)
 {
-    return gnuradio::get_initial_sptr(new ofdm_divide_vcvc_impl(
-        vlen_in, vlen_out, discarded_carriers, num_sync_words, len_key));
+    return gnuradio::make_block_sptr<ofdm_divide_vcvc_impl>(
+        vlen_in, vlen_out, discarded_carriers, num_sync_words, len_key);
 }
 
 /*

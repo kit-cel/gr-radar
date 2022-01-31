@@ -38,13 +38,13 @@ tracking_singletarget::sptr tracking_singletarget::make(int num_particle,
                                                         int threshold_lost,
                                                         std::string filter)
 {
-    return gnuradio::get_initial_sptr(new tracking_singletarget_impl(num_particle,
+    return gnuradio::make_block_sptr<tracking_singletarget_impl>(num_particle,
                                                                      std_range_meas,
                                                                      std_velocity_meas,
                                                                      std_accel_sys,
                                                                      threshold_track,
                                                                      threshold_lost,
-                                                                     filter));
+                                                                     filter);
 }
 
 /*

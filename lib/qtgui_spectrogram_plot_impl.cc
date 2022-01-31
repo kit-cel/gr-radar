@@ -39,7 +39,7 @@ qtgui_spectrogram_plot::sptr qtgui_spectrogram_plot::make(int vlen,
                                                           bool autoscale_z,
                                                           std::string len_key)
 {
-    return gnuradio::get_initial_sptr(new qtgui_spectrogram_plot_impl(vlen,
+    return gnuradio::make_block_sptr<qtgui_spectrogram_plot_impl>(vlen,
                                                                       interval,
                                                                       xlabel,
                                                                       ylabel,
@@ -48,7 +48,7 @@ qtgui_spectrogram_plot::sptr qtgui_spectrogram_plot::make(int vlen,
                                                                       axis_y,
                                                                       axis_z,
                                                                       autoscale_z,
-                                                                      len_key));
+                                                                      len_key);
 }
 
 /*

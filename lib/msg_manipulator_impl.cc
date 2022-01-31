@@ -32,8 +32,7 @@ msg_manipulator::sptr msg_manipulator::make(std::vector<std::string> symbols,
                                             std::vector<float> const_add,
                                             std::vector<float> const_mult)
 {
-    return gnuradio::get_initial_sptr(
-        new msg_manipulator_impl(symbols, const_add, const_mult));
+    return gnuradio::make_block_sptr<msg_manipulator_impl>(symbols, const_add, const_mult);
 }
 
 /*

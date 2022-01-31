@@ -32,8 +32,7 @@ split_cc::sptr split_cc::make(int packet_num,
                               const std::vector<int> packet_parts,
                               const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new split_cc_impl(packet_num, packet_parts, len_key));
+    return gnuradio::make_block_sptr<split_cc_impl>(packet_num, packet_parts, len_key);
 }
 
 /*

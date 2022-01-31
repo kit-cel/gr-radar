@@ -38,8 +38,8 @@ signal_generator_fmcw_c::sptr signal_generator_fmcw_c::make(const int samp_rate,
                                                             const float amplitude,
                                                             const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new signal_generator_fmcw_c_impl(
-        samp_rate, samp_up, samp_down, samp_cw, freq_cw, freq_sweep, amplitude, len_key));
+    return gnuradio::make_block_sptr<signal_generator_fmcw_c_impl>(
+        samp_rate, samp_up, samp_down, samp_cw, freq_cw, freq_sweep, amplitude, len_key);
 }
 
 signal_generator_fmcw_c_impl::signal_generator_fmcw_c_impl(const int samp_rate,

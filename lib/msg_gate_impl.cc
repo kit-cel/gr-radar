@@ -33,7 +33,7 @@ msg_gate::sptr msg_gate::make(std::vector<std::string> keys,
                               std::vector<float> val_min,
                               std::vector<float> val_max)
 {
-    return gnuradio::get_initial_sptr(new msg_gate_impl(keys, val_min, val_max));
+    return gnuradio::make_block_sptr<msg_gate_impl>(keys, val_min, val_max);
 }
 
 /*

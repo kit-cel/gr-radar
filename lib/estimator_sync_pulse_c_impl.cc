@@ -32,8 +32,7 @@ namespace radar {
 estimator_sync_pulse_c::sptr estimator_sync_pulse_c::make(int num_xcorr,
                                                           const std::string len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new estimator_sync_pulse_c_impl(num_xcorr, len_key));
+    return gnuradio::make_block_sptr<estimator_sync_pulse_c_impl>(num_xcorr, len_key);
 }
 
 /*
