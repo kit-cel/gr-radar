@@ -46,7 +46,7 @@ estimator_cw_impl::estimator_cw_impl(float center_freq)
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in, boost::bind(&estimator_cw_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");

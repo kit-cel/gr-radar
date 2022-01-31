@@ -72,18 +72,15 @@ estimator_fmcw_impl::estimator_fmcw_impl(int samp_rate,
     // Register input message ports
     d_port_id_in_cw = pmt::mp("Msg in CW");
     message_port_register_in(d_port_id_in_cw);
-    set_msg_handler(d_port_id_in_cw,
-                    boost::bind(&estimator_fmcw_impl::handle_msg_cw, this, _1));
+    set_msg_handler(d_port_id_in_cw, [this](pmt::pmt_t msg) { this->handle_msg_cw(msg); });
 
     d_port_id_in_up = pmt::mp("Msg in UP");
     message_port_register_in(d_port_id_in_up);
-    set_msg_handler(d_port_id_in_up,
-                    boost::bind(&estimator_fmcw_impl::handle_msg_up, this, _1));
+    set_msg_handler(d_port_id_in_up, [this](pmt::pmt_t msg) { this->handle_msg_up(msg); });
 
     d_port_id_in_down = pmt::mp("Msg in DOWN");
     message_port_register_in(d_port_id_in_down);
-    set_msg_handler(d_port_id_in_down,
-                    boost::bind(&estimator_fmcw_impl::handle_msg_down, this, _1));
+    set_msg_handler(d_port_id_in_down, [this](pmt::pmt_t msg) { this->handle_msg_down(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");

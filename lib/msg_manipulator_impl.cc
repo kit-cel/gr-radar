@@ -52,8 +52,7 @@ msg_manipulator_impl::msg_manipulator_impl(std::vector<std::string> symbols,
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in,
-                    boost::bind(&msg_manipulator_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");
