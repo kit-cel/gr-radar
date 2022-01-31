@@ -25,7 +25,6 @@
 #include "estimator_rcs_impl.h"
 #include <gnuradio/io_signature.h>
 #include <gnuradio/math.h>
-#include <boost/circular_buffer.hpp>
 #include <numeric>
 
 namespace gr {
