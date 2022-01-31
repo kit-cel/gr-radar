@@ -44,7 +44,7 @@ namespace radar {
 class RADAR_API crop_matrix_vcvc : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<crop_matrix_vcvc> sptr;
+    typedef std::shared_ptr<crop_matrix_vcvc> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::crop_matrix_vcvc.

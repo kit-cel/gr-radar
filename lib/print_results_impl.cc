@@ -31,7 +31,7 @@ namespace radar {
 
 print_results::sptr print_results::make(bool store_msg, const std::string filename)
 {
-    return gnuradio::get_initial_sptr(new print_results_impl(store_msg, filename));
+    return gnuradio::make_block_sptr<print_results_impl>(store_msg, filename);
 }
 
 /*
@@ -48,7 +48,7 @@ print_results_impl::print_results_impl(bool store_msg, const std::string filenam
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in, boost::bind(&print_results_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { handle_msg(msg); });
 }
 
 /*

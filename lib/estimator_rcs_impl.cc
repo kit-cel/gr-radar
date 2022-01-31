@@ -22,10 +22,9 @@
 #include "config.h"
 #endif
 
+#include "estimator_rcs_impl.h"
 #include <gnuradio/io_signature.h>
 #include <gnuradio/math.h>
-#include <boost/circular_buffer.hpp>
-#include "estimator_rcs_impl.h"
 #include <numeric>
 
 namespace gr {
@@ -40,14 +39,14 @@ estimator_rcs::sptr estimator_rcs::make(int num_mean,
                                         float corr_factor,
                                         float exponent)
 {
-    return gnuradio::get_initial_sptr(new estimator_rcs_impl(num_mean,
-                                                             center_freq,
-                                                             antenna_gain_tx,
-                                                             antenna_gain_rx,
-                                                             usrp_gain_rx,
-                                                             power_tx,
-                                                             corr_factor,
-                                                             exponent));
+    return gnuradio::make_block_sptr<estimator_rcs_impl>(num_mean,
+                                                         center_freq,
+                                                         antenna_gain_tx,
+                                                         antenna_gain_rx,
+                                                         usrp_gain_rx,
+                                                         power_tx,
+                                                         corr_factor,
+                                                         exponent);
 }
 
 /*
@@ -79,7 +78,7 @@ estimator_rcs_impl::estimator_rcs_impl(int num_mean,
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in, boost::bind(&estimator_rcs_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");

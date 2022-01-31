@@ -52,7 +52,7 @@ namespace radar {
 class RADAR_API find_max_peak_c : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<find_max_peak_c> sptr;
+    typedef std::shared_ptr<find_max_peak_c> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::find_max_peak_c.

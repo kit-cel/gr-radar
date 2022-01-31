@@ -47,7 +47,7 @@ namespace radar {
 class RADAR_API ofdm_divide_vcvc : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<ofdm_divide_vcvc> sptr;
+    typedef std::shared_ptr<ofdm_divide_vcvc> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::ofdm_divide_vcvc.

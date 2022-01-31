@@ -32,8 +32,8 @@ namespace radar {
 estimator_fsk::sptr
 estimator_fsk::make(float center_freq, float delta_freq, bool push_power)
 {
-    return gnuradio::get_initial_sptr(
-        new estimator_fsk_impl(center_freq, delta_freq, push_power));
+    return gnuradio::make_block_sptr<estimator_fsk_impl>(
+        center_freq, delta_freq, push_power);
 }
 
 /*
@@ -53,7 +53,7 @@ estimator_fsk_impl::estimator_fsk_impl(float center_freq,
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in, boost::bind(&estimator_fsk_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");

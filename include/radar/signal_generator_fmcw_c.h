@@ -47,7 +47,7 @@ namespace radar {
 class RADAR_API signal_generator_fmcw_c : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<signal_generator_fmcw_c> sptr;
+    typedef std::shared_ptr<signal_generator_fmcw_c> sptr;
 
     /*!
      * \param samp_rate Signal sample rate (samples per second)

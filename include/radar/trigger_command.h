@@ -30,7 +30,7 @@ namespace radar {
 
 /*!
  * \brief This block executes a command with the std::system() command if a value from a
- * f32vector with a given identifer (symbol) is in a given range. Each index of a vector
+ * f32vector with a given identifier (symbol) is in a given range. Each index of a vector
  * refers to a identifier. The execution of a command can be blocked for block_time
  * milliseconds after the last execution.
  *
@@ -46,7 +46,7 @@ namespace radar {
 class RADAR_API trigger_command : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<trigger_command> sptr;
+    typedef std::shared_ptr<trigger_command> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::trigger_command.

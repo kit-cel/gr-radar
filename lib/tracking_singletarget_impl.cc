@@ -38,13 +38,13 @@ tracking_singletarget::sptr tracking_singletarget::make(int num_particle,
                                                         int threshold_lost,
                                                         std::string filter)
 {
-    return gnuradio::get_initial_sptr(new tracking_singletarget_impl(num_particle,
-                                                                     std_range_meas,
-                                                                     std_velocity_meas,
-                                                                     std_accel_sys,
-                                                                     threshold_track,
-                                                                     threshold_lost,
-                                                                     filter));
+    return gnuradio::make_block_sptr<tracking_singletarget_impl>(num_particle,
+                                                                 std_range_meas,
+                                                                 std_velocity_meas,
+                                                                 std_accel_sys,
+                                                                 threshold_track,
+                                                                 threshold_lost,
+                                                                 filter);
 }
 
 /*
@@ -72,8 +72,7 @@ tracking_singletarget_impl::tracking_singletarget_impl(int num_particle,
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in,
-                    boost::bind(&tracking_singletarget_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");

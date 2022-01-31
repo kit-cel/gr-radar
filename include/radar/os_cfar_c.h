@@ -53,7 +53,7 @@ namespace radar {
 class RADAR_API os_cfar_c : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<os_cfar_c> sptr;
+    typedef std::shared_ptr<os_cfar_c> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::os_cfar_c.

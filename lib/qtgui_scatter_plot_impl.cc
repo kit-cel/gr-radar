@@ -35,8 +35,8 @@ qtgui_scatter_plot::sptr qtgui_scatter_plot::make(int interval,
                                                   std::vector<float> axis_y,
                                                   std::string label)
 {
-    return gnuradio::get_initial_sptr(
-        new qtgui_scatter_plot_impl(interval, label_x, label_y, axis_x, axis_y, label));
+    return gnuradio::make_block_sptr<qtgui_scatter_plot_impl>(
+        interval, label_x, label_y, axis_x, axis_y, label);
 }
 
 /*
@@ -63,8 +63,7 @@ qtgui_scatter_plot_impl::qtgui_scatter_plot_impl(int interval,
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in,
-                    boost::bind(&qtgui_scatter_plot_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Setup GUI
     run_gui();

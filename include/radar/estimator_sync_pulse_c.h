@@ -30,7 +30,7 @@ namespace radar {
 
 /*!
  * \brief This block can be used to estimate the shift of a signal on input 1 in relation
- * to an other on input 2. For example the constant number of delay samples due to
+ * to another on input 2. For example the constant number of delay samples due to
  * hardware effect from a signal source can be estimated. The calculation of the shift is
  * done by a cross correlation of the input signals. The number of correlations in samples
  * is given with num_xcorr. The output message is the number of delay samples with the
@@ -45,7 +45,7 @@ namespace radar {
 class RADAR_API estimator_sync_pulse_c : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<estimator_sync_pulse_c> sptr;
+    typedef std::shared_ptr<estimator_sync_pulse_c> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::estimator_sync_pulse_c.

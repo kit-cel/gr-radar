@@ -41,7 +41,7 @@ namespace radar {
 class RADAR_API ts_fft_cc : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<ts_fft_cc> sptr;
+    typedef std::shared_ptr<ts_fft_cc> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::ts_fft_cc.

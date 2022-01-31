@@ -31,8 +31,8 @@ namespace radar {
 ofdm_cyclic_prefix_remover_cvc::sptr
 ofdm_cyclic_prefix_remover_cvc::make(int fft_len, int cp_len, std::string len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new ofdm_cyclic_prefix_remover_cvc_impl(fft_len, cp_len, len_key));
+    return gnuradio::make_block_sptr<ofdm_cyclic_prefix_remover_cvc_impl>(
+        fft_len, cp_len, len_key);
 }
 
 /*

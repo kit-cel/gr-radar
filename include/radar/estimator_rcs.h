@@ -61,7 +61,7 @@ namespace radar {
 class RADAR_API estimator_rcs : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<estimator_rcs> sptr;
+    typedef std::shared_ptr<estimator_rcs> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::estimator_rcs.

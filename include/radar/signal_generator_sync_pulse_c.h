@@ -48,7 +48,7 @@ namespace radar {
 class RADAR_API signal_generator_sync_pulse_c : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<signal_generator_sync_pulse_c> sptr;
+    typedef std::shared_ptr<signal_generator_sync_pulse_c> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of

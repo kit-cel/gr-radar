@@ -35,8 +35,8 @@ signal_generator_cw_c::sptr signal_generator_cw_c::make(int packet_len,
                                                         float amplitude,
                                                         const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new signal_generator_cw_c_impl(
-        packet_len, samp_rate, frequency, amplitude, len_key));
+    return gnuradio::make_block_sptr<signal_generator_cw_c_impl>(
+        packet_len, samp_rate, frequency, amplitude, len_key);
 }
 
 /*
@@ -87,9 +87,11 @@ int signal_generator_cw_c_impl::work(int noutput_items,
         for (int k = 0; k < d_num_freq; k++) { // Go through frequencies
             out[i] += d_amplitude / (float)d_num_freq *
                       exp(d_phase[k]); // output amplitude is normed on d_amplitude
-            d_phase[k] = gr_complex(0, std::fmod(imag(d_phase[k]) + 2 * GR_M_PI * d_frequency[k] /
-                                                               (float)d_samp_rate,
-                                        2 * GR_M_PI));
+            d_phase[k] =
+                gr_complex(0,
+                           std::fmod(imag(d_phase[k]) + 2 * GR_M_PI * d_frequency[k] /
+                                                            (float)d_samp_rate,
+                                     2 * GR_M_PI));
         }
     }
 

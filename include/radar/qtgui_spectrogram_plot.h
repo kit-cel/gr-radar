@@ -51,7 +51,7 @@ namespace radar {
 class RADAR_API qtgui_spectrogram_plot : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<qtgui_spectrogram_plot> sptr;
+    typedef std::shared_ptr<qtgui_spectrogram_plot> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::qtgui_spectrogram_plot.

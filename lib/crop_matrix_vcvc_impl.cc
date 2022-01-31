@@ -33,8 +33,8 @@ crop_matrix_vcvc::sptr crop_matrix_vcvc::make(int vlen,
                                               std::vector<int> crop_y,
                                               std::string len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new crop_matrix_vcvc_impl(vlen, crop_x, crop_y, len_key));
+    return gnuradio::make_block_sptr<crop_matrix_vcvc_impl>(
+        vlen, crop_x, crop_y, len_key);
 }
 
 /*

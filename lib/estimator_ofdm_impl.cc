@@ -36,8 +36,8 @@ estimator_ofdm::sptr estimator_ofdm::make(std::string symbol_x,
                                           std::vector<float> axis_y,
                                           bool merge_consecutive)
 {
-    return gnuradio::get_initial_sptr(new estimator_ofdm_impl(
-        symbol_x, len_x, axis_x, symbol_y, len_y, axis_y, merge_consecutive));
+    return gnuradio::make_block_sptr<estimator_ofdm_impl>(
+        symbol_x, len_x, axis_x, symbol_y, len_y, axis_y, merge_consecutive);
 }
 
 /*
@@ -65,8 +65,7 @@ estimator_ofdm_impl::estimator_ofdm_impl(std::string symbol_x,
     // Register input message port
     d_port_id_in = pmt::mp("Msg in");
     message_port_register_in(d_port_id_in);
-    set_msg_handler(d_port_id_in,
-                    boost::bind(&estimator_ofdm_impl::handle_msg, this, _1));
+    set_msg_handler(d_port_id_in, [this](pmt::pmt_t msg) { this->handle_msg(msg); });
 
     // Register output message port
     d_port_id_out = pmt::mp("Msg out");

@@ -43,7 +43,7 @@ namespace radar {
 class RADAR_API ofdm_cyclic_prefix_remover_cvc : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<ofdm_cyclic_prefix_remover_cvc> sptr;
+    typedef std::shared_ptr<ofdm_cyclic_prefix_remover_cvc> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of

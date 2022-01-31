@@ -32,7 +32,7 @@ namespace radar {
  * \brief This block displays a scatter plot of two data sets. The identifiers (symbols)
  * are given with label_x and label_y. The display range is given with axis_x and axis_y.
  * Points that are not in range are simply not displayed (there are no errors or
- * warnings). label gives an additional lable to differ multiple scatter plots on the
+ * warnings). label gives an additional label to differ multiple scatter plots on the
  * screen by the titles. The update interval is given in milliseconds.
  *
  * \param interval Update interval in milliseconds
@@ -48,7 +48,7 @@ namespace radar {
 class RADAR_API qtgui_scatter_plot : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<qtgui_scatter_plot> sptr;
+    typedef std::shared_ptr<qtgui_scatter_plot> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::qtgui_scatter_plot.

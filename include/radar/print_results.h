@@ -42,7 +42,7 @@ namespace radar {
 class RADAR_API print_results : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<print_results> sptr;
+    typedef std::shared_ptr<print_results> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::print_results.

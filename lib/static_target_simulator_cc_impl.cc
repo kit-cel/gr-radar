@@ -47,18 +47,17 @@ static_target_simulator_cc::make(std::vector<float> range,
                                  bool self_coupling,
                                  const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(
-        new static_target_simulator_cc_impl(range,
-                                            velocity,
-                                            rcs,
-                                            azimuth,
-                                            position_rx,
-                                            samp_rate,
-                                            center_freq,
-                                            self_coupling_db,
-                                            rndm_phaseshift,
-                                            self_coupling,
-                                            len_key));
+    return gnuradio::make_block_sptr<static_target_simulator_cc_impl>(range,
+                                                                      velocity,
+                                                                      rcs,
+                                                                      azimuth,
+                                                                      position_rx,
+                                                                      samp_rate,
+                                                                      center_freq,
+                                                                      self_coupling_db,
+                                                                      rndm_phaseshift,
+                                                                      self_coupling,
+                                                                      len_key);
 }
 
 static_target_simulator_cc_impl::static_target_simulator_cc_impl(
@@ -223,20 +222,22 @@ int static_target_simulator_cc_impl::work(int noutput_items,
             for (int i = 0; i < noutput_items; i++) {
                 // Doppler shift filter and rescaling amplitude with rcs
                 d_filt_doppler[k][i] = std::exp(d_phase_doppler) * d_scale_ampl[k];
-                d_phase_doppler =
-                    gr_complex(0, std::fmod(std::imag(d_phase_doppler) +
-                                       2 * GR_M_PI * d_doppler[k] / (float)d_samp_rate,
-                                   2 * GR_M_PI)); // integrate phase (with plus!)
+                d_phase_doppler = gr_complex(
+                    0,
+                    std::fmod(std::imag(d_phase_doppler) +
+                                  2 * GR_M_PI * d_doppler[k] / (float)d_samp_rate,
+                              2 * GR_M_PI)); // integrate phase (with plus!)
             }
 
             d_filt_time[k].resize(noutput_items);
             d_phase_time = 0;
             for (int i = 0; i < noutput_items; i++) {
                 // Time shift filter, uses target range
-                d_phase_time =
-                    gr_complex(0, std::fmod(2 * GR_M_PI * (d_timeshift[k]) // range time shift
-                                       * d_freq[i],
-                                   2 * GR_M_PI)); // integrate phase (with minus!)
+                d_phase_time = gr_complex(
+                    0,
+                    std::fmod(2 * GR_M_PI * (d_timeshift[k]) // range time shift
+                                  * d_freq[i],
+                              2 * GR_M_PI)); // integrate phase (with minus!)
                 d_filt_time[k][i] =
                     std::exp(-d_phase_time) /
                     (float)noutput_items; // div with noutput_item to correct amplitude
@@ -251,8 +252,9 @@ int static_target_simulator_cc_impl::work(int noutput_items,
                 d_phase_time = 0;
                 for (int i = 0; i < noutput_items; i++) {
                     // Time shift filter, uses azimuth and RX position
-                    d_phase_time =
-                        gr_complex(0, std::fmod(2 * GR_M_PI *
+                    d_phase_time = gr_complex(
+                        0,
+                        std::fmod(2 * GR_M_PI *
                                       (d_timeshift_azimuth[l][k]) // azimuth time shift
                                       * d_freq[i],
                                   2 * GR_M_PI)); // integrate phase (with minus!)
@@ -271,7 +273,8 @@ int static_target_simulator_cc_impl::work(int noutput_items,
     if (d_rndm_phaseshift) {
         gr_complex phase_random_hold;
         for (int k = 0; k < d_num_targets; k++) {
-            phase_random_hold = gr_complex(0, 2 * GR_M_PI * float((std::rand() % 1000 + 1) / 1000.0));
+            phase_random_hold =
+                gr_complex(0, 2 * GR_M_PI * float((std::rand() % 1000 + 1) / 1000.0));
             d_phase_random = std::exp(phase_random_hold);
             std::fill_n(&d_filt_phase[k][0], noutput_items, d_phase_random);
         }

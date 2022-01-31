@@ -54,7 +54,7 @@ namespace radar {
 class RADAR_API estimator_ofdm : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<estimator_ofdm> sptr;
+    typedef std::shared_ptr<estimator_ofdm> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::estimator_ofdm.

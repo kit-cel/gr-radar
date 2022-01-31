@@ -35,8 +35,8 @@ os_cfar_2d_vc::sptr os_cfar_2d_vc::make(int vlen,
                                         float mult_threshold,
                                         const std::string& len_key)
 {
-    return gnuradio::get_initial_sptr(new os_cfar_2d_vc_impl(
-        vlen, samp_compare, samp_protect, rel_threshold, mult_threshold, len_key));
+    return gnuradio::make_block_sptr<os_cfar_2d_vc_impl>(
+        vlen, samp_compare, samp_protect, rel_threshold, mult_threshold, len_key);
 }
 
 /*
