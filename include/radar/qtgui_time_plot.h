@@ -46,7 +46,7 @@ namespace radar {
 class RADAR_API qtgui_time_plot : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<qtgui_time_plot> sptr;
+    typedef std::shared_ptr<qtgui_time_plot> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::qtgui_time_plot.

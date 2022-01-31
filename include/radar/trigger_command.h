@@ -46,7 +46,7 @@ namespace radar {
 class RADAR_API trigger_command : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<trigger_command> sptr;
+    typedef std::shared_ptr<trigger_command> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::trigger_command.

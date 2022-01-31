@@ -48,7 +48,7 @@ namespace radar {
 class RADAR_API qtgui_scatter_plot : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<qtgui_scatter_plot> sptr;
+    typedef std::shared_ptr<qtgui_scatter_plot> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::qtgui_scatter_plot.

@@ -96,7 +96,7 @@ namespace radar {
 class RADAR_API static_target_simulator_cc : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<static_target_simulator_cc> sptr;
+    typedef std::shared_ptr<static_target_simulator_cc> sptr;
 
     /*!
      * \param range Target ranges as vector (length H)

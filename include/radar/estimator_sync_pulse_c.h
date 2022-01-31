@@ -45,7 +45,7 @@ namespace radar {
 class RADAR_API estimator_sync_pulse_c : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<estimator_sync_pulse_c> sptr;
+    typedef std::shared_ptr<estimator_sync_pulse_c> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::estimator_sync_pulse_c.

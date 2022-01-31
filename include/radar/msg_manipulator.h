@@ -44,7 +44,7 @@ namespace radar {
 class RADAR_API msg_manipulator : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<msg_manipulator> sptr;
+    typedef std::shared_ptr<msg_manipulator> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::msg_manipulator.

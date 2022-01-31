@@ -44,7 +44,7 @@ namespace radar {
 class RADAR_API msg_gate : virtual public gr::block
 {
 public:
-    typedef boost::shared_ptr<msg_gate> sptr;
+    typedef std::shared_ptr<msg_gate> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::msg_gate.

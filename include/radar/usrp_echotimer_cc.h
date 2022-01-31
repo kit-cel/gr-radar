@@ -35,7 +35,7 @@ namespace radar {
 class RADAR_API usrp_echotimer_cc : virtual public gr::tagged_stream_block
 {
 public:
-    typedef boost::shared_ptr<usrp_echotimer_cc> sptr;
+    typedef std::shared_ptr<usrp_echotimer_cc> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of radar::usrp_echotimer_cc.
