@@ -22,10 +22,10 @@
 #include "config.h"
 #endif
 
+#include "estimator_rcs_impl.h"
 #include <gnuradio/io_signature.h>
 #include <gnuradio/math.h>
 #include <boost/circular_buffer.hpp>
-#include "estimator_rcs_impl.h"
 #include <numeric>
 
 namespace gr {
@@ -41,13 +41,13 @@ estimator_rcs::sptr estimator_rcs::make(int num_mean,
                                         float exponent)
 {
     return gnuradio::make_block_sptr<estimator_rcs_impl>(num_mean,
-                                                             center_freq,
-                                                             antenna_gain_tx,
-                                                             antenna_gain_rx,
-                                                             usrp_gain_rx,
-                                                             power_tx,
-                                                             corr_factor,
-                                                             exponent);
+                                                         center_freq,
+                                                         antenna_gain_tx,
+                                                         antenna_gain_rx,
+                                                         usrp_gain_rx,
+                                                         power_tx,
+                                                         corr_factor,
+                                                         exponent);
 }
 
 /*

@@ -31,7 +31,8 @@ namespace radar {
 transpose_matrix_vcvc::sptr
 transpose_matrix_vcvc::make(int vlen_in, int vlen_out, std::string len_key)
 {
-    return gnuradio::make_block_sptr<transpose_matrix_vcvc_impl>(vlen_in, vlen_out, len_key);
+    return gnuradio::make_block_sptr<transpose_matrix_vcvc_impl>(
+        vlen_in, vlen_out, len_key);
 }
 
 /*

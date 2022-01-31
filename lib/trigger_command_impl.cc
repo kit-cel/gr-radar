@@ -34,7 +34,8 @@ trigger_command::sptr trigger_command::make(std::string command,
                                             std::vector<float> vals_max,
                                             int block_time)
 {
-    return gnuradio::make_block_sptr<trigger_command_impl>(command, identifiers, vals_min, vals_max, block_time);
+    return gnuradio::make_block_sptr<trigger_command_impl>(
+        command, identifiers, vals_min, vals_max, block_time);
 }
 
 /*

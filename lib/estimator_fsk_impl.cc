@@ -32,7 +32,8 @@ namespace radar {
 estimator_fsk::sptr
 estimator_fsk::make(float center_freq, float delta_freq, bool push_power)
 {
-    return gnuradio::make_block_sptr<estimator_fsk_impl>(center_freq, delta_freq, push_power);
+    return gnuradio::make_block_sptr<estimator_fsk_impl>(
+        center_freq, delta_freq, push_power);
 }
 
 /*
