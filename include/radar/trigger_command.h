@@ -30,7 +30,7 @@ namespace radar {
 
 /*!
  * \brief This block executes a command with the std::system() command if a value from a
- * f32vector with a given identifer (symbol) is in a given range. Each index of a vector
+ * f32vector with a given identifier (symbol) is in a given range. Each index of a vector
  * refers to a identifier. The execution of a command can be blocked for block_time
  * milliseconds after the last execution.
  *

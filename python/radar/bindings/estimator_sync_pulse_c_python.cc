@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(estimator_sync_pulse_c.h) */
-/* BINDTOOL_HEADER_FILE_HASH(3ba54089f45df6842b57038b364a9af9)                     */
+/* BINDTOOL_HEADER_FILE(estimator_sync_pulse_c.h)                                        */
+/* BINDTOOL_HEADER_FILE_HASH(da126d75b30155955db6b753b36c3bf7)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -30,26 +30,31 @@ namespace py = pybind11;
 void bind_estimator_sync_pulse_c(py::module& m)
 {
 
-    using estimator_sync_pulse_c = ::gr::radar::estimator_sync_pulse_c;
+    using estimator_sync_pulse_c    = ::gr::radar::estimator_sync_pulse_c;
 
 
-    py::class_<estimator_sync_pulse_c,
-               gr::tagged_stream_block,
-               gr::block,
-               gr::basic_block,
-               std::shared_ptr<estimator_sync_pulse_c>>(
-        m, "estimator_sync_pulse_c", D(estimator_sync_pulse_c))
+    py::class_<estimator_sync_pulse_c, gr::tagged_stream_block, gr::block, gr::basic_block,
+        std::shared_ptr<estimator_sync_pulse_c>>(m, "estimator_sync_pulse_c", D(estimator_sync_pulse_c))
 
         .def(py::init(&estimator_sync_pulse_c::make),
-             py::arg("num_xcorr"),
-             py::arg("len_key") = "packet_len",
-             D(estimator_sync_pulse_c, make))
+           py::arg("num_xcorr"),
+           py::arg("len_key") = "packet_len",
+           D(estimator_sync_pulse_c,make)
+        )
 
 
-        .def("set_num_xcorr",
-             &estimator_sync_pulse_c::set_num_xcorr,
-             py::arg("num"),
-             D(estimator_sync_pulse_c, set_num_xcorr))
+
+
+
+
+        .def("set_num_xcorr",&estimator_sync_pulse_c::set_num_xcorr,
+            py::arg("num"),
+            D(estimator_sync_pulse_c,set_num_xcorr)
+        )
 
         ;
+
+
+
+
 }
