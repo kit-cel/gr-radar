@@ -1,0 +1,113 @@
+{% set oot_name = "radar" %}
+{% set name = "gnuradio-" + oot_name %}
+{% set version = (environ.get("GIT_DESCRIBE_TAG_PEP440", "0.0.0." + datetime.datetime.now().strftime("%Y%m%d") + ".dev+" + environ.get("GIT_DESCRIBE_HASH", "local"))|string) %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  # use local path or git repository depending on if the build is local or done on CI
+  path: "../.."  # [not os.environ.get("CI")]
+  git_url: {{ environ.get('FEEDSTOCK_ROOT', "../..") }}  # [os.environ.get("CI")]
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - cmake
+    - git
+    - ninja
+    - pkg-config
+    # cross-compilation requirements
+    - python                              # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - numpy                               # [build_platform != target_platform]
+    - pybind11                            # [build_platform != target_platform]
+    # Add extra build tool dependencies here
+    - {{ cdt("mesa-libgl-devel") }}  # [linux]
+
+  host:
+    - gmp  # [linux]
+    # the following two entries are for generating builds against specific GR versions
+    - gnuradio-core  # [not gnuradio_extra_pin]
+    - gnuradio-core {{ gnuradio_extra_pin }}.*  # [gnuradio_extra_pin]
+    - pip  # [win]
+    - pybind11
+    - python
+    - numpy
+    - volk
+    # Add/remove library dependencies here
+    - boost-cpp
+    - fftw
+    - pyqt
+    - qt-main
+    - qwt
+    - uhd
+    # for testing
+    - matplotlib
+
+  run:
+    - numpy
+    - python
+    # Add/remove runtime dependencies here
+    - boost-cpp
+    - pyqt
+    - {{ pin_compatible('qwt', max_pin='x.x') }}
+
+test:
+  commands:
+    # verify that (some) headers get installed
+    - test -f $PREFIX/include/{{ oot_name }}/api.h  # [not win]
+    - test -f $PREFIX/include/{{ oot_name }}/estimator_cw.h  # [not win]
+    - test -f $PREFIX/include/{{ oot_name }}/tracking_singletarget.h  # [not win]
+    - if not exist %PREFIX%\\Library\\include\\{{ oot_name }}\\api.h exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\include\\{{ oot_name }}\\estimator_cw.h exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\include\\{{ oot_name }}\\tracking_singletarget.h exit 1  # [win]
+
+    # verify that libraries get installed
+    - test -f $PREFIX/lib/lib{{ name }}${SHLIB_EXT}  # [not win]
+    - if not exist %PREFIX%\\Library\\bin\\{{ name }}.dll exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\{{ name }}.lib exit 1  # [win]
+
+    # verify that (some) GRC blocks get installed
+    {% set blocks = ["radar_crop_matrix_vcvc", "radar_estimator_cw"] %}
+    {% set blocks = blocks + ["radar_find_max_peak_c", "radar_msg_gate"] %}
+    {% set blocks = blocks + ["radar_ofdm_cyclic_prefix_remover_cvc"] %}
+    {% set blocks = blocks + ["radar_os_cfar_2d_vc", "radar_print_results"] %}
+    {% set blocks = blocks + ["radar_qtgui_scatter_plot"] %}
+    {% set blocks = blocks + ["radar_signal_generator_cw_c"] %}
+    {% set blocks = blocks + ["radar_split_cc"] %}
+    {% set blocks = blocks + ["radar_static_target_simulator_cc"] %}
+    {% set blocks = blocks + ["radar_tracking_singletarget"] %}
+    {% set blocks = blocks + ["radar_transpose_matrix_vcvc"] %}
+    {% set blocks = blocks + ["radar_trigger_command", "radar_ts_fft_cc"] %}
+    {% set blocks = blocks + ["radar_usrp_echotimer_cc"] %}
+    {% for block in blocks %}
+    - test -f $PREFIX/share/gnuradio/grc/blocks/{{ block }}.block.yml  # [not win]
+    - if not exist %PREFIX%\\Library\\share\\gnuradio\\grc\\blocks\\{{ block }}.block.yml exit 1  # [win]
+    {% endfor %}
+
+  imports:
+    # verify that the python module imports
+    - gnuradio.{{ oot_name }}
+
+about:
+  home: https://github.com/kit-cel/gr-radar
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: 'GNU Radio Radar Toolbox'
+  description: >
+    The gr-radar project provides a toolbox of commonly used radar algorithms.
+    An important part is the UHD Echotimer, which enables a synchronized TX and
+    RX stream from USRPs to ensure a constant phase relation in measurements.
+    Example flowgraphs for CW, Dual CW, FSK, FMCW and OFDM radar are given and
+    partly tested on hardware. GUI elements for target representation and
+    further signal processing algorithms such as target tracking are
+    implemented. Check out the project website for example videos and further
+    information.
+  dev_url: https://github.com/kit-cel/gr-radar
