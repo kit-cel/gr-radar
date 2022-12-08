@@ -46,17 +46,15 @@ list(APPEND radar_python_files
     usrp_echotimer_cc_python.cc
     python_bindings.cc)
 
-GR_PYBIND_MAKE_OOT(radar 
-   ../../.. 
+GR_PYBIND_MAKE_OOT(radar
+   ../../..
    gr::radar
    "${radar_python_files}")
 
-# copy in bindings .so file for use in QA test module
-add_custom_target(
-  copy_bindings_for_tests ALL
-  COMMAND
-    ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/*.so"
-    ${CMAKE_BINARY_DIR}/test_modules/gnuradio/radar/
-  DEPENDS radar_python)
+# copy bindings extension for use in QA test module
+add_custom_command(TARGET radar_python POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:radar_python>
+    ${PROJECT_BINARY_DIR}/test_modules/gnuradio/radar/
+)
 
 install(TARGETS radar_python DESTINATION ${GR_PYTHON_DIR}/gnuradio/radar COMPONENT pythonapi)
