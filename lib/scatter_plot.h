@@ -26,6 +26,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_plot_marker.h>
 #include <qwt_symbol.h>
+#include <qwt_text.h>
 
 namespace gr {
 namespace radar {
