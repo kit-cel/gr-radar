@@ -2,34 +2,34 @@
 
 id: radar_trigger_command
 label: Trigger Command
-category: '[RADAR]/Tools'
+category: "[RADAR]/Tools"
 
 parameters:
--   id: command
+  - id: command
     label: Command
     dtype: string
--   id: identifiers
+  - id: identifiers
     label: Identifiers
     dtype: raw
--   id: vals_min
+  - id: vals_min
     label: Value min
     dtype: real_vector
--   id: vals_max
+  - id: vals_max
     label: Value max
     dtype: real_vector
--   id: block_time
+  - id: block_time
     label: Block duration [ms]
     dtype: int
-    default: '0'
+    default: "0"
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.trigger_command(${command}, ${identifiers}, ${vals_min}, ${vals_max},
-        ${block_time})
+  imports: from gnuradio import radar
+  make: radar.trigger_command(${command}, ${identifiers}, ${vals_min}, ${vals_max},
+    ${block_time})
 
 file_format: 1

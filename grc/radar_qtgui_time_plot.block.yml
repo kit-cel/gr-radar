@@ -2,33 +2,33 @@
 
 id: radar_qtgui_time_plot
 label: QT GUI Time Plot
-category: '[RADAR]/GUI'
+category: "[RADAR]/GUI"
 
 parameters:
--   id: interval
+  - id: interval
     label: Update interval [ms]
     dtype: int
--   id: label_y
+  - id: label_y
     label: Label y
     dtype: string
--   id: axis_y
+  - id: axis_y
     label: Axis y
     dtype: real_vector
--   id: range_time
+  - id: range_time
     label: Range time [s]
     dtype: float
--   id: label
+  - id: label
     label: Label title
     dtype: string
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.qtgui_time_plot(${interval}, ${label_y}, ${axis_y}, ${range_time},
-        ${label})
+  imports: from gnuradio import radar
+  make: radar.qtgui_time_plot(${interval}, ${label_y}, ${axis_y}, ${range_time},
+    ${label})
 
 file_format: 1

@@ -2,33 +2,33 @@
 
 id: radar_split_fsk_cc
 label: Split FSK
-category: '[RADAR]/Tools'
+category: "[RADAR]/Tools"
 
 parameters:
--   id: samp_per_freq
+  - id: samp_per_freq
     label: Samples per frequency
     dtype: int
--   id: samp_discard
+  - id: samp_discard
     label: Discarded samples per frequency
     dtype: int
--   id: len_key
+  - id: len_key
     label: Packet length key
     dtype: string
     default: '"packet_len"'
 
 inputs:
--   label: IQ in
+  - label: IQ in
     domain: stream
     dtype: complex
 
 outputs:
--   label: IQ out
+  - label: IQ out
     domain: stream
     dtype: complex
-    multiplicity: '2'
+    multiplicity: "2"
 
 templates:
-    imports: import radar
-    make: radar.split_fsk_cc(${samp_per_freq}, ${samp_discard}, ${len_key})
+  imports: from gnuradio import radar
+  make: radar.split_fsk_cc(${samp_per_freq}, ${samp_discard}, ${len_key})
 
 file_format: 1

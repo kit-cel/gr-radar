@@ -2,46 +2,46 @@
 
 id: radar_estimator_ofdm
 label: Estimator OFDM
-category: '[RADAR]/Estimators'
+category: "[RADAR]/Estimators"
 
 parameters:
--   id: symbol_x
+  - id: symbol_x
     label: Symbol x
     dtype: string
--   id: len_x
+  - id: len_x
     label: Length x
     dtype: int
--   id: axis_x
+  - id: axis_x
     label: Axis x
     dtype: real_vector
--   id: symbol_y
+  - id: symbol_y
     label: Symbol y
     dtype: string
--   id: len_y
+  - id: len_y
     label: Length y
     dtype: int
--   id: axis_y
+  - id: axis_y
     label: Axis y
     dtype: real_vector
--   id: merge_consecutive
+  - id: merge_consecutive
     label: Merge consecutive peaks
     dtype: bool
-    default: 'True'
-    options: ['True', 'False']
+    default: "True"
+    options: ["True", "False"]
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.estimator_ofdm(${symbol_x}, ${len_x}, ${axis_x}, ${symbol_y}, ${len_y},
-        ${axis_y}, ${merge_consecutive})
+  imports: from gnuradio import radar
+  make: radar.estimator_ofdm(${symbol_x}, ${len_x}, ${axis_x}, ${symbol_y}, ${len_y},
+    ${axis_y}, ${merge_consecutive})
 
 file_format: 1

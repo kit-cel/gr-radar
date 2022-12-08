@@ -2,25 +2,25 @@
 
 id: radar_estimator_cw
 label: Estimator CW
-category: '[RADAR]/Estimators'
+category: "[RADAR]/Estimators"
 
 parameters:
--   id: center_freq
+  - id: center_freq
     label: Center frequency
     dtype: float
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.estimator_cw(${center_freq})
+  imports: from gnuradio import radar
+  make: radar.estimator_cw(${center_freq})
 
 file_format: 1

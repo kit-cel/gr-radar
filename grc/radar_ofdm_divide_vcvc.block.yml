@@ -2,42 +2,43 @@
 
 id: radar_ofdm_divide_vcvc
 label: OFDM Divide
-category: '[RADAR]/RADAR'
+category: "[RADAR]/RADAR"
 
 parameters:
--   id: vlen_in
+  - id: vlen_in
     label: Vector length input
     dtype: int
--   id: vlen_out
+  - id: vlen_out
     label: Vector length output
     dtype: int
--   id: discarded_carriers
+  - id: discarded_carriers
     label: Discarded carriers
     dtype: int_vector
--   id: num_sync_words
+  - id: num_sync_words
     label: Number of sync words
     dtype: int
--   id: len_key
+  - id: len_key
     label: Packet length key
     dtype: string
     default: '"packet_len"'
 
 inputs:
--   label: IQ in
+  - label: IQ in
     domain: stream
     dtype: complex
     vlen: ${ vlen_in }
-    multiplicity: '2'
+    multiplicity: "2"
 
 outputs:
--   label: IQ out
+  - label: IQ out
     domain: stream
     dtype: complex
     vlen: ${ vlen_out }
 
 templates:
-    imports: import radar
-    make: radar.ofdm_divide_vcvc(${vlen_in}, ${vlen_out}, ${discarded_carriers}, ${num_sync_words},
-        ${len_key})
+  imports: from gnuradio import radar
+  make:
+    radar.ofdm_divide_vcvc(${vlen_in}, ${vlen_out}, ${discarded_carriers}, ${num_sync_words},
+    ${len_key})
 
 file_format: 1
