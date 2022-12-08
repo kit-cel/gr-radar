@@ -50,7 +50,7 @@ class qa_ts_fft_cc (gr_unittest.TestCase):
 		# check data
 		data = snk1.data()
 		np_fft = numpy.fft.fft(data) # get fft
-		self.assertComplexTuplesAlmostEqual(snk2.data(),np_fft,4) # compare numpy fft and fft from block
+		self.assertComplexTuplesAlmostEqual(snk2.data(),np_fft,3) # compare numpy fft and fft from block
 
 	def test_002_t (self):
 		# set up fg
