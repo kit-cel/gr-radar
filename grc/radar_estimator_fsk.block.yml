@@ -2,33 +2,33 @@
 
 id: radar_estimator_fsk
 label: Estimator FSK
-category: '[RADAR]/Estimators'
+category: "[RADAR]/Estimators"
 
 parameters:
--   id: center_freq
+  - id: center_freq
     label: Center frequency
     dtype: float
--   id: delta_freq
+  - id: delta_freq
     label: Delta frequency
     dtype: float
--   id: push_power
+  - id: push_power
     label: Push through power of peaks
     dtype: bool
-    default: 'False'
-    options: ['True', 'False']
+    default: "False"
+    options: ["True", "False"]
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.estimator_fsk(${center_freq}, ${delta_freq}, ${push_power})
+  imports: from gnuradio import radar
+  make: radar.estimator_fsk(${center_freq}, ${delta_freq}, ${push_power})
 
 file_format: 1

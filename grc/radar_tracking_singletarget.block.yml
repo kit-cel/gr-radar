@@ -2,44 +2,45 @@
 
 id: radar_tracking_singletarget
 label: Tracking Single Target
-category: '[RADAR]/RADAR'
+category: "[RADAR]/RADAR"
 
 parameters:
--   id: num_particle
+  - id: num_particle
     label: Particle number
     dtype: int
--   id: std_range_meas
+  - id: std_range_meas
     label: Std range measurement
     dtype: float
--   id: std_velocity_meas
+  - id: std_velocity_meas
     label: Std velocity measurement
     dtype: float
--   id: std_accel_sys
+  - id: std_accel_sys
     label: Std system acceleration
     dtype: float
--   id: threshold_track
+  - id: threshold_track
     label: Threshold track acceptance
     dtype: float
--   id: threshold_lost
+  - id: threshold_lost
     label: Threshold lost track
     dtype: int
--   id: filter
+  - id: filter
     label: Filter
     dtype: string
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.tracking_singletarget(${num_particle}, ${std_range_meas}, ${std_velocity_meas},
-        ${std_accel_sys}, ${threshold_track}, ${threshold_lost}, ${filter})
+  imports: from gnuradio import radar
+  make:
+    radar.tracking_singletarget(${num_particle}, ${std_range_meas}, ${std_velocity_meas},
+    ${std_accel_sys}, ${threshold_track}, ${threshold_lost}, ${filter})
 
 file_format: 1

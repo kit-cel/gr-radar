@@ -2,50 +2,51 @@
 
 id: radar_estimator_rcs
 label: Estimator RCS
-category: '[RADAR]/Estimators'
+category: "[RADAR]/Estimators"
 
 parameters:
--   id: num_mean
+  - id: num_mean
     label: Mean Samples
     dtype: int
--   id: center_freq
+  - id: center_freq
     label: Center frequency
     dtype: float
--   id: antenna_gain_tx
+  - id: antenna_gain_tx
     label: Antenna Gain Tx [dBi]
     dtype: float
--   id: antenna_gain_rx
+  - id: antenna_gain_rx
     label: Antenna Gain Rx [dBi]
     dtype: float
--   id: usrp_gain_rx
+  - id: usrp_gain_rx
     label: Usrp Gain Rx [dB]
     dtype: float
--   id: power_tx
+  - id: power_tx
     label: Power Tx [W]
     dtype: float
--   id: corr_factor
+  - id: corr_factor
     label: Correction factor
     dtype: float
--   id: exponent
+  - id: exponent
     label: Exponent
     dtype: float
-    default: '1'
+    default: "1"
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.estimator_rcs(${num_mean}, ${center_freq}, ${antenna_gain_tx}, ${antenna_gain_rx},
-        ${usrp_gain_rx}, ${power_tx}, ${corr_factor}, ${exponent})
-    callbacks:
+  imports: from gnuradio import radar
+  make:
+    radar.estimator_rcs(${num_mean}, ${center_freq}, ${antenna_gain_tx}, ${antenna_gain_rx},
+    ${usrp_gain_rx}, ${power_tx}, ${corr_factor}, ${exponent})
+  callbacks:
     - set_num_mean(${num_mean})
     - set_center_freq(${center_freq})
     - set_antenna_gain_tx(${antenna_gain_tx})

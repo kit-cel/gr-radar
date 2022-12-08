@@ -2,27 +2,27 @@
 
 id: radar_print_results
 label: Print Results
-category: '[RADAR]/Tools'
+category: "[RADAR]/Tools"
 
 parameters:
--   id: store_msg
+  - id: store_msg
     label: Store messages
     dtype: bool
-    default: 'False'
-    options: ['True', 'False']
--   id: filename
+    default: "False"
+    options: ["True", "False"]
+  - id: filename
     label: Filename
     dtype: string
     default: '""'
     hide: part
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.print_results(${store_msg}, ${filename})
+  imports: from gnuradio import radar
+  make: radar.print_results(${store_msg}, ${filename})
 
 file_format: 1

@@ -2,33 +2,33 @@
 
 id: radar_msg_manipulator
 label: Message Manipulator
-category: '[RADAR]/Tools'
+category: "[RADAR]/Tools"
 
 parameters:
--   id: symbols
+  - id: symbols
     label: Keys
     dtype: raw
--   id: const_add
+  - id: const_add
     label: Add
     dtype: real_vector
--   id: const_mult
+  - id: const_mult
     label: Mult
     dtype: real_vector
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.msg_manipulator(${symbols}, ${const_add}, ${const_mult})
-    callbacks:
+  imports: from gnuradio import radar
+  make: radar.msg_manipulator(${symbols}, ${const_add}, ${const_mult})
+  callbacks:
     - set_const_add(${const_add})
     - set_const_mult(${const_mult})
 

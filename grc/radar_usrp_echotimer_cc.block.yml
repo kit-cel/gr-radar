@@ -2,129 +2,129 @@
 
 id: radar_usrp_echotimer_cc
 label: USRP Echotimer
-category: '[RADAR]/RADAR'
+category: "[RADAR]/RADAR"
 
 parameters:
--   id: samp_rate
+  - id: samp_rate
     label: Sample rate
     dtype: int
--   id: center_freq
+  - id: center_freq
     label: Center frequency
     dtype: float
--   id: num_delay_samps
+  - id: num_delay_samps
     label: Number delay samples
     dtype: int
-    default: '0'
--   id: args_tx
+    default: "0"
+  - id: args_tx
     label: TX Arguments
     dtype: string
-    default: '''addr=192.168.xx.xx'''
+    default: "'addr=192.168.xx.xx'"
     hide: part
--   id: wire_tx
+  - id: wire_tx
     label: TX Wire
     dtype: string
-    default: ''''''
+    default: "''"
     hide: part
--   id: clock_source_tx
+  - id: clock_source_tx
     label: TX Clock source
     dtype: string
-    default: '''internal'''
+    default: "'internal'"
     hide: part
--   id: time_source_tx
+  - id: time_source_tx
     label: TX Time source
     dtype: string
-    default: '''none'''
+    default: "'none'"
     hide: part
--   id: antenna_tx
+  - id: antenna_tx
     label: TX Antenna
     dtype: string
     hide: part
--   id: gain_tx
+  - id: gain_tx
     label: TX Gain
     dtype: float
     hide: part
--   id: timeout_tx
+  - id: timeout_tx
     label: TX Timeout
     dtype: float
-    default: '0.1'
+    default: "0.1"
     hide: part
--   id: wait_tx
+  - id: wait_tx
     label: TX Wait to start
     dtype: float
-    default: '0.05'
+    default: "0.05"
     hide: part
--   id: lo_offset_tx
+  - id: lo_offset_tx
     label: TX Lo offset
     dtype: float
-    default: '0'
+    default: "0"
     hide: part
--   id: args_rx
+  - id: args_rx
     label: RX Arguments
     dtype: string
-    default: '''addr=192.168.xx.xx'''
+    default: "'addr=192.168.xx.xx'"
     hide: part
--   id: wire_rx
+  - id: wire_rx
     label: RX Wire
     dtype: string
-    default: ''''''
+    default: "''"
     hide: part
--   id: clock_source_rx
+  - id: clock_source_rx
     label: RX Clock source
     dtype: string
-    default: '''mimo'''
+    default: "'mimo'"
     hide: part
--   id: time_source_rx
+  - id: time_source_rx
     label: RX Time Source
     dtype: string
-    default: '''mimo'''
+    default: "'mimo'"
     hide: part
--   id: antenna_rx
+  - id: antenna_rx
     label: RX Antenna
     dtype: string
     hide: part
--   id: gain_rx
+  - id: gain_rx
     label: RX Gain
     dtype: float
     hide: part
--   id: timeout_rx
+  - id: timeout_rx
     label: RX Timeout
     dtype: float
-    default: '0.1'
+    default: "0.1"
     hide: part
--   id: wait_rx
+  - id: wait_rx
     label: RX Wait to start
     dtype: float
-    default: '0.05'
+    default: "0.05"
     hide: part
--   id: lo_offset_rx
+  - id: lo_offset_rx
     label: RX Lo offset
     dtype: float
-    default: '0'
+    default: "0"
     hide: part
--   id: len_key
+  - id: len_key
     label: Packet length key
     dtype: string
     default: '"packet_len"'
     hide: part
 
 inputs:
--   label: IQ in
+  - label: IQ in
     domain: stream
     dtype: complex
 
 outputs:
--   label: IQ out
+  - label: IQ out
     domain: stream
     dtype: complex
 
 templates:
-    imports: import radar
-    make: radar.usrp_echotimer_cc(${samp_rate}, ${center_freq}, ${num_delay_samps},
-        ${args_tx}, ${wire_tx}, ${clock_source_tx}, ${time_source_tx}, ${antenna_tx},
-        ${gain_tx}, ${timeout_tx}, ${wait_tx}, ${lo_offset_tx}, ${args_rx}, ${wire_rx},
-        ${clock_source_rx}, ${time_source_rx}, ${antenna_rx}, ${gain_rx}, ${timeout_rx},
-        ${wait_rx}, ${lo_offset_rx}, ${len_key})
-    callbacks:
+  imports: from gnuradio import radar
+  make: radar.usrp_echotimer_cc(${samp_rate}, ${center_freq}, ${num_delay_samps},
+    ${args_tx}, ${wire_tx}, ${clock_source_tx}, ${time_source_tx}, ${antenna_tx},
+    ${gain_tx}, ${timeout_tx}, ${wait_tx}, ${lo_offset_tx}, ${args_rx}, ${wire_rx},
+    ${clock_source_rx}, ${time_source_rx}, ${antenna_rx}, ${gain_rx}, ${timeout_rx},
+    ${wait_rx}, ${lo_offset_rx}, ${len_key})
+  callbacks:
     - set_num_delay_samps(${num_delay_samps})
     - set_tx_gain(${gain_tx})
     - set_rx_gain(${gain_rx})

@@ -2,40 +2,40 @@
 
 id: radar_signal_generator_fsk_c
 label: Signal Generator FSK
-category: '[RADAR]/Generators'
+category: "[RADAR]/Generators"
 
 parameters:
--   id: samp_rate
+  - id: samp_rate
     label: Sample rate
     dtype: int
--   id: samp_per_freq
+  - id: samp_per_freq
     label: Samples per frequency
     dtype: int
--   id: blocks_per_tag
+  - id: blocks_per_tag
     label: Frequency blocks per tag
     dtype: int
--   id: freq_low
+  - id: freq_low
     label: Frequency low
     dtype: float
--   id: freq_high
+  - id: freq_high
     label: Frequency high
     dtype: float
--   id: amplitude
+  - id: amplitude
     label: Amplitude
     dtype: float
--   id: len_key
+  - id: len_key
     label: Packet length key
     dtype: string
     default: '"packet_len"'
 
 outputs:
--   label: IQ out
+  - label: IQ out
     domain: stream
     dtype: complex
 
 templates:
-    imports: import radar
-    make: radar.signal_generator_fsk_c(${samp_rate}, ${samp_per_freq}, ${blocks_per_tag},
-        ${freq_low}, ${freq_high}, ${amplitude}, ${len_key})
+  imports: from gnuradio import radar
+  make: radar.signal_generator_fsk_c(${samp_rate}, ${samp_per_freq}, ${blocks_per_tag},
+    ${freq_low}, ${freq_high}, ${amplitude}, ${len_key})
 
 file_format: 1

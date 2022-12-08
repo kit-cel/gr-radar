@@ -2,43 +2,44 @@
 
 id: radar_signal_generator_fmcw_c
 label: Signal Generator FMCW
-category: '[RADAR]/Generators'
+category: "[RADAR]/Generators"
 
 parameters:
--   id: samp_rate
+  - id: samp_rate
     label: Sample rate
     dtype: int
--   id: samp_cw
+  - id: samp_cw
     label: Samples CW
     dtype: int
--   id: samp_up
+  - id: samp_up
     label: Samples up-chirp
     dtype: int
--   id: samp_down
+  - id: samp_down
     label: Samples down-chirp
     dtype: int
--   id: freq_cw
+  - id: freq_cw
     label: Frequency CW
     dtype: float
--   id: freq_sweep
+  - id: freq_sweep
     label: Sweep frequency
     dtype: float
--   id: amplitude
+  - id: amplitude
     label: Amplitude
     dtype: float
--   id: len_key
+  - id: len_key
     label: Packet length key
     dtype: string
     default: '"packet_len"'
 
 outputs:
--   label: IQ out
+  - label: IQ out
     domain: stream
     dtype: complex
 
 templates:
-    imports: import radar
-    make: radar.signal_generator_fmcw_c(${samp_rate}, ${samp_up}, ${samp_down}, ${samp_cw},
-        ${freq_cw}, ${freq_sweep}, ${amplitude}, ${len_key})
+  imports: from gnuradio import radar
+  make:
+    radar.signal_generator_fmcw_c(${samp_rate}, ${samp_up}, ${samp_down}, ${samp_cw},
+    ${freq_cw}, ${freq_sweep}, ${amplitude}, ${len_key})
 
 file_format: 1

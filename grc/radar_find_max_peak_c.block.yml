@@ -2,46 +2,46 @@
 
 id: radar_find_max_peak_c
 label: Find Max Peak
-category: '[RADAR]/Tools'
+category: "[RADAR]/Tools"
 
 parameters:
--   id: samp_rate
+  - id: samp_rate
     label: Sample rate
     dtype: int
--   id: threshold
+  - id: threshold
     label: Threshold [dB]
     dtype: float
--   id: samp_protect
+  - id: samp_protect
     label: Number protected samples
     dtype: int
--   id: max_freq
+  - id: max_freq
     label: Cut frequencies
     dtype: real_vector
--   id: cut_max_freq
+  - id: cut_max_freq
     label: Use cut frequencies
     dtype: bool
-    default: 'False'
-    options: ['True', 'False']
--   id: len_key
+    default: "False"
+    options: ["True", "False"]
+  - id: len_key
     label: Packet length key
     dtype: string
     default: '"packet_len"'
 
 inputs:
--   label: IQ in
+  - label: IQ in
     domain: stream
     dtype: complex
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.find_max_peak_c(${samp_rate}, ${threshold}, ${samp_protect}, ${max_freq},
-        ${cut_max_freq}, ${len_key})
-    callbacks:
+  imports: from gnuradio import radar
+  make: radar.find_max_peak_c(${samp_rate}, ${threshold}, ${samp_protect}, ${max_freq},
+    ${cut_max_freq}, ${len_key})
+  callbacks:
     - set_threshold(${threshold})
     - set_samp_protect(${samp_protect})
 

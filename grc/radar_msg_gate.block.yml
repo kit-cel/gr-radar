@@ -2,31 +2,31 @@
 
 id: radar_msg_gate
 label: Message Gate
-category: '[RADAR]/Tools'
+category: "[RADAR]/Tools"
 
 parameters:
--   id: msg_keys
+  - id: msg_keys
     label: Keys
     dtype: raw
--   id: val_min
+  - id: val_min
     label: Value min
     dtype: real_vector
--   id: val_max
+  - id: val_max
     label: Value max
     dtype: real_vector
 
 inputs:
--   domain: message
+  - domain: message
     id: Msg in
     optional: true
 
 outputs:
--   domain: message
+  - domain: message
     id: Msg out
     optional: true
 
 templates:
-    imports: import radar
-    make: radar.msg_gate(${msg_keys}, ${val_min}, ${val_max})
+  imports: from gnuradio import radar
+  make: radar.msg_gate(${msg_keys}, ${val_min}, ${val_max})
 
 file_format: 1
