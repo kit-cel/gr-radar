@@ -27,6 +27,7 @@
 #include <qwt_plot_marker.h>
 #include <qwt_symbol.h>
 #include <qwt_text.h>
+#include <qwt_matrix_raster_data.h>
 
 namespace gr {
 namespace radar {

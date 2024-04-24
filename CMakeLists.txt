@@ -29,7 +29,7 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 # Make sure our local CMake Modules path comes first
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 # Find gnuradio to get access to the cmake modules
-find_package(Gnuradio REQUIRED)
+find_package(Gnuradio "3.10" REQUIRED)
 
 # Set the version information here
 set(VERSION_MAJOR 1)
@@ -74,7 +74,7 @@ if(NOT CMAKE_MODULES_DIR)
   set(CMAKE_MODULES_DIR lib${LIB_SUFFIX}/cmake)
 endif(NOT CMAKE_MODULES_DIR)
 
-set(GR_INCLUDE_DIR      include/radar)
+set(GR_INCLUDE_DIR      include/gnuradio/radar)
 set(GR_CMAKE_DIR        ${CMAKE_MODULES_DIR}/gnuradio-radar)
 set(GR_PKG_DATA_DIR     ${GR_DATA_DIR}/${CMAKE_PROJECT_NAME})
 set(GR_PKG_DOC_DIR      ${GR_DOC_DIR}/${CMAKE_PROJECT_NAME})
@@ -132,7 +132,7 @@ add_custom_target(uninstall
 ########################################################################
 # Add subdirectories
 ########################################################################
-add_subdirectory(include/radar)
+add_subdirectory(include/gnuradio/radar)
 add_subdirectory(lib)
 add_subdirectory(apps)
 add_subdirectory(docs)

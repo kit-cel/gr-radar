@@ -31,7 +31,7 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-radar)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR})
+#set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR})
 
 # Create a package directory that tests can import. It includes everything
 # from `python/`.

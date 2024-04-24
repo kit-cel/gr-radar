@@ -15,36 +15,44 @@
 
 namespace py = pybind11;
 
-void bind_crop_matrix_vcvc(py::module&);
-void bind_estimator_cw(py::module&);
-void bind_estimator_fmcw(py::module&);
-void bind_estimator_fsk(py::module&);
-void bind_estimator_ofdm(py::module&);
-void bind_estimator_rcs(py::module&);
-void bind_estimator_sync_pulse_c(py::module&);
-void bind_find_max_peak_c(py::module&);
-void bind_msg_gate(py::module&);
-void bind_msg_manipulator(py::module&);
-void bind_ofdm_cyclic_prefix_remover_cvc(py::module&);
-void bind_ofdm_divide_vcvc(py::module&);
-void bind_os_cfar_2d_vc(py::module&);
-void bind_os_cfar_c(py::module&);
-void bind_print_results(py::module&);
-void bind_qtgui_scatter_plot(py::module&);
-void bind_qtgui_spectrogram_plot(py::module&);
-void bind_qtgui_time_plot(py::module&);
-void bind_signal_generator_cw_c(py::module&);
-void bind_signal_generator_fmcw_c(py::module&);
-void bind_signal_generator_fsk_c(py::module&);
-void bind_signal_generator_sync_pulse_c(py::module&);
-void bind_split_cc(py::module&);
-void bind_split_fsk_cc(py::module&);
-void bind_static_target_simulator_cc(py::module&);
-void bind_tracking_singletarget(py::module&);
-void bind_transpose_matrix_vcvc(py::module&);
-void bind_trigger_command(py::module&);
-void bind_ts_fft_cc(py::module&);
-void bind_usrp_echotimer_cc(py::module&);
+// Headers for binding functions
+/**************************************/
+// The following comment block is used for
+// gr_modtool to insert function prototypes
+// Please do not delete
+/**************************************/
+// BINDING_FUNCTION_PROTOTYPES(
+void bind_crop_matrix_vcvc(py::module& m);
+void bind_estimator_cw(py::module& m);
+void bind_estimator_fmcw(py::module& m);
+void bind_estimator_fsk(py::module& m);
+void bind_estimator_ofdm(py::module& m);
+void bind_estimator_rcs(py::module& m);
+void bind_estimator_sync_pulse_c(py::module& m);
+void bind_find_max_peak_c(py::module& m);
+void bind_msg_gate(py::module& m);
+void bind_msg_manipulator(py::module& m);
+void bind_ofdm_cyclic_prefix_remover_cvc(py::module& m);
+void bind_ofdm_divide_vcvc(py::module& m);
+void bind_os_cfar_2d_vc(py::module& m);
+void bind_os_cfar_c(py::module& m);
+void bind_print_results(py::module& m);
+void bind_qtgui_scatter_plot(py::module& m);
+void bind_qtgui_spectrogram_plot(py::module& m);
+void bind_qtgui_time_plot(py::module& m);
+void bind_signal_generator_cw_c(py::module& m);
+void bind_signal_generator_fmcw_c(py::module& m);
+void bind_signal_generator_fsk_c(py::module& m);
+void bind_signal_generator_sync_pulse_c(py::module& m);
+void bind_split_cc(py::module& m);
+void bind_split_fsk_cc(py::module& m);
+void bind_static_target_simulator_cc(py::module& m);
+void bind_tracking_singletarget(py::module& m);
+void bind_transpose_matrix_vcvc(py::module& m);
+void bind_trigger_command(py::module& m);
+void bind_ts_fft_cc(py::module& m);
+void bind_usrp_echotimer_cc(py::module& m);
+// ) END BINDING_FUNCTION_PROTOTYPES
 
 // We need this hack because import_array() returns NULL
 // for newer Python versions.

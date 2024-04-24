@@ -1,4 +1,12 @@
 ########################################################################
+# Check if there is C++ code at all
+########################################################################
+if(NOT radar_sources)
+    MESSAGE(STATUS "No C++ sources... skipping python bindings")
+    return()
+endif(NOT radar_sources)
+
+########################################################################
 # Check for pygccxml
 ########################################################################
 GR_PYTHON_CHECK_MODULE_RAW(

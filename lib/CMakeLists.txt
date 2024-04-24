@@ -25,7 +25,8 @@ set(QTGUI_MOC_HEADERS
 	scatter_plot.h
 	time_plot.h
 	spectrogram_plot.h)
-QT5_WRAP_CPP(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
+	
+qt5_wrap_cpp(QTGUI_MOC_OUTFILES ${QTGUI_MOC_HEADERS})
 
 ########################################################################
 # Setup library
@@ -77,7 +78,7 @@ endif(NOT radar_sources)
 
 add_library(gnuradio-radar SHARED ${radar_sources})
 target_link_libraries(gnuradio-radar PUBLIC
-  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f UHD::UHD qwt::qwt
+  gnuradio::gnuradio-runtime ${QT_LIBRARIES} fftw3f::fftw3f UHD::UHD qwt::qwt Qt5::Widgets
 )
 target_include_directories(gnuradio-radar
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
@@ -95,7 +96,7 @@ endif(APPLE)
 # Install built library files
 ########################################################################
 include(GrMiscUtils)
-GR_LIBRARY_FOO(gnuradio-radar)
+GR_LIBRARY_FOO(gnuradio-radar Qwt Qt5Widgets)
 
 ########################################################################
 # Print summary

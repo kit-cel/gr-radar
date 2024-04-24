@@ -28,9 +28,9 @@ For full documentation build the toolbox and open `build/docs/doxygen/html/index
 
 
 **Development platform**
-GNU Radio maint-3.8
+GNU Radio maint-3.10
 UHD 3.15
-Ubuntu 18.04
+Ubuntu 22.04
 
 **Dependencies**
 Qt 5.10.1

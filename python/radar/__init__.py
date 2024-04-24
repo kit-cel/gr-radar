@@ -27,9 +27,8 @@ import os
 # import pybind11 generated symbols into the radar namespace
 try:
     # this might fail if the module is python-only
-    from .bindings.radar_python import *
-except ModuleNotFoundError:
     from .radar_python import *
+except ModuleNotFoundError:
     pass
 
 # import any pure python here
