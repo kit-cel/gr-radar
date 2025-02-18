@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_SPLIT_FSK_CC_IMPL_H
 #define INCLUDED_RADAR_SPLIT_FSK_CC_IMPL_H
 
-#include <radar/split_fsk_cc.h>
+#include <gnuradio/radar/split_fsk_cc.h>
 
 namespace gr {
 namespace radar {

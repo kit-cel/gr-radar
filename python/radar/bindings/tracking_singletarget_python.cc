@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(tracking_singletarget.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(7d2d0f396f7818282264c078e7ff4de1)                     */
+/* BINDTOOL_HEADER_FILE_HASH(2ee9f4c035d62ad87d09227d5161f82c)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/tracking_singletarget.h>
+#include <gnuradio/radar/tracking_singletarget.h>
 // pydoc.h is automatically generated in the build directory
 #include <tracking_singletarget_pydoc.h>
 

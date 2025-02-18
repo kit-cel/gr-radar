@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_ESTIMATOR_FMCW_IMPL_H
 #define INCLUDED_RADAR_ESTIMATOR_FMCW_IMPL_H
 
-#include <radar/estimator_fmcw.h>
+#include <gnuradio/radar/estimator_fmcw.h>
 
 namespace gr {
 namespace radar {

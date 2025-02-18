@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(static_target_simulator_cc.h) */
-/* BINDTOOL_HEADER_FILE_HASH(15c4318d0cfd84ce6174a086369fe3b9)                     */
+/* BINDTOOL_HEADER_FILE_HASH(f35e6617e29a8e533370a13e678d434e)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/static_target_simulator_cc.h>
+#include <gnuradio/radar/static_target_simulator_cc.h>
 // pydoc.h is automatically generated in the build directory
 #include <static_target_simulator_cc_pydoc.h>
 

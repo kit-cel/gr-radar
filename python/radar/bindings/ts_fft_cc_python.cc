@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(ts_fft_cc.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(235e9875d778dc9ff2fb5ce01777060d)                     */
+/* BINDTOOL_HEADER_FILE_HASH(32aa7d029054aeef675c7c3d8706a1de)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/ts_fft_cc.h>
+#include <gnuradio/radar/ts_fft_cc.h>
 // pydoc.h is automatically generated in the build directory
 #include <ts_fft_cc_pydoc.h>
 

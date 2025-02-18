@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(qtgui_scatter_plot.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(4e4d605a7b90a8b3a37dd8cf73c4d7cc)                     */
+/* BINDTOOL_HEADER_FILE_HASH(c89baa7003a383ea9fd823f0672db1a6)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/qtgui_scatter_plot.h>
+#include <gnuradio/radar/qtgui_scatter_plot.h>
 // pydoc.h is automatically generated in the build directory
 #include <qtgui_scatter_plot_pydoc.h>
 

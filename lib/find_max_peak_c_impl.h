@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_FIND_MAX_PEAK_C_IMPL_H
 #define INCLUDED_RADAR_FIND_MAX_PEAK_C_IMPL_H
 
-#include <radar/find_max_peak_c.h>
+#include <gnuradio/radar/find_max_peak_c.h>
 
 namespace gr {
 namespace radar {

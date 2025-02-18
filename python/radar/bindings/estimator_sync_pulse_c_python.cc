@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(estimator_sync_pulse_c.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(da126d75b30155955db6b753b36c3bf7)                     */
+/* BINDTOOL_HEADER_FILE_HASH(4cb0667787dde39dd8ab67766537c9ab)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/estimator_sync_pulse_c.h>
+#include <gnuradio/radar/estimator_sync_pulse_c.h>
 // pydoc.h is automatically generated in the build directory
 #include <estimator_sync_pulse_c_pydoc.h>
 

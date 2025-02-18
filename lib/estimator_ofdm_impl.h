@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_ESTIMATOR_OFDM_IMPL_H
 #define INCLUDED_RADAR_ESTIMATOR_OFDM_IMPL_H
 
-#include <radar/estimator_ofdm.h>
+#include <gnuradio/radar/estimator_ofdm.h>
 
 namespace gr {
 namespace radar {

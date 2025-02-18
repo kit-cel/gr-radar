@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_TRANSPOSE_MATRIX_VCVC_IMPL_H
 #define INCLUDED_RADAR_TRANSPOSE_MATRIX_VCVC_IMPL_H
 
-#include <radar/transpose_matrix_vcvc.h>
+#include <gnuradio/radar/transpose_matrix_vcvc.h>
 
 namespace gr {
 namespace radar {

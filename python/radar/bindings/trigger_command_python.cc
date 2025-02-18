@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(trigger_command.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(c8626e3e3c68934129a0b5e859f0854c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(e28bb6e13530582304bf379cba0add81)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/trigger_command.h>
+#include <gnuradio/radar/trigger_command.h>
 // pydoc.h is automatically generated in the build directory
 #include <trigger_command_pydoc.h>
 

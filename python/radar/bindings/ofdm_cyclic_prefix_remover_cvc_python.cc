@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(ofdm_cyclic_prefix_remover_cvc.h) */
-/* BINDTOOL_HEADER_FILE_HASH(b7bbc63f474b115bd5daca5d45afd39c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(6b95f2e5af199e3eec6e727d65a8a504)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/ofdm_cyclic_prefix_remover_cvc.h>
+#include <gnuradio/radar/ofdm_cyclic_prefix_remover_cvc.h>
 // pydoc.h is automatically generated in the build directory
 #include <ofdm_cyclic_prefix_remover_cvc_pydoc.h>
 

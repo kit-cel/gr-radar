@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(print_results.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(924d069bc77b8c935ae0b6e24c1f5f2c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(16c7d8cd3f4c7240003752ce9258abf2)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/print_results.h>
+#include <gnuradio/radar/print_results.h>
 // pydoc.h is automatically generated in the build directory
 #include <print_results_pydoc.h>
 

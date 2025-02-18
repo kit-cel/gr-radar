@@ -22,7 +22,7 @@
 #define INCLUDED_RADAR_TS_FFT_CC_IMPL_H
 
 #include <fftw3.h>
-#include <radar/ts_fft_cc.h>
+#include <gnuradio/radar/ts_fft_cc.h>
 
 namespace gr {
 namespace radar {

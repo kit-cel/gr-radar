@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(estimator_rcs.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(58001c0b8dd2ca549a8680b73d54cbf0)                     */
+/* BINDTOOL_HEADER_FILE_HASH(6c650725ea7187bb05633ae476a9a12e)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/estimator_rcs.h>
+#include <gnuradio/radar/estimator_rcs.h>
 // pydoc.h is automatically generated in the build directory
 #include <estimator_rcs_pydoc.h>
 

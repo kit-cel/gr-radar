@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(signal_generator_fmcw_c.h) */
-/* BINDTOOL_HEADER_FILE_HASH(de1c980b31eea0e314ea5eb67380615d)                     */
+/* BINDTOOL_HEADER_FILE_HASH(35be950c13f23dfc32831837f7ae17cc)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/signal_generator_fmcw_c.h>
+#include <gnuradio/radar/signal_generator_fmcw_c.h>
 // pydoc.h is automatically generated in the build directory
 #include <signal_generator_fmcw_c_pydoc.h>
 

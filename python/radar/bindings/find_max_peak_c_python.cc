@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(find_max_peak_c.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(24fbff5018a01a6f4563a40d9a3f89cb)                     */
+/* BINDTOOL_HEADER_FILE_HASH(cee83267a3059dccca38516b0aa073ec)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/find_max_peak_c.h>
+#include <gnuradio/radar/find_max_peak_c.h>
 // pydoc.h is automatically generated in the build directory
 #include <find_max_peak_c_pydoc.h>
 

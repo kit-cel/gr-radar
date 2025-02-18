@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(msg_manipulator.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(fc91b50dcaff97c7ccd7fc23f65f3ee0)                     */
+/* BINDTOOL_HEADER_FILE_HASH(0a3c3e6c0fe3bc461b5b551d1a4ca066)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/msg_manipulator.h>
+#include <gnuradio/radar/msg_manipulator.h>
 // pydoc.h is automatically generated in the build directory
 #include <msg_manipulator_pydoc.h>
 

@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(usrp_echotimer_cc.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(179281bf816eada79a1fa5f542238ece)                     */
+/* BINDTOOL_HEADER_FILE_HASH(09ae1002f14d29b34b2621e2b6e23430)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/usrp_echotimer_cc.h>
+#include <gnuradio/radar/usrp_echotimer_cc.h>
 // pydoc.h is automatically generated in the build directory
 #include <usrp_echotimer_cc_pydoc.h>
 

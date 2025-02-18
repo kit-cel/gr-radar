@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(crop_matrix_vcvc.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(a6b385ed23d7afc2f53f2bb64577e004)                     */
+/* BINDTOOL_HEADER_FILE_HASH(b006a653b33c48119b849f9ac6c97b81)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/crop_matrix_vcvc.h>
+#include <gnuradio/radar/crop_matrix_vcvc.h>
 // pydoc.h is automatically generated in the build directory
 #include <crop_matrix_vcvc_pydoc.h>
 

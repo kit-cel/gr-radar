@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(qtgui_time_plot.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(ced4f3be4c4678ddc02d3e2c49697056)                     */
+/* BINDTOOL_HEADER_FILE_HASH(42d465a67f39ce0593bf71237529d55d)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/qtgui_time_plot.h>
+#include <gnuradio/radar/qtgui_time_plot.h>
 // pydoc.h is automatically generated in the build directory
 #include <qtgui_time_plot_pydoc.h>
 

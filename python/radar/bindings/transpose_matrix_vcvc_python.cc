@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(transpose_matrix_vcvc.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(9f3b9aa205f455cbf2f22e9b2ba1f75c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(bad07b06ad8a08d63307f9e48b66b374)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/transpose_matrix_vcvc.h>
+#include <gnuradio/radar/transpose_matrix_vcvc.h>
 // pydoc.h is automatically generated in the build directory
 #include <transpose_matrix_vcvc_pydoc.h>
 

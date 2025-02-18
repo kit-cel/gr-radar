@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_USRP_ECHOTIMER_CC_IMPL_H
 #define INCLUDED_RADAR_USRP_ECHOTIMER_CC_IMPL_H
 
-#include <radar/usrp_echotimer_cc.h>
+#include <gnuradio/radar/usrp_echotimer_cc.h>
 
 #include <uhd/usrp/multi_usrp.hpp>
 #include <uhd/utils/thread.hpp>

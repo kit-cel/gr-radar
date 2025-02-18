@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(msg_gate.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(45217f19d5d2438fe8dd3dbb3d3da61f)                     */
+/* BINDTOOL_HEADER_FILE_HASH(b266a5952da2d6a6643dc2bf7e11ba97)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/msg_gate.h>
+#include <gnuradio/radar/msg_gate.h>
 // pydoc.h is automatically generated in the build directory
 #include <msg_gate_pydoc.h>
 

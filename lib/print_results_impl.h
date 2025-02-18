@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_PRINT_RESULTS_IMPL_H
 #define INCLUDED_RADAR_PRINT_RESULTS_IMPL_H
 
-#include <radar/print_results.h>
+#include <gnuradio/radar/print_results.h>
 #include <fstream>
 
 namespace gr {

@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_ESTIMATOR_FSK_IMPL_H
 #define INCLUDED_RADAR_ESTIMATOR_FSK_IMPL_H
 
-#include <radar/estimator_fsk.h>
+#include <gnuradio/radar/estimator_fsk.h>
 
 namespace gr {
 namespace radar {

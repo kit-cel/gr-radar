@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_OS_CFAR_C_IMPL_H
 #define INCLUDED_RADAR_OS_CFAR_C_IMPL_H
 
-#include <radar/os_cfar_c.h>
+#include <gnuradio/radar/os_cfar_c.h>
 
 namespace gr {
 namespace radar {

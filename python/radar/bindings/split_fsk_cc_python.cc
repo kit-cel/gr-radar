@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(split_fsk_cc.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(b03b5814d1e7dffe9ac9d02a849ee442)                     */
+/* BINDTOOL_HEADER_FILE_HASH(e7005f2dc4013dde40e98107203e74ef)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/split_fsk_cc.h>
+#include <gnuradio/radar/split_fsk_cc.h>
 // pydoc.h is automatically generated in the build directory
 #include <split_fsk_cc_pydoc.h>
 

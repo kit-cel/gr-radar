@@ -22,7 +22,7 @@
 #define INCLUDED_RADAR_TRIGGER_COMMAND_IMPL_H
 
 #include "boost/date_time/posix_time/posix_time.hpp"
-#include <radar/trigger_command.h>
+#include <gnuradio/radar/trigger_command.h>
 
 namespace gr {
 namespace radar {

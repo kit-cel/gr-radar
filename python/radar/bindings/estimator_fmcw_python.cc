@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(estimator_fmcw.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(7aa05f03af07fd1ff14a6801bb62df83)                     */
+/* BINDTOOL_HEADER_FILE_HASH(1987984c1c62b0869f69b0c00e50daf1)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/estimator_fmcw.h>
+#include <gnuradio/radar/estimator_fmcw.h>
 // pydoc.h is automatically generated in the build directory
 #include <estimator_fmcw_pydoc.h>
 

@@ -22,7 +22,7 @@
 #define INCLUDED_RADAR_STATIC_TARGET_SIMULATOR_CC_IMPL_H
 
 #include <fftw3.h>
-#include <radar/static_target_simulator_cc.h>
+#include <gnuradio/radar/static_target_simulator_cc.h>
 
 namespace gr {
 namespace radar {
