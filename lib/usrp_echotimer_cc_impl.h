@@ -39,9 +39,9 @@ namespace gr {
 
      public:
       usrp_echotimer_cc_impl(int samp_rate, float center_freq, int num_delay_samps,
-		std::string args_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
+		std::string args_tx, int channel_tx, std::string wire_tx, std::string clock_source_tx, std::string time_source_tx, std::string antenna_tx, float gain_tx,
 		float timeout_tx, float wait_tx, float lo_offset_tx,
-		std::string args_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
+		std::string args_rx, int channel_rx, std::string wire_rx, std::string clock_source_rx, std::string time_source_rx, std::string antenna_rx, float gain_rx,
 		float timeout_rx, float wait_rx, float lo_offset_rx,
 		const std::string& len_key);
       ~usrp_echotimer_cc_impl();
@@ -71,6 +71,7 @@ namespace gr {
       float d_timeout_tx, d_timeout_rx;
       float d_wait_tx, d_wait_rx;
       float d_gain_tx, d_gain_rx;
+      int d_channel_tx, d_channel_rx;
       
       uhd::time_spec_t d_time_now_tx, d_time_now_rx;
       
