@@ -33,6 +33,7 @@ usrp_echotimer_cc::sptr usrp_echotimer_cc::make(int samp_rate,
                                                 float center_freq,
                                                 int num_delay_samps,
                                                 std::string args_tx,
+                                                int channel_tx,
                                                 std::string wire_tx,
                                                 std::string clock_source_tx,
                                                 std::string time_source_tx,
@@ -42,6 +43,7 @@ usrp_echotimer_cc::sptr usrp_echotimer_cc::make(int samp_rate,
                                                 float wait_tx,
                                                 float lo_offset_tx,
                                                 std::string args_rx,
+                                                int channel_rx,
                                                 std::string wire_rx,
                                                 std::string clock_source_rx,
                                                 std::string time_source_rx,
@@ -56,6 +58,7 @@ usrp_echotimer_cc::sptr usrp_echotimer_cc::make(int samp_rate,
                                                              center_freq,
                                                              num_delay_samps,
                                                              args_tx,
+                                                             channel_tx,
                                                              wire_tx,
                                                              clock_source_tx,
                                                              time_source_tx,
@@ -65,6 +68,7 @@ usrp_echotimer_cc::sptr usrp_echotimer_cc::make(int samp_rate,
                                                              wait_tx,
                                                              lo_offset_tx,
                                                              args_rx,
+                                                             channel_rx,
                                                              wire_rx,
                                                              clock_source_rx,
                                                              time_source_rx,
@@ -83,6 +87,7 @@ usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate,
                                                float center_freq,
                                                int num_delay_samps,
                                                std::string args_tx,
+                                               int channel_tx,
                                                std::string wire_tx,
                                                std::string clock_source_tx,
                                                std::string time_source_tx,
@@ -92,6 +97,7 @@ usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate,
                                                float wait_tx,
                                                float lo_offset_tx,
                                                std::string args_rx,
+                                               int channel_rx,
                                                std::string wire_rx,
                                                std::string clock_source_rx,
                                                std::string time_source_rx,
@@ -158,6 +164,9 @@ usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate,
 
     // Setup transmit streamer
     uhd::stream_args_t stream_args_tx("fc32", d_wire_tx); // complex floats
+    std::vector<size_t> channel_nums_tx;
+    channel_nums_tx.push_back(channel_tx);
+    stream_args_tx.channels = channel_nums_tx;
     d_tx_stream = d_usrp_tx->get_tx_stream(stream_args_tx);
 
     //***** Setup USRP RX *****//
@@ -201,9 +210,9 @@ usrp_echotimer_cc_impl::usrp_echotimer_cc_impl(int samp_rate,
 
     // Setup receive streamer
     uhd::stream_args_t stream_args_rx("fc32", d_wire_rx); // complex floats
-    std::vector<size_t> channel_nums;
-    channel_nums.push_back(0); // define channel!
-    stream_args_rx.channels = channel_nums;
+    std::vector<size_t> channel_nums_rx;
+    channel_nums_rx.push_back(channel_rx);
+    stream_args_rx.channels = channel_nums_rx;
     d_rx_stream = d_usrp_rx->get_rx_stream(stream_args_rx);
 
     //***** Misc *****//

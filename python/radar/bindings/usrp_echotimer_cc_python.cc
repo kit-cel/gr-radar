@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(usrp_echotimer_cc.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(d96753f044b2b982312d86f7be6e1c36)                     */
+/* BINDTOOL_HEADER_FILE_HASH(179281bf816eada79a1fa5f542238ece)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -45,6 +45,7 @@ void bind_usrp_echotimer_cc(py::module& m)
              py::arg("center_freq"),
              py::arg("num_delay_samps"),
              py::arg("args_tx"),
+             py::arg("channel_tx"),
              py::arg("wire_tx"),
              py::arg("clock_source_tx"),
              py::arg("time_source_tx"),
@@ -54,6 +55,7 @@ void bind_usrp_echotimer_cc(py::module& m)
              py::arg("wait_tx"),
              py::arg("lo_offset_tx"),
              py::arg("args_rx"),
+             py::arg("channel_rx"),
              py::arg("wire_rx"),
              py::arg("clock_source_rx"),
              py::arg("time_source_rx"),
