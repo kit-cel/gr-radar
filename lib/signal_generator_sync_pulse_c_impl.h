@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_SIGNAL_GENERATOR_SYNC_PULSE_C_IMPL_H
 #define INCLUDED_RADAR_SIGNAL_GENERATOR_SYNC_PULSE_C_IMPL_H
 
-#include <radar/signal_generator_sync_pulse_c.h>
+#include <gnuradio/radar/signal_generator_sync_pulse_c.h>
 
 namespace gr {
 namespace radar {

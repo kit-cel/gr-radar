@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(estimator_fsk.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(f2ad10bbeb5a3d0b9835e7a0813024a7)                     */
+/* BINDTOOL_HEADER_FILE_HASH(db3f04bbc2498ca7da24c4a425708d5a)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/estimator_fsk.h>
+#include <gnuradio/radar/estimator_fsk.h>
 // pydoc.h is automatically generated in the build directory
 #include <estimator_fsk_pydoc.h>
 

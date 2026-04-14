@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_OS_CFAR_2D_VC_IMPL_H
 #define INCLUDED_RADAR_OS_CFAR_2D_VC_IMPL_H
 
-#include <radar/os_cfar_2d_vc.h>
+#include <gnuradio/radar/os_cfar_2d_vc.h>
 
 namespace gr {
 namespace radar {

@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(qtgui_spectrogram_plot.h) */
-/* BINDTOOL_HEADER_FILE_HASH(ff65522254da20afbc0e0ad04f44244b)                     */
+/* BINDTOOL_HEADER_FILE_HASH(7726602e7fea89b15696e839853e337f)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/qtgui_spectrogram_plot.h>
+#include <gnuradio/radar/qtgui_spectrogram_plot.h>
 // pydoc.h is automatically generated in the build directory
 #include <qtgui_spectrogram_plot_pydoc.h>
 

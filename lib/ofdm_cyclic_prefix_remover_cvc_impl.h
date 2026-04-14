@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_OFDM_CYCLIC_PREFIX_REMOVER_CVC_IMPL_H
 #define INCLUDED_RADAR_OFDM_CYCLIC_PREFIX_REMOVER_CVC_IMPL_H
 
-#include <radar/ofdm_cyclic_prefix_remover_cvc.h>
+#include <gnuradio/radar/ofdm_cyclic_prefix_remover_cvc.h>
 
 namespace gr {
 namespace radar {

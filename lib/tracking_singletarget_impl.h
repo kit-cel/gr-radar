@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_TRACKING_SINGLETARGET_IMPL_H
 #define INCLUDED_RADAR_TRACKING_SINGLETARGET_IMPL_H
 
-#include <radar/tracking_singletarget.h>
+#include <gnuradio/radar/tracking_singletarget.h>
 
 namespace gr {
 namespace radar {

@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(os_cfar_c.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(ed2b8bb6b06fc8e50b633ab66f17e93c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(b988ca5e14a95de2f2fcd6c845ee92b0)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,7 +23,7 @@
 
 namespace py = pybind11;
 
-#include <radar/os_cfar_c.h>
+#include <gnuradio/radar/os_cfar_c.h>
 // pydoc.h is automatically generated in the build directory
 #include <os_cfar_c_pydoc.h>
 

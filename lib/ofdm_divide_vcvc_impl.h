@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_OFDM_DIVIDE_VCVC_IMPL_H
 #define INCLUDED_RADAR_OFDM_DIVIDE_VCVC_IMPL_H
 
-#include <radar/ofdm_divide_vcvc.h>
+#include <gnuradio/radar/ofdm_divide_vcvc.h>
 
 namespace gr {
 namespace radar {

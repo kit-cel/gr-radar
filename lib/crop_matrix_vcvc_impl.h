@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_CROP_MATRIX_VCVC_IMPL_H
 #define INCLUDED_RADAR_CROP_MATRIX_VCVC_IMPL_H
 
-#include <radar/crop_matrix_vcvc.h>
+#include <gnuradio/radar/crop_matrix_vcvc.h>
 
 namespace gr {
 namespace radar {

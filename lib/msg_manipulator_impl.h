@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_MSG_MANIPULATOR_IMPL_H
 #define INCLUDED_RADAR_MSG_MANIPULATOR_IMPL_H
 
-#include <radar/msg_manipulator.h>
+#include <gnuradio/radar/msg_manipulator.h>
 
 namespace gr {
 namespace radar {

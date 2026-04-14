@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_MSG_GATE_IMPL_H
 #define INCLUDED_RADAR_MSG_GATE_IMPL_H
 
-#include <radar/msg_gate.h>
+#include <gnuradio/radar/msg_gate.h>
 
 namespace gr {
 namespace radar {

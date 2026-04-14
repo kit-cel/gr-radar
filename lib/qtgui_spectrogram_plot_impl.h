@@ -22,7 +22,7 @@
 #define INCLUDED_RADAR_QTGUI_SPECTROGRAM_PLOT_IMPL_H
 
 #include "spectrogram_plot.h"
-#include <radar/qtgui_spectrogram_plot.h>
+#include <gnuradio/radar/qtgui_spectrogram_plot.h>
 
 namespace gr {
 namespace radar {

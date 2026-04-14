@@ -21,7 +21,7 @@
 #ifndef INCLUDED_RADAR_ESTIMATOR_RCS_IMPL_H
 #define INCLUDED_RADAR_ESTIMATOR_RCS_IMPL_H
 
-#include <radar/estimator_rcs.h>
+#include <gnuradio/radar/estimator_rcs.h>
 #include <boost/circular_buffer.hpp>
 
 namespace gr {

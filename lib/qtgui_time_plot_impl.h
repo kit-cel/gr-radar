@@ -22,7 +22,7 @@
 #define INCLUDED_RADAR_QTGUI_TIME_PLOT_IMPL_H
 
 #include "time_plot.h"
-#include <radar/qtgui_time_plot.h>
+#include <gnuradio/radar/qtgui_time_plot.h>
 
 namespace gr {
 namespace radar {
